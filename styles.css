@@ -234,6 +234,14 @@ a.research-card p { font-size: 0.875rem; color: var(--text-2); line-height: 1.7;
 .music-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
 .music-btn { color: #fff; border-color: rgba(255,255,255,0.3); display: inline-flex; align-items: center; }
 .music-btn:hover { background: #fff; color: var(--accent); border-color: #fff; }
+.music-article {
+  margin-top: 3rem; padding: 2rem; max-width: 800px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px;
+}
+.music-article h4 { font-family: var(--font-serif); font-size: 1.125rem; font-weight: 500; color: #fff; margin-bottom: 0.25rem; }
+.music-article-subtitle { font-size: 0.875rem; color: var(--gold-light); margin-bottom: 1rem; font-style: italic; }
+.music-article p { font-size: 0.9375rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 1.25rem; }
+.music-article .btn { margin-bottom: 0; }
 
 /* --- Boards --- */
 .section-boards { background: var(--surface-alt); }
@@ -273,14 +281,8 @@ a.research-card p { font-size: 0.875rem; color: var(--text-2); line-height: 1.7;
   .about-portrait-grid { grid-template-columns: 280px 1fr; gap: 3rem; }
   .roles-grid { grid-template-columns: repeat(2, 1fr); }
   .informed-pillars { grid-template-columns: repeat(2, 1fr); }
-
   .boards-grid { grid-template-columns: repeat(2, 1fr); }
-}
 
-@media (max-width: 768px) {
-  :root { --nav-h: 64px; }
-  .container { padding: 0 1.5rem; }
-  .section { padding: 4rem 0; }
   .nav-toggle { display: flex; }
   .nav-links {
     position: absolute; top: var(--nav-h); left: 0; right: 0;
@@ -291,10 +293,17 @@ a.research-card p { font-size: 0.875rem; color: var(--text-2); line-height: 1.7;
     border-bottom: 1px solid var(--border);
   }
   .nav-links.open { opacity: 1; pointer-events: auto; }
-  .nav-links a { font-size: 0.70rem; }
+  .nav-links a { font-size: 0.875rem; }
   .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-toggle.active span:nth-child(2) { opacity: 0; }
   .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+
+@media (max-width: 768px) {
+  :root { --nav-h: 64px; }
+  .container { padding: 0 1.5rem; }
+  .section { padding: 4rem 0; }
+  .nav-links a { font-size: 0.70rem; }
   .about-portrait-grid { grid-template-columns: 1fr; }
   .about-photo { max-width: 320px; margin: 0 auto 2rem; }
   .about-highlights { flex-direction: column; }
