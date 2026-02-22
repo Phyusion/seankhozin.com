@@ -3,6 +3,22 @@
 (function () {
   'use strict';
 
+  // Hero video — ensure playback and handle failures
+  const heroVideo = document.querySelector('.hero-video');
+  if (heroVideo) {
+    const playPromise = heroVideo.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Autoplay was blocked or video failed — hide the video element
+        // so the CSS fallback background on .hero shows through
+        heroVideo.style.display = 'none';
+      });
+    }
+    heroVideo.addEventListener('error', () => {
+      heroVideo.style.display = 'none';
+    }, true);
+  }
+
   // Nav scroll effect
   const nav = document.getElementById('nav');
   const onScroll = () => {
