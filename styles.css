@@ -266,6 +266,37 @@ img { max-width: 100%; display: block; }
 .research-pub-list.expanded .research-pub-toggle { margin-top: 0.5rem; }
 .research-links { display: flex; gap: 1rem; justify-content: center; margin-top: 4rem; flex-wrap: wrap; }
 
+/* AI/ML subsection feature card */
+.research-subsection-ai {
+  position: relative; overflow: hidden; border-radius: 12px;
+  background: #0a0a0a url('ai-ml-bg.png') center/cover no-repeat;
+  padding: 3.5rem; color: #fff;
+}
+.research-ai-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(160deg, rgba(10,10,10,0.92) 0%, rgba(30,58,95,0.7) 45%, rgba(10,10,10,0.85) 100%),
+    radial-gradient(ellipse at 80% 30%, rgba(176,141,87,0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+.research-ai-inner { position: relative; z-index: 2; }
+.research-subsection-ai .research-subsection-title { color: #fff; }
+.research-subsection-ai .research-subsection-desc { color: rgba(255,255,255,0.75); }
+.research-subsection-ai .research-pub {
+  background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); color: #fff;
+}
+.research-subsection-ai .research-pub:hover {
+  background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); color: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.research-subsection-ai .research-journal { color: var(--gold-light); }
+.research-subsection-ai .research-pub-title { color: #fff; }
+.research-subsection-ai .research-pub-toggle {
+  color: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.2);
+}
+.research-subsection-ai .research-pub-toggle:hover {
+  background: #fff; color: var(--accent); border-color: #fff;
+}
 
 /* --- Podcast --- */
 .section-podcast {
