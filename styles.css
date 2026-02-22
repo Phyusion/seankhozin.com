@@ -175,12 +175,10 @@ img { max-width: 100%; display: block; }
 }
 .role-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
 .role-logo {
-  width: 64px; height: 64px; margin-bottom: 1.5rem;
-  border-radius: 10px; overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  height: 48px; margin-bottom: 1.5rem;
 }
 .role-logo img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
+  height: 100%; width: auto; object-fit: contain; display: block;
 }
 .role-card h3 { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 500; margin-bottom: 0.25rem; line-height: 1.3; }
 .role-position { font-size: 0.875rem; font-weight: 500; color: var(--gold); margin-bottom: 0.25rem; }
