@@ -306,6 +306,7 @@ img { max-width: 100%; display: block; }
   color: var(--gold-light); margin-bottom: 0.5rem; letter-spacing: -0.01em;
 }
 .ai-initiative .research-subsection-desc { margin-bottom: 0; }
+.research-subsection-ai .research-pub-list { margin-top: 2.5rem; }
 
 /* --- Podcast --- */
 .section-podcast {
