@@ -267,6 +267,38 @@ img { max-width: 100%; display: block; }
 .research-links { display: flex; gap: 1rem; justify-content: center; margin-top: 4rem; flex-wrap: wrap; }
 
 
+/* --- Podcast --- */
+.section-podcast { background: var(--bg); }
+.podcast-content {
+  display: grid; grid-template-columns: 280px 1fr; gap: 4rem; align-items: center;
+}
+.podcast-logo-wrapper { display: flex; justify-content: center; }
+.podcast-logo {
+  width: 280px; height: 280px; border-radius: 20px; overflow: hidden;
+  background: var(--surface-alt); border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(30,58,95,0.12), 0 4px 16px rgba(0,0,0,0.06);
+  transition: transform 300ms var(--ease), box-shadow 300ms var(--ease);
+}
+.podcast-logo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 64px rgba(30,58,95,0.18), 0 8px 24px rgba(0,0,0,0.08);
+}
+.podcast-logo img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.podcast-tagline {
+  font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.25rem;
+}
+.podcast-desc {
+  font-size: 1.0625rem; color: var(--text-2); line-height: 1.8; margin-bottom: 2rem; max-width: 600px;
+}
+.podcast-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+.podcast-btn {
+  display: inline-flex; align-items: center;
+}
+.podcast-btn svg { flex-shrink: 0; }
+
 /* --- Music --- */
 .section-music { background: var(--accent); color: #fff; }
 .section-music .section-label { color: var(--gold-light); }
@@ -328,6 +360,8 @@ img { max-width: 100%; display: block; }
   .roles-grid { grid-template-columns: repeat(2, 1fr); }
   .informed-pillars { grid-template-columns: repeat(2, 1fr); }
   .boards-grid { grid-template-columns: repeat(2, 1fr); }
+  .podcast-content { grid-template-columns: 240px 1fr; gap: 3rem; }
+  .podcast-logo { width: 240px; height: 240px; }
 
   .nav-toggle { display: flex; }
   .nav-links {
@@ -358,6 +392,10 @@ img { max-width: 100%; display: block; }
   .about-photo { max-width: 320px; margin: 0 auto 2rem; }
   .about-highlights { flex-direction: column; }
   .roles-grid, .informed-pillars, .boards-grid { grid-template-columns: 1fr; }
+  .podcast-content { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+  .podcast-logo { width: 220px; height: 220px; margin: 0 auto; }
+  .podcast-desc { margin-left: auto; margin-right: auto; }
+  .podcast-cta { justify-content: center; }
   .research-pub { padding: 1rem 1.25rem; }
   .research-pub-title { font-size: 0.9375rem; }
   .hero-cta, .contact-links { flex-direction: column; align-items: center; }
