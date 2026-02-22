@@ -45,11 +45,22 @@
     faders.forEach(el => observer.observe(el));
   }
 
+  // Collapsible publication lists
+  document.querySelectorAll('.research-pub-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const list = btn.closest('.research-pub-list');
+      const isExpanded = list.classList.toggle('expanded');
+      btn.setAttribute('aria-expanded', isExpanded);
+      const total = list.querySelectorAll('.research-pub').length;
+      btn.textContent = isExpanded ? 'Show fewer' : 'Show all ' + total + ' publications';
+    });
+  });
+
   // Auto-add fade-in to section children
   document.querySelectorAll('.section').forEach(section => {
     const header = section.querySelector('.section-header');
     const cards = section.querySelectorAll(
-      '.role-card, .timeline-item, .research-card, .media-card, .board-item, .highlight-card, .pillar, .contact-link'
+      '.role-card, .timeline-item, .research-card, .research-subsection, .media-card, .board-item, .highlight-card, .pillar, .contact-link'
     );
 
     if (header) header.classList.add('fade-in');
