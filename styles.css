@@ -224,46 +224,92 @@ img { max-width: 100%; display: block; }
 /* --- Research --- */
 .section-research { background: var(--surface-alt); }
 .research-lead {
-  font-size: 1.125rem; line-height: 1.8; color: var(--text-2); max-width: 900px; margin-bottom: 3.5rem;
+  font-size: 1.125rem; line-height: 1.8; color: var(--text-2); max-width: 900px; margin-bottom: 3rem;
 }
-.research-subsection { margin-bottom: 3.5rem; }
-.research-subsection:last-of-type { margin-bottom: 0; }
-.research-subsection-title {
-  font-family: var(--font-serif); font-size: 1.375rem; font-weight: 500; letter-spacing: -0.01em;
-  line-height: 1.3; color: var(--text); margin-bottom: 1rem;
+.research-accordions { display: flex; flex-direction: column; gap: 1.25rem; }
+
+/* Accordion card */
+.research-accordion {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  overflow: hidden; transition: box-shadow 300ms var(--ease), border-color 300ms var(--ease);
 }
+.research-accordion:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+.research-accordion.open { border-color: rgba(30,58,95,0.15); box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
+
+/* Accordion header */
+.research-accordion-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  padding: 1.75rem 2rem; cursor: pointer; user-select: none;
+  border-left: 3px solid var(--gold); transition: background 200ms var(--ease);
+}
+.research-accordion-header:hover { background: rgba(0,0,0,0.015); }
+.research-accordion-header:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 10px; }
+.research-accordion-label { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; min-width: 0; }
+.research-accordion-label h3 {
+  font-family: var(--font-serif); font-size: 1.25rem; font-weight: 500;
+  letter-spacing: -0.01em; line-height: 1.3; color: var(--text); margin: 0;
+}
+.research-accordion-count {
+  display: inline-flex; align-items: center; padding: 0.25rem 0.75rem;
+  font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--gold); background: rgba(176,141,87,0.08); border-radius: 20px; white-space: nowrap;
+}
+.research-accordion-chevron {
+  flex-shrink: 0; color: var(--text-3); transition: transform 400ms var(--ease), color 200ms var(--ease);
+}
+.research-accordion.open .research-accordion-chevron { transform: rotate(180deg); color: var(--accent); }
+
+/* Accordion panel — smooth expand/collapse */
+.research-accordion-panel {
+  display: grid; grid-template-rows: 0fr; transition: grid-template-rows 500ms var(--ease);
+}
+.research-accordion.open .research-accordion-panel { grid-template-rows: 1fr; }
+.research-accordion-body {
+  overflow: hidden; padding: 0 2rem;
+  transition: padding 500ms var(--ease);
+}
+.research-accordion.open .research-accordion-body { padding: 0 2rem 2rem; }
+
+/* Description */
 .research-subsection-desc {
   font-size: 0.9375rem; color: var(--text-2); line-height: 1.8; margin-bottom: 1.5rem; max-width: 960px;
 }
-.research-pub-list { display: flex; flex-direction: column; gap: 0.75rem; }
+
+/* Publication list */
+.research-pub-list { display: flex; flex-direction: column; gap: 0.625rem; }
 .research-pub {
-  display: block; padding: 1.125rem 1.5rem; background: var(--surface); border: 1px solid var(--border);
+  display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.25rem;
+  background: var(--surface-alt); border: 1px solid transparent; border-left: 3px solid var(--border);
   border-radius: 6px; text-decoration: none; color: var(--text);
-  transition: transform 200ms var(--ease), box-shadow 200ms var(--ease), border-color 200ms var(--ease);
-}
-.research-pub:hover {
-  transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-  border-color: var(--accent); color: var(--text);
-}
-.research-journal {
-  display: inline-block; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 0.375rem;
-}
-.research-pub-title {
-  display: block; font-family: var(--font-serif); font-size: 1rem; font-weight: 500;
-  line-height: 1.45; color: var(--text);
-}
-.research-pub-list[data-collapsible="true"]:not(.expanded) .research-pub:nth-child(n+5) { display: none; }
-.research-pub-toggle {
-  display: inline-flex; align-items: center; gap: 0.375rem;
-  background: none; border: 1px solid var(--border); border-radius: 4px;
-  padding: 0.5rem 1rem; margin-top: 0.5rem;
-  font-family: var(--font-sans); font-size: 0.8125rem; font-weight: 500;
-  color: var(--accent); cursor: pointer;
   transition: all 200ms var(--ease);
 }
-.research-pub-toggle:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
-.research-pub-list.expanded .research-pub-toggle { margin-top: 0.5rem; }
+.research-pub:hover {
+  border-left-color: var(--gold); background: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04); transform: translateX(4px);
+  color: var(--text);
+}
+.research-journal {
+  display: inline-block; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 0.25rem;
+}
+.research-pub-title {
+  display: block; font-family: var(--font-serif); font-size: 0.9375rem; font-weight: 500;
+  line-height: 1.45; color: var(--text);
+}
+
+/* Collapsible publications */
+.research-pub-list[data-collapsible="true"]:not(.expanded) .research-pub:nth-child(n+5) { display: none; }
+.research-pub-toggle {
+  display: inline-flex; align-items: center; gap: 0.5rem; align-self: flex-start;
+  background: none; border: none; padding: 0.5rem 0; margin-top: 0.25rem;
+  font-family: var(--font-sans); font-size: 0.8125rem; font-weight: 500;
+  color: var(--accent); cursor: pointer; transition: color 200ms var(--ease);
+}
+.research-pub-toggle::before { content: '+'; font-size: 1rem; font-weight: 600; line-height: 1; }
+.research-pub-list.expanded .research-pub-toggle::before { content: '\2212'; }
+.research-pub-toggle:hover { color: var(--accent-light); }
+
+/* Scholar / ResearchGate links */
 .research-links { display: flex; gap: 1rem; justify-content: center; margin-top: 4rem; flex-wrap: wrap; }
 
 
@@ -358,8 +404,11 @@ img { max-width: 100%; display: block; }
   .about-photo { max-width: 320px; margin: 0 auto 2rem; }
   .about-highlights { flex-direction: column; }
   .roles-grid, .informed-pillars, .boards-grid { grid-template-columns: 1fr; }
-  .research-pub { padding: 1rem 1.25rem; }
-  .research-pub-title { font-size: 0.9375rem; }
+  .research-accordion-header { padding: 1.25rem 1.25rem; }
+  .research-accordion-label h3 { font-size: 1.0625rem; }
+  .research-accordion-body, .research-accordion.open .research-accordion-body { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .research-pub { padding: 0.875rem 1rem; }
+  .research-pub-title { font-size: 0.875rem; }
   .hero-cta, .contact-links { flex-direction: column; align-items: center; }
 }
 

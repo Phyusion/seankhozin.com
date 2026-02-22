@@ -45,7 +45,20 @@
     faders.forEach(el => observer.observe(el));
   }
 
-  // Collapsible publication lists
+  // Research accordion expand/collapse
+  document.querySelectorAll('.research-accordion-header').forEach(header => {
+    const handler = () => {
+      const accordion = header.closest('.research-accordion');
+      const isOpen = accordion.classList.toggle('open');
+      header.setAttribute('aria-expanded', isOpen);
+    };
+    header.addEventListener('click', handler);
+    header.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handler(); }
+    });
+  });
+
+  // Collapsible publication lists (show more / show fewer)
   document.querySelectorAll('.research-pub-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       const list = btn.closest('.research-pub-list');
@@ -60,7 +73,7 @@
   document.querySelectorAll('.section').forEach(section => {
     const header = section.querySelector('.section-header');
     const cards = section.querySelectorAll(
-      '.role-card, .timeline-item, .research-card, .research-subsection, .media-card, .board-item, .highlight-card, .pillar, .contact-link'
+      '.role-card, .timeline-item, .research-accordion, .media-card, .board-item, .highlight-card, .pillar, .contact-link'
     );
 
     if (header) header.classList.add('fade-in');
