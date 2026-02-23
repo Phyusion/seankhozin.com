@@ -345,9 +345,9 @@ img { max-width: 100%; display: block; }
   color: rgba(255,255,255,0.3) !important; padding-bottom: 0.25rem !important;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-.fda-matrix-corner { width: 4.5rem; }
+.fda-matrix-corner { width: 3rem; }
 .fda-matrix-row-label {
-  position: relative; width: 1.75rem; padding: 0 !important;
+  position: relative; width: 1rem; padding: 0 !important;
   vertical-align: middle; text-align: center !important;
   border: none !important; background: transparent !important;
 }
@@ -359,7 +359,7 @@ img { max-width: 100%; display: block; }
 }
 .fda-matrix-row-header {
   font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-  color: rgba(255,255,255,0.45); text-align: right !important; padding-right: 0.875rem !important;
+  color: rgba(255,255,255,0.45); text-align: right !important; padding-right: 0.5rem !important;
 }
 .fda-concordant {
   background: rgba(176,141,87,0.22); color: #fff; font-weight: 600;
