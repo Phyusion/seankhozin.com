@@ -187,7 +187,7 @@ img { max-width: 100%; display: block; }
 .role-links { margin-top: 1rem; display: flex; gap: 0.75rem; }
 .role-link { font-size: 0.8125rem; font-weight: 500; color: var(--accent); text-decoration: none; border: 1px solid var(--border); padding: 0.35rem 0.875rem; border-radius: 4px; transition: all 200ms var(--ease); }
 .role-link:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
-.role-card p:last-child { font-size: 0.9375rem; color: var(--text-2); line-height: 1.7; }
+.role-card > p:not(.role-position):not(.role-parent) { font-size: 0.9375rem; color: var(--text-2); line-height: 1.7; }
 
 /* --- Timeline --- */
 .timeline { position: relative; padding-left: 4rem; }
