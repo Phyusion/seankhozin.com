@@ -374,11 +374,6 @@ img { max-width: 100%; display: block; }
 .fda-discordant:hover {
   background: rgba(255,255,255,0.06);
 }
-.fda-extreme {
-  color: rgba(220,120,100,0.9) !important; font-weight: 600;
-  background: rgba(220,120,100,0.08) !important;
-  border-color: rgba(220,120,100,0.15) !important;
-}
 .fda-matrix-total {
   color: rgba(255,255,255,0.4); font-weight: 500; font-size: 0.8125rem;
   border-radius: 4px;
@@ -410,9 +405,6 @@ img { max-width: 100%; display: block; }
 }
 .fda-legend-discordant {
   background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-}
-.fda-legend-extreme {
-  background: rgba(220,120,100,0.2); border: 1px solid rgba(220,120,100,0.4);
 }
 .fda-table-note {
   padding: 0.75rem 2rem 0.25rem; margin: 0; text-align: center;
