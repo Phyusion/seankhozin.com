@@ -329,7 +329,7 @@ img { max-width: 100%; display: block; }
 }
 .fda-table-scroll { overflow-x: auto; }
 .fda-matrix {
-  width: 100%; border-collapse: separate; border-spacing: 3px;
+  table-layout: fixed; width: 100%; border-collapse: separate; border-spacing: 3px;
   font-size: 0.875rem; margin: 0.75rem auto; max-width: 640px;
 }
 .fda-matrix th, .fda-matrix td {
