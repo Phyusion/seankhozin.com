@@ -310,6 +310,84 @@ img { max-width: 100%; display: block; }
 .ai-initiative .research-subsection-desc { margin-bottom: 0; }
 .research-subsection-ai .research-pub-list { margin-top: 2.5rem; }
 
+/* FDA Discordance Table */
+.fda-table-wrapper {
+  margin: 2.5rem 0; border-radius: 10px; overflow: hidden;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+.fda-table-header {
+  padding: 1.75rem 2rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.fda-table-title {
+  font-family: var(--font-serif); font-size: 1.0625rem; font-weight: 500;
+  color: var(--gold-light); margin-bottom: 0.25rem; letter-spacing: -0.01em;
+}
+.fda-table-subtitle {
+  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin: 0;
+}
+.fda-table-scroll { overflow-x: auto; }
+.fda-table {
+  width: 100%; border-collapse: collapse; font-size: 0.875rem;
+  table-layout: fixed;
+}
+.fda-table th {
+  padding: 0.875rem 2rem; text-align: left; font-size: 0.6875rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35);
+  border-bottom: 1px solid rgba(255,255,255,0.08); white-space: nowrap;
+}
+.fda-table th:first-child { width: 28%; }
+.fda-table th:nth-child(2) { width: 14%; text-align: right; }
+.fda-table th:nth-child(3) { width: 42%; }
+.fda-table th:nth-child(4) { width: 16%; text-align: right; }
+.fda-table td {
+  padding: 0.6875rem 2rem; color: rgba(255,255,255,0.8);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 150ms var(--ease);
+}
+.fda-table td:nth-child(2) { text-align: right; font-variant-numeric: tabular-nums; }
+.fda-table td:nth-child(4) { text-align: right; font-variant-numeric: tabular-nums; color: rgba(255,255,255,0.5); }
+.fda-table tbody tr:hover td { background: rgba(255,255,255,0.04); }
+.fda-tumor-name { font-weight: 500; color: #fff; }
+.fda-bar-cell {
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.fda-bar {
+  flex: 1; height: 6px; border-radius: 3px; position: relative;
+  background: rgba(255,255,255,0.08); overflow: hidden;
+}
+.fda-bar::after {
+  content: ''; position: absolute; inset: 0; border-radius: 3px;
+  width: var(--bar-w, 0%);
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%);
+  transition: width 0.8s var(--ease);
+}
+.fda-bar-overall::after {
+  background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.5) 100%);
+}
+.fda-val {
+  flex-shrink: 0; min-width: 3.25rem; text-align: right;
+  font-variant-numeric: tabular-nums; font-weight: 500; font-size: 0.8125rem;
+  color: rgba(255,255,255,0.85);
+}
+.fda-row-high .fda-tumor-name { color: var(--gold-light); }
+.fda-row-high .fda-val { color: var(--gold-light); font-weight: 600; }
+.fda-row-high td:nth-child(4) { color: var(--gold-light); font-weight: 500; }
+.fda-table tfoot td {
+  border-top: 1px solid rgba(255,255,255,0.1); border-bottom: none;
+  padding-top: 0.875rem; padding-bottom: 0.875rem;
+}
+.fda-table tfoot .fda-tumor-name {
+  font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+.fda-table tfoot .fda-val { color: rgba(255,255,255,0.6); }
+.fda-table-note {
+  padding: 1rem 2rem 1.25rem; margin: 0;
+  font-size: 0.75rem; color: rgba(255,255,255,0.3); line-height: 1.6;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
 
 /* --- Music --- */
 .section-music { background: var(--accent); color: #fff; }
@@ -405,6 +483,10 @@ img { max-width: 100%; display: block; }
   .research-pub { padding: 1rem 1.25rem; }
   .research-pub-title { font-size: 0.9375rem; }
   .hero-cta, .contact-links { flex-direction: column; align-items: center; }
+  .fda-table { table-layout: auto; min-width: 520px; }
+  .fda-table th, .fda-table td { padding: 0.625rem 1.25rem; }
+  .fda-table-header { padding: 1.25rem 1.25rem 1rem; }
+  .fda-table-note { padding: 0.875rem 1.25rem 1rem; }
 }
 
 @media (max-width: 480px) {
