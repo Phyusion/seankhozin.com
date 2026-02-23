@@ -464,12 +464,12 @@
             <table class="fda-matrix">
               <thead>
                 <tr>
-                  <th class="fda-matrix-corner"></th>
+                  <th class="fda-matrix-corner" colspan="2"></th>
                   <th colspan="5" class="fda-matrix-group-header">Independent Radiologist</th>
                   <th class="fda-matrix-total-header">Total</th>
                 </tr>
                 <tr>
-                  <th class="fda-matrix-corner"></th>
+                  <th class="fda-matrix-corner" colspan="2"></th>
                   <th>CR</th>
                   <th>PR</th>
                   <th>SD</th>
@@ -480,6 +480,7 @@
               </thead>
               <tbody>
                 <tr>
+                  <th class="fda-matrix-row-header fda-matrix-row-label" rowspan="5"><span>Investigator</span></th>
                   <th class="fda-matrix-row-header">CR</th>
                   <td class="fda-concordant">305</td>
                   <td class="fda-discordant">250</td>
@@ -527,6 +528,7 @@
               </tbody>
               <tfoot>
                 <tr>
+                  <th class="fda-matrix-corner"></th>
                   <th class="fda-matrix-row-header fda-matrix-total-header">Total</th>
                   <td class="fda-matrix-total">619</td>
                   <td class="fda-matrix-total">4,536</td>
@@ -541,8 +543,15 @@
           <div class="fda-table-legend">
             <span class="fda-legend-item"><span class="fda-legend-swatch fda-legend-concordant"></span>Concordant</span>
             <span class="fda-legend-item"><span class="fda-legend-swatch fda-legend-discordant"></span>Discordant</span>
+            <span class="fda-legend-item"><span class="fda-legend-swatch fda-legend-extreme"></span>Extreme discordance</span>
           </div>
-          <p class="fda-table-note">CR = Complete Response &middot; PR = Partial Response &middot; SD = Stable Disease &middot; PD = Progressive Disease &middot; NE = Not Evaluable</p>
+          <p class="fda-table-note">
+            Response categories per <strong>RECIST 1.1</strong> (Response Evaluation Criteria in Solid Tumors):
+            CR = Complete Response &middot; PR = Partial Response &middot; SD = Stable Disease &middot; PD = Progressive Disease &middot; NE = Not Evaluable
+          </p>
+          <p class="fda-table-source">
+            FDA meta-analysis of 27 oncology trials &middot; Khozin <em>et al.</em>, <em>Clinical Cancer Research</em>, 2020
+          </p>
         </div>
 
         <div class="ai-initiative">
