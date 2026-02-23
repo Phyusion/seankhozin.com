@@ -454,95 +454,95 @@
         <p class="research-subsection-desc">Dr. Khozin's work in AI spans foundation models for oncology, LLM-based clinical trial data analysis, and regulatory frameworks for AI/ML adoption across the drug development life cycle. At the FDA, he established Information Exchange and Data Transformation (INFORMED), the agency's first data science and technology incubator, which laid the groundwork for integrating AI and digital health into drug development and regulatory decision-making.</p>
         <p class="research-subsection-desc">A central focus of Dr. Khozin’s current work is modernizing how tumor burden is measured in clinical trials. In a large FDA-led meta-analysis of more than 14,000 patients enrolled in registration trials, he found that two independent radiologists reviewing the same scans agreed on tumor response classification only about 70% of the time. In ovarian and pancreatic cancers, discordance reached as high as 45%, with striking cases in which one reader determined a complete response while the other concluded progressive disease in the very same patient.</p>
 
-        <!-- FDA Meta-Analysis Discordance Table -->
+        <!-- FDA Meta-Analysis Concordance Matrix -->
         <div class="fda-table-wrapper">
           <div class="fda-table-header">
-            <h4 class="fda-table-title">Response Assessment Discordance by Tumor Type</h4>
-            <p class="fda-table-subtitle">FDA Meta-Analysis &middot; 14,302 Patients Across Registration Trials</p>
+            <h4 class="fda-table-title">Inter-Reader Response Classification</h4>
+            <p class="fda-table-subtitle">Primary Investigator vs. Independent Radiologist &middot; N = 13,677</p>
           </div>
           <div class="fda-table-scroll">
-            <table class="fda-table">
+            <table class="fda-matrix">
               <thead>
                 <tr>
-                  <th>Tumor Type</th>
-                  <th>N</th>
-                  <th>Discordance Rate</th>
-                  <th>CR &harr; PD</th>
+                  <th class="fda-matrix-corner"></th>
+                  <th colspan="5" class="fda-matrix-group-header">Independent Radiologist</th>
+                  <th class="fda-matrix-total-header">Total</th>
+                </tr>
+                <tr>
+                  <th class="fda-matrix-corner"></th>
+                  <th>CR</th>
+                  <th>PR</th>
+                  <th>SD</th>
+                  <th>PD</th>
+                  <th>NE</th>
+                  <th class="fda-matrix-total-header">Total</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="fda-row-high">
-                  <td><span class="fda-tumor-name">Ovarian</span></td>
-                  <td>1,216</td>
-                  <td><span class="fda-bar-cell"><span class="fda-bar" style="--bar-w:100%"></span><span class="fda-val">45.0%</span></span></td>
-                  <td>8.2%</td>
-                </tr>
-                <tr class="fda-row-high">
-                  <td><span class="fda-tumor-name">Pancreatic</span></td>
-                  <td>862</td>
-                  <td><span class="fda-bar-cell"><span class="fda-bar" style="--bar-w:97%"></span><span class="fda-val">43.8%</span></span></td>
-                  <td>5.1%</td>
+                <tr>
+                  <th class="fda-matrix-row-header">CR</th>
+                  <td class="fda-concordant">305</td>
+                  <td class="fda-discordant">250</td>
+                  <td class="fda-discordant">116</td>
+                  <td class="fda-discordant fda-extreme">14</td>
+                  <td class="fda-discordant">25</td>
+                  <td class="fda-matrix-total">710</td>
                 </tr>
                 <tr>
-                  <td><span class="fda-tumor-name">Gastric / GEJ</span></td>
-                  <td>1,089</td>
-                  <td><span class="fda-bar-cell"><span class="fda-bar" style="--bar-w:86%"></span><span class="fda-val">38.5%</span></span></td>
-                  <td>4.7%</td>
+                  <th class="fda-matrix-row-header">PR</th>
+                  <td class="fda-discordant">240</td>
+                  <td class="fda-concordant">3,366</td>
+                  <td class="fda-discordant">908</td>
+                  <td class="fda-discordant">126</td>
+                  <td class="fda-discordant">33</td>
+                  <td class="fda-matrix-total">4,673</td>
                 </tr>
                 <tr>
-                  <td><span class="fda-tumor-name">Hepatocellular</span></td>
-                  <td>543</td>
-                  <td><span class="fda-bar-cell"><span class="fda-bar" style="--bar-w:82%"></span><span class="fda-val">36.9%</span></span></td>
-                  <td>4.3%</td>
+                  <th class="fda-matrix-row-header">SD</th>
+                  <td class="fda-discordant">64</td>
+                  <td class="fda-discordant">849</td>
+                  <td class="fda-concordant">3,522</td>
+                  <td class="fda-discordant">668</td>
+                  <td class="fda-discordant">74</td>
+                  <td class="fda-matrix-total">5,177</td>
                 </tr>
                 <tr>
-                  <td><span class="fda-tumor-name">Breast</span></td>
-                  <td>2,148</td>
-                  <td><span class="fda-bar-cell"><span class="fda-bar" style="--bar-w:78%"></span><span class="fda-val">35.2%</span></span></td>
-                  <td>3.9%</td>
+                  <th class="fda-matrix-row-header">PD</th>
+                  <td class="fda-discordant fda-extreme">9</td>
+                  <td class="fda-discordant">58</td>
+                  <td class="fda-discordant">507</td>
+                  <td class="fda-concordant">1,890</td>
+                  <td class="fda-discordant">134</td>
+                  <td class="fda-matrix-total">2,598</td>
                 </tr>
                 <tr>
-                  <td><span class="fda-tumor-name">Colorectal</span></td>
-                  <td>1,876</td>
-                  <td><span class="fda-bar-cell"><span class="fda-bar" style="--bar-w:71%"></span><span class="fda-val">32.1%</span></span></td>
-                  <td>3.2%</td>
-                </tr>
-                <tr>
-                  <td><span class="fda-tumor-name">Head &amp; Neck</span></td>
-                  <td>687</td>
-                  <td><span class="fda-bar-cell"><span class="fda-bar" style="--bar-w:70%"></span><span class="fda-val">31.4%</span></span></td>
-                  <td>3.5%</td>
-                </tr>
-                <tr>
-                  <td><span class="fda-tumor-name">NSCLC</span></td>
-                  <td>3,245</td>
-                  <td><span class="fda-bar-cell"><span class="fda-bar" style="--bar-w:64%"></span><span class="fda-val">28.7%</span></span></td>
-                  <td>2.8%</td>
-                </tr>
-                <tr>
-                  <td><span class="fda-tumor-name">RCC</span></td>
-                  <td>1,534</td>
-                  <td><span class="fda-bar-cell"><span class="fda-bar" style="--bar-w:58%"></span><span class="fda-val">26.3%</span></span></td>
-                  <td>2.1%</td>
-                </tr>
-                <tr>
-                  <td><span class="fda-tumor-name">Melanoma</span></td>
-                  <td>1,102</td>
-                  <td><span class="fda-bar-cell"><span class="fda-bar" style="--bar-w:55%"></span><span class="fda-val">24.8%</span></span></td>
-                  <td>1.9%</td>
+                  <th class="fda-matrix-row-header">NE</th>
+                  <td class="fda-discordant">1</td>
+                  <td class="fda-discordant">13</td>
+                  <td class="fda-discordant">31</td>
+                  <td class="fda-discordant">49</td>
+                  <td class="fda-concordant">425</td>
+                  <td class="fda-matrix-total">519</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
-                  <td><span class="fda-tumor-name">Overall</span></td>
-                  <td>14,302</td>
-                  <td><span class="fda-bar-cell"><span class="fda-bar fda-bar-overall" style="--bar-w:67%"></span><span class="fda-val">30.2%</span></span></td>
-                  <td>3.8%</td>
+                  <th class="fda-matrix-row-header fda-matrix-total-header">Total</th>
+                  <td class="fda-matrix-total">619</td>
+                  <td class="fda-matrix-total">4,536</td>
+                  <td class="fda-matrix-total">5,084</td>
+                  <td class="fda-matrix-total">2,747</td>
+                  <td class="fda-matrix-total">691</td>
+                  <td class="fda-matrix-total fda-matrix-grand-total">13,677</td>
                 </tr>
               </tfoot>
             </table>
           </div>
-          <p class="fda-table-note">CR &harr; PD = cases where one reader classified complete response while the other classified progressive disease in the same patient.</p>
+          <div class="fda-table-legend">
+            <span class="fda-legend-item"><span class="fda-legend-swatch fda-legend-concordant"></span>Concordant</span>
+            <span class="fda-legend-item"><span class="fda-legend-swatch fda-legend-discordant"></span>Discordant</span>
+          </div>
+          <p class="fda-table-note">CR = Complete Response &middot; PR = Partial Response &middot; SD = Stable Disease &middot; PD = Progressive Disease &middot; NE = Not Evaluable</p>
         </div>
 
         <div class="ai-initiative">
