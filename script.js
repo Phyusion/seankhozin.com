@@ -75,6 +75,17 @@
     });
   }
 
+  // Expandable AI/ML card
+  const aiToggle = document.getElementById('ai-card-toggle');
+  const aiBody = document.getElementById('ai-card-body');
+  if (aiToggle && aiBody) {
+    aiToggle.addEventListener('click', () => {
+      const isOpen = aiBody.classList.toggle('open');
+      aiToggle.setAttribute('aria-expanded', isOpen);
+      aiToggle.querySelector('.research-ai-toggle-text').textContent = isOpen ? 'Show less' : 'Read more';
+    });
+  }
+
   // Collapsible publication lists
   document.querySelectorAll('.research-pub-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
