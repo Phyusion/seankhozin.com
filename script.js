@@ -45,6 +45,16 @@
     faders.forEach(el => observer.observe(el));
   }
 
+  // Expandable contact form
+  const formTrigger = document.getElementById('contact-form-trigger');
+  const formPanel = document.getElementById('contact-form-panel');
+  if (formTrigger && formPanel) {
+    formTrigger.addEventListener('click', () => {
+      const isOpen = formPanel.classList.toggle('open');
+      formTrigger.setAttribute('aria-expanded', isOpen);
+    });
+  }
+
   // Collapsible publication lists
   document.querySelectorAll('.research-pub-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
