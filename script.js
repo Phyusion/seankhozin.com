@@ -75,6 +75,17 @@
     });
   }
 
+  // Expandable research cards (light theme)
+  document.querySelectorAll('.research-card-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.research-card-expandable');
+      const body = card.querySelector('.research-card-body');
+      const isOpen = body.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+      btn.querySelector('.research-card-toggle-text').textContent = isOpen ? 'Show less' : 'Read more';
+    });
+  });
+
   // Expandable AI/ML card
   const aiToggle = document.getElementById('ai-card-toggle');
   const aiBody = document.getElementById('ai-card-body');

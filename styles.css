@@ -293,6 +293,57 @@ img { max-width: 100%; display: block; }
 .research-pub-list.expanded .research-pub-toggle { margin-top: 0.5rem; }
 .research-links { display: flex; gap: 1rem; justify-content: center; margin-top: 4rem; flex-wrap: wrap; }
 
+/* Expandable research cards (light theme) */
+.research-card-expandable {
+  overflow: hidden; border-radius: 12px;
+  background: var(--surface); border: 1px solid var(--border);
+}
+.research-card-banner {
+  display: block; width: 100%; height: 220px;
+  object-fit: cover; object-position: center;
+}
+.research-card-content { padding: 2.5rem 3.5rem 3.5rem; }
+.research-card-header {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem;
+}
+.research-card-header-text { flex: 1; min-width: 0; }
+.research-card-header .research-subsection-title { margin-bottom: 0.75rem; }
+.research-card-header .research-subsection-desc { margin-bottom: 0; }
+.research-card-toggle {
+  display: inline-flex; align-items: center; gap: 0.5rem; flex-shrink: 0;
+  margin-top: 0.25rem;
+  background: none; border: 1px solid var(--border); border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-sans); font-size: 0.8125rem; font-weight: 500;
+  color: var(--accent); cursor: pointer;
+  transition: all 200ms var(--ease);
+}
+.research-card-toggle:hover {
+  background: var(--accent); color: #fff; border-color: var(--accent);
+}
+.research-card-chevron {
+  transition: transform 400ms var(--ease);
+}
+.research-card-toggle[aria-expanded="true"] .research-card-chevron {
+  transform: rotate(180deg);
+}
+.research-card-body {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows 500ms var(--ease);
+}
+.research-card-body.open {
+  grid-template-rows: 1fr;
+}
+.research-card-body-inner {
+  overflow: hidden;
+}
+.research-card-body:not(.open) .research-card-body-inner {
+  padding-top: 0;
+}
+.research-card-body.open .research-card-body-inner {
+  padding-top: 1.5rem;
+}
+
 /* AI/ML subsection feature card */
 .research-subsection-ai {
   position: relative; overflow: hidden; border-radius: 12px;
@@ -668,6 +719,10 @@ img { max-width: 100%; display: block; }
   .fda-matrix { min-width: 480px; font-size: 0.8125rem; }
   .fda-table-header { padding: 1.25rem 1.25rem 1rem; }
   .fda-table-note { padding: 0.625rem 1.25rem 1rem; }
+  .research-card-banner { height: 160px; }
+  .research-card-content { padding: 1.75rem 1.5rem 2rem; }
+  .research-card-header { flex-direction: column; gap: 1rem; }
+  .research-card-toggle { align-self: flex-start; }
   .research-ai-banner { height: 160px; }
   .research-ai-inner { padding: 1.75rem 1.5rem 2rem; }
   .research-ai-header { flex-direction: column; gap: 1rem; }
