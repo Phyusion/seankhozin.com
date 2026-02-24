@@ -45,6 +45,26 @@
     faders.forEach(el => observer.observe(el));
   }
 
+  // Sticky section headers
+  const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
+  document.querySelectorAll('.section-header').forEach(header => {
+    var sentinel = document.createElement('div');
+    sentinel.className = 'section-header-sentinel';
+    sentinel.setAttribute('aria-hidden', 'true');
+    header.parentElement.insertBefore(sentinel, header);
+
+    var stickyObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          var isAbove = entry.boundingClientRect.top < navHeight;
+          header.classList.toggle('stuck', !entry.isIntersecting && isAbove);
+        });
+      },
+      { rootMargin: '-' + (navHeight + 1) + 'px 0px 0px 0px' }
+    );
+    stickyObserver.observe(sentinel);
+  });
+
   // Expandable contact form
   const formTrigger = document.getElementById('contact-form-trigger');
   const formPanel = document.getElementById('contact-form-panel');
