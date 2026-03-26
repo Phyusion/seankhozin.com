@@ -21,11 +21,10 @@
   // ============================================================
   //  #1 — PARALLAX (mouse-driven depth shift)
   // ============================================================
-  var parallax = { x: 0, y: 0, targetX: 0, targetY: 0 };
-  var PARALLAX_STRENGTH = 30;
+  var parallax = { y: 0, targetY: 0 };
+  var PARALLAX_STRENGTH = 25;
 
   function updateParallax() {
-    parallax.x += (parallax.targetX - parallax.x) * 0.06;
     parallax.y += (parallax.targetY - parallax.y) * 0.06;
   }
 
@@ -241,9 +240,9 @@
       vy: Math.sin(angle) * speed,
       text: FORMULA_TEXTS[Math.floor(Math.random() * FORMULA_TEXTS.length)],
       opacity: 0,
-      maxOpacity: 0.25 + Math.random() * 0.2,
+      maxOpacity: 0.45 + Math.random() * 0.25,
       fadeIn: true,
-      fadeSpeed: 0.003 + Math.random() * 0.003,
+      fadeSpeed: 0.004 + Math.random() * 0.004,
       size: 11 + Math.floor(Math.random() * 5),
       useGold: Math.random() < 0.25,
     };
@@ -276,14 +275,12 @@
   canvas.addEventListener('mousemove', function(e) {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
-    // #1 — Parallax: shift based on mouse distance from center
-    parallax.targetX = ((e.clientX / W) - 0.5) * PARALLAX_STRENGTH * -1;
+    // #1 — Parallax: vertical shift based on mouse Y position
     parallax.targetY = ((e.clientY / H) - 0.5) * PARALLAX_STRENGTH * -1;
   });
   canvas.addEventListener('mouseleave', function() {
     mouse.x = -9999;
     mouse.y = -9999;
-    parallax.targetX = 0;
     parallax.targetY = 0;
   });
 
@@ -304,7 +301,7 @@
       var depth = net.depth;
       for (var ndi = 0; ndi < net.nodes.length; ndi++) {
         var node = net.nodes[ndi];
-        node.x = node.baseX + parallax.x * depth;
+        node.x = node.baseX;
         node.y = node.baseY + parallax.y * depth;
         node.pulsePhase += 0.02;
         node.activation = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(node.pulsePhase));
@@ -366,7 +363,7 @@
       var p = particles[pi];
       var flicker = 0.7 + 0.3 * Math.sin(p.phase);
       ctx.beginPath();
-      ctx.arc(p.x + parallax.x * 0.2, p.y + parallax.y * 0.2, p.r, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y + parallax.y * 0.2, p.r, 0, Math.PI * 2);
       ctx.fillStyle = rgba(COL.nodeDim, p.alpha * flicker);
       ctx.fill();
     }
@@ -377,7 +374,7 @@
       if (f.opacity <= 0.01) continue;
       ctx.font = f.size + "px 'Courier New', monospace";
       ctx.fillStyle = f.useGold ? rgba(COL.goldLight, f.opacity) : rgba(COL.formula, f.opacity);
-      ctx.fillText(f.text, f.x + parallax.x * 0.15, f.y + parallax.y * 0.15);
+      ctx.fillText(f.text, f.x, f.y + parallax.y * 0.15);
     }
 
     // Neural networks
@@ -392,7 +389,7 @@
           var conn = net.connections[ci];
           var a = net.nodes[conn.from];
           var b = net.nodes[conn.to];
-          var alpha = (0.15 + conn.weight * 0.15) * connEntr;
+          var alpha = (0.08 + conn.weight * 0.1) * connEntr;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -418,18 +415,18 @@
         ctx.moveTo(tx, ty);
         ctx.lineTo(px, py);
         var trailCol = sig.bright ? COL.gold : COL.signal;
-        ctx.strokeStyle = rgba(trailCol, fade * 0.6);
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = rgba(trailCol, fade * 0.35);
+        ctx.lineWidth = 1.5;
         ctx.stroke();
 
         ctx.beginPath();
         ctx.arc(px, py, 3, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(sig.bright ? COL.goldLight : COL.signal, fade * 0.95);
+        ctx.fillStyle = rgba(sig.bright ? COL.goldLight : COL.signal, fade * 0.7);
         ctx.fill();
 
         ctx.beginPath();
         ctx.arc(px, py, 8, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(sig.bright ? COL.gold : COL.node, fade * 0.18);
+        ctx.fillStyle = rgba(sig.bright ? COL.gold : COL.node, fade * 0.1);
         ctx.fill();
 
         if (fade > 0.5) {
@@ -452,7 +449,7 @@
 
         // Outer glow
         var glowGrad = ctx.createRadialGradient(node.x, node.y, drawR, node.x, node.y, drawR * 6);
-        glowGrad.addColorStop(0, rgba(COL.node, 0.15 * pulse * entrAlpha));
+        glowGrad.addColorStop(0, rgba(COL.node, 0.08 * pulse * entrAlpha));
         glowGrad.addColorStop(1, rgba(COL.node, 0));
         ctx.beginPath();
         ctx.arc(node.x, node.y, drawR * 6, 0, Math.PI * 2);
@@ -462,16 +459,16 @@
         // Node fill — bold and visible
         ctx.beginPath();
         ctx.arc(node.x, node.y, drawR, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(COL.node, (0.5 + 0.4 * node.activation * pulse) * entrAlpha);
+        ctx.fillStyle = rgba(COL.node, (0.25 + 0.2 * node.activation * pulse) * entrAlpha);
         ctx.fill();
-        ctx.strokeStyle = rgba(COL.node, (0.7 + 0.3 * pulse) * entrAlpha);
-        ctx.lineWidth = 1.2;
+        ctx.strokeStyle = rgba(COL.node, (0.35 + 0.2 * pulse) * entrAlpha);
+        ctx.lineWidth = 1;
         ctx.stroke();
 
         // Inner core — bright
         ctx.beginPath();
         ctx.arc(node.x, node.y, drawR * 0.4, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(COL.signal, 0.8 * node.activation * pulse * entrAlpha);
+        ctx.fillStyle = rgba(COL.signal, 0.4 * node.activation * pulse * entrAlpha);
         ctx.fill();
       }
 
