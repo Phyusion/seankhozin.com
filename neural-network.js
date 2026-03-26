@@ -304,10 +304,10 @@
     // Check formulas first (drawn on top)
     for (var fi = formulas.length - 1; fi >= 0; fi--) {
       var f = formulas[fi];
-      // Approximate hit box based on text size
       var tw = f.text.length * f.size * 0.55;
       var th = f.size;
-      if (mx >= f.x && mx <= f.x + tw && my >= f.y - th && my <= f.y) {
+      var fdy = f.y + parallax.y * 0.15;
+      if (mx >= f.x && mx <= f.x + tw && my >= fdy - th && my <= fdy) {
         f.grabbed = true;
         grabbed = { type: 'formula', ref: f, offsetX: mx - f.x, offsetY: my - f.y };
         canvas.style.cursor = 'grabbing';
@@ -365,14 +365,16 @@
 
     if (frame % 6 === 0) spawnSignals();
 
-    // Update node positions with parallax (#1)
+    // Update node positions with parallax (#1); skip parallax for grabbed nodes
     for (var ni = 0; ni < networks.length; ni++) {
       var net = networks[ni];
       var depth = net.depth;
       for (var ndi = 0; ndi < net.nodes.length; ndi++) {
         var node = net.nodes[ndi];
-        node.x = node.baseX;
-        node.y = node.baseY + parallax.y * depth;
+        if (!node.grabbed) {
+          node.x = node.baseX;
+          node.y = node.baseY + parallax.y * depth;
+        }
         node.pulsePhase += 0.005;
         node.activation = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(node.pulsePhase));
       }
@@ -442,9 +444,10 @@
       // Hit test for hover
       var tw = f.text.length * f.size * 0.55;
       var th = f.size;
+      var fDrawY = f.y + (f.grabbed ? 0 : parallax.y * 0.15);
       var isHoveredF = !grabbed && mouse.x > -9000 &&
         mouse.x >= f.x && mouse.x <= f.x + tw &&
-        mouse.y >= f.y - th && mouse.y <= f.y + 4;
+        mouse.y >= fDrawY - th && mouse.y <= fDrawY + 4;
       var isActiveF = f.grabbed || isHoveredF;
       var alpha;
       if (isActiveF) {
@@ -524,8 +527,9 @@
         var entrAlpha = layerEntrance(node.layer, totalLayers);
         if (entrAlpha <= 0) continue;
 
+        var nodeHitR = Math.max(node.radius * 3, 12);
         var isHovered = !grabbed && mouse.x > -9000 &&
-          (mouse.x - node.x) * (mouse.x - node.x) + (mouse.y - node.y) * (mouse.y - node.y) < Math.max(node.radius * 3, 12) * Math.max(node.radius * 3, 12);
+          (mouse.x - node.x) * (mouse.x - node.x) + (mouse.y - node.y) * (mouse.y - node.y) < nodeHitR * nodeHitR;
         var isActive = node.grabbed || isHovered;
         var nodeAlpha = isActive ? 1 : entrAlpha;
         var pulse = 0.6 + 0.4 * Math.sin(node.pulsePhase);
