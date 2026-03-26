@@ -78,7 +78,8 @@ img { max-width: 100%; display: block; }
 #neural-canvas {
   position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1;
 }
-.hero-content { text-align: center; padding: 6rem 2rem; position: relative; z-index: 3; }
+.hero-content { text-align: center; padding: 6rem 2rem; position: relative; z-index: 3; pointer-events: none; }
+.hero-content a, .hero-content button { pointer-events: auto; }
 .hero-eyebrow {
   font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
   color: var(--gold); margin-bottom: 1rem;
@@ -121,7 +122,7 @@ img { max-width: 100%; display: block; }
   transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 .hero-scroll {
-  position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); z-index: 3;
+  position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); z-index: 3; pointer-events: none;
   opacity: 0; animation: fadeUp 0.8s var(--ease) 1s forwards;
 }
 .scroll-indicator { width: 24px; height: 40px; border: 2px solid rgba(30,58,95,0.5); border-radius: 12px; position: relative; }
@@ -527,7 +528,12 @@ img { max-width: 100%; display: block; }
 /* --- Contact --- */
 .section-contact { text-align: center; position: relative; overflow: hidden; }
 #contact-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-.section-contact .container { position: relative; z-index: 1; }
+.section-contact .container { position: relative; z-index: 1; pointer-events: none; }
+.section-contact .container a,
+.section-contact .container button,
+.section-contact .container input,
+.section-contact .container textarea,
+.section-contact .container .contact-form-wrapper { pointer-events: auto; }
 .contact-content .lead { font-size: 1.125rem; color: var(--text-2); max-width: 600px; margin: 0 auto 3rem; }
 .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
 .contact-link {

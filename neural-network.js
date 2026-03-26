@@ -834,7 +834,7 @@
     // Nodes with hover/grab highlight
     for (var ni = 0; ni < net.nodes.length; ni++) {
       var nd = net.nodes[ni];
-      var hr = Math.max(nd.r*3, 12);
+      var hr = Math.max(nd.r*4, 16);
       var isHov = !grabbed && mouse.x > -9000 &&
         (mouse.x-nd.x)*(mouse.x-nd.x)+(mouse.y-nd.y)*(mouse.y-nd.y) < hr*hr;
       var isAct = nd.grabbed || isHov;
