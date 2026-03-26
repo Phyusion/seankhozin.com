@@ -405,3 +405,137 @@
     onScroll();
   }
 })();
+
+// ================================================================
+//  DNA Double Helix — rotating around vertical (long) axis
+// ================================================================
+(function() {
+  var canvas = document.getElementById('dna-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var DPR = window.devicePixelRatio || 1;
+  var W = 80, H = 200;
+
+  canvas.width = W * DPR;
+  canvas.height = H * DPR;
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+  var COL = {
+    strand1: [30, 58, 95],    // accent navy
+    strand2: [176, 141, 87],  // gold
+    rung:    [45, 90, 142],   // signal blue
+    glow:    [30, 58, 95],
+  };
+  function rgba(c, a) { return 'rgba('+c[0]+','+c[1]+','+c[2]+','+a+')'; }
+
+  var rotation = 0;
+  var NUM_POINTS = 30;   // points per strand
+  var RADIUS = 22;       // helix radius
+  var PITCH = H / 5;     // vertical distance per full turn
+  var RUNG_INTERVAL = 3; // connect every Nth pair
+
+  // Visibility check
+  var isVisible = false;
+  if (typeof IntersectionObserver !== 'undefined') {
+    var obs = new IntersectionObserver(function(entries) {
+      isVisible = entries[0].isIntersecting;
+    }, { rootMargin: '100px' });
+    obs.observe(canvas);
+  } else {
+    isVisible = true;
+  }
+
+  function draw() {
+    if (!isVisible) { requestAnimationFrame(draw); return; }
+    rotation += 0.008;
+    ctx.clearRect(0, 0, W, H);
+
+    var cx = W / 2;
+    var padY = 15;
+    var availH = H - padY * 2;
+
+    // Pre-compute all strand points
+    var s1 = [], s2 = [];
+    for (var i = 0; i < NUM_POINTS; i++) {
+      var t = i / (NUM_POINTS - 1); // 0 to 1
+      var y = padY + t * availH;
+      var angle = t * Math.PI * 4 + rotation; // ~2 full turns
+
+      // Strand 1
+      var x1_3d = Math.cos(angle) * RADIUS;
+      var z1 = Math.sin(angle) * RADIUS;
+      var depth1 = 0.5 + 0.5 * (z1 / RADIUS); // 0=back, 1=front
+
+      // Strand 2 — offset by PI
+      var x2_3d = Math.cos(angle + Math.PI) * RADIUS;
+      var z2 = Math.sin(angle + Math.PI) * RADIUS;
+      var depth2 = 0.5 + 0.5 * (z2 / RADIUS);
+
+      s1.push({ x: cx + x1_3d, y: y, depth: depth1 });
+      s2.push({ x: cx + x2_3d, y: y, depth: depth2 });
+    }
+
+    // Draw rungs (base pairs) — behind strands
+    for (var ri = 0; ri < NUM_POINTS; ri += RUNG_INTERVAL) {
+      var p1 = s1[ri], p2 = s2[ri];
+      var rungDepth = (p1.depth + p2.depth) / 2;
+      ctx.beginPath();
+      ctx.moveTo(p1.x, p1.y);
+      ctx.lineTo(p2.x, p2.y);
+      ctx.strokeStyle = rgba(COL.rung, 0.15 + 0.25 * rungDepth);
+      ctx.lineWidth = 1 + rungDepth;
+      ctx.stroke();
+
+      // Small dots at rung endpoints
+      var dotR = 1.5 + rungDepth;
+      ctx.beginPath(); ctx.arc(p1.x, p1.y, dotR, 0, Math.PI * 2);
+      ctx.fillStyle = rgba(COL.strand1, 0.3 + 0.4 * p1.depth);
+      ctx.fill();
+      ctx.beginPath(); ctx.arc(p2.x, p2.y, dotR, 0, Math.PI * 2);
+      ctx.fillStyle = rgba(COL.strand2, 0.3 + 0.4 * p2.depth);
+      ctx.fill();
+    }
+
+    // Draw strand 1 — smooth curve
+    ctx.beginPath();
+    ctx.moveTo(s1[0].x, s1[0].y);
+    for (var i1 = 1; i1 < NUM_POINTS; i1++) {
+      var prev = s1[i1 - 1], curr = s1[i1];
+      var mx2 = (prev.x + curr.x) / 2, my2 = (prev.y + curr.y) / 2;
+      ctx.quadraticCurveTo(prev.x, prev.y, mx2, my2);
+    }
+    ctx.strokeStyle = rgba(COL.strand1, 0.6);
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Draw strand 2 — smooth curve
+    ctx.beginPath();
+    ctx.moveTo(s2[0].x, s2[0].y);
+    for (var i2 = 1; i2 < NUM_POINTS; i2++) {
+      var prev2 = s2[i2 - 1], curr2 = s2[i2];
+      var mx3 = (prev2.x + curr2.x) / 2, my3 = (prev2.y + curr2.y) / 2;
+      ctx.quadraticCurveTo(prev2.x, prev2.y, mx3, my3);
+    }
+    ctx.strokeStyle = rgba(COL.strand2, 0.6);
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Draw front nodes on top for depth effect
+    for (var fi = 0; fi < NUM_POINTS; fi += RUNG_INTERVAL) {
+      var fp1 = s1[fi], fp2 = s2[fi];
+      if (fp1.depth > 0.6) {
+        ctx.beginPath(); ctx.arc(fp1.x, fp1.y, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = rgba(COL.strand1, 0.7);
+        ctx.fill();
+      }
+      if (fp2.depth > 0.6) {
+        ctx.beginPath(); ctx.arc(fp2.x, fp2.y, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = rgba(COL.strand2, 0.7);
+        ctx.fill();
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
