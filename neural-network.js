@@ -228,7 +228,7 @@
 
   function createFormula(startFromCenter) {
     var angle = Math.random() * Math.PI * 2;
-    var speed = 0.06 + Math.random() * 0.12;
+    var speed = 0.03 + Math.random() * 0.06;
     var cx = W / 2;
     var cy = H / 2;
     var dist = startFromCenter ? 0 : (Math.random() * Math.max(W, H) * 0.5);
@@ -241,7 +241,7 @@
       opacity: 0,
       maxOpacity: 0.45 + Math.random() * 0.25,
       fadeIn: true,
-      fadeSpeed: 0.001 + Math.random() * 0.001,
+      fadeSpeed: 0.0005 + Math.random() * 0.0005,
       size: 11 + Math.floor(Math.random() * 5),
       useGold: Math.random() < 0.25,
     };
@@ -287,12 +287,14 @@
   //  SCROLL PARALLAX — translate background image on scroll
   // ============================================================
   var heroBg = document.getElementById('hero-bg');
-  window.addEventListener('scroll', function() {
+  function onScrollParallax() {
     var scrollY = window.pageYOffset || document.documentElement.scrollTop;
     if (heroBg) {
-      heroBg.style.transform = 'translateY(' + (scrollY * 0.35) + 'px)';
+      heroBg.style.transform = 'translate3d(0,' + (scrollY * 0.5) + 'px,0)';
     }
-  }, { passive: true });
+  }
+  window.addEventListener('scroll', onScrollParallax, { passive: true });
+  onScrollParallax();
 
   // ============================================================
   //  ANIMATION LOOP
