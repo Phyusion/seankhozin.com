@@ -114,9 +114,10 @@
 
   function buildNetworks() {
     networks.length = 0;
+    var pad = H * 0.08; // 8% padding top and bottom
     var configs = [
-      { cx: W * 0.15, cy: H * 0.35, layers: [3, 5, 6, 4, 2], scale: 0.85, rotation: -0.1, depth: 1.0 },
-      { cx: W * 0.82, cy: H * 0.6,  layers: [2, 4, 5, 3],    scale: 0.7,  rotation: 0.15, depth: 0.6 },
+      { cx: W * 0.15, cy: H * 0.5, layers: [3, 5, 6, 4, 2], scale: 0.85, rotation: -0.1, depth: 1.0 },
+      { cx: W * 0.82, cy: H * 0.5, layers: [2, 4, 5, 3],    scale: 0.7,  rotation: 0.15, depth: 0.6 },
     ];
 
     for (var ci = 0; ci < configs.length; ci++) {
@@ -124,8 +125,10 @@
       var net = { nodes: [], connections: [], signals: [], cx: cfg.cx, cy: cfg.cy,
                   layers: cfg.layers, scale: cfg.scale, rotation: cfg.rotation, depth: cfg.depth };
       var layerCount = cfg.layers.length;
+      var maxNodes = Math.max.apply(null, cfg.layers);
+      var availH = H - pad * 2;
+      var nodeSpacing = maxNodes > 1 ? availH / (maxNodes - 1) : availH;
       var layerSpacing = 90 * cfg.scale;
-      var nodeSpacing = 50 * cfg.scale;
       var startX = cfg.cx - ((layerCount - 1) * layerSpacing) / 2;
 
       for (var l = 0; l < layerCount; l++) {
@@ -664,7 +667,11 @@
     net = { nodes: [], connections: [], signals: [] };
     var layers = [2, 4, 3, 2];
     var cx = W * 0.85, cy = H * 0.5, sc = 0.6, rot = 0.2;
-    var lSp = 70 * sc, nSp = 40 * sc;
+    var pad = H * 0.1;
+    var maxN = Math.max.apply(null, layers);
+    var availH = H - pad * 2;
+    var nSp = maxN > 1 ? availH / (maxN - 1) : availH;
+    var lSp = 70 * sc;
     var startX = cx - ((layers.length - 1) * lSp) / 2;
     for (var l = 0; l < layers.length; l++) {
       var count = layers[l], x = startX + l * lSp;
