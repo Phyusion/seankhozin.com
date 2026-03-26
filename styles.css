@@ -530,7 +530,7 @@ img { max-width: 100%; display: block; }
 .board-detail a:hover { text-decoration: underline; }
 
 /* --- Contact --- */
-.section-contact { text-align: center; }
+.section-contact { text-align: center; padding-bottom: 2rem; }
 .contact-content .lead { font-size: 1.125rem; color: var(--text-2); max-width: 600px; margin: 0 auto 3rem; }
 .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
 .contact-link {
@@ -625,7 +625,12 @@ img { max-width: 100%; display: block; }
 /* --- DNA Helix --- */
 .dna-wrapper {
   display: flex; justify-content: center; align-items: center;
-  padding: 0.5rem 0 1.5rem; background: var(--bg);
+  padding: 0 0 1.5rem; background: var(--bg);
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.dna-wrapper.visible {
+  opacity: 1; transform: translateY(0);
 }
 #dna-canvas {
   width: 80px; height: 200px;

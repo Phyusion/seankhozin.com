@@ -435,14 +435,17 @@
   var RUNG_INTERVAL = 3; // connect every Nth pair
 
   // Visibility check
+  var wrapper = canvas.parentElement;
   var isVisible = false;
   if (typeof IntersectionObserver !== 'undefined') {
     var obs = new IntersectionObserver(function(entries) {
       isVisible = entries[0].isIntersecting;
-    }, { rootMargin: '100px' });
+      if (isVisible && wrapper) wrapper.classList.add('visible');
+    }, { rootMargin: '50px' });
     obs.observe(canvas);
   } else {
     isVisible = true;
+    if (wrapper) wrapper.classList.add('visible');
   }
 
   function draw() {
