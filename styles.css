@@ -68,7 +68,12 @@ img { max-width: 100%; display: block; }
 /* --- Hero --- */
 .hero {
   position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center;
-  overflow: hidden; background: #0a1628 url('NYC.jpg') center/cover no-repeat;
+  overflow: hidden; background: #0a1628;
+}
+.hero-bg {
+  position: absolute; top: -80px; left: 0; right: 0; bottom: -80px; z-index: 0;
+  background: url('NYC.jpg') center/cover no-repeat;
+  will-change: transform;
 }
 .hero-overlay {
   position: absolute; inset: 0; z-index: 1;
@@ -112,10 +117,10 @@ img { max-width: 100%; display: block; }
   position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); z-index: 2;
   opacity: 0; animation: fadeUp 0.8s var(--ease) 1s forwards;
 }
-.scroll-indicator { width: 24px; height: 40px; border: 2px solid rgba(255,255,255,0.25); border-radius: 12px; position: relative; }
+.scroll-indicator { width: 26px; height: 42px; border: 2px solid rgba(255,255,255,0.6); border-radius: 13px; position: relative; }
 .scroll-indicator::after {
-  content: ''; position: absolute; top: 6px; left: 50%; width: 4px; height: 8px;
-  background: rgba(30,58,95,0.7); border-radius: 2px; transform: translateX(-50%);
+  content: ''; position: absolute; top: 6px; left: 50%; width: 4px; height: 10px;
+  background: rgba(255,255,255,0.7); border-radius: 2px; transform: translateX(-50%);
   animation: scrollBounce 2s ease-in-out infinite;
 }
 
