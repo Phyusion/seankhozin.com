@@ -100,15 +100,28 @@
     canvas.addEventListener('mouseup', function() {
       if (state.grabbed) { state.grabbed.ref.grabbed = false; state.grabbed = null; canvas.style.cursor = ''; }
     });
+    // Safety: release grab if mouseup happens outside canvas
+    document.addEventListener('mouseup', function() {
+      if (state.grabbed) { state.grabbed.ref.grabbed = false; state.grabbed = null; canvas.style.cursor = ''; }
+    });
 
-    // Touch — just highlight, don't interfere with scrolling
+    // Touch — highlight on tap, clear on release. Passive so scrolling isn't blocked.
     canvas.addEventListener('touchstart', function(e) {
       if (e.touches.length === 1) {
         var p = cXY(e.touches[0]);
         state.mouse.x = p.x; state.mouse.y = p.y;
       }
     }, { passive: true });
+    canvas.addEventListener('touchmove', function(e) {
+      if (e.touches.length === 1) {
+        var p = cXY(e.touches[0]);
+        state.mouse.x = p.x; state.mouse.y = p.y;
+      }
+    }, { passive: true });
     canvas.addEventListener('touchend', function() {
+      state.mouse.x = -9999; state.mouse.y = -9999;
+    }, { passive: true });
+    canvas.addEventListener('touchcancel', function() {
       state.mouse.x = -9999; state.mouse.y = -9999;
     }, { passive: true });
 
@@ -177,7 +190,7 @@
   function buildFormulas(s) {
     s.formulas = [];
     var W = s.W, H = s.H;
-    var count = Math.max(6, Math.floor(W / 180));
+    var count = Math.max(3, Math.floor(W / 200));
     var spacing = W / count;
     for (var i = 0; i < count; i++) {
       s.formulas.push({
@@ -319,6 +332,11 @@
         ctx.fillText('w='+nd.weight, nd.x+r+4, nd.y-3);
       }
     }
+
+    // Set cursor based on hover state
+    if (!s.grabbed) {
+      s.canvas.style.cursor = hovIdx >= 0 ? 'grab' : '';
+    }
   }
 
   // ============================================================
@@ -328,6 +346,7 @@
     var ctx = s.ctx, mouse = s.mouse;
     ctx.clearRect(0, 0, s.W, s.H);
 
+    var anyFormulaHovered = false;
     for (var fi = 0; fi < s.formulas.length; fi++) {
       var f = s.formulas[fi];
       ctx.font = f.size + "px 'Courier New', monospace";
@@ -336,11 +355,17 @@
         mouse.x >= f.x-pad && mouse.x <= f.x+tw+pad &&
         mouse.y >= f.y-f.size-pad && mouse.y <= f.y+pad;
       var isAct = f.grabbed || isHov;
+      if (isHov) anyFormulaHovered = true;
 
       var alpha = isAct ? 1 : 0.55;
       ctx.font = (isAct ? 'bold ' : '') + f.size + "px 'Courier New', monospace";
       ctx.fillStyle = f.useGold ? rgba(COL.goldL, alpha) : rgba(COL.formula, alpha);
       ctx.fillText(f.text, f.x, f.y);
+    }
+
+    // Set cursor based on hover state
+    if (!s.grabbed) {
+      s.canvas.style.cursor = anyFormulaHovered ? 'grab' : '';
     }
   }
 
@@ -431,18 +456,20 @@
   var rotation = 0;
   var NUM_POINTS = 30;   // points per strand
   var RADIUS = 22;       // helix radius
-  var PITCH = H / 5;     // vertical distance per full turn
   var RUNG_INTERVAL = 3; // connect every Nth pair
 
   // Visibility check
+  var wrapper = canvas.parentElement;
   var isVisible = false;
   if (typeof IntersectionObserver !== 'undefined') {
     var obs = new IntersectionObserver(function(entries) {
       isVisible = entries[0].isIntersecting;
-    }, { rootMargin: '100px' });
+      if (isVisible && wrapper) wrapper.classList.add('visible');
+    }, { rootMargin: '50px' });
     obs.observe(canvas);
   } else {
     isVisible = true;
+    if (wrapper) wrapper.classList.add('visible');
   }
 
   function draw() {
