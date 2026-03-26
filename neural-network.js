@@ -308,10 +308,12 @@
 
     for (var fi = formulas.length - 1; fi >= 0; fi--) {
       var f = formulas[fi];
-      var tw = f.text.length * f.size * 0.55;
+      ctx.font = f.size + "px 'Courier New', monospace";
+      var tw = ctx.measureText(f.text).width;
       var th = f.size;
       var fdy = f.y + (f.grabbed ? 0 : parallax.y * 0.15);
-      if (mx >= f.x && mx <= f.x + tw && my >= fdy - th && my <= fdy) {
+      var pad = 6;
+      if (mx >= f.x - pad && mx <= f.x + tw + pad && my >= fdy - th - pad && my <= fdy + pad) {
         f.grabbed = true;
         grabbed = { type: 'formula', ref: f, offsetX: mx - f.x, offsetY: my - f.y };
         canvas.style.cursor = 'grabbing';
@@ -325,7 +327,7 @@
         var node = net.nodes[ndi];
         var dx = mx - node.x;
         var dy = my - node.y;
-        var hitR = Math.max(node.radius * 3, 12);
+        var hitR = Math.max(node.radius * 4, 16);
         if (dx * dx + dy * dy < hitR * hitR) {
           node.grabbed = true;
           grabbed = { type: 'node', ref: node, offsetX: mx - node.baseX, offsetY: my - node.baseY };
@@ -444,13 +446,15 @@
     // Formulas — opaque at bottom, fade as they rise; hover/grab = full opacity
     for (var fi = 0; fi < formulas.length; fi++) {
       var f = formulas[fi];
-      // Hit test for hover
-      var tw = f.text.length * f.size * 0.55;
+      // Measure text for accurate hit box
+      ctx.font = f.size + "px 'Courier New', monospace";
+      var tw = ctx.measureText(f.text).width;
       var th = f.size;
       var fDrawY = f.y + (f.grabbed ? 0 : parallax.y * 0.15);
+      var pad = 6;
       var isHoveredF = !grabbed && mouse.x > -9000 &&
-        mouse.x >= f.x && mouse.x <= f.x + tw &&
-        mouse.y >= fDrawY - th && mouse.y <= fDrawY + 4;
+        mouse.x >= f.x - pad && mouse.x <= f.x + tw + pad &&
+        mouse.y >= fDrawY - th - pad && mouse.y <= fDrawY + pad;
       var isActiveF = f.grabbed || isHoveredF;
       var alpha;
       if (isActiveF) {
@@ -530,7 +534,7 @@
         var entrAlpha = layerEntrance(node.layer, totalLayers);
         if (entrAlpha <= 0) continue;
 
-        var nodeHitR = Math.max(node.radius * 3, 12);
+        var nodeHitR = Math.max(node.radius * 4, 16);
         var isHovered = !grabbed && mouse.x > -9000 &&
           (mouse.x - node.x) * (mouse.x - node.x) + (mouse.y - node.y) * (mouse.y - node.y) < nodeHitR * nodeHitR;
         var isActive = node.grabbed || isHovered;
@@ -570,7 +574,7 @@
         var mnode = net.nodes[mi];
         var mdx = mouse.x - mnode.x;
         var mdy = mouse.y - mnode.y;
-        var hitR = Math.max(mnode.radius * 3, 12);
+        var hitR = Math.max(mnode.radius * 4, 16);
         if (mdx * mdx + mdy * mdy < hitR * hitR && mouse.x > -9000) {
           // Draw all connections involving this node at full visibility
           for (var hci = 0; hci < net.connections.length; hci++) {
@@ -703,7 +707,7 @@
       x: Math.random() * W * 0.7,
       y: fromTop ? -10 - Math.random() * 30 : Math.random() * H,
       vx: (Math.random() - 0.5) * 0.01,
-      vy: 0.02 + Math.random() * 0.04,
+      vy: 0.04 + Math.random() * 0.07,
       text: TEXTS[Math.floor(Math.random() * TEXTS.length)],
       baseOpacity: 0.6 + Math.random() * 0.3,
       size: 10 + Math.floor(Math.random() * 4),
@@ -736,15 +740,17 @@
   canvas.addEventListener('mousedown', function(e) {
     var p = cXY(e);
     for (var fi = formulas.length-1; fi >= 0; fi--) {
-      var f = formulas[fi], tw = f.text.length * f.size * 0.55, th = f.size;
-      if (p.x >= f.x && p.x <= f.x+tw && p.y >= f.y-th && p.y <= f.y) {
+      var f = formulas[fi];
+      ctx.font = f.size + "px 'Courier New', monospace";
+      var tw = ctx.measureText(f.text).width, th = f.size, pad = 6;
+      if (p.x >= f.x-pad && p.x <= f.x+tw+pad && p.y >= f.y-th-pad && p.y <= f.y+pad) {
         f.grabbed = true;
         grabbed = { type:'formula', ref:f, ox:p.x-f.x, oy:p.y-f.y };
         canvas.style.cursor = 'grabbing'; return;
       }
     }
     for (var ni = 0; ni < net.nodes.length; ni++) {
-      var nd = net.nodes[ni], dx = p.x-nd.x, dy = p.y-nd.y, hr = Math.max(nd.r*3,12);
+      var nd = net.nodes[ni], dx = p.x-nd.x, dy = p.y-nd.y, hr = Math.max(nd.r*4,16);
       if (dx*dx+dy*dy < hr*hr) {
         nd.grabbed = true;
         grabbed = { type:'node', ref:nd, ox:p.x-nd.baseX, oy:p.y-nd.baseY };
@@ -761,7 +767,7 @@
     frame++;
     if (frame % 12 === 0 && net.signals.length < 10) {
       var c = net.connections[Math.floor(Math.random() * net.connections.length)];
-      net.signals.push({ conn:c, t:0, speed:0.0004+Math.random()*0.0008, bright:Math.random()>0.5, value:(Math.random()*2-1).toFixed(2) });
+      net.signals.push({ conn:c, t:0, speed:0.001+Math.random()*0.002, bright:Math.random()>0.5, value:(Math.random()*2-1).toFixed(2) });
     }
     for (var si = net.signals.length-1; si >= 0; si--) {
       net.signals[si].t += net.signals[si].speed;
@@ -785,9 +791,10 @@
     // Formulas — opaque at top, fade toward bottom; hover/grab = full
     for (var fi = 0; fi < formulas.length; fi++) {
       var f = formulas[fi];
-      var tw = f.text.length * f.size * 0.55, th = f.size;
+      ctx.font = f.size + "px 'Courier New', monospace";
+      var tw = ctx.measureText(f.text).width, th = f.size, pad = 6;
       var isHov = !grabbed && mouse.x > -9000 &&
-        mouse.x >= f.x && mouse.x <= f.x+tw && mouse.y >= f.y-th && mouse.y <= f.y+4;
+        mouse.x >= f.x-pad && mouse.x <= f.x+tw+pad && mouse.y >= f.y-th-pad && mouse.y <= f.y+pad;
       var isAct = f.grabbed || isHov;
       var alpha = isAct ? 1 : f.baseOpacity * Math.max(0, Math.min(1, 1 - f.y / H));
       if (alpha <= 0.01) continue;
@@ -847,7 +854,7 @@
     // Hover: highlight connections from hovered node
     for (var mi = 0; mi < net.nodes.length; mi++) {
       var mnd = net.nodes[mi];
-      var mhr = Math.max(mnd.r*3, 12);
+      var mhr = Math.max(mnd.r*4, 16);
       if (mouse.x > -9000 && (mouse.x-mnd.x)*(mouse.x-mnd.x)+(mouse.y-mnd.y)*(mouse.y-mnd.y) < mhr*mhr) {
         for (var hci = 0; hci < net.connections.length; hci++) {
           var hc = net.connections[hci];
