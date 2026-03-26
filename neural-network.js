@@ -13,7 +13,7 @@
     goldLight:[160, 120, 60],
     wire:     [30, 58, 95],
     signal:   [45, 90, 142],
-    formula:  [60, 90, 130],
+    formula:  [40, 65, 100],
   };
 
   function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
@@ -236,7 +236,7 @@
       vx: (Math.random() - 0.5) * 0.02,
       vy: -(0.015 + Math.random() * 0.03),
       text: FORMULA_TEXTS[Math.floor(Math.random() * FORMULA_TEXTS.length)],
-      baseOpacity: 0.55 + Math.random() * 0.3,
+      baseOpacity: 0.75 + Math.random() * 0.25,
       size: 11 + Math.floor(Math.random() * 5),
       useGold: Math.random() < 0.25,
     };
@@ -618,5 +618,181 @@
 
   resize();
   initParticles();
+  animate();
+})();
+
+// ================================================================
+//  CONTACT SECTION — lighter neural net + formulas (top-down)
+// ================================================================
+(function() {
+  var canvas = document.getElementById('contact-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W, H, section;
+  var DPR = window.devicePixelRatio || 1;
+
+  var COL = {
+    node:    [30, 58, 95],
+    wire:    [30, 58, 95],
+    signal:  [45, 90, 142],
+    gold:    [176, 141, 87],
+    formula: [40, 65, 100],
+    goldL:   [160, 120, 60],
+  };
+  function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
+
+  function resize() {
+    section = canvas.parentElement;
+    W = section ? section.offsetWidth : window.innerWidth;
+    H = section ? section.offsetHeight : 600;
+    canvas.width = W * DPR;
+    canvas.height = H * DPR;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    buildNet();
+    buildFormulas();
+  }
+
+  // Single smaller network on the right
+  var net = { nodes: [], connections: [], signals: [] };
+  function buildNet() {
+    net = { nodes: [], connections: [], signals: [] };
+    var layers = [2, 4, 3, 2];
+    var cx = W * 0.85;
+    var cy = H * 0.5;
+    var sc = 0.6;
+    var layerSpacing = 70 * sc;
+    var nodeSpacing = 40 * sc;
+    var startX = cx - ((layers.length - 1) * layerSpacing) / 2;
+    var rot = 0.2;
+
+    for (var l = 0; l < layers.length; l++) {
+      var count = layers[l];
+      var x = startX + l * layerSpacing;
+      var startY = cy - ((count - 1) * nodeSpacing) / 2;
+      for (var n = 0; n < count; n++) {
+        var y = startY + n * nodeSpacing;
+        var dx = x - cx, dy = y - cy;
+        var cos = Math.cos(rot), sin = Math.sin(rot);
+        net.nodes.push({
+          x: cx + dx * cos - dy * sin,
+          y: cy + dx * sin + dy * cos,
+          r: (2.5 + Math.random()) * sc,
+          phase: Math.random() * Math.PI * 2,
+          layer: l,
+        });
+      }
+    }
+    var idx = 0;
+    for (var l2 = 0; l2 < layers.length - 1; l2++) {
+      var cC = layers[l2], nC = layers[l2 + 1];
+      var cS = idx, nS = idx + cC;
+      for (var a = 0; a < cC; a++)
+        for (var b = 0; b < nC; b++)
+          net.connections.push({ from: cS + a, to: nS + b, w: Math.random() });
+      idx += cC;
+    }
+  }
+
+  // Formulas — descend from top
+  var formulas = [];
+  var TEXTS = [
+    '\u2207W = \u2202L/\u2202W', 'ReLU(x)', '\u03C3(z)', 'softmax(z)',
+    'Attention(Q,K,V)', 'z = W\u00B7x + b', '\u03B1 = 0.001',
+    'H(p,q) = -\u03A3 p log q', 'dropout(p=0.5)', 'BatchNorm(x)',
+    'GELU(x)', 'F1 = 2PR/(P+R)', 'conv2d(x,k)', 'LayerNorm(x)',
+  ];
+
+  function buildFormulas() {
+    formulas.length = 0;
+    var count = Math.max(8, Math.floor((W * H) / 80000));
+    for (var i = 0; i < count; i++) formulas.push(makeFormula(false));
+  }
+
+  function makeFormula(fromTop) {
+    return {
+      x: Math.random() * W * 0.7,
+      y: fromTop ? -10 - Math.random() * 30 : Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.01,
+      vy: 0.01 + Math.random() * 0.02,
+      text: TEXTS[Math.floor(Math.random() * TEXTS.length)],
+      baseOpacity: 0.5 + Math.random() * 0.3,
+      size: 10 + Math.floor(Math.random() * 4),
+      useGold: Math.random() < 0.3,
+    };
+  }
+
+  var frame = 0;
+  function update() {
+    frame++;
+    // Signals
+    if (frame % 12 === 0 && net.signals.length < 10) {
+      var c = net.connections[Math.floor(Math.random() * net.connections.length)];
+      net.signals.push({ conn: c, t: 0, speed: 0.0004 + Math.random() * 0.0008, bright: Math.random() > 0.5 });
+    }
+    for (var si = net.signals.length - 1; si >= 0; si--) {
+      net.signals[si].t += net.signals[si].speed;
+      if (net.signals[si].t > 1) net.signals.splice(si, 1);
+    }
+    for (var ni = 0; ni < net.nodes.length; ni++) net.nodes[ni].phase += 0.004;
+    // Formulas descend
+    for (var fi = 0; fi < formulas.length; fi++) {
+      var f = formulas[fi];
+      f.x += f.vx; f.y += f.vy;
+      if (f.y > H + 20 || f.x < -150 || f.x > W + 150) formulas[fi] = makeFormula(true);
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Formulas — opaque at top, fade toward bottom (inverse of hero)
+    for (var fi = 0; fi < formulas.length; fi++) {
+      var f = formulas[fi];
+      var posAlpha = Math.max(0, Math.min(1, 1 - f.y / H));
+      var alpha = f.baseOpacity * posAlpha;
+      if (alpha <= 0.01) continue;
+      ctx.font = f.size + "px 'Courier New', monospace";
+      ctx.fillStyle = f.useGold ? rgba(COL.goldL, alpha) : rgba(COL.formula, alpha);
+      ctx.fillText(f.text, f.x, f.y);
+    }
+
+    // Connections
+    for (var ci = 0; ci < net.connections.length; ci++) {
+      var c = net.connections[ci];
+      var a = net.nodes[c.from], b = net.nodes[c.to];
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+      ctx.strokeStyle = rgba(COL.wire, 0.04 + c.w * 0.05);
+      ctx.lineWidth = 0.5; ctx.stroke();
+    }
+
+    // Signals
+    for (var si = 0; si < net.signals.length; si++) {
+      var s = net.signals[si];
+      var sa = net.nodes[s.conn.from], sb = net.nodes[s.conn.to];
+      var px = sa.x + (sb.x - sa.x) * s.t;
+      var py = sa.y + (sb.y - sa.y) * s.t;
+      var fade = s.t < 0.15 ? s.t / 0.15 : s.t > 0.85 ? (1 - s.t) / 0.15 : 1;
+      ctx.beginPath(); ctx.arc(px, py, 2, 0, Math.PI * 2);
+      ctx.fillStyle = rgba(s.bright ? COL.gold : COL.signal, fade * 0.4);
+      ctx.fill();
+    }
+
+    // Nodes
+    for (var ni = 0; ni < net.nodes.length; ni++) {
+      var nd = net.nodes[ni];
+      var p = 0.6 + 0.4 * Math.sin(nd.phase);
+      ctx.beginPath(); ctx.arc(nd.x, nd.y, nd.r, 0, Math.PI * 2);
+      ctx.fillStyle = rgba(COL.node, 0.12 + 0.1 * p);
+      ctx.fill();
+      ctx.strokeStyle = rgba(COL.node, 0.18 + 0.12 * p);
+      ctx.lineWidth = 0.8; ctx.stroke();
+    }
+  }
+
+  function animate() { update(); draw(); requestAnimationFrame(animate); }
+  window.addEventListener('resize', resize);
+  resize();
   animate();
 })();
