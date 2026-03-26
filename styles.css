@@ -41,28 +41,28 @@ img { max-width: 100%; display: block; }
 }
 .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; height: 100%; display: flex; align-items: center; justify-content: space-between; }
 .nav-logo {
-  font-family: var(--font-serif); font-size: 1.5rem; font-weight: 600; color: rgba(255,255,255,0.9); letter-spacing: -0.02em;
+  font-family: var(--font-serif); font-size: 1.5rem; font-weight: 600; color: var(--accent); letter-spacing: -0.02em;
   transition: color 300ms var(--ease);
 }
-.nav-logo:hover { color: rgba(255,255,255,0.9); }
+.nav-logo:hover { color: var(--accent); }
 .nav.scrolled .nav-logo { color: var(--accent); }
 .nav.scrolled .nav-logo:hover { color: var(--accent); }
 .nav-links { display: flex; gap: 1.5rem; list-style: none; }
 .nav-links a {
-  font-size: 0.875rem; font-weight: 500; color: rgba(255,255,255,0.65); letter-spacing: 0.01em;
+  font-size: 0.875rem; font-weight: 500; color: var(--text-2); letter-spacing: 0.01em;
   padding: 0.25rem 0; position: relative; transition: color 300ms var(--ease);
 }
 .nav.scrolled .nav-links a { color: var(--text-2); }
 .nav-links a::after {
   content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1.5px;
-  background: #fff; transition: width 300ms var(--ease), background 300ms var(--ease);
+  background: var(--accent); transition: width 300ms var(--ease), background 300ms var(--ease);
 }
 .nav.scrolled .nav-links a::after { background: var(--accent); }
-.nav-links a:hover { color: #fff; }
+.nav-links a:hover { color: var(--text); }
 .nav.scrolled .nav-links a:hover { color: var(--text); }
 .nav-links a:hover::after { width: 100%; }
 .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.5rem; }
-.nav-toggle span { width: 24px; height: 2px; background: #fff; transition: transform 300ms var(--ease), opacity 150ms var(--ease), background 300ms var(--ease); }
+.nav-toggle span { width: 24px; height: 2px; background: var(--accent); transition: transform 300ms var(--ease), opacity 150ms var(--ease), background 300ms var(--ease); }
 .nav.scrolled .nav-toggle span { background: var(--text); }
 
 /* --- Hero --- */

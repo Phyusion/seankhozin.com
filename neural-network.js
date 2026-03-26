@@ -60,7 +60,7 @@
   var meshPhase = 0;
 
   function drawMeshGradient() {
-    meshPhase += 0.003;
+    meshPhase += 0.0015;
 
     var cx1 = W * (0.3 + 0.15 * Math.sin(meshPhase * 0.7));
     var cy1 = H * (0.3 + 0.1 * Math.cos(meshPhase * 0.5));
@@ -116,7 +116,6 @@
     var configs = [
       { cx: W * 0.15, cy: H * 0.35, layers: [3, 5, 6, 4, 2], scale: 0.85, rotation: -0.1, depth: 1.0 },
       { cx: W * 0.82, cy: H * 0.6,  layers: [2, 4, 5, 3],    scale: 0.7,  rotation: 0.15, depth: 0.6 },
-      { cx: W * 0.5,  cy: H * 0.8,  layers: [4, 6, 6, 5, 3], scale: 0.55, rotation: 0.05, depth: 0.3 },
     ];
 
     for (var ci = 0; ci < configs.length; ci++) {
@@ -178,7 +177,7 @@
       var conn = net.connections[Math.floor(Math.random() * net.connections.length)];
       net.signals.push({
         conn: conn, t: 0,
-        speed: 0.002 + Math.random() * 0.004,
+        speed: 0.001 + Math.random() * 0.002,
         value: (Math.random() * 2 - 1).toFixed(2),
         bright: Math.random() > 0.5,
       });
@@ -229,7 +228,7 @@
 
   function createFormula(startFromCenter) {
     var angle = Math.random() * Math.PI * 2;
-    var speed = 0.25 + Math.random() * 0.5;
+    var speed = 0.12 + Math.random() * 0.25;
     var cx = W / 2;
     var cy = H / 2;
     var dist = startFromCenter ? 0 : (Math.random() * Math.max(W, H) * 0.5);
@@ -242,7 +241,7 @@
       opacity: 0,
       maxOpacity: 0.45 + Math.random() * 0.25,
       fadeIn: true,
-      fadeSpeed: 0.004 + Math.random() * 0.004,
+      fadeSpeed: 0.002 + Math.random() * 0.002,
       size: 11 + Math.floor(Math.random() * 5),
       useGold: Math.random() < 0.25,
     };
@@ -259,8 +258,8 @@
       particles.push({
         x: Math.random() * W,
         y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.2,
-        vy: (Math.random() - 0.5) * 0.2,
+        vx: (Math.random() - 0.5) * 0.1,
+        vy: (Math.random() - 0.5) * 0.1,
         r: 0.5 + Math.random() * 1.2,
         alpha: 0.1 + Math.random() * 0.25,
         phase: Math.random() * Math.PI * 2,
@@ -285,6 +284,17 @@
   });
 
   // ============================================================
+  //  SCROLL PARALLAX — shift background image on scroll
+  // ============================================================
+  var heroEl = canvas.parentElement;
+  window.addEventListener('scroll', function() {
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    if (heroEl) {
+      heroEl.style.backgroundPositionY = (scrollY * 0.4) + 'px';
+    }
+  }, { passive: true });
+
+  // ============================================================
   //  ANIMATION LOOP
   // ============================================================
   var frame = 0;
@@ -303,7 +313,7 @@
         var node = net.nodes[ndi];
         node.x = node.baseX;
         node.y = node.baseY + parallax.y * depth;
-        node.pulsePhase += 0.02;
+        node.pulsePhase += 0.01;
         node.activation = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(node.pulsePhase));
       }
 
@@ -332,7 +342,7 @@
       var p = particles[pi];
       p.x += p.vx;
       p.y += p.vy;
-      p.phase += 0.015;
+      p.phase += 0.008;
       if (p.x < -10) p.x = W + 10;
       if (p.x > W + 10) p.x = -10;
       if (p.y < -10) p.y = H + 10;
