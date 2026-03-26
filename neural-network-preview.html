@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #0a1628; overflow: hidden; font-family: 'Inter', system-ui, sans-serif; }
+    body { background: #ffffff; overflow: hidden; font-family: 'Inter', system-ui, sans-serif; }
 
     .hero {
       position: relative;
@@ -32,14 +32,14 @@
       position: absolute;
       inset: 0;
       z-index: 1;
-      background: radial-gradient(ellipse at center, rgba(10,22,40,0.2) 0%, rgba(10,22,40,0.6) 100%);
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.45) 100%);
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
       text-align: center;
-      color: #fff;
+      color: #1c1917;
     }
 
     .hero-eyebrow {
@@ -79,11 +79,11 @@
       transition: all 200ms ease;
     }
     .btn-outline {
-      background: rgba(255,255,255,0.1); color: #fff;
-      border: 1px solid rgba(255,255,255,0.5);
+      background: rgba(30,58,95,0.08); color: #1e3a5f;
+      border: 1px solid rgba(30,58,95,0.4);
     }
     .btn-outline:hover {
-      background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.8);
+      background: #1e3a5f; color: #fff; border-color: #1e3a5f;
     }
   </style>
 </head>
@@ -113,14 +113,14 @@
 
     // --- Palette (from site: accent #1e3a5f, gold #b08d57) ---
     const COL = {
-      bg:       [10, 22, 40],       // #0a1628
-      node:     [160, 210, 255],    // bright blue
-      nodeDim:  [100, 160, 220],    // dimmer blue
+      bg:       [255, 255, 255],    // white
+      node:     [30, 58, 95],       // accent #1e3a5f
+      nodeDim:  [45, 90, 142],      // accent-light
       gold:     [176, 141, 87],     // #b08d57
-      goldLight:[212, 185, 138],    // #d4b98a
-      wire:     [120, 180, 240],
-      signal:   [200, 230, 255],
-      formula:  [180, 210, 240],
+      goldLight:[160, 120, 60],     // darker gold for white bg
+      wire:     [30, 58, 95],       // accent
+      signal:   [45, 90, 142],      // accent-light
+      formula:  [100, 130, 165],    // muted blue
     };
 
     function rgba(c, a) { return `rgba(${c[0]},${c[1]},${c[2]},${a})`; }
@@ -381,7 +381,7 @@
 
       // Subtle gradient overlay for depth
       const grad = ctx.createRadialGradient(W * 0.5, H * 0.4, 0, W * 0.5, H * 0.4, W * 0.7);
-      grad.addColorStop(0, rgba([30, 58, 95], 0.35));    // subtle accent center
+      grad.addColorStop(0, rgba([232, 238, 245], 0.5));   // accent-subtle center
       grad.addColorStop(1, rgba(COL.bg, 0));
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, W, H);
@@ -512,8 +512,8 @@
 
       // --- Vignette ---
       const vig = ctx.createRadialGradient(W * 0.5, H * 0.5, W * 0.25, W * 0.5, H * 0.5, W * 0.8);
-      vig.addColorStop(0, 'rgba(10,22,40,0)');
-      vig.addColorStop(1, 'rgba(5,12,25,0.6)');
+      vig.addColorStop(0, 'rgba(255,255,255,0)');
+      vig.addColorStop(1, 'rgba(245,245,244,0.5)');
       ctx.fillStyle = vig;
       ctx.fillRect(0, 0, W, H);
     }
