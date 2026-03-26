@@ -13,62 +13,56 @@
     goldLight:[160, 120, 60],
     wire:     [30, 58, 95],
     signal:   [45, 90, 142],
-    formula:  [100, 130, 165],
+    formula:  [60, 90, 130],
   };
 
   function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
 
   // ============================================================
-  //  #1 — PARALLAX
+  //  #1 — PARALLAX (mouse-driven depth shift)
   // ============================================================
   var parallax = { x: 0, y: 0, targetX: 0, targetY: 0 };
-  var PARALLAX_STRENGTH = 15; // max px shift
+  var PARALLAX_STRENGTH = 30;
 
   function updateParallax() {
-    // Smooth lerp toward target
-    parallax.x += (parallax.targetX - parallax.x) * 0.05;
-    parallax.y += (parallax.targetY - parallax.y) * 0.05;
+    parallax.x += (parallax.targetX - parallax.x) * 0.06;
+    parallax.y += (parallax.targetY - parallax.y) * 0.06;
   }
 
   // ============================================================
-  //  #3 — ENTRANCE ANIMATION
+  //  #3 — ENTRANCE ANIMATION (layer-by-layer reveal)
   // ============================================================
   var entranceStart = Date.now();
-  var ENTRANCE_DURATION = 3000; // ms total for full entrance
+  var ENTRANCE_DURATION = 3000;
 
   function getEntranceProgress() {
-    var elapsed = Date.now() - entranceStart;
-    return Math.min(elapsed / ENTRANCE_DURATION, 1);
+    return Math.min((Date.now() - entranceStart) / ENTRANCE_DURATION, 1);
   }
 
-  // Returns 0-1 for a given layer, staggered across the entrance
   function layerEntrance(layerIndex, totalLayers) {
     var progress = getEntranceProgress();
-    // Each layer gets a window; stagger them
-    var layerStart = (layerIndex / totalLayers) * 0.6; // layers fill first 60% of time
+    var layerStart = (layerIndex / totalLayers) * 0.6;
     var layerEnd = layerStart + 0.3;
     return Math.max(0, Math.min(1, (progress - layerStart) / (layerEnd - layerStart)));
   }
 
-  // Connections fade in after nodes
   function connectionEntrance() {
     var progress = getEntranceProgress();
-    return Math.max(0, Math.min(1, (progress - 0.3) / 0.4)); // 30%-70%
+    return Math.max(0, Math.min(1, (progress - 0.3) / 0.4));
   }
 
-  // Signals only after connections visible
   function signalsAllowed() {
     return getEntranceProgress() > 0.6;
   }
 
   // ============================================================
-  //  #4 — ANIMATED MESH GRADIENT
+  //  #4 — ANIMATED MESH GRADIENT (slowly shifting color blobs)
   // ============================================================
   var meshPhase = 0;
 
   function drawMeshGradient() {
     meshPhase += 0.003;
-    // Two slowly shifting radial gradients to create a mesh effect
+
     var cx1 = W * (0.3 + 0.15 * Math.sin(meshPhase * 0.7));
     var cy1 = H * (0.3 + 0.1 * Math.cos(meshPhase * 0.5));
     var cx2 = W * (0.7 + 0.1 * Math.cos(meshPhase * 0.6));
@@ -76,23 +70,23 @@
     var cx3 = W * (0.5 + 0.2 * Math.sin(meshPhase * 0.4));
     var cy3 = H * (0.8 + 0.1 * Math.cos(meshPhase * 0.9));
 
-    // Gradient 1 — soft blue
-    var g1 = ctx.createRadialGradient(cx1, cy1, 0, cx1, cy1, W * 0.5);
-    g1.addColorStop(0, 'rgba(220, 232, 245, 0.4)');
+    // Blob 1 — soft blue
+    var g1 = ctx.createRadialGradient(cx1, cy1, 0, cx1, cy1, W * 0.55);
+    g1.addColorStop(0, 'rgba(200, 220, 245, 0.55)');
     g1.addColorStop(1, 'rgba(255, 255, 255, 0)');
     ctx.fillStyle = g1;
     ctx.fillRect(0, 0, W, H);
 
-    // Gradient 2 — lavender tint
-    var g2 = ctx.createRadialGradient(cx2, cy2, 0, cx2, cy2, W * 0.45);
-    g2.addColorStop(0, 'rgba(225, 225, 245, 0.3)');
+    // Blob 2 — lavender
+    var g2 = ctx.createRadialGradient(cx2, cy2, 0, cx2, cy2, W * 0.5);
+    g2.addColorStop(0, 'rgba(215, 210, 240, 0.4)');
     g2.addColorStop(1, 'rgba(255, 255, 255, 0)');
     ctx.fillStyle = g2;
     ctx.fillRect(0, 0, W, H);
 
-    // Gradient 3 — warm gold hint
-    var g3 = ctx.createRadialGradient(cx3, cy3, 0, cx3, cy3, W * 0.35);
-    g3.addColorStop(0, 'rgba(240, 232, 215, 0.2)');
+    // Blob 3 — warm gold
+    var g3 = ctx.createRadialGradient(cx3, cy3, 0, cx3, cy3, W * 0.4);
+    g3.addColorStop(0, 'rgba(235, 225, 200, 0.35)');
     g3.addColorStop(1, 'rgba(255, 255, 255, 0)');
     ctx.fillStyle = g3;
     ctx.fillRect(0, 0, W, H);
@@ -228,7 +222,7 @@
 
   function buildFormulas() {
     formulas.length = 0;
-    var count = Math.max(18, Math.floor((W * H) / 50000));
+    var count = Math.max(20, Math.floor((W * H) / 40000));
     for (var i = 0; i < count; i++) {
       formulas.push(createFormula(false));
     }
@@ -247,9 +241,9 @@
       vy: Math.sin(angle) * speed,
       text: FORMULA_TEXTS[Math.floor(Math.random() * FORMULA_TEXTS.length)],
       opacity: 0,
-      maxOpacity: 0.1 + Math.random() * 0.12,
+      maxOpacity: 0.25 + Math.random() * 0.2,
       fadeIn: true,
-      fadeSpeed: 0.002 + Math.random() * 0.003,
+      fadeSpeed: 0.003 + Math.random() * 0.003,
       size: 11 + Math.floor(Math.random() * 5),
       useGold: Math.random() < 0.25,
     };
@@ -282,7 +276,7 @@
   canvas.addEventListener('mousemove', function(e) {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
-    // Update parallax target based on mouse position relative to center
+    // #1 — Parallax: shift based on mouse distance from center
     parallax.targetX = ((e.clientX / W) - 0.5) * PARALLAX_STRENGTH * -1;
     parallax.targetY = ((e.clientY / H) - 0.5) * PARALLAX_STRENGTH * -1;
   });
@@ -304,7 +298,7 @@
 
     if (frame % 6 === 0) spawnSignals();
 
-    // Update node positions with parallax
+    // Update node positions with parallax (#1)
     for (var ni = 0; ni < networks.length; ni++) {
       var net = networks[ni];
       var depth = net.depth;
@@ -367,7 +361,7 @@
     // #4 — Animated mesh gradient
     drawMeshGradient();
 
-    // Ambient particles
+    // Ambient particles (with parallax)
     for (var pi = 0; pi < particles.length; pi++) {
       var p = particles[pi];
       var flicker = 0.7 + 0.3 * Math.sin(p.phase);
@@ -377,7 +371,7 @@
       ctx.fill();
     }
 
-    // Formulas (with subtle parallax)
+    // Formulas (with parallax)
     for (var fi = 0; fi < formulas.length; fi++) {
       var f = formulas[fi];
       if (f.opacity <= 0.01) continue;
@@ -387,23 +381,23 @@
     }
 
     // Neural networks
-    var connEntrance = connectionEntrance();
+    var connEntr = connectionEntrance();
     for (var ni = 0; ni < networks.length; ni++) {
       var net = networks[ni];
       var totalLayers = net.layers.length;
 
-      // Connections (with entrance fade)
-      if (connEntrance > 0) {
+      // Connections (#3 entrance fade)
+      if (connEntr > 0) {
         for (var ci = 0; ci < net.connections.length; ci++) {
           var conn = net.connections[ci];
           var a = net.nodes[conn.from];
           var b = net.nodes[conn.to];
-          var alpha = (0.2 + conn.weight * 0.2) * connEntrance;
+          var alpha = (0.15 + conn.weight * 0.15) * connEntr;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
           ctx.strokeStyle = rgba(COL.wire, alpha);
-          ctx.lineWidth = 0.6;
+          ctx.lineWidth = 0.7;
           ctx.stroke();
         }
       }
@@ -424,28 +418,28 @@
         ctx.moveTo(tx, ty);
         ctx.lineTo(px, py);
         var trailCol = sig.bright ? COL.gold : COL.signal;
-        ctx.strokeStyle = rgba(trailCol, fade * 0.4);
-        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = rgba(trailCol, fade * 0.6);
+        ctx.lineWidth = 2;
         ctx.stroke();
 
         ctx.beginPath();
-        ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+        ctx.arc(px, py, 3, 0, Math.PI * 2);
         ctx.fillStyle = rgba(sig.bright ? COL.goldLight : COL.signal, fade * 0.95);
         ctx.fill();
 
         ctx.beginPath();
-        ctx.arc(px, py, 7, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(sig.bright ? COL.gold : COL.node, fade * 0.12);
+        ctx.arc(px, py, 8, 0, Math.PI * 2);
+        ctx.fillStyle = rgba(sig.bright ? COL.gold : COL.node, fade * 0.18);
         ctx.fill();
 
         if (fade > 0.5) {
-          ctx.font = '8px monospace';
-          ctx.fillStyle = rgba(COL.signal, fade * 0.5);
-          ctx.fillText(sig.value, px + 7, py - 4);
+          ctx.font = '9px monospace';
+          ctx.fillStyle = rgba(COL.signal, fade * 0.6);
+          ctx.fillText(sig.value, px + 8, py - 5);
         }
       }
 
-      // Nodes (with layer-by-layer entrance)
+      // Nodes (#3 layer-by-layer entrance)
       for (var ndi = 0; ndi < net.nodes.length; ndi++) {
         var node = net.nodes[ndi];
         var entrAlpha = layerEntrance(node.layer, totalLayers);
@@ -453,33 +447,31 @@
 
         var pulse = 0.6 + 0.4 * Math.sin(node.pulsePhase);
         var r = node.radius;
-
-        // Scale up from 0 during entrance
         var entrScale = 0.3 + 0.7 * entrAlpha;
         var drawR = r * entrScale;
 
         // Outer glow
-        var glowGrad = ctx.createRadialGradient(node.x, node.y, drawR, node.x, node.y, drawR * 5);
-        glowGrad.addColorStop(0, rgba(COL.node, 0.1 * pulse * entrAlpha));
+        var glowGrad = ctx.createRadialGradient(node.x, node.y, drawR, node.x, node.y, drawR * 6);
+        glowGrad.addColorStop(0, rgba(COL.node, 0.15 * pulse * entrAlpha));
         glowGrad.addColorStop(1, rgba(COL.node, 0));
         ctx.beginPath();
-        ctx.arc(node.x, node.y, drawR * 5, 0, Math.PI * 2);
+        ctx.arc(node.x, node.y, drawR * 6, 0, Math.PI * 2);
         ctx.fillStyle = glowGrad;
         ctx.fill();
 
-        // Node fill
+        // Node fill — bold and visible
         ctx.beginPath();
         ctx.arc(node.x, node.y, drawR, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(COL.node, (0.4 + 0.5 * node.activation * pulse) * entrAlpha);
+        ctx.fillStyle = rgba(COL.node, (0.5 + 0.4 * node.activation * pulse) * entrAlpha);
         ctx.fill();
-        ctx.strokeStyle = rgba(COL.node, (0.6 + 0.4 * pulse) * entrAlpha);
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = rgba(COL.node, (0.7 + 0.3 * pulse) * entrAlpha);
+        ctx.lineWidth = 1.2;
         ctx.stroke();
 
-        // Inner core
+        // Inner core — bright
         ctx.beginPath();
-        ctx.arc(node.x, node.y, drawR * 0.45, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(COL.signal, 0.7 * node.activation * pulse * entrAlpha);
+        ctx.arc(node.x, node.y, drawR * 0.4, 0, Math.PI * 2);
+        ctx.fillStyle = rgba(COL.signal, 0.8 * node.activation * pulse * entrAlpha);
         ctx.fill();
       }
 
@@ -490,12 +482,12 @@
         var mdy = mouse.y - mnode.y;
         var mdist = Math.sqrt(mdx * mdx + mdy * mdy);
         if (mdist < 150) {
-          var malpha = (1 - mdist / 150) * 0.3;
+          var malpha = (1 - mdist / 150) * 0.4;
           ctx.beginPath();
           ctx.moveTo(mnode.x, mnode.y);
           ctx.lineTo(mouse.x, mouse.y);
           ctx.strokeStyle = rgba(COL.goldLight, malpha);
-          ctx.lineWidth = 0.5;
+          ctx.lineWidth = 0.8;
           ctx.stroke();
 
           ctx.font = '9px monospace';
@@ -505,10 +497,10 @@
       }
     }
 
-    // Vignette
-    var vig = ctx.createRadialGradient(W * 0.5, H * 0.5, W * 0.25, W * 0.5, H * 0.5, W * 0.8);
+    // Soft vignette
+    var vig = ctx.createRadialGradient(W * 0.5, H * 0.5, W * 0.3, W * 0.5, H * 0.5, W * 0.85);
     vig.addColorStop(0, 'rgba(255,255,255,0)');
-    vig.addColorStop(1, 'rgba(245,245,244,0.5)');
+    vig.addColorStop(1, 'rgba(250,250,249,0.4)');
     ctx.fillStyle = vig;
     ctx.fillRect(0, 0, W, H);
   }
