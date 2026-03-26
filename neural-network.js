@@ -95,8 +95,9 @@
   //  RESIZE
   // ============================================================
   function resize() {
-    W = window.innerWidth;
-    H = window.innerHeight;
+    var hero = canvas.parentElement;
+    W = hero ? hero.offsetWidth : window.innerWidth;
+    H = hero ? hero.offsetHeight : window.innerHeight;
     canvas.width = W * DPR;
     canvas.height = H * DPR;
     canvas.style.width = W + 'px';
