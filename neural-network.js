@@ -60,7 +60,7 @@
   var meshPhase = 0;
 
   function drawMeshGradient() {
-    meshPhase += 0.0015;
+    meshPhase += 0.0007;
 
     var cx1 = W * (0.3 + 0.15 * Math.sin(meshPhase * 0.7));
     var cy1 = H * (0.3 + 0.1 * Math.cos(meshPhase * 0.5));
@@ -177,7 +177,7 @@
       var conn = net.connections[Math.floor(Math.random() * net.connections.length)];
       net.signals.push({
         conn: conn, t: 0,
-        speed: 0.001 + Math.random() * 0.002,
+        speed: 0.0005 + Math.random() * 0.001,
         value: (Math.random() * 2 - 1).toFixed(2),
         bright: Math.random() > 0.5,
       });
@@ -228,7 +228,7 @@
 
   function createFormula(startFromCenter) {
     var angle = Math.random() * Math.PI * 2;
-    var speed = 0.12 + Math.random() * 0.25;
+    var speed = 0.06 + Math.random() * 0.12;
     var cx = W / 2;
     var cy = H / 2;
     var dist = startFromCenter ? 0 : (Math.random() * Math.max(W, H) * 0.5);
@@ -241,7 +241,7 @@
       opacity: 0,
       maxOpacity: 0.45 + Math.random() * 0.25,
       fadeIn: true,
-      fadeSpeed: 0.002 + Math.random() * 0.002,
+      fadeSpeed: 0.001 + Math.random() * 0.001,
       size: 11 + Math.floor(Math.random() * 5),
       useGold: Math.random() < 0.25,
     };
@@ -258,8 +258,8 @@
       particles.push({
         x: Math.random() * W,
         y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.1,
-        vy: (Math.random() - 0.5) * 0.1,
+        vx: (Math.random() - 0.5) * 0.05,
+        vy: (Math.random() - 0.5) * 0.05,
         r: 0.5 + Math.random() * 1.2,
         alpha: 0.1 + Math.random() * 0.25,
         phase: Math.random() * Math.PI * 2,
@@ -284,13 +284,13 @@
   });
 
   // ============================================================
-  //  SCROLL PARALLAX — shift background image on scroll
+  //  SCROLL PARALLAX — translate background image on scroll
   // ============================================================
-  var heroEl = canvas.parentElement;
+  var heroBg = document.getElementById('hero-bg');
   window.addEventListener('scroll', function() {
     var scrollY = window.pageYOffset || document.documentElement.scrollTop;
-    if (heroEl) {
-      heroEl.style.backgroundPositionY = (scrollY * 0.4) + 'px';
+    if (heroBg) {
+      heroBg.style.transform = 'translateY(' + (scrollY * 0.35) + 'px)';
     }
   }, { passive: true });
 
@@ -313,7 +313,7 @@
         var node = net.nodes[ndi];
         node.x = node.baseX;
         node.y = node.baseY + parallax.y * depth;
-        node.pulsePhase += 0.01;
+        node.pulsePhase += 0.005;
         node.activation = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(node.pulsePhase));
       }
 
@@ -342,7 +342,7 @@
       var p = particles[pi];
       p.x += p.vx;
       p.y += p.vy;
-      p.phase += 0.008;
+      p.phase += 0.004;
       if (p.x < -10) p.x = W + 10;
       if (p.x > W + 10) p.x = -10;
       if (p.y < -10) p.y = H + 10;
