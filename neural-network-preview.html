@@ -46,7 +46,7 @@
       font-size: 0.85rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      opacity: 0.75;
+      color: #b08d57;
       margin-bottom: 1rem;
     }
 
@@ -289,12 +289,19 @@
       }
     }
 
-    function createFormula() {
+    function createFormula(startFromCenter) {
+      // Emerge from center and radiate outward
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 0.2 + Math.random() * 0.4;
+      const cx = W / 2;
+      const cy = H / 2;
+      // If starting fresh, begin at center; otherwise scatter for initial population
+      const dist = startFromCenter ? (Math.random() * 30) : (Math.random() * Math.max(W, H) * 0.6);
       return {
-        x: Math.random() * W,
-        y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: -0.15 - Math.random() * 0.25,
+        x: cx + Math.cos(angle) * dist,
+        y: cy + Math.sin(angle) * dist,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
         text: FORMULA_TEXTS[Math.floor(Math.random() * FORMULA_TEXTS.length)],
         opacity: 0,
         maxOpacity: 0.12 + Math.random() * 0.2,
@@ -367,11 +374,8 @@
         } else {
           f.opacity -= f.fadeSpeed * 0.5;
         }
-        if (f.opacity <= 0 || f.y < -30 || f.x < -200 || f.x > W + 200) {
-          formulas[i] = createFormula();
-          formulas[i].y = H + 20;
-          formulas[i].opacity = 0;
-          formulas[i].fadeIn = true;
+        if (f.opacity <= 0 || f.y < -30 || f.y > H + 30 || f.x < -200 || f.x > W + 200) {
+          formulas[i] = createFormula(true);
         }
       }
 
