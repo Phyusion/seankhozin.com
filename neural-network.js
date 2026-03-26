@@ -213,9 +213,12 @@
     for (var i = 0; i < s.nodes.length; i++) {
       if (!s.nodes[i].grabbed) s.nodes[i].phase += 0.008;
     }
-    if (frame % 20 === 0 && s.signals.length < 8 && s.connections.length > 0) {
-      var c = s.connections[Math.floor(Math.random() * s.connections.length)];
-      s.signals.push({ conn: c, t: 0, speed: 0.003 + Math.random() * 0.004, bright: Math.random() > 0.5 });
+    if (frame % 4 === 0 && s.signals.length < 30 && s.connections.length > 0) {
+      var numSpawn = 1 + Math.floor(Math.random() * 3);
+      for (var sp = 0; sp < numSpawn; sp++) {
+        var c = s.connections[Math.floor(Math.random() * s.connections.length)];
+        s.signals.push({ conn: c, t: 0, speed: 0.003 + Math.random() * 0.004, bright: Math.random() > 0.5 });
+      }
     }
     for (var si = s.signals.length - 1; si >= 0; si--) {
       s.signals[si].t += s.signals[si].speed;
