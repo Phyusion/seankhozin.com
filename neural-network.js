@@ -263,19 +263,82 @@
   }
 
   // ============================================================
-  //  MOUSE INTERACTION
+  //  MOUSE INTERACTION + CLICK-TO-GRAB
   // ============================================================
   var mouse = { x: -9999, y: -9999 };
+  var grabbed = null; // { type: 'formula'|'node', ref, offsetX, offsetY }
+
   canvas.addEventListener('mousemove', function(e) {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
-    // #1 — Parallax: vertical shift based on mouse Y position
     parallax.targetY = ((e.clientY / H) - 0.5) * PARALLAX_STRENGTH * -1;
+
+    // Drag grabbed item
+    if (grabbed) {
+      if (grabbed.type === 'formula') {
+        grabbed.ref.x = e.clientX - grabbed.offsetX;
+        grabbed.ref.y = e.clientY - grabbed.offsetY;
+        grabbed.ref.vx = 0;
+        grabbed.ref.vy = 0;
+      } else if (grabbed.type === 'node') {
+        grabbed.ref.baseX = e.clientX - grabbed.offsetX;
+        grabbed.ref.baseY = e.clientY - grabbed.offsetY;
+        grabbed.ref.x = grabbed.ref.baseX;
+        grabbed.ref.y = grabbed.ref.baseY;
+      }
+    }
   });
+
   canvas.addEventListener('mouseleave', function() {
     mouse.x = -9999;
     mouse.y = -9999;
     parallax.targetY = 0;
+    if (grabbed) { grabbed.ref.grabbed = false; grabbed = null; }
+    canvas.style.cursor = '';
+  });
+
+  canvas.addEventListener('mousedown', function(e) {
+    var mx = e.clientX;
+    var my = e.clientY;
+
+    // Check formulas first (drawn on top)
+    for (var fi = formulas.length - 1; fi >= 0; fi--) {
+      var f = formulas[fi];
+      // Approximate hit box based on text size
+      var tw = f.text.length * f.size * 0.55;
+      var th = f.size;
+      if (mx >= f.x && mx <= f.x + tw && my >= f.y - th && my <= f.y) {
+        f.grabbed = true;
+        grabbed = { type: 'formula', ref: f, offsetX: mx - f.x, offsetY: my - f.y };
+        canvas.style.cursor = 'grabbing';
+        return;
+      }
+    }
+
+    // Check network nodes
+    for (var ni = 0; ni < networks.length; ni++) {
+      var net = networks[ni];
+      for (var ndi = 0; ndi < net.nodes.length; ndi++) {
+        var node = net.nodes[ndi];
+        var dx = mx - node.x;
+        var dy = my - node.y;
+        var hitR = Math.max(node.radius * 3, 12);
+        if (dx * dx + dy * dy < hitR * hitR) {
+          node.grabbed = true;
+          grabbed = { type: 'node', ref: node, offsetX: mx - node.baseX, offsetY: my - node.baseY };
+          canvas.style.cursor = 'grabbing';
+          return;
+        }
+      }
+    }
+  });
+
+  canvas.addEventListener('mouseup', function() {
+    if (grabbed) {
+      grabbed.ref.grabbed = false;
+      grabbed = null;
+      canvas.style.cursor = '';
+    }
   });
 
   // ============================================================
@@ -322,10 +385,12 @@
 
     for (var fi = 0; fi < formulas.length; fi++) {
       var f = formulas[fi];
-      f.x += f.vx;
-      f.y += f.vy;
-      // Respawn from bottom when off top
-      if (f.y < -30 || f.x < -200 || f.x > W + 200) {
+      if (!f.grabbed) {
+        f.x += f.vx;
+        f.y += f.vy;
+      }
+      // Respawn from bottom when off top (never respawn grabbed)
+      if (!f.grabbed && (f.y < -30 || f.x < -200 || f.x > W + 200)) {
         formulas[fi] = createFormula(true);
       }
     }
@@ -371,16 +436,27 @@
       ctx.fill();
     }
 
-    // Formulas — opaque at bottom, fade to transparent as they rise
+    // Formulas — opaque at bottom, fade as they rise; hover/grab = full opacity
     for (var fi = 0; fi < formulas.length; fi++) {
       var f = formulas[fi];
-      // Position-based opacity: 1.0 at bottom (y=H), 0.0 at top (y=0)
-      var posAlpha = Math.max(0, Math.min(1, f.y / H));
-      var alpha = f.baseOpacity * posAlpha;
+      // Hit test for hover
+      var tw = f.text.length * f.size * 0.55;
+      var th = f.size;
+      var isHoveredF = !grabbed && mouse.x > -9000 &&
+        mouse.x >= f.x && mouse.x <= f.x + tw &&
+        mouse.y >= f.y - th && mouse.y <= f.y + 4;
+      var isActiveF = f.grabbed || isHoveredF;
+      var alpha;
+      if (isActiveF) {
+        alpha = 1;
+      } else {
+        var posAlpha = Math.max(0, Math.min(1, f.y / H));
+        alpha = f.baseOpacity * posAlpha;
+      }
       if (alpha <= 0.01) continue;
-      ctx.font = f.size + "px 'Courier New', monospace";
+      ctx.font = (isActiveF ? 'bold ' : '') + f.size + "px 'Courier New', monospace";
       ctx.fillStyle = f.useGold ? rgba(COL.goldLight, alpha) : rgba(COL.formula, alpha);
-      ctx.fillText(f.text, f.x, f.y + parallax.y * 0.15);
+      ctx.fillText(f.text, f.x, f.y + (f.grabbed ? 0 : parallax.y * 0.15));
     }
 
     // Neural networks
@@ -442,39 +518,43 @@
         }
       }
 
-      // Nodes (#3 layer-by-layer entrance)
+      // Nodes (#3 layer-by-layer entrance; grabbed = full opacity)
       for (var ndi = 0; ndi < net.nodes.length; ndi++) {
         var node = net.nodes[ndi];
         var entrAlpha = layerEntrance(node.layer, totalLayers);
         if (entrAlpha <= 0) continue;
 
+        var isHovered = !grabbed && mouse.x > -9000 &&
+          (mouse.x - node.x) * (mouse.x - node.x) + (mouse.y - node.y) * (mouse.y - node.y) < Math.max(node.radius * 3, 12) * Math.max(node.radius * 3, 12);
+        var isActive = node.grabbed || isHovered;
+        var nodeAlpha = isActive ? 1 : entrAlpha;
         var pulse = 0.6 + 0.4 * Math.sin(node.pulsePhase);
         var r = node.radius;
-        var entrScale = 0.3 + 0.7 * entrAlpha;
+        var entrScale = isActive ? 1.3 : (0.3 + 0.7 * entrAlpha);
         var drawR = r * entrScale;
 
         // Outer glow
         var glowGrad = ctx.createRadialGradient(node.x, node.y, drawR, node.x, node.y, drawR * 6);
-        glowGrad.addColorStop(0, rgba(COL.node, 0.05 * pulse * entrAlpha));
+        glowGrad.addColorStop(0, rgba(COL.node, (isActive ? 0.3 : 0.05) * pulse * nodeAlpha));
         glowGrad.addColorStop(1, rgba(COL.node, 0));
         ctx.beginPath();
         ctx.arc(node.x, node.y, drawR * 6, 0, Math.PI * 2);
         ctx.fillStyle = glowGrad;
         ctx.fill();
 
-        // Node fill — bold and visible
+        // Node fill
         ctx.beginPath();
         ctx.arc(node.x, node.y, drawR, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(COL.node, (0.15 + 0.12 * node.activation * pulse) * entrAlpha);
+        ctx.fillStyle = rgba(COL.node, isActive ? 0.85 : (0.15 + 0.12 * node.activation * pulse) * entrAlpha);
         ctx.fill();
-        ctx.strokeStyle = rgba(COL.node, (0.2 + 0.15 * pulse) * entrAlpha);
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = rgba(COL.node, isActive ? 1 : (0.2 + 0.15 * pulse) * entrAlpha);
+        ctx.lineWidth = isActive ? 2 : 1;
         ctx.stroke();
 
-        // Inner core — bright
+        // Inner core
         ctx.beginPath();
         ctx.arc(node.x, node.y, drawR * 0.4, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(COL.signal, 0.25 * node.activation * pulse * entrAlpha);
+        ctx.fillStyle = rgba(COL.signal, isActive ? 0.9 : 0.25 * node.activation * pulse * entrAlpha);
         ctx.fill();
       }
 
