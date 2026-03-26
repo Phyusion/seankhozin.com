@@ -178,7 +178,7 @@
       var conn = net.connections[Math.floor(Math.random() * net.connections.length)];
       net.signals.push({
         conn: conn, t: 0,
-        speed: 0.006 + Math.random() * 0.01,
+        speed: 0.002 + Math.random() * 0.004,
         value: (Math.random() * 2 - 1).toFixed(2),
         bright: Math.random() > 0.5,
       });
@@ -351,8 +351,9 @@
   }
 
   function draw() {
-    // Clear
-    ctx.fillStyle = rgba(COL.bg, 1);
+    // Clear with semi-transparent white so NYC.jpg shows through at ~20%
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
     ctx.fillRect(0, 0, W, H);
 
     // #4 — Animated mesh gradient
@@ -389,7 +390,7 @@
           var conn = net.connections[ci];
           var a = net.nodes[conn.from];
           var b = net.nodes[conn.to];
-          var alpha = (0.08 + conn.weight * 0.1) * connEntr;
+          var alpha = (0.04 + conn.weight * 0.06) * connEntr;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -415,13 +416,13 @@
         ctx.moveTo(tx, ty);
         ctx.lineTo(px, py);
         var trailCol = sig.bright ? COL.gold : COL.signal;
-        ctx.strokeStyle = rgba(trailCol, fade * 0.35);
-        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = rgba(trailCol, fade * 0.25);
+        ctx.lineWidth = 1.2;
         ctx.stroke();
 
         ctx.beginPath();
         ctx.arc(px, py, 3, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(sig.bright ? COL.goldLight : COL.signal, fade * 0.7);
+        ctx.fillStyle = rgba(sig.bright ? COL.goldLight : COL.signal, fade * 0.5);
         ctx.fill();
 
         ctx.beginPath();
@@ -449,7 +450,7 @@
 
         // Outer glow
         var glowGrad = ctx.createRadialGradient(node.x, node.y, drawR, node.x, node.y, drawR * 6);
-        glowGrad.addColorStop(0, rgba(COL.node, 0.08 * pulse * entrAlpha));
+        glowGrad.addColorStop(0, rgba(COL.node, 0.05 * pulse * entrAlpha));
         glowGrad.addColorStop(1, rgba(COL.node, 0));
         ctx.beginPath();
         ctx.arc(node.x, node.y, drawR * 6, 0, Math.PI * 2);
@@ -459,16 +460,16 @@
         // Node fill — bold and visible
         ctx.beginPath();
         ctx.arc(node.x, node.y, drawR, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(COL.node, (0.25 + 0.2 * node.activation * pulse) * entrAlpha);
+        ctx.fillStyle = rgba(COL.node, (0.15 + 0.12 * node.activation * pulse) * entrAlpha);
         ctx.fill();
-        ctx.strokeStyle = rgba(COL.node, (0.35 + 0.2 * pulse) * entrAlpha);
+        ctx.strokeStyle = rgba(COL.node, (0.2 + 0.15 * pulse) * entrAlpha);
         ctx.lineWidth = 1;
         ctx.stroke();
 
         // Inner core — bright
         ctx.beginPath();
         ctx.arc(node.x, node.y, drawR * 0.4, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(COL.signal, 0.4 * node.activation * pulse * entrAlpha);
+        ctx.fillStyle = rgba(COL.signal, 0.25 * node.activation * pulse * entrAlpha);
         ctx.fill();
       }
 
