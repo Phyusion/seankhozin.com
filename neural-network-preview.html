@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #1e3a5f; overflow: hidden; font-family: 'Inter', system-ui, sans-serif; }
+    body { background: #0a1628; overflow: hidden; font-family: 'Inter', system-ui, sans-serif; }
 
     .hero {
       position: relative;
@@ -32,7 +32,7 @@
       position: absolute;
       inset: 0;
       z-index: 1;
-      background: radial-gradient(ellipse at center, rgba(30,58,95,0.15) 0%, rgba(30,58,95,0.55) 100%);
+      background: radial-gradient(ellipse at center, rgba(10,22,40,0.2) 0%, rgba(10,22,40,0.6) 100%);
     }
 
     .hero-content {
@@ -113,7 +113,7 @@
 
     // --- Palette (from site: accent #1e3a5f, gold #b08d57) ---
     const COL = {
-      bg:       [30, 58, 95],       // #1e3a5f
+      bg:       [10, 22, 40],       // #0a1628
       node:     [160, 210, 255],    // bright blue
       nodeDim:  [100, 160, 220],    // dimmer blue
       gold:     [176, 141, 87],     // #b08d57
@@ -381,7 +381,7 @@
 
       // Subtle gradient overlay for depth
       const grad = ctx.createRadialGradient(W * 0.5, H * 0.4, 0, W * 0.5, H * 0.4, W * 0.7);
-      grad.addColorStop(0, rgba([45, 90, 142], 0.4));   // accent-light center
+      grad.addColorStop(0, rgba([30, 58, 95], 0.35));    // subtle accent center
       grad.addColorStop(1, rgba(COL.bg, 0));
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, W, H);
@@ -512,8 +512,8 @@
 
       // --- Vignette ---
       const vig = ctx.createRadialGradient(W * 0.5, H * 0.5, W * 0.25, W * 0.5, H * 0.5, W * 0.8);
-      vig.addColorStop(0, 'rgba(30,58,95,0)');
-      vig.addColorStop(1, 'rgba(20,40,65,0.5)');
+      vig.addColorStop(0, 'rgba(10,22,40,0)');
+      vig.addColorStop(1, 'rgba(5,12,25,0.6)');
       ctx.fillStyle = vig;
       ctx.fillRect(0, 0, W, H);
     }
