@@ -121,23 +121,52 @@
   // ============================================================
   function buildNeural(s) {
     s.nodes = []; s.connections = []; s.signals = [];
-    var W = s.W, H = s.H, pad = 30;
-    var count = Math.max(8, Math.floor((W - pad*2) / 80));
-    var spacing = (W - pad*2) / (count - 1);
-    for (var i = 0; i < count; i++) {
-      s.nodes.push({
-        x: pad + i * spacing,
-        y: H/2 + Math.sin(i * 0.8) * H * 0.15,
-        r: 3 + Math.random() * 2,
-        phase: Math.random() * Math.PI * 2,
-        weight: (Math.random()*2-1).toFixed(2),
-      });
-    }
-    for (var i2 = 0; i2 < count; i2++) {
-      var reach = Math.min(3, count - i2 - 1);
-      for (var j = 1; j <= reach; j++) {
-        if (Math.random() < 0.6)
-          s.connections.push({ from: i2, to: i2+j, weight: Math.random() });
+    var W = s.W, H = s.H;
+    var padX = 20, padY = 8;
+    // Repeat small multi-layer networks across the width
+    var layerDef = [2, 4, 5, 4, 2]; // nodes per layer in each block
+    var maxPerLayer = 5;
+    var layerCount = layerDef.length;
+    var layerSpacing = 50;
+    var blockWidth = (layerCount - 1) * layerSpacing;
+    var blockGap = 30;
+    var numBlocks = Math.max(1, Math.floor((W - padX * 2 + blockGap) / (blockWidth + blockGap)));
+    var totalWidth = numBlocks * blockWidth + (numBlocks - 1) * blockGap;
+    var startX = (W - totalWidth) / 2;
+    var nodeSpacing = (H - padY * 2) / (maxPerLayer - 1);
+
+    for (var b = 0; b < numBlocks; b++) {
+      var bx = startX + b * (blockWidth + blockGap);
+      var blockStart = s.nodes.length;
+      // Create nodes layer by layer
+      for (var l = 0; l < layerCount; l++) {
+        var count = layerDef[l];
+        var x = bx + l * layerSpacing;
+        var sy = H / 2 - ((count - 1) * nodeSpacing) / 2;
+        for (var n = 0; n < count; n++) {
+          s.nodes.push({
+            x: x, y: sy + n * nodeSpacing,
+            r: 2.5 + Math.random() * 1.5,
+            phase: Math.random() * Math.PI * 2,
+            weight: (Math.random() * 2 - 1).toFixed(2),
+            layer: l,
+          });
+        }
+      }
+      // Connect adjacent layers within this block
+      var idx = blockStart;
+      for (var l2 = 0; l2 < layerCount - 1; l2++) {
+        var cC = layerDef[l2], nC = layerDef[l2 + 1];
+        var cS = idx, nS = idx + cC;
+        for (var a = 0; a < cC; a++) {
+          for (var bb = 0; bb < nC; bb++) {
+            // Skip some connections for visual clarity
+            if (Math.random() < 0.7) {
+              s.connections.push({ from: cS + a, to: nS + bb, weight: Math.random() });
+            }
+          }
+        }
+        idx += cC;
       }
     }
   }
@@ -226,31 +255,40 @@
       if (s.nodes[gi].grabbed) { hovIdx = gi; break; }
     }
 
-    // Connections — curved arcs
+    // Connections — straight lines between layers
     for (var ci = 0; ci < s.connections.length; ci++) {
       var c = s.connections[ci];
       var a = s.nodes[c.from], b = s.nodes[c.to];
       var isHighlighted = (c.from === hovIdx || c.to === hovIdx);
-      var cpY = Math.min(a.y, b.y) - 15;
       ctx.beginPath();
       ctx.moveTo(a.x, a.y);
-      ctx.quadraticCurveTo((a.x+b.x)/2, cpY, b.x, b.y);
-      ctx.strokeStyle = isHighlighted ? rgba(COL.gold, 0.8) : rgba(COL.wire, 0.12 + c.weight * 0.1);
-      ctx.lineWidth = isHighlighted ? 2 : 0.8;
+      ctx.lineTo(b.x, b.y);
+      ctx.strokeStyle = isHighlighted ? rgba(COL.gold, 0.8) : rgba(COL.wire, 0.08 + c.weight * 0.07);
+      ctx.lineWidth = isHighlighted ? 1.8 : 0.5;
       ctx.stroke();
     }
 
-    // Signals along curves
+    // Signals traveling left-to-right along connections
     for (var si = 0; si < s.signals.length; si++) {
       var sig = s.signals[si];
       var sa = s.nodes[sig.conn.from], sb = s.nodes[sig.conn.to];
-      var t = sig.t, cpY2 = Math.min(sa.y, sb.y) - 15;
-      var mx = (sa.x+sb.x)/2;
-      var px = (1-t)*(1-t)*sa.x + 2*(1-t)*t*mx + t*t*sb.x;
-      var py = (1-t)*(1-t)*sa.y + 2*(1-t)*t*cpY2 + t*t*sb.y;
+      var t = sig.t;
+      var px = sa.x + (sb.x - sa.x) * t;
+      var py = sa.y + (sb.y - sa.y) * t;
       var fade = t < 0.15 ? t/0.15 : t > 0.85 ? (1-t)/0.15 : 1;
-      ctx.beginPath(); ctx.arc(px, py, 2.5, 0, Math.PI*2);
-      ctx.fillStyle = rgba(sig.bright ? COL.gold : COL.signal, fade * 0.7);
+
+      // Trail
+      var trT = Math.max(0, t - 0.12);
+      ctx.beginPath();
+      ctx.moveTo(sa.x + (sb.x-sa.x)*trT, sa.y + (sb.y-sa.y)*trT);
+      ctx.lineTo(px, py);
+      ctx.strokeStyle = rgba(sig.bright ? COL.gold : COL.signal, fade * 0.35);
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Dot
+      ctx.beginPath(); ctx.arc(px, py, 2, 0, Math.PI*2);
+      ctx.fillStyle = rgba(sig.bright ? COL.gold : COL.signal, fade * 0.8);
       ctx.fill();
     }
 
