@@ -85,6 +85,27 @@
     .btn-outline:hover {
       background: #1e3a5f; color: #fff; border-color: #1e3a5f;
     }
+
+    .hero-scroll {
+      position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); z-index: 2;
+      opacity: 0; animation: fadeUp 0.8s ease 1s forwards;
+    }
+    .scroll-indicator {
+      width: 24px; height: 40px; border: 2px solid rgba(30,58,95,0.25); border-radius: 12px; position: relative;
+    }
+    .scroll-indicator::after {
+      content: ''; position: absolute; top: 6px; left: 50%; width: 4px; height: 8px;
+      background: rgba(30,58,95,0.4); border-radius: 2px; transform: translateX(-50%);
+      animation: scrollBounce 1.8s ease-in-out infinite;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes scrollBounce {
+      0%, 100% { top: 6px; opacity: 0.4; }
+      50% { top: 18px; opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -101,6 +122,9 @@
         <a href="#" class="btn btn-outline">Substack</a>
         <a href="#" class="btn btn-outline">Get in Touch</a>
       </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-indicator"></div>
     </div>
   </div>
 
