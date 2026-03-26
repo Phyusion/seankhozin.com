@@ -558,24 +558,41 @@
         ctx.fill();
       }
 
-      // Mouse interaction
+      // Hover: highlight all connections from/to hovered node
       for (var mi = 0; mi < net.nodes.length; mi++) {
         var mnode = net.nodes[mi];
         var mdx = mouse.x - mnode.x;
         var mdy = mouse.y - mnode.y;
-        var mdist = Math.sqrt(mdx * mdx + mdy * mdy);
-        if (mdist < 150) {
-          var malpha = (1 - mdist / 150) * 0.4;
-          ctx.beginPath();
-          ctx.moveTo(mnode.x, mnode.y);
-          ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = rgba(COL.goldLight, malpha);
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
-
+        var hitR = Math.max(mnode.radius * 3, 12);
+        if (mdx * mdx + mdy * mdy < hitR * hitR && mouse.x > -9000) {
+          // Draw all connections involving this node at full visibility
+          for (var hci = 0; hci < net.connections.length; hci++) {
+            var hconn = net.connections[hci];
+            if (hconn.from === mi || hconn.to === mi) {
+              var ha = net.nodes[hconn.from];
+              var hb = net.nodes[hconn.to];
+              ctx.beginPath();
+              ctx.moveTo(ha.x, ha.y);
+              ctx.lineTo(hb.x, hb.y);
+              ctx.strokeStyle = rgba(COL.gold, 0.6);
+              ctx.lineWidth = 1.5;
+              ctx.stroke();
+              // Highlight connected node
+              var other = hconn.from === mi ? hb : ha;
+              ctx.beginPath();
+              ctx.arc(other.x, other.y, other.radius * 1.3, 0, Math.PI * 2);
+              ctx.fillStyle = rgba(COL.node, 0.5);
+              ctx.fill();
+              ctx.strokeStyle = rgba(COL.node, 0.8);
+              ctx.lineWidth = 1.5;
+              ctx.stroke();
+            }
+          }
+          // Show weight label
           ctx.font = '9px monospace';
-          ctx.fillStyle = rgba(COL.goldLight, malpha);
+          ctx.fillStyle = rgba(COL.goldLight, 0.8);
           ctx.fillText('w=' + mnode.weight, mnode.x + mnode.radius + 5, mnode.y - 6);
+          break;
         }
       }
     }
