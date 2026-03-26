@@ -437,7 +437,7 @@
         for (const conn of net.connections) {
           const a = net.nodes[conn.from];
           const b = net.nodes[conn.to];
-          const alpha = 0.06 + conn.weight * 0.08;
+          const alpha = 0.12 + conn.weight * 0.14;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -503,9 +503,9 @@
           // Node ring
           ctx.beginPath();
           ctx.arc(node.x, node.y, r, 0, Math.PI * 2);
-          ctx.fillStyle = rgba(COL.node, 0.15 + 0.35 * node.activation * pulse);
+          ctx.fillStyle = rgba(COL.node, 0.25 + 0.45 * node.activation * pulse);
           ctx.fill();
-          ctx.strokeStyle = rgba(COL.node, 0.3 + 0.5 * pulse);
+          ctx.strokeStyle = rgba(COL.node, 0.5 + 0.5 * pulse);
           ctx.lineWidth = 1;
           ctx.stroke();
 
