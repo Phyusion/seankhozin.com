@@ -158,7 +158,7 @@
       vy: Math.sin(angle) * speed,
       text: FORMULA_TEXTS[Math.floor(Math.random() * FORMULA_TEXTS.length)],
       opacity: 0,
-      maxOpacity: 0.2 + Math.random() * 0.2,
+      maxOpacity: 0.1 + Math.random() * 0.12,
       fadeIn: true,
       fadeSpeed: 0.002 + Math.random() * 0.003,
       size: 11 + Math.floor(Math.random() * 5),
@@ -283,7 +283,7 @@
         var conn = net.connections[ci];
         var a = net.nodes[conn.from];
         var b = net.nodes[conn.to];
-        var alpha = 0.12 + conn.weight * 0.14;
+        var alpha = 0.2 + conn.weight * 0.2;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(b.x, b.y);
@@ -343,15 +343,15 @@
 
         ctx.beginPath();
         ctx.arc(node.x, node.y, r, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(COL.node, 0.25 + 0.45 * node.activation * pulse);
+        ctx.fillStyle = rgba(COL.node, 0.4 + 0.5 * node.activation * pulse);
         ctx.fill();
-        ctx.strokeStyle = rgba(COL.node, 0.5 + 0.5 * pulse);
+        ctx.strokeStyle = rgba(COL.node, 0.6 + 0.4 * pulse);
         ctx.lineWidth = 1;
         ctx.stroke();
 
         ctx.beginPath();
         ctx.arc(node.x, node.y, r * 0.45, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(COL.signal, 0.5 * node.activation * pulse);
+        ctx.fillStyle = rgba(COL.signal, 0.7 * node.activation * pulse);
         ctx.fill();
       }
 
