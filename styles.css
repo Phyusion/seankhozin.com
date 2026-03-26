@@ -148,7 +148,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* --- Sections --- */
-.section { padding: 8rem 0; --section-bg: var(--bg); }
+.section { padding: 5rem 0; --section-bg: var(--bg); }
 .section-header {
   position: sticky; top: var(--nav-h); z-index: 50;
   margin-bottom: 4rem; padding: 0.5rem 0;
@@ -530,7 +530,7 @@ img { max-width: 100%; display: block; }
 .board-detail a:hover { text-decoration: underline; }
 
 /* --- Contact --- */
-.section-contact { text-align: center; padding-bottom: 2rem; }
+.section-contact { text-align: center; padding-bottom: 1.5rem; }
 .contact-content .lead { font-size: 1.125rem; color: var(--text-2); max-width: 600px; margin: 0 auto 3rem; }
 .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
 .contact-link {
@@ -677,7 +677,7 @@ img { max-width: 100%; display: block; }
 @media (max-width: 768px) {
   :root { --nav-h: 64px; }
   .container { padding: 0 1.5rem; }
-  .section { padding: 4rem 0; }
+  .section { padding: 3rem 0; }
   .nav-links a { font-size: 0.70rem; }
   .about-portrait-grid { grid-template-columns: 1fr; }
   .about-photo { max-width: 320px; margin: 0 auto 2rem; }
