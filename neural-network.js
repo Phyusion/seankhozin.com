@@ -229,17 +229,14 @@
 
   function createFormula(fromBottom) {
     var x = Math.random() * W;
-    var y = fromBottom ? H + 10 + Math.random() * 40 : Math.random() * H;
+    var y = fromBottom ? H + 10 + Math.random() * 40 : H * 0.3 + Math.random() * H * 0.7;
     return {
       x: x,
       y: y,
       vx: (Math.random() - 0.5) * 0.02,
       vy: -(0.015 + Math.random() * 0.03),
       text: FORMULA_TEXTS[Math.floor(Math.random() * FORMULA_TEXTS.length)],
-      opacity: 0,
-      maxOpacity: 0.45 + Math.random() * 0.25,
-      fadeIn: true,
-      fadeSpeed: 0.0005 + Math.random() * 0.0005,
+      baseOpacity: 0.55 + Math.random() * 0.3,
       size: 11 + Math.floor(Math.random() * 5),
       useGold: Math.random() < 0.25,
     };
@@ -327,13 +324,8 @@
       var f = formulas[fi];
       f.x += f.vx;
       f.y += f.vy;
-      if (f.fadeIn) {
-        f.opacity += f.fadeSpeed;
-        if (f.opacity >= f.maxOpacity) { f.opacity = f.maxOpacity; f.fadeIn = false; }
-      } else {
-        f.opacity -= f.fadeSpeed * 0.5;
-      }
-      if (f.opacity <= 0 || f.y < -30 || f.x < -200 || f.x > W + 200) {
+      // Respawn from bottom when off top
+      if (f.y < -30 || f.x < -200 || f.x > W + 200) {
         formulas[fi] = createFormula(true);
       }
     }
@@ -379,12 +371,15 @@
       ctx.fill();
     }
 
-    // Formulas (with parallax)
+    // Formulas — opaque at bottom, fade to transparent as they rise
     for (var fi = 0; fi < formulas.length; fi++) {
       var f = formulas[fi];
-      if (f.opacity <= 0.01) continue;
+      // Position-based opacity: 1.0 at bottom (y=H), 0.0 at top (y=0)
+      var posAlpha = Math.max(0, Math.min(1, f.y / H));
+      var alpha = f.baseOpacity * posAlpha;
+      if (alpha <= 0.01) continue;
       ctx.font = f.size + "px 'Courier New', monospace";
-      ctx.fillStyle = f.useGold ? rgba(COL.goldLight, f.opacity) : rgba(COL.formula, f.opacity);
+      ctx.fillStyle = f.useGold ? rgba(COL.goldLight, alpha) : rgba(COL.formula, alpha);
       ctx.fillText(f.text, f.x, f.y + parallax.y * 0.15);
     }
 
