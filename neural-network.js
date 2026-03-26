@@ -394,10 +394,10 @@
   // ============================================================
   var heroBg = document.getElementById('hero-bg');
   if (heroBg) {
-    function onScroll() {
+    var onScroll = function() {
       var scrollY = window.pageYOffset || document.documentElement.scrollTop;
       heroBg.style.transform = 'translate3d(0,' + (scrollY * 0.4) + 'px,0)';
-    }
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
