@@ -1,11 +1,11 @@
 (function() {
-  const canvas = document.getElementById('neural-canvas');
+  var canvas = document.getElementById('neural-canvas');
   if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let W, H;
-  const DPR = window.devicePixelRatio || 1;
+  var ctx = canvas.getContext('2d');
+  var W, H;
+  var DPR = window.devicePixelRatio || 1;
 
-  const COL = {
+  var COL = {
     bg:       [255, 255, 255],
     node:     [30, 58, 95],
     nodeDim:  [45, 90, 142],
@@ -16,8 +16,91 @@
     formula:  [100, 130, 165],
   };
 
-  function rgba(c, a) { return `rgba(${c[0]},${c[1]},${c[2]},${a})`; }
+  function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
 
+  // ============================================================
+  //  #1 — PARALLAX
+  // ============================================================
+  var parallax = { x: 0, y: 0, targetX: 0, targetY: 0 };
+  var PARALLAX_STRENGTH = 15; // max px shift
+
+  function updateParallax() {
+    // Smooth lerp toward target
+    parallax.x += (parallax.targetX - parallax.x) * 0.05;
+    parallax.y += (parallax.targetY - parallax.y) * 0.05;
+  }
+
+  // ============================================================
+  //  #3 — ENTRANCE ANIMATION
+  // ============================================================
+  var entranceStart = Date.now();
+  var ENTRANCE_DURATION = 3000; // ms total for full entrance
+
+  function getEntranceProgress() {
+    var elapsed = Date.now() - entranceStart;
+    return Math.min(elapsed / ENTRANCE_DURATION, 1);
+  }
+
+  // Returns 0-1 for a given layer, staggered across the entrance
+  function layerEntrance(layerIndex, totalLayers) {
+    var progress = getEntranceProgress();
+    // Each layer gets a window; stagger them
+    var layerStart = (layerIndex / totalLayers) * 0.6; // layers fill first 60% of time
+    var layerEnd = layerStart + 0.3;
+    return Math.max(0, Math.min(1, (progress - layerStart) / (layerEnd - layerStart)));
+  }
+
+  // Connections fade in after nodes
+  function connectionEntrance() {
+    var progress = getEntranceProgress();
+    return Math.max(0, Math.min(1, (progress - 0.3) / 0.4)); // 30%-70%
+  }
+
+  // Signals only after connections visible
+  function signalsAllowed() {
+    return getEntranceProgress() > 0.6;
+  }
+
+  // ============================================================
+  //  #4 — ANIMATED MESH GRADIENT
+  // ============================================================
+  var meshPhase = 0;
+
+  function drawMeshGradient() {
+    meshPhase += 0.003;
+    // Two slowly shifting radial gradients to create a mesh effect
+    var cx1 = W * (0.3 + 0.15 * Math.sin(meshPhase * 0.7));
+    var cy1 = H * (0.3 + 0.1 * Math.cos(meshPhase * 0.5));
+    var cx2 = W * (0.7 + 0.1 * Math.cos(meshPhase * 0.6));
+    var cy2 = H * (0.6 + 0.15 * Math.sin(meshPhase * 0.8));
+    var cx3 = W * (0.5 + 0.2 * Math.sin(meshPhase * 0.4));
+    var cy3 = H * (0.8 + 0.1 * Math.cos(meshPhase * 0.9));
+
+    // Gradient 1 — soft blue
+    var g1 = ctx.createRadialGradient(cx1, cy1, 0, cx1, cy1, W * 0.5);
+    g1.addColorStop(0, 'rgba(220, 232, 245, 0.4)');
+    g1.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    ctx.fillStyle = g1;
+    ctx.fillRect(0, 0, W, H);
+
+    // Gradient 2 — lavender tint
+    var g2 = ctx.createRadialGradient(cx2, cy2, 0, cx2, cy2, W * 0.45);
+    g2.addColorStop(0, 'rgba(225, 225, 245, 0.3)');
+    g2.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    ctx.fillStyle = g2;
+    ctx.fillRect(0, 0, W, H);
+
+    // Gradient 3 — warm gold hint
+    var g3 = ctx.createRadialGradient(cx3, cy3, 0, cx3, cy3, W * 0.35);
+    g3.addColorStop(0, 'rgba(240, 232, 215, 0.2)');
+    g3.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    ctx.fillStyle = g3;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  // ============================================================
+  //  RESIZE
+  // ============================================================
   function resize() {
     W = window.innerWidth;
     H = window.innerHeight;
@@ -33,34 +116,38 @@
   // ============================================================
   //  MULTI-LAYER NEURAL NETWORKS
   // ============================================================
-  const networks = [];
+  var networks = [];
 
   function buildNetworks() {
     networks.length = 0;
-    const configs = [
-      { cx: W * 0.15, cy: H * 0.35, layers: [3, 5, 6, 4, 2], scale: 0.85, rotation: -0.1 },
-      { cx: W * 0.82, cy: H * 0.6,  layers: [2, 4, 5, 3],    scale: 0.7,  rotation: 0.15 },
-      { cx: W * 0.5,  cy: H * 0.8,  layers: [4, 6, 6, 5, 3], scale: 0.55, rotation: 0.05 },
+    var configs = [
+      { cx: W * 0.15, cy: H * 0.35, layers: [3, 5, 6, 4, 2], scale: 0.85, rotation: -0.1, depth: 1.0 },
+      { cx: W * 0.82, cy: H * 0.6,  layers: [2, 4, 5, 3],    scale: 0.7,  rotation: 0.15, depth: 0.6 },
+      { cx: W * 0.5,  cy: H * 0.8,  layers: [4, 6, 6, 5, 3], scale: 0.55, rotation: 0.05, depth: 0.3 },
     ];
 
-    for (const cfg of configs) {
-      const net = { nodes: [], connections: [], signals: [], ...cfg };
-      const layerCount = cfg.layers.length;
-      const layerSpacing = 90 * cfg.scale;
-      const nodeSpacing = 50 * cfg.scale;
-      const startX = cfg.cx - ((layerCount - 1) * layerSpacing) / 2;
+    for (var ci = 0; ci < configs.length; ci++) {
+      var cfg = configs[ci];
+      var net = { nodes: [], connections: [], signals: [], cx: cfg.cx, cy: cfg.cy,
+                  layers: cfg.layers, scale: cfg.scale, rotation: cfg.rotation, depth: cfg.depth };
+      var layerCount = cfg.layers.length;
+      var layerSpacing = 90 * cfg.scale;
+      var nodeSpacing = 50 * cfg.scale;
+      var startX = cfg.cx - ((layerCount - 1) * layerSpacing) / 2;
 
-      for (let l = 0; l < layerCount; l++) {
-        const count = cfg.layers[l];
-        const x = startX + l * layerSpacing;
-        const startY = cfg.cy - ((count - 1) * nodeSpacing) / 2;
-        for (let n = 0; n < count; n++) {
-          const y = startY + n * nodeSpacing;
-          const dx = x - cfg.cx;
-          const dy = y - cfg.cy;
-          const cos = Math.cos(cfg.rotation);
-          const sin = Math.sin(cfg.rotation);
+      for (var l = 0; l < layerCount; l++) {
+        var count = cfg.layers[l];
+        var x = startX + l * layerSpacing;
+        var startY = cfg.cy - ((count - 1) * nodeSpacing) / 2;
+        for (var n = 0; n < count; n++) {
+          var y = startY + n * nodeSpacing;
+          var dx = x - cfg.cx;
+          var dy = y - cfg.cy;
+          var cos = Math.cos(cfg.rotation);
+          var sin = Math.sin(cfg.rotation);
           net.nodes.push({
+            baseX: cfg.cx + dx * cos - dy * sin,
+            baseY: cfg.cy + dx * sin + dy * cos,
             x: cfg.cx + dx * cos - dy * sin,
             y: cfg.cy + dx * sin + dy * cos,
             layer: l, index: n,
@@ -72,14 +159,14 @@
         }
       }
 
-      let nodeIdx = 0;
-      for (let l = 0; l < layerCount - 1; l++) {
-        const currCount = cfg.layers[l];
-        const nextCount = cfg.layers[l + 1];
-        const currStart = nodeIdx;
-        const nextStart = nodeIdx + currCount;
-        for (let a = 0; a < currCount; a++) {
-          for (let b = 0; b < nextCount; b++) {
+      var nodeIdx = 0;
+      for (var l2 = 0; l2 < layerCount - 1; l2++) {
+        var currCount = cfg.layers[l2];
+        var nextCount = cfg.layers[l2 + 1];
+        var currStart = nodeIdx;
+        var nextStart = nodeIdx + currCount;
+        for (var a = 0; a < currCount; a++) {
+          for (var b = 0; b < nextCount; b++) {
             net.connections.push({ from: currStart + a, to: nextStart + b, weight: Math.random() });
           }
         }
@@ -91,11 +178,13 @@
   }
 
   function spawnSignals() {
-    for (const net of networks) {
+    if (!signalsAllowed()) return;
+    for (var ni = 0; ni < networks.length; ni++) {
+      var net = networks[ni];
       if (net.signals.length > 25) continue;
-      const conn = net.connections[Math.floor(Math.random() * net.connections.length)];
+      var conn = net.connections[Math.floor(Math.random() * net.connections.length)];
       net.signals.push({
-        conn, t: 0,
+        conn: conn, t: 0,
         speed: 0.006 + Math.random() * 0.01,
         value: (Math.random() * 2 - 1).toFixed(2),
         bright: Math.random() > 0.5,
@@ -106,8 +195,8 @@
   // ============================================================
   //  FLOATING MATHEMATICAL FORMULAS
   // ============================================================
-  const formulas = [];
-  const FORMULA_TEXTS = [
+  var formulas = [];
+  var FORMULA_TEXTS = [
     'f(x) = sigmoid(Wx + b)',
     'L = -1/N \u03A3 y\u1D62 log(\u0177\u1D62)',
     '\u2207W = \u2202L/\u2202W',
@@ -139,18 +228,18 @@
 
   function buildFormulas() {
     formulas.length = 0;
-    const count = Math.max(18, Math.floor((W * H) / 50000));
-    for (let i = 0; i < count; i++) {
+    var count = Math.max(18, Math.floor((W * H) / 50000));
+    for (var i = 0; i < count; i++) {
       formulas.push(createFormula(false));
     }
   }
 
   function createFormula(startFromCenter) {
-    const angle = Math.random() * Math.PI * 2;
-    const speed = 0.25 + Math.random() * 0.5;
-    const cx = W / 2;
-    const cy = H / 2;
-    const dist = startFromCenter ? 0 : (Math.random() * Math.max(W, H) * 0.5);
+    var angle = Math.random() * Math.PI * 2;
+    var speed = 0.25 + Math.random() * 0.5;
+    var cx = W / 2;
+    var cy = H / 2;
+    var dist = startFromCenter ? 0 : (Math.random() * Math.max(W, H) * 0.5);
     return {
       x: cx + Math.cos(angle) * dist,
       y: cy + Math.sin(angle) * dist,
@@ -158,7 +247,7 @@
       vy: Math.sin(angle) * speed,
       text: FORMULA_TEXTS[Math.floor(Math.random() * FORMULA_TEXTS.length)],
       opacity: 0,
-      maxOpacity: 0.2 + Math.random() * 0.2,
+      maxOpacity: 0.1 + Math.random() * 0.12,
       fadeIn: true,
       fadeSpeed: 0.002 + Math.random() * 0.003,
       size: 11 + Math.floor(Math.random() * 5),
@@ -169,11 +258,11 @@
   // ============================================================
   //  FLOATING PARTICLES
   // ============================================================
-  const particles = [];
+  var particles = [];
   function initParticles() {
     particles.length = 0;
-    const count = Math.floor((W * H) / 12000);
-    for (let i = 0; i < count; i++) {
+    var count = Math.floor((W * H) / 12000);
+    for (var i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * W,
         y: Math.random() * H,
@@ -189,32 +278,52 @@
   // ============================================================
   //  MOUSE INTERACTION
   // ============================================================
-  const mouse = { x: -9999, y: -9999 };
-  canvas.addEventListener('mousemove', function(e) { mouse.x = e.clientX; mouse.y = e.clientY; });
-  canvas.addEventListener('mouseleave', function() { mouse.x = -9999; mouse.y = -9999; });
+  var mouse = { x: -9999, y: -9999 };
+  canvas.addEventListener('mousemove', function(e) {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    // Update parallax target based on mouse position relative to center
+    parallax.targetX = ((e.clientX / W) - 0.5) * PARALLAX_STRENGTH * -1;
+    parallax.targetY = ((e.clientY / H) - 0.5) * PARALLAX_STRENGTH * -1;
+  });
+  canvas.addEventListener('mouseleave', function() {
+    mouse.x = -9999;
+    mouse.y = -9999;
+    parallax.targetX = 0;
+    parallax.targetY = 0;
+  });
 
   // ============================================================
   //  ANIMATION LOOP
   // ============================================================
-  let frame = 0;
+  var frame = 0;
 
   function update() {
     frame++;
+    updateParallax();
+
     if (frame % 6 === 0) spawnSignals();
 
-    for (const net of networks) {
-      for (let i = net.signals.length - 1; i >= 0; i--) {
-        net.signals[i].t += net.signals[i].speed;
-        if (net.signals[i].t > 1) net.signals.splice(i, 1);
-      }
-      for (const node of net.nodes) {
+    // Update node positions with parallax
+    for (var ni = 0; ni < networks.length; ni++) {
+      var net = networks[ni];
+      var depth = net.depth;
+      for (var ndi = 0; ndi < net.nodes.length; ndi++) {
+        var node = net.nodes[ndi];
+        node.x = node.baseX + parallax.x * depth;
+        node.y = node.baseY + parallax.y * depth;
         node.pulsePhase += 0.02;
         node.activation = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(node.pulsePhase));
       }
+
+      for (var si = net.signals.length - 1; si >= 0; si--) {
+        net.signals[si].t += net.signals[si].speed;
+        if (net.signals[si].t > 1) net.signals.splice(si, 1);
+      }
     }
 
-    for (let i = 0; i < formulas.length; i++) {
-      const f = formulas[i];
+    for (var fi = 0; fi < formulas.length; fi++) {
+      var f = formulas[fi];
       f.x += f.vx;
       f.y += f.vy;
       if (f.fadeIn) {
@@ -224,11 +333,12 @@
         f.opacity -= f.fadeSpeed * 0.5;
       }
       if (f.opacity <= 0 || f.y < -30 || f.y > H + 30 || f.x < -200 || f.x > W + 200) {
-        formulas[i] = createFormula(true);
+        formulas[fi] = createFormula(true);
       }
     }
 
-    for (const p of particles) {
+    for (var pi = 0; pi < particles.length; pi++) {
+      var p = particles[pi];
       p.x += p.vx;
       p.y += p.vy;
       p.phase += 0.015;
@@ -237,12 +347,12 @@
       if (p.y < -10) p.y = H + 10;
       if (p.y > H + 10) p.y = -10;
 
-      const dx = p.x - mouse.x;
-      const dy = p.y - mouse.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 120 && dist > 0) {
-        p.vx += (dx / dist) * 0.05;
-        p.vy += (dy / dist) * 0.05;
+      var pdx = p.x - mouse.x;
+      var pdy = p.y - mouse.y;
+      var pdist = Math.sqrt(pdx * pdx + pdy * pdy);
+      if (pdist < 120 && pdist > 0) {
+        p.vx += (pdx / pdist) * 0.05;
+        p.vy += (pdy / pdist) * 0.05;
       }
       p.vx *= 0.99;
       p.vy *= 0.99;
@@ -250,48 +360,55 @@
   }
 
   function draw() {
+    // Clear
     ctx.fillStyle = rgba(COL.bg, 1);
     ctx.fillRect(0, 0, W, H);
 
-    var grad = ctx.createRadialGradient(W * 0.5, H * 0.4, 0, W * 0.5, H * 0.4, W * 0.7);
-    grad.addColorStop(0, rgba([232, 238, 245], 0.5));
-    grad.addColorStop(1, rgba(COL.bg, 0));
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, W, H);
+    // #4 — Animated mesh gradient
+    drawMeshGradient();
 
+    // Ambient particles
     for (var pi = 0; pi < particles.length; pi++) {
       var p = particles[pi];
       var flicker = 0.7 + 0.3 * Math.sin(p.phase);
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.arc(p.x + parallax.x * 0.2, p.y + parallax.y * 0.2, p.r, 0, Math.PI * 2);
       ctx.fillStyle = rgba(COL.nodeDim, p.alpha * flicker);
       ctx.fill();
     }
 
+    // Formulas (with subtle parallax)
     for (var fi = 0; fi < formulas.length; fi++) {
       var f = formulas[fi];
       if (f.opacity <= 0.01) continue;
       ctx.font = f.size + "px 'Courier New', monospace";
       ctx.fillStyle = f.useGold ? rgba(COL.goldLight, f.opacity) : rgba(COL.formula, f.opacity);
-      ctx.fillText(f.text, f.x, f.y);
+      ctx.fillText(f.text, f.x + parallax.x * 0.15, f.y + parallax.y * 0.15);
     }
 
+    // Neural networks
+    var connEntrance = connectionEntrance();
     for (var ni = 0; ni < networks.length; ni++) {
       var net = networks[ni];
+      var totalLayers = net.layers.length;
 
-      for (var ci = 0; ci < net.connections.length; ci++) {
-        var conn = net.connections[ci];
-        var a = net.nodes[conn.from];
-        var b = net.nodes[conn.to];
-        var alpha = 0.12 + conn.weight * 0.14;
-        ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(b.x, b.y);
-        ctx.strokeStyle = rgba(COL.wire, alpha);
-        ctx.lineWidth = 0.6;
-        ctx.stroke();
+      // Connections (with entrance fade)
+      if (connEntrance > 0) {
+        for (var ci = 0; ci < net.connections.length; ci++) {
+          var conn = net.connections[ci];
+          var a = net.nodes[conn.from];
+          var b = net.nodes[conn.to];
+          var alpha = (0.2 + conn.weight * 0.2) * connEntrance;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = rgba(COL.wire, alpha);
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
       }
 
+      // Signals
       for (var si = 0; si < net.signals.length; si++) {
         var sig = net.signals[si];
         var sa = net.nodes[sig.conn.from];
@@ -328,33 +445,45 @@
         }
       }
 
+      // Nodes (with layer-by-layer entrance)
       for (var ndi = 0; ndi < net.nodes.length; ndi++) {
         var node = net.nodes[ndi];
+        var entrAlpha = layerEntrance(node.layer, totalLayers);
+        if (entrAlpha <= 0) continue;
+
         var pulse = 0.6 + 0.4 * Math.sin(node.pulsePhase);
         var r = node.radius;
 
-        var glowGrad = ctx.createRadialGradient(node.x, node.y, r, node.x, node.y, r * 5);
-        glowGrad.addColorStop(0, rgba(COL.node, 0.1 * pulse));
+        // Scale up from 0 during entrance
+        var entrScale = 0.3 + 0.7 * entrAlpha;
+        var drawR = r * entrScale;
+
+        // Outer glow
+        var glowGrad = ctx.createRadialGradient(node.x, node.y, drawR, node.x, node.y, drawR * 5);
+        glowGrad.addColorStop(0, rgba(COL.node, 0.1 * pulse * entrAlpha));
         glowGrad.addColorStop(1, rgba(COL.node, 0));
         ctx.beginPath();
-        ctx.arc(node.x, node.y, r * 5, 0, Math.PI * 2);
+        ctx.arc(node.x, node.y, drawR * 5, 0, Math.PI * 2);
         ctx.fillStyle = glowGrad;
         ctx.fill();
 
+        // Node fill
         ctx.beginPath();
-        ctx.arc(node.x, node.y, r, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(COL.node, 0.25 + 0.45 * node.activation * pulse);
+        ctx.arc(node.x, node.y, drawR, 0, Math.PI * 2);
+        ctx.fillStyle = rgba(COL.node, (0.4 + 0.5 * node.activation * pulse) * entrAlpha);
         ctx.fill();
-        ctx.strokeStyle = rgba(COL.node, 0.5 + 0.5 * pulse);
+        ctx.strokeStyle = rgba(COL.node, (0.6 + 0.4 * pulse) * entrAlpha);
         ctx.lineWidth = 1;
         ctx.stroke();
 
+        // Inner core
         ctx.beginPath();
-        ctx.arc(node.x, node.y, r * 0.45, 0, Math.PI * 2);
-        ctx.fillStyle = rgba(COL.signal, 0.5 * node.activation * pulse);
+        ctx.arc(node.x, node.y, drawR * 0.45, 0, Math.PI * 2);
+        ctx.fillStyle = rgba(COL.signal, 0.7 * node.activation * pulse * entrAlpha);
         ctx.fill();
       }
 
+      // Mouse interaction
       for (var mi = 0; mi < net.nodes.length; mi++) {
         var mnode = net.nodes[mi];
         var mdx = mouse.x - mnode.x;
@@ -376,6 +505,7 @@
       }
     }
 
+    // Vignette
     var vig = ctx.createRadialGradient(W * 0.5, H * 0.5, W * 0.25, W * 0.5, H * 0.5, W * 0.8);
     vig.addColorStop(0, 'rgba(255,255,255,0)');
     vig.addColorStop(1, 'rgba(245,245,244,0.5)');
