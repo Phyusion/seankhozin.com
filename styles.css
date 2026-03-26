@@ -71,7 +71,7 @@ img { max-width: 100%; display: block; }
   overflow: hidden; background: #ffffff;
 }
 .hero-bg {
-  position: absolute; inset: -60px; z-index: 0;
+  position: absolute; top: -100px; left: 0; right: 0; bottom: -100px; z-index: 0;
   background: url('NYC.jpg') center/cover no-repeat;
   will-change: transform;
 }
