@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neural Network Animation Preview</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0a1628; overflow: hidden; font-family: 'Inter', system-ui, sans-serif; }
+
+    .hero {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #neural-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: radial-gradient(ellipse at center, rgba(10,22,40,0.3) 0%, rgba(10,22,40,0.7) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 1rem;
+    }
+
+    .hero-name {
+      font-size: 4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-title {
+      font-size: 1.5rem;
+      font-weight: 300;
+      opacity: 0.8;
+      margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <canvas id="neural-canvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Physician-Scientist &bull; Oncologist &bull; AI Innovator</p>
+      <h1 class="hero-name">Sean Khozin</h1>
+      <p class="hero-title">MD, MPH</p>
+      <p class="hero-subtitle">Advancing human health through the convergence of medicine, data science, and artificial intelligence.</p>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    const canvas = document.getElementById('neural-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, nodes, mouse;
+    const NODE_COUNT = 80;
+    const CONNECTION_DIST = 180;
+    const MOUSE_DIST = 200;
+
+    // Colors from the site's navy palette
+    const COLORS = {
+      node: 'rgba(100, 180, 255, 0.8)',
+      nodeGlow: 'rgba(100, 180, 255, 0.15)',
+      line: 'rgba(100, 180, 255, ##ALPHA##)',
+      data: 'rgba(140, 220, 255, 0.9)',
+      pulse: 'rgba(100, 200, 255, ##ALPHA##)',
+    };
+
+    mouse = { x: -1000, y: -1000 };
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+
+    function createNodes() {
+      nodes = [];
+      for (let i = 0; i < NODE_COUNT; i++) {
+        nodes.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          radius: Math.random() * 2 + 1.5,
+          pulsePhase: Math.random() * Math.PI * 2,
+          // Some nodes display floating data
+          hasData: Math.random() < 0.3,
+          dataValue: '',
+          dataTimer: 0,
+          dataOpacity: 0,
+        });
+      }
+    }
+
+    function generateDataValue() {
+      const types = [
+        () => (Math.random()).toFixed(3),
+        () => Math.floor(Math.random() * 2).toString(),
+        () => (Math.random() * 2 - 1).toFixed(2),
+        () => '0x' + Math.floor(Math.random() * 255).toString(16).padStart(2, '0'),
+        () => [0,1][Math.floor(Math.random()*2)] + '.' + Math.floor(Math.random()*99).toString().padStart(2,'0'),
+      ];
+      return types[Math.floor(Math.random() * types.length)]();
+    }
+
+    // Data pulses that travel along connections
+    const pulses = [];
+    function spawnPulse(x1, y1, x2, y2) {
+      if (pulses.length > 30) return;
+      pulses.push({
+        x1, y1, x2, y2,
+        t: 0,
+        speed: 0.008 + Math.random() * 0.012,
+        value: generateDataValue(),
+      });
+    }
+
+    let frameCount = 0;
+
+    function update() {
+      frameCount++;
+      for (const node of nodes) {
+        node.x += node.vx;
+        node.y += node.vy;
+
+        // Bounce off edges with padding
+        if (node.x < -20) node.vx = Math.abs(node.vx);
+        if (node.x > width + 20) node.vx = -Math.abs(node.vx);
+        if (node.y < -20) node.vy = Math.abs(node.vy);
+        if (node.y > height + 20) node.vy = -Math.abs(node.vy);
+
+        // Subtle mouse attraction
+        const dx = mouse.x - node.x;
+        const dy = mouse.y - node.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MOUSE_DIST && dist > 0) {
+          node.vx += (dx / dist) * 0.02;
+          node.vy += (dy / dist) * 0.02;
+        }
+
+        // Damping
+        node.vx *= 0.999;
+        node.vy *= 0.999;
+
+        // Update data display
+        if (node.hasData) {
+          node.dataTimer++;
+          if (node.dataTimer > 120 + Math.random() * 200) {
+            node.dataValue = generateDataValue();
+            node.dataTimer = 0;
+            node.dataOpacity = 1;
+          }
+          if (node.dataOpacity > 0) {
+            node.dataOpacity -= 0.008;
+          }
+        }
+
+        node.pulsePhase += 0.03;
+      }
+
+      // Update pulses
+      for (let i = pulses.length - 1; i >= 0; i--) {
+        pulses[i].t += pulses[i].speed;
+        if (pulses[i].t > 1) {
+          pulses.splice(i, 1);
+        }
+      }
+
+      // Occasionally spawn pulses along connections
+      if (frameCount % 8 === 0) {
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].x - nodes[j].x;
+            const dy = nodes[i].y - nodes[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < CONNECTION_DIST && Math.random() < 0.005) {
+              spawnPulse(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
+            }
+          }
+        }
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw connections
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECTION_DIST) {
+            const alpha = (1 - dist / CONNECTION_DIST) * 0.25;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.strokeStyle = `rgba(100, 180, 255, ${alpha})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw mouse connections
+      for (const node of nodes) {
+        const dx = mouse.x - node.x;
+        const dy = mouse.y - node.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MOUSE_DIST) {
+          const alpha = (1 - dist / MOUSE_DIST) * 0.15;
+          ctx.beginPath();
+          ctx.moveTo(node.x, node.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = `rgba(140, 220, 255, ${alpha})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+
+      // Draw pulses traveling along connections
+      for (const pulse of pulses) {
+        const px = pulse.x1 + (pulse.x2 - pulse.x1) * pulse.t;
+        const py = pulse.y1 + (pulse.y2 - pulse.y1) * pulse.t;
+        const fadeAlpha = pulse.t < 0.1 ? pulse.t / 0.1 : pulse.t > 0.9 ? (1 - pulse.t) / 0.1 : 1;
+
+        // Pulse dot
+        ctx.beginPath();
+        ctx.arc(px, py, 2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(140, 220, 255, ${fadeAlpha * 0.9})`;
+        ctx.fill();
+
+        // Pulse glow
+        ctx.beginPath();
+        ctx.arc(px, py, 6, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(100, 180, 255, ${fadeAlpha * 0.15})`;
+        ctx.fill();
+
+        // Data value near pulse
+        if (fadeAlpha > 0.3) {
+          ctx.font = '9px monospace';
+          ctx.fillStyle = `rgba(140, 220, 255, ${fadeAlpha * 0.6})`;
+          ctx.fillText(pulse.value, px + 8, py - 5);
+        }
+      }
+
+      // Draw nodes
+      for (const node of nodes) {
+        const pulse = Math.sin(node.pulsePhase) * 0.3 + 0.7;
+
+        // Outer glow
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius * 4, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(100, 180, 255, ${0.05 * pulse})`;
+        ctx.fill();
+
+        // Node core
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(100, 180, 255, ${0.6 + 0.3 * pulse})`;
+        ctx.fill();
+
+        // Data label
+        if (node.hasData && node.dataOpacity > 0) {
+          ctx.font = '10px monospace';
+          ctx.fillStyle = `rgba(140, 220, 255, ${node.dataOpacity * 0.7})`;
+          ctx.fillText(node.dataValue, node.x + node.radius + 6, node.y + 3);
+        }
+      }
+    }
+
+    function animate() {
+      update();
+      draw();
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      resize();
+      createNodes();
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    });
+
+    resize();
+    createNodes();
+    animate();
+  })();
+  </script>
+</body>
+</html>
