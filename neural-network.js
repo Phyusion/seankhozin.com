@@ -227,17 +227,14 @@
     }
   }
 
-  function createFormula(startFromCenter) {
-    var angle = Math.random() * Math.PI * 2;
-    var speed = 0.03 + Math.random() * 0.06;
-    var cx = W / 2;
-    var cy = H / 2;
-    var dist = startFromCenter ? 0 : (Math.random() * Math.max(W, H) * 0.5);
+  function createFormula(fromBottom) {
+    var x = Math.random() * W;
+    var y = fromBottom ? H + 10 + Math.random() * 40 : Math.random() * H;
     return {
-      x: cx + Math.cos(angle) * dist,
-      y: cy + Math.sin(angle) * dist,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed,
+      x: x,
+      y: y,
+      vx: (Math.random() - 0.5) * 0.02,
+      vy: -(0.015 + Math.random() * 0.03),
       text: FORMULA_TEXTS[Math.floor(Math.random() * FORMULA_TEXTS.length)],
       opacity: 0,
       maxOpacity: 0.45 + Math.random() * 0.25,
@@ -336,7 +333,7 @@
       } else {
         f.opacity -= f.fadeSpeed * 0.5;
       }
-      if (f.opacity <= 0 || f.y < -30 || f.y > H + 30 || f.x < -200 || f.x > W + 200) {
+      if (f.opacity <= 0 || f.y < -30 || f.x < -200 || f.x > W + 200) {
         formulas[fi] = createFormula(true);
       }
     }
