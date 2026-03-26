@@ -625,7 +625,7 @@ img { max-width: 100%; display: block; }
 /* --- DNA Helix --- */
 .dna-wrapper {
   display: flex; justify-content: center; align-items: center;
-  padding: 3rem 0 2rem; background: var(--bg);
+  padding: 0.5rem 0 1.5rem; background: var(--bg);
 }
 #dna-canvas {
   width: 80px; height: 200px;
