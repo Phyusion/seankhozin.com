@@ -80,7 +80,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=27">
+  <link rel="stylesheet" href="styles.css?v=28">
 </head>
 <body>
   <!-- Navigation -->
@@ -207,6 +207,21 @@
           <p>A podcast from the CEO Roundtable on Cancer, examining the hard problems in oncology and exploring practical solutions that connect science to patient impact.</p>
           <div class="role-links">
             <a href="https://www.youtube.com/@PrecisionSignals" class="role-link" target="_blank" rel="noopener">YouTube</a>
+          </div>
+        </div>
+      </div>
+      <!-- Latest Episode Banner -->
+      <div class="podcast-banner">
+        <button class="podcast-banner-trigger" id="podcast-banner-trigger" aria-expanded="false" aria-controls="podcast-banner-panel">
+          <img src="precision-signals-logo.png" alt="Precision Signals" class="podcast-banner-logo">
+          <span class="podcast-banner-text">Latest Episode of Precision Signals</span>
+          <svg class="podcast-banner-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="podcast-banner-panel" id="podcast-banner-panel">
+          <div class="podcast-banner-inner">
+            <div class="podcast-embed">
+              <iframe src="https://www.youtube.com/embed/videoseries?list=UUgB_b-5uAnb_l-hxqfUBwkw" title="Latest Precision Signals Episode" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+            </div>
           </div>
         </div>
       </div>

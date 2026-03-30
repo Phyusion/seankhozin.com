@@ -75,6 +75,16 @@
     });
   }
 
+  // Expandable podcast banner
+  const podcastTrigger = document.getElementById('podcast-banner-trigger');
+  const podcastPanel = document.getElementById('podcast-banner-panel');
+  if (podcastTrigger && podcastPanel) {
+    podcastTrigger.addEventListener('click', () => {
+      const isOpen = podcastPanel.classList.toggle('open');
+      podcastTrigger.setAttribute('aria-expanded', isOpen);
+    });
+  }
+
   // Expandable research cards (light theme)
   document.querySelectorAll('.research-card-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
