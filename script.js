@@ -78,11 +78,38 @@
   // Expandable podcast banner
   const podcastTrigger = document.getElementById('podcast-banner-trigger');
   const podcastPanel = document.getElementById('podcast-banner-panel');
+  const podcastIframe = document.getElementById('podcast-iframe');
+  var podcastLoaded = false;
   if (podcastTrigger && podcastPanel) {
-    podcastTrigger.addEventListener('click', () => {
-      const isOpen = podcastPanel.classList.toggle('open');
-      podcastTrigger.setAttribute('aria-expanded', isOpen);
+    podcastTrigger.addEventListener('click', function () {
+      var isOpen = podcastPanel.classList.toggle('open');
+      podcastTrigger.setAttribute('aria-expanded', String(isOpen));
+      if (isOpen && !podcastLoaded) {
+        podcastLoaded = true;
+        loadLatestEpisode();
+      }
     });
+  }
+
+  // Fetch latest Precision Signals episode from YouTube RSS feed
+  function loadLatestEpisode() {
+    var fallbackSrc = 'https://www.youtube.com/embed/videoseries?list=UUgB_b-5uAnb_l-hxqfUBwkw';
+    fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://www.youtube.com/feeds/videos.xml?channel_id=UCgB_b-5uAnb_l-hxqfUBwkw'))
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data.items && data.items.length > 0) {
+          var link = data.items[0].link;
+          var match = link.match(/[?&]v=([^&]+)/);
+          if (match) {
+            podcastIframe.src = 'https://www.youtube.com/embed/' + match[1];
+            return;
+          }
+        }
+        podcastIframe.src = fallbackSrc;
+      })
+      .catch(function () {
+        podcastIframe.src = fallbackSrc;
+      });
   }
 
   // Expandable research cards (light theme)
@@ -111,7 +138,7 @@
   document.querySelectorAll('.section').forEach(section => {
     const header = section.querySelector('.section-header');
     const cards = section.querySelectorAll(
-      '.role-card, .timeline-item, .research-card, .research-subsection, .media-card, .board-item, .highlight-card, .pillar, .contact-link'
+      '.role-card, .timeline-item, .research-card, .research-subsection, .media-card, .board-item, .highlight-card, .pillar, .contact-link, .podcast-banner'
     );
 
     if (header) header.classList.add('fade-in');
