@@ -93,8 +93,8 @@
 
   // Fetch latest Precision Signals episode from YouTube RSS feed
   function loadLatestEpisode() {
-    var fallbackSrc = 'https://www.youtube.com/embed/videoseries?list=UUgB_b-5uAnb_l-hxqfUBwkw';
-    fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://www.youtube.com/feeds/videos.xml?channel_id=UCgB_b-5uAnb_l-hxqfUBwkw'))
+    var fallbackSrc = 'https://www.youtube.com/embed/videoseries?list=UUaFDT_bRrAwsNo4WFUteVjw';
+    fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://www.youtube.com/feeds/videos.xml?channel_id=UCaFDT_bRrAwsNo4WFUteVjw'))
       .then(function (res) { return res.json(); })
       .then(function (data) {
         if (data.items && data.items.length > 0) {
