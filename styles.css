@@ -246,19 +246,15 @@ img { max-width: 100%; display: block; }
 .podcast-banner-chevron { transition: transform 400ms var(--ease); flex-shrink: 0; }
 .podcast-banner-trigger[aria-expanded="true"] .podcast-banner-chevron { transform: rotate(180deg); }
 .podcast-banner-panel {
-  display: grid; grid-template-rows: 0fr;
-  transition: grid-template-rows 500ms var(--ease);
-  overflow: hidden;
-}
-.podcast-banner-panel.open { grid-template-rows: 1fr; }
-.podcast-banner-inner {
-  overflow: hidden; min-height: 0;
+  max-height: 0; overflow: hidden;
+  transition: max-height 500ms var(--ease), padding 500ms var(--ease);
   background: var(--accent-subtle); border: 1px solid rgba(30,58,95,0.1); border-top: none;
   border-radius: 0 0 8px 8px;
   padding: 0 1.5rem;
-  transition: padding 500ms var(--ease);
 }
-.podcast-banner-panel.open .podcast-banner-inner { padding: 1.5rem; }
+.podcast-banner-panel.open {
+  max-height: 800px; padding: 1.5rem;
+}
 .podcast-embed { width: 100%; aspect-ratio: 16 / 9; }
 .podcast-embed iframe {
   display: block; width: 100%; height: 100%;
