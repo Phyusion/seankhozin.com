@@ -134,27 +134,6 @@
     });
   });
 
-  // Deferred loading for embedded iframes (knowledge graph)
-  const deferredFrames = document.querySelectorAll('iframe[data-src]');
-  if (deferredFrames.length) {
-    if ('IntersectionObserver' in window) {
-      const frameObserver = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.src = entry.target.dataset.src;
-              frameObserver.unobserve(entry.target);
-            }
-          });
-        },
-        { rootMargin: '400px 0px' }
-      );
-      deferredFrames.forEach(frame => frameObserver.observe(frame));
-    } else {
-      deferredFrames.forEach(frame => { frame.src = frame.dataset.src; });
-    }
-  }
-
   // Auto-add fade-in to section children
   document.querySelectorAll('.section').forEach(section => {
     const header = section.querySelector('.section-header');
