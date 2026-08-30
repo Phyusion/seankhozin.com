@@ -1,0 +1,385 @@
+/* ==========================================================================
+   GRAPHITE — a crisp, neutral workspace theme for Obsidian
+   Level 2 of 4: clean and functional.
+
+   Design brief: a modern software surface. Cool neutral greys, one confident
+   blue accent, consistent 8px rhythm, soft cards, legible density. Everything
+   is still calm, but the UI now has structure you can navigate by.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Palette
+   -------------------------------------------------------------------------- */
+
+.theme-light {
+  --color-base-00: #ffffff;
+  --color-base-05: #fafbfc;
+  --color-base-10: #f4f6f8;
+  --color-base-20: #e9edf1;
+  --color-base-25: #dfe4ea;
+  --color-base-30: #d3d9e0;
+  --color-base-35: #c2cad4;
+  --color-base-40: #aab3bf;
+  --color-base-50: #8b95a3;
+  --color-base-60: #66707e;
+  --color-base-70: #454e5b;
+  --color-base-100: #1a1f26;
+
+  --color-accent-1: #2f6feb;
+  --color-accent-2: #4c86f5;
+  --color-accent: #2f6feb;
+
+  --color-red: #d64545;
+  --color-orange: #d97706;
+  --color-yellow: #ca8a04;
+  --color-green: #17915c;
+  --color-cyan: #0e8a9e;
+  --color-blue: #2f6feb;
+  --color-purple: #7c5cd6;
+  --color-pink: #d2478c;
+
+  /* RGB triplets — Obsidian derives callout, graph and canvas
+     colours from these, so they must track the palette above. */
+  --color-red-rgb: 214, 69, 69;
+  --color-orange-rgb: 217, 119, 6;
+  --color-yellow-rgb: 202, 138, 4;
+  --color-green-rgb: 23, 145, 92;
+  --color-cyan-rgb: 14, 138, 158;
+  --color-blue-rgb: 47, 111, 235;
+  --color-purple-rgb: 124, 92, 214;
+  --color-pink-rgb: 210, 71, 140;
+  --color-accent-rgb: 47, 111, 235;
+
+  --background-primary: var(--color-base-00);
+  --background-primary-alt: var(--color-base-05);
+  --background-secondary: var(--color-base-10);
+  --background-secondary-alt: var(--color-base-20);
+  --background-modifier-border: var(--color-base-25);
+  --background-modifier-border-hover: var(--color-base-30);
+  --background-modifier-border-focus: var(--color-accent-1);
+  --background-modifier-hover: rgba(26, 31, 38, 0.045);
+  --background-modifier-active-hover: rgba(47, 111, 235, 0.09);
+  --background-modifier-form-field: var(--color-base-00);
+
+  --text-normal: var(--color-base-100);
+  --text-muted: var(--color-base-60);
+  --text-faint: var(--color-base-40);
+  --text-selection: rgba(47, 111, 235, 0.16);
+  --text-highlight-bg: rgba(250, 204, 21, 0.4);
+
+  --shadow-s: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --shadow-l: 0 8px 28px rgba(16, 24, 40, 0.1),
+    0 2px 6px rgba(16, 24, 40, 0.06);
+}
+
+.theme-dark {
+  --color-base-00: #14171c;
+  --color-base-05: #171b21;
+  --color-base-10: #1c2027;
+  --color-base-20: #23282f;
+  --color-base-25: #2a3038;
+  --color-base-30: #333a44;
+  --color-base-35: #3f4753;
+  --color-base-40: #545d6a;
+  --color-base-50: #737d8b;
+  --color-base-60: #98a1ad;
+  --color-base-70: #c0c7d1;
+  --color-base-100: #e9edf2;
+
+  --color-accent-1: #5b93ff;
+  --color-accent-2: #7ba9ff;
+  --color-accent: #5b93ff;
+
+  --color-red: #f47070;
+  --color-orange: #e59a4a;
+  --color-yellow: #e2b341;
+  --color-green: #46c08b;
+  --color-cyan: #40b8cc;
+  --color-blue: #5b93ff;
+  --color-purple: #a58bf0;
+  --color-pink: #ef7ab0;
+
+  /* RGB triplets — Obsidian derives callout, graph and canvas
+     colours from these, so they must track the palette above. */
+  --color-red-rgb: 244, 112, 112;
+  --color-orange-rgb: 229, 154, 74;
+  --color-yellow-rgb: 226, 179, 65;
+  --color-green-rgb: 70, 192, 139;
+  --color-cyan-rgb: 64, 184, 204;
+  --color-blue-rgb: 91, 147, 255;
+  --color-purple-rgb: 165, 139, 240;
+  --color-pink-rgb: 239, 122, 176;
+  --color-accent-rgb: 91, 147, 255;
+
+  --background-primary: var(--color-base-00);
+  --background-primary-alt: var(--color-base-05);
+  --background-secondary: var(--color-base-10);
+  --background-secondary-alt: var(--color-base-20);
+  --background-modifier-border: var(--color-base-25);
+  --background-modifier-border-hover: var(--color-base-30);
+  --background-modifier-border-focus: var(--color-accent-1);
+  --background-modifier-hover: rgba(255, 255, 255, 0.05);
+  --background-modifier-active-hover: rgba(91, 147, 255, 0.14);
+  --background-modifier-form-field: var(--color-base-05);
+
+  --text-normal: var(--color-base-100);
+  --text-muted: var(--color-base-60);
+  --text-faint: var(--color-base-40);
+  --text-selection: rgba(91, 147, 255, 0.22);
+  --text-highlight-bg: rgba(226, 179, 65, 0.3);
+
+  --shadow-s: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-l: 0 10px 32px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* --------------------------------------------------------------------------
+   2. Type & metrics
+   -------------------------------------------------------------------------- */
+
+body {
+  --font-text-theme: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  --font-interface-theme: "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  --font-monospace-theme: "JetBrains Mono", "SF Mono", "Cascadia Code",
+    ui-monospace, monospace;
+
+  --font-text-size: 16px;
+  --line-height-normal: 1.6;
+  --line-height-tight: 1.35;
+  --file-line-width: 46rem;
+  --p-spacing: 0.85rem;
+
+  --bold-weight: 640;
+  --bold-color: var(--text-normal);
+
+  --radius-s: 5px;
+  --radius-m: 7px;
+  --radius-l: 10px;
+  --radius-xl: 14px;
+
+  --link-color: var(--color-accent-1);
+  --link-color-hover: var(--color-accent-2);
+  --link-decoration: none;
+  --link-decoration-hover: underline;
+  --link-external-color: var(--color-accent-1);
+  --link-unresolved-color: var(--color-red);
+  --link-unresolved-opacity: 0.6;
+  --link-unresolved-decoration-style: dotted;
+
+  --divider-color: var(--background-modifier-border);
+  --divider-width: 1px;
+  --hr-color: var(--background-modifier-border);
+  --hr-thickness: 1px;
+
+  --input-radius: var(--radius-m);
+  --input-height: 32px;
+  --modal-radius: var(--radius-xl);
+  --modal-border-width: 1px;
+
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: var(--background-modifier-border);
+  --scrollbar-active-thumb-bg: var(--background-modifier-border-hover);
+}
+
+body {
+  --h1-size: 1.85em;
+  --h2-size: 1.5em;
+  --h3-size: 1.25em;
+  --h4-size: 1.08em;
+  --h5-size: 0.98em;
+  --h6-size: 0.9em;
+
+  --h1-weight: 700;
+  --h2-weight: 660;
+  --h3-weight: 640;
+  --h4-weight: 620;
+  --h5-weight: 600;
+  --h6-weight: 600;
+
+  --h1-color: var(--text-normal);
+  --h2-color: var(--text-normal);
+  --h3-color: var(--text-normal);
+  --h4-color: var(--text-normal);
+  --h5-color: var(--text-muted);
+  --h6-color: var(--text-muted);
+  --h6-variant: uppercase;
+
+  --heading-spacing: calc(var(--p-spacing) * 2.2);
+}
+
+.markdown-rendered h1,
+.markdown-rendered h2 {
+  letter-spacing: -0.018em;
+}
+.markdown-rendered h6 {
+  letter-spacing: 0.08em;
+}
+
+/* An H2 gets a rule under it — the one structural flourish in the body copy. */
+.markdown-rendered h2 {
+  padding-bottom: 0.28em;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+/* --------------------------------------------------------------------------
+   3. Chrome
+   -------------------------------------------------------------------------- */
+
+body {
+  --titlebar-background: var(--background-secondary);
+  --titlebar-background-focused: var(--background-secondary);
+  --ribbon-background: var(--background-secondary);
+  --ribbon-background-collapsed: var(--background-secondary);
+
+  --tab-background-active: var(--background-primary);
+  --tab-text-color-focused-active: var(--text-normal);
+  --tab-text-color-focused-active-current: var(--text-normal);
+  --tab-radius-active: var(--radius-m);
+  --tab-outline-color: var(--background-modifier-border);
+  --tab-outline-width: 1px;
+  --tab-divider-color: transparent;
+  --tab-font-weight: 500;
+
+  --nav-item-size: 0.88em;
+  --nav-item-weight: 450;
+  --nav-item-weight-active: 620;
+  --nav-item-color: var(--text-muted);
+  --nav-item-color-hover: var(--text-normal);
+  --nav-item-color-active: var(--text-normal);
+  --nav-item-background-hover: var(--background-modifier-hover);
+  --nav-item-background-active: var(--background-modifier-active-hover);
+  --nav-item-padding: var(--size-4-1) var(--size-4-2);
+  --nav-indentation-guide-color: var(--background-modifier-border);
+}
+
+/* The active file gets a left marker so it survives a crowded sidebar. */
+.nav-file-title.is-active,
+.tree-item-self.is-active {
+  box-shadow: inset 2px 0 0 var(--color-accent-1);
+}
+
+.workspace-tab-header.is-active::after {
+  content: "";
+  position: absolute;
+  inset: auto var(--size-4-2) 0 var(--size-4-2);
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-accent-1);
+}
+.workspace-tab-header {
+  position: relative;
+}
+
+/* Panes read as cards floating on the workspace ground. */
+.workspace-split.mod-root .workspace-leaf {
+  border-radius: var(--radius-l);
+}
+
+/* Search results and the command palette get real elevation. */
+.suggestion-container,
+.prompt {
+  box-shadow: var(--shadow-l);
+  border: 1px solid var(--background-modifier-border);
+}
+
+/* --------------------------------------------------------------------------
+   4. Content blocks
+   -------------------------------------------------------------------------- */
+
+body {
+  --blockquote-border-thickness: 3px;
+  --blockquote-border-color: var(--color-accent-1);
+  --blockquote-color: var(--text-muted);
+  --blockquote-background-color: var(--background-primary-alt);
+  --blockquote-style: normal;
+
+  --code-background: var(--background-secondary);
+  --code-normal: var(--text-normal);
+  --code-size: 0.87em;
+  --code-radius: var(--radius-s);
+
+  --table-header-background: var(--background-secondary);
+  --table-header-weight: 620;
+  --table-row-alt-background: var(--background-primary-alt);
+  --table-row-background-hover: var(--background-modifier-hover);
+  --table-border-color: var(--background-modifier-border);
+  --table-border-width: 1px;
+
+  --tag-background: var(--background-secondary-alt);
+  --tag-color: var(--text-muted);
+  --tag-radius: 12px;
+  --tag-padding-x: 8px;
+  --tag-padding-y: 2px;
+  --tag-decoration: none;
+  --tag-border-width: 0;
+
+  --checkbox-radius: 4px;
+  --checkbox-size: 16px;
+  --checkbox-color: var(--color-accent-1);
+  --checkbox-color-hover: var(--color-accent-2);
+  --checkbox-marker-color: #fff;
+  --checkbox-border-color: var(--color-base-35);
+  --checklist-done-color: var(--text-faint);
+
+  --embed-background: var(--background-primary-alt);
+  --embed-border-left: 3px solid var(--background-modifier-border);
+  --embed-padding: var(--size-4-2) var(--size-4-4);
+
+  --callout-padding: var(--size-4-3) var(--size-4-4);
+  --callout-radius: var(--radius-m);
+  --callout-border-width: 0 0 0 3px;
+  --callout-border-opacity: 0.5;
+  --callout-title-size: 0.95em;
+  --callout-title-weight: 620;
+}
+
+blockquote {
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  padding: var(--size-4-2) var(--size-4-4);
+}
+
+/* Code blocks get a frame so they read as a unit. */
+.markdown-rendered pre {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  background: var(--background-secondary);
+}
+
+.markdown-rendered table {
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  border: 1px solid var(--table-border-color);
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.markdown-rendered th {
+  border-top: none;
+}
+.markdown-rendered tr td:first-child,
+.markdown-rendered tr th:first-child {
+  border-left: none;
+}
+
+.markdown-rendered a.tag:hover {
+  background: var(--background-modifier-active-hover);
+  color: var(--text-normal);
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   5. Graph & canvas
+   -------------------------------------------------------------------------- */
+
+body {
+  --graph-line: var(--background-modifier-border-hover);
+  --graph-node: var(--text-muted);
+  --graph-node-focused: var(--color-accent-1);
+  --graph-node-tag: var(--color-green);
+  --graph-node-attachment: var(--color-purple);
+  --graph-node-unresolved: var(--text-faint);
+
+  --canvas-background: var(--background-secondary);
+  --canvas-dot-pattern: var(--background-modifier-border);
+  --canvas-card-label-color: var(--text-faint);
+}

@@ -1,0 +1,925 @@
+/* ==========================================================================
+   NOCTURNE — a layered, configurable theme for Obsidian
+   Level 4 of 4: the sophisticated one.
+
+   Design brief: a full design system rather than a recolour. Four surface
+   elevations, a tuned type scale, translucent chrome, a gradient accent used
+   sparingly, every callout type styled, extended task states, focus dimming
+   for inactive panes, and live configuration through the Style Settings
+   plugin (optional — the defaults stand on their own).
+
+   Structure
+     0. Style Settings schema
+     1. Design tokens
+     2. Light / dark surface maps
+     3. Typography
+     4. Chrome: titlebar, ribbon, tabs, sidebar
+     5. Editor & prose
+     6. Callouts
+     7. Tasks & lists
+     8. Code
+     9. Tables, properties, embeds
+    10. Search, modals, menus
+    11. Graph & canvas
+    12. Motion, focus, responsive, print
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. Style Settings schema (read by the Style Settings plugin, if installed)
+   -------------------------------------------------------------------------- */
+
+/* @settings
+
+name: Nocturne
+id: nocturne
+settings:
+    -
+        id: nocturne-accent-light
+        title: Accent colour (light mode)
+        type: variable-themed-color
+        format: hex
+        opacity: false
+        default-light: '#4763d6'
+        default-dark: '#7c9cff'
+    -
+        id: nocturne-reading-width
+        title: Reading width
+        description: Width of the text column, in rem.
+        type: variable-number-slider
+        default: 46
+        min: 32
+        max: 78
+        step: 1
+        format: rem
+    -
+        id: nocturne-font-size
+        title: Editor font size
+        type: variable-number-slider
+        default: 16
+        min: 13
+        max: 22
+        step: 0.5
+        format: px
+    -
+        id: nocturne-line-height
+        title: Line height
+        type: variable-number-slider
+        default: 1.62
+        min: 1.3
+        max: 2
+        step: 0.02
+    -
+        id: nocturne-translucent-chrome
+        title: Translucent sidebars
+        description: Frosted-glass sidebars and tab bar.
+        type: class-toggle
+        default: true
+    -
+        id: nocturne-dim-inactive
+        title: Dim inactive panes
+        description: Fade panes that do not have focus.
+        type: class-toggle
+        default: true
+    -
+        id: nocturne-underline-links
+        title: Underline internal links
+        type: class-toggle
+        default: false
+    -
+        id: nocturne-no-motion
+        title: Reduce motion
+        description: Disable theme transitions and animations.
+        type: class-toggle
+        default: false
+
+*/
+
+/* --------------------------------------------------------------------------
+   1. Design tokens — shape, motion, elevation
+   -------------------------------------------------------------------------- */
+
+body {
+  --nocturne-reading-width: 46rem;
+  --nocturne-font-size: 16px;
+  --nocturne-line-height: 1.62;
+
+  --nocturne-ease: cubic-bezier(0.2, 0.8, 0.25, 1);
+  --nocturne-fast: 120ms;
+  --nocturne-slow: 260ms;
+
+  --radius-s: 6px;
+  --radius-m: 9px;
+  --radius-l: 13px;
+  --radius-xl: 18px;
+
+  --size-nav-indent: 14px;
+}
+
+/* --------------------------------------------------------------------------
+   2. Surface maps
+   -------------------------------------------------------------------------- */
+
+.theme-dark {
+  /* Four elevations: page, panel, raised, floating. */
+  --color-base-00: #101319;
+  --color-base-05: #141822;
+  --color-base-10: #191e29;
+  --color-base-20: #1f2531;
+  --color-base-25: #262d3b;
+  --color-base-30: #2e3646;
+  --color-base-35: #394254;
+  --color-base-40: #4a566c;
+  --color-base-50: #6b788f;
+  --color-base-60: #8e9ab0;
+  --color-base-70: #b6c0d2;
+  --color-base-100: #e6ebf4;
+
+  --nocturne-accent-light: #7c9cff;
+  --nocturne-accent-2: #9d7cff;
+  --nocturne-glow: rgba(124, 156, 255, 0.35);
+  --nocturne-chrome: rgba(20, 24, 34, 0.72);
+  --nocturne-hairline: rgba(255, 255, 255, 0.06);
+
+  --color-accent-1: var(--nocturne-accent-light);
+  --color-accent-2: var(--nocturne-accent-2);
+  --color-accent: var(--nocturne-accent-light);
+
+  --color-red: #f2777a;
+  --color-orange: #e8a35c;
+  --color-yellow: #e3c05c;
+  --color-green: #63c99a;
+  --color-cyan: #52bcd3;
+  --color-blue: #7c9cff;
+  --color-purple: #a98bf5;
+  --color-pink: #ec7bb4;
+
+  /* RGB triplets — Obsidian derives callout, graph and canvas
+     colours from these, so they must track the palette above. */
+  --color-red-rgb: 242, 119, 122;
+  --color-orange-rgb: 232, 163, 92;
+  --color-yellow-rgb: 227, 192, 92;
+  --color-green-rgb: 99, 201, 154;
+  --color-cyan-rgb: 82, 188, 211;
+  --color-blue-rgb: 124, 156, 255;
+  --color-purple-rgb: 169, 139, 245;
+  --color-pink-rgb: 236, 123, 180;
+  --color-accent-rgb: 124, 156, 255;
+
+  --background-primary: var(--color-base-00);
+  --background-primary-alt: var(--color-base-05);
+  --background-secondary: var(--color-base-05);
+  --background-secondary-alt: var(--color-base-10);
+  --background-modifier-border: var(--color-base-20);
+  --background-modifier-border-hover: var(--color-base-30);
+  --background-modifier-border-focus: var(--color-accent-1);
+  --background-modifier-hover: rgba(255, 255, 255, 0.05);
+  --background-modifier-active-hover: rgba(124, 156, 255, 0.16);
+  --background-modifier-form-field: var(--color-base-10);
+  --background-modifier-success: rgba(99, 201, 154, 0.2);
+  --background-modifier-error: rgba(242, 119, 122, 0.2);
+
+  --text-normal: var(--color-base-100);
+  --text-muted: var(--color-base-60);
+  --text-faint: var(--color-base-50);
+  --text-on-accent: #0d1017;
+  --text-selection: rgba(124, 156, 255, 0.24);
+  --text-highlight-bg: rgba(227, 192, 92, 0.28);
+
+  --shadow-s: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-l: 0 18px 48px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+.theme-light {
+  --color-base-00: #ffffff;
+  --color-base-05: #f8f9fc;
+  --color-base-10: #f1f3f9;
+  --color-base-20: #e6e9f2;
+  --color-base-25: #dbdfeb;
+  --color-base-30: #ccd2e2;
+  --color-base-35: #b8c0d4;
+  --color-base-40: #9aa4bd;
+  --color-base-50: #7c869f;
+  --color-base-60: #5c6579;
+  --color-base-70: #3d4453;
+  --color-base-100: #141824;
+
+  --nocturne-accent-light: #4763d6;
+  --nocturne-accent-2: #7a53d6;
+  --nocturne-glow: rgba(71, 99, 214, 0.22);
+  --nocturne-chrome: rgba(248, 249, 252, 0.78);
+  --nocturne-hairline: rgba(20, 24, 36, 0.07);
+
+  --color-accent-1: var(--nocturne-accent-light);
+  --color-accent-2: var(--nocturne-accent-2);
+  --color-accent: var(--nocturne-accent-light);
+
+  --color-red: #cf4b4e;
+  --color-orange: #c07a2b;
+  --color-yellow: #a98418;
+  --color-green: #1e8f60;
+  --color-cyan: #0d8ba3;
+  --color-blue: #4763d6;
+  --color-purple: #6f4fc4;
+  --color-pink: #c44a8c;
+
+  /* RGB triplets — Obsidian derives callout, graph and canvas
+     colours from these, so they must track the palette above. */
+  --color-red-rgb: 207, 75, 78;
+  --color-orange-rgb: 192, 122, 43;
+  --color-yellow-rgb: 169, 132, 24;
+  --color-green-rgb: 30, 143, 96;
+  --color-cyan-rgb: 13, 139, 163;
+  --color-blue-rgb: 71, 99, 214;
+  --color-purple-rgb: 111, 79, 196;
+  --color-pink-rgb: 196, 74, 140;
+  --color-accent-rgb: 71, 99, 214;
+
+  --background-primary: var(--color-base-00);
+  --background-primary-alt: var(--color-base-05);
+  --background-secondary: var(--color-base-05);
+  --background-secondary-alt: var(--color-base-10);
+  --background-modifier-border: var(--color-base-20);
+  --background-modifier-border-hover: var(--color-base-30);
+  --background-modifier-border-focus: var(--color-accent-1);
+  --background-modifier-hover: rgba(20, 24, 36, 0.045);
+  --background-modifier-active-hover: rgba(71, 99, 214, 0.1);
+  --background-modifier-form-field: var(--color-base-00);
+  --background-modifier-success: rgba(30, 143, 96, 0.16);
+  --background-modifier-error: rgba(207, 75, 78, 0.16);
+
+  --text-normal: var(--color-base-100);
+  --text-muted: var(--color-base-60);
+  --text-faint: var(--color-base-40);
+  --text-on-accent: #ffffff;
+  --text-selection: rgba(71, 99, 214, 0.16);
+  --text-highlight-bg: rgba(250, 214, 100, 0.45);
+
+  --shadow-s: 0 1px 2px rgba(20, 24, 36, 0.07);
+  --shadow-l: 0 16px 44px rgba(20, 24, 36, 0.14),
+    0 3px 10px rgba(20, 24, 36, 0.07);
+}
+
+/* --------------------------------------------------------------------------
+   3. Typography
+   -------------------------------------------------------------------------- */
+
+body {
+  --font-text-theme: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  --font-interface-theme: "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  --font-monospace-theme: "JetBrains Mono", "SF Mono", "Fira Code",
+    ui-monospace, monospace;
+
+  --font-text-size: var(--nocturne-font-size);
+  --line-height-normal: var(--nocturne-line-height);
+  --line-height-tight: 1.35;
+  --file-line-width: var(--nocturne-reading-width);
+  --p-spacing: 0.9rem;
+  --p-spacing-empty: 0rem;
+
+  --bold-weight: 660;
+  --bold-color: var(--text-normal);
+  --italic-color: inherit;
+
+  --h1-size: 1.95em;
+  --h2-size: 1.55em;
+  --h3-size: 1.27em;
+  --h4-size: 1.1em;
+  --h5-size: 1em;
+  --h6-size: 0.85em;
+
+  --h1-weight: 700;
+  --h2-weight: 660;
+  --h3-weight: 640;
+  --h4-weight: 620;
+  --h5-weight: 620;
+  --h6-weight: 700;
+
+  --h1-color: var(--text-normal);
+  --h2-color: var(--text-normal);
+  --h3-color: var(--text-normal);
+  --h4-color: var(--text-normal);
+  --h5-color: var(--text-muted);
+  --h6-color: var(--color-accent-1);
+  --h6-variant: uppercase;
+  --heading-spacing: calc(var(--p-spacing) * 2.2);
+
+  --link-color: var(--color-accent-1);
+  --link-color-hover: var(--color-accent-2);
+  --link-decoration: none;
+  --link-decoration-hover: none;
+  --link-external-color: var(--color-accent-1);
+  --link-external-decoration: none;
+  --link-unresolved-color: var(--color-red);
+  --link-unresolved-opacity: 0.55;
+  --link-unresolved-decoration-style: dashed;
+}
+
+.markdown-rendered h1,
+.markdown-rendered h2 {
+  letter-spacing: -0.021em;
+}
+.markdown-rendered h3 {
+  letter-spacing: -0.012em;
+}
+.markdown-rendered h6 {
+  letter-spacing: 0.12em;
+}
+
+/* The H1 carries the theme's one gradient. */
+.markdown-rendered h1,
+.markdown-source-view.mod-cm6 .HyperMD-header-1 {
+  background: linear-gradient(
+    100deg,
+    var(--text-normal) 0%,
+    var(--text-normal) 45%,
+    var(--color-accent-1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Internal links: a hover underline that grows from the left. */
+.markdown-rendered a.internal-link {
+  position: relative;
+  text-decoration: none;
+  background-image: linear-gradient(var(--color-accent-1), var(--color-accent-1));
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--nocturne-fast) var(--nocturne-ease),
+    color var(--nocturne-fast) var(--nocturne-ease);
+}
+.markdown-rendered a.internal-link:hover {
+  background-size: 100% 1px;
+}
+body.nocturne-underline-links .markdown-rendered a.internal-link {
+  background-size: 100% 1px;
+  opacity: 0.92;
+}
+
+/* --------------------------------------------------------------------------
+   4. Chrome
+   -------------------------------------------------------------------------- */
+
+body {
+  --titlebar-background: transparent;
+  --titlebar-background-focused: transparent;
+  --titlebar-border-width: 0;
+  --ribbon-background: transparent;
+  --ribbon-background-collapsed: var(--background-secondary);
+
+  --tab-background-active: var(--background-primary);
+  --tab-text-color-focused-active-current: var(--text-normal);
+  --tab-radius-active: var(--radius-m);
+  --tab-outline-color: transparent;
+  --tab-outline-width: 0;
+  --tab-divider-color: transparent;
+  --tab-font-size: 0.85em;
+  --tab-font-weight: 500;
+  --tab-container-background: transparent;
+
+  --nav-item-size: 0.87em;
+  --nav-item-weight: 450;
+  --nav-item-weight-active: 640;
+  --nav-item-color: var(--text-muted);
+  --nav-item-color-hover: var(--text-normal);
+  --nav-item-color-active: var(--text-normal);
+  --nav-item-background-hover: var(--background-modifier-hover);
+  --nav-item-background-active: var(--background-modifier-active-hover);
+  --nav-item-padding: 5px 10px;
+  --nav-indentation-guide-color: var(--background-modifier-border);
+  --nav-indentation-guide-width: 1px;
+
+  --header-height: 40px;
+  --divider-color: var(--nocturne-hairline);
+  --divider-width: 1px;
+  --divider-width-hover: 3px;
+  --hr-color: var(--background-modifier-border);
+  --hr-thickness: 1px;
+
+  --icon-size: 17px;
+  --icon-stroke: 1.6px;
+  --icon-color-hover: var(--color-accent-1);
+
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: var(--color-base-30);
+  --scrollbar-active-thumb-bg: var(--color-base-40);
+
+  --modal-radius: var(--radius-xl);
+  --modal-border-width: 1px;
+  --input-radius: var(--radius-m);
+  --input-height: 32px;
+}
+
+.workspace {
+  background: var(--background-secondary);
+}
+
+/* Frosted chrome. */
+body.nocturne-translucent-chrome .workspace-split.mod-left-split,
+body.nocturne-translucent-chrome .workspace-split.mod-right-split,
+body.nocturne-translucent-chrome .workspace-ribbon {
+  background: var(--nocturne-chrome);
+  backdrop-filter: saturate(140%) blur(18px);
+  -webkit-backdrop-filter: saturate(140%) blur(18px);
+}
+
+.workspace-split.mod-left-split,
+.workspace-split.mod-right-split {
+  box-shadow: none;
+  border-right: 1px solid var(--nocturne-hairline);
+}
+.workspace-split.mod-right-split {
+  border-right: none;
+  border-left: 1px solid var(--nocturne-hairline);
+}
+
+/* Root panes float as rounded cards over the workspace ground. */
+.workspace-split.mod-root .workspace-leaf,
+.workspace-split.mod-root .workspace-tabs {
+  border-radius: var(--radius-l);
+  overflow: hidden;
+}
+.workspace-split.mod-root .workspace-leaf-content {
+  border: 1px solid var(--nocturne-hairline);
+  border-radius: var(--radius-l);
+}
+
+/* Active tab: pill with a soft accent halo. */
+.workspace-tab-header.is-active {
+  box-shadow: 0 0 0 1px var(--nocturne-hairline),
+    0 2px 10px -4px var(--nocturne-glow);
+}
+.workspace-tab-header-inner {
+  transition: background-color var(--nocturne-fast) var(--nocturne-ease);
+}
+
+/* Sidebar rows slide a hair on hover. */
+.nav-file-title,
+.nav-folder-title,
+.tree-item-self {
+  border-radius: var(--radius-s);
+  transition: background-color var(--nocturne-fast) var(--nocturne-ease),
+    transform var(--nocturne-fast) var(--nocturne-ease),
+    color var(--nocturne-fast) var(--nocturne-ease);
+}
+.nav-file-title:hover,
+.nav-folder-title:hover {
+  transform: translateX(2px);
+}
+.nav-file-title.is-active {
+  box-shadow: inset 2px 0 0 var(--color-accent-1);
+}
+
+/* Ribbon icons pick up the accent on hover. */
+.side-dock-ribbon-action:hover {
+  color: var(--color-accent-1);
+}
+
+/* --------------------------------------------------------------------------
+   5. Editor & prose
+   -------------------------------------------------------------------------- */
+
+body {
+  --blockquote-border-thickness: 3px;
+  --blockquote-border-color: var(--color-accent-1);
+  --blockquote-color: var(--text-muted);
+  --blockquote-background-color: var(--background-primary-alt);
+
+  --embed-background: var(--background-primary-alt);
+  --embed-border-left: 3px solid var(--color-accent-1);
+  --embed-padding: var(--size-4-2) var(--size-4-4);
+
+  --tag-background: color-mix(in srgb, var(--color-accent-1) 14%, transparent);
+  --tag-color: var(--color-accent-1);
+  --tag-radius: 999px;
+  --tag-padding-x: 9px;
+  --tag-padding-y: 2px;
+  --tag-size: 0.78em;
+  --tag-weight: 550;
+  --tag-decoration: none;
+  --tag-border-width: 0;
+}
+
+blockquote {
+  border-radius: 0 var(--radius-m) var(--radius-m) 0;
+  padding: var(--size-4-2) var(--size-4-4);
+}
+
+.markdown-rendered a.tag {
+  transition: background-color var(--nocturne-fast) var(--nocturne-ease);
+}
+.markdown-rendered a.tag:hover {
+  background: color-mix(in srgb, var(--color-accent-1) 26%, transparent);
+  text-decoration: none;
+}
+
+/* Highlights read as marker, not as a solid block. */
+.markdown-rendered mark {
+  border-radius: 3px;
+  padding: 0.05em 0.2em;
+}
+
+/* Section rule with a centred accent dot. */
+.markdown-rendered hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--background-modifier-border) 15%,
+    var(--background-modifier-border) 85%,
+    transparent
+  );
+  margin: calc(var(--p-spacing) * 2.2) 0;
+  position: relative;
+}
+.markdown-rendered hr::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -2px;
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  border-radius: 50%;
+  background: var(--color-accent-1);
+  opacity: 0.6;
+}
+
+/* --------------------------------------------------------------------------
+   6. Callouts — every type, tinted from its own colour
+   -------------------------------------------------------------------------- */
+
+body {
+  --callout-padding: var(--size-4-3) var(--size-4-4);
+  --callout-radius: var(--radius-m);
+  --callout-border-width: 0;
+  --callout-border-opacity: 0.35;
+  --callout-title-size: 0.92em;
+  --callout-title-weight: 640;
+}
+
+.callout {
+  background: color-mix(
+    in srgb,
+    rgb(var(--callout-color)) 9%,
+    var(--background-primary)
+  );
+  border: 1px solid
+    color-mix(in srgb, rgb(var(--callout-color)) 26%, transparent);
+  box-shadow: inset 3px 0 0 rgb(var(--callout-color));
+  transition: box-shadow var(--nocturne-slow) var(--nocturne-ease);
+}
+.callout:hover {
+  box-shadow: inset 3px 0 0 rgb(var(--callout-color)),
+    0 4px 18px -8px
+      color-mix(in srgb, rgb(var(--callout-color)) 45%, transparent);
+}
+.callout-title {
+  color: rgb(var(--callout-color));
+  letter-spacing: 0.01em;
+}
+.callout-icon .svg-icon {
+  stroke-width: 2px;
+}
+.callout[data-callout-fold] .callout-fold {
+  transition: transform var(--nocturne-fast) var(--nocturne-ease);
+}
+
+/* Two extra callout flavours worth having in a research vault. */
+.callout[data-callout="hypothesis"] {
+  --callout-color: 169, 139, 245;
+  --callout-icon: lucide-flask-conical;
+}
+.callout[data-callout="decision"] {
+  --callout-color: 99, 201, 154;
+  --callout-icon: lucide-gavel;
+}
+
+/* --------------------------------------------------------------------------
+   7. Tasks & lists
+   -------------------------------------------------------------------------- */
+
+body {
+  --checkbox-radius: 5px;
+  --checkbox-size: 16px;
+  --checkbox-color: var(--color-accent-1);
+  --checkbox-color-hover: var(--color-accent-2);
+  --checkbox-border-color: var(--color-base-35);
+  --checkbox-border-color-hover: var(--color-accent-1);
+  --checkbox-marker-color: var(--text-on-accent);
+  --checklist-done-color: var(--text-faint);
+  --checklist-done-decoration: line-through;
+  --list-indent: 1.6em;
+  --list-spacing: 0.12em;
+}
+
+input[type="checkbox"] {
+  transition: background-color var(--nocturne-fast) var(--nocturne-ease),
+    border-color var(--nocturne-fast) var(--nocturne-ease),
+    box-shadow var(--nocturne-fast) var(--nocturne-ease);
+}
+input[type="checkbox"]:hover {
+  box-shadow: 0 0 0 3px var(--nocturne-glow);
+}
+
+/* Extended task states: > / - / ! / ? / * — colour the marker and the text. */
+.markdown-rendered li[data-task=">"] > input,
+.markdown-source-view li[data-task=">"] > input {
+  --checkbox-color: var(--color-cyan);
+  border-color: var(--color-cyan);
+}
+.markdown-rendered li[data-task="-"] > input {
+  --checkbox-color: var(--text-faint);
+  border-color: var(--text-faint);
+}
+.markdown-rendered li[data-task="-"] {
+  color: var(--text-faint);
+  text-decoration: line-through;
+}
+.markdown-rendered li[data-task="!"] > input {
+  --checkbox-color: var(--color-red);
+  border-color: var(--color-red);
+}
+.markdown-rendered li[data-task="?"] > input {
+  --checkbox-color: var(--color-yellow);
+  border-color: var(--color-yellow);
+}
+.markdown-rendered li[data-task="*"] > input {
+  --checkbox-color: var(--color-purple);
+  border-color: var(--color-purple);
+}
+
+/* Bullets take the accent at depth, so nesting is readable at a glance. */
+.markdown-rendered ul > li::marker {
+  color: var(--text-faint);
+}
+.markdown-rendered ul ul > li::marker {
+  color: var(--color-accent-1);
+  opacity: 0.7;
+}
+
+/* --------------------------------------------------------------------------
+   8. Code
+   -------------------------------------------------------------------------- */
+
+body {
+  --code-background: var(--background-secondary-alt);
+  --code-normal: var(--text-normal);
+  --code-size: 0.86em;
+  --code-radius: var(--radius-s);
+  --code-comment: var(--text-faint);
+  --code-function: var(--color-purple);
+  --code-important: var(--color-orange);
+  --code-keyword: var(--color-pink);
+  --code-property: var(--color-cyan);
+  --code-string: var(--color-green);
+  --code-value: var(--color-orange);
+  --code-tag: var(--color-red);
+  --code-operator: var(--color-cyan);
+}
+
+.markdown-rendered pre {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  background: var(--background-secondary-alt);
+  padding-top: 2em;
+  position: relative;
+  box-shadow: var(--shadow-s);
+}
+
+/* Language rail across the top of fenced blocks. */
+.markdown-rendered pre > code[class*="language-"]::before {
+  content: attr(class);
+  position: absolute;
+  inset: 0 0 auto 0;
+  padding: 0.32em 0.85em;
+  font-family: var(--font-interface-theme);
+  font-size: 0.7em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  background: var(--background-secondary);
+  border-bottom: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m) var(--radius-m) 0 0;
+}
+
+/* Keep the copy button out of the way until you want it. */
+.markdown-rendered pre .copy-code-button {
+  opacity: 0;
+  border-radius: var(--radius-s);
+  transition: opacity var(--nocturne-fast) var(--nocturne-ease);
+}
+.markdown-rendered pre:hover .copy-code-button {
+  opacity: 1;
+}
+
+/* Inline code sits in a tinted chip. */
+.markdown-rendered code:not(pre code) {
+  padding: 0.12em 0.36em;
+  border: 1px solid var(--nocturne-hairline);
+  border-radius: var(--radius-s);
+}
+
+/* --------------------------------------------------------------------------
+   9. Tables, properties, embeds
+   -------------------------------------------------------------------------- */
+
+body {
+  --table-header-background: var(--background-secondary-alt);
+  --table-header-weight: 640;
+  --table-header-size: 0.86em;
+  --table-row-alt-background: var(--background-primary-alt);
+  --table-row-background-hover: var(--background-modifier-hover);
+  --table-border-color: var(--background-modifier-border);
+  --table-border-width: 1px;
+
+  --metadata-background: transparent;
+  --metadata-label-text-color: var(--text-faint);
+  --metadata-label-font-size: 0.82em;
+  --metadata-input-text-color: var(--text-normal);
+  --metadata-divider-color: var(--nocturne-hairline);
+  --metadata-sidebar-label-font-size: 0.82em;
+}
+
+.markdown-rendered table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--table-border-color);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  font-size: 0.94em;
+  font-variant-numeric: tabular-nums;
+}
+.markdown-rendered th {
+  border-top: none;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.markdown-rendered tr td:first-child,
+.markdown-rendered tr th:first-child {
+  border-left: none;
+}
+.markdown-rendered tbody tr {
+  transition: background-color var(--nocturne-fast) var(--nocturne-ease);
+}
+
+/* Properties block reads as a compact record header. */
+.metadata-container {
+  border: 1px solid var(--nocturne-hairline);
+  border-radius: var(--radius-m);
+  padding: var(--size-4-2) var(--size-4-3);
+  background: var(--background-primary-alt);
+}
+.metadata-property-key {
+  letter-spacing: 0.02em;
+}
+
+/* Transclusions look embedded, not pasted. */
+.markdown-embed {
+  border-radius: 0 var(--radius-m) var(--radius-m) 0;
+}
+.markdown-embed-title {
+  color: var(--text-muted);
+  font-weight: 620;
+}
+
+/* --------------------------------------------------------------------------
+   10. Search, modals, menus
+   -------------------------------------------------------------------------- */
+
+.prompt,
+.suggestion-container,
+.modal {
+  border: 1px solid var(--nocturne-hairline);
+  box-shadow: var(--shadow-l);
+}
+.prompt {
+  border-radius: var(--radius-xl);
+}
+.suggestion-item.is-selected {
+  background: var(--background-modifier-active-hover);
+  border-radius: var(--radius-s);
+}
+.menu {
+  border-radius: var(--radius-l);
+  border: 1px solid var(--nocturne-hairline);
+  box-shadow: var(--shadow-l);
+}
+.menu-item {
+  border-radius: var(--radius-s);
+}
+
+.search-result-file-title {
+  font-weight: 620;
+}
+.search-result-file-matched-text {
+  background: color-mix(in srgb, var(--color-accent-1) 26%, transparent);
+  border-radius: 3px;
+}
+
+/* Focused inputs get the accent ring rather than a hard border. */
+input[type="text"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+.prompt-input:focus {
+  box-shadow: 0 0 0 3px var(--nocturne-glow);
+  outline: none;
+}
+
+/* --------------------------------------------------------------------------
+   11. Graph & canvas
+   -------------------------------------------------------------------------- */
+
+body {
+  --graph-line: var(--color-base-30);
+  --graph-node: var(--text-muted);
+  --graph-node-focused: var(--color-accent-1);
+  --graph-node-tag: var(--color-green);
+  --graph-node-attachment: var(--color-purple);
+  --graph-node-unresolved: var(--text-faint);
+
+  --canvas-background: var(--background-secondary);
+  --canvas-dot-pattern: var(--background-modifier-border);
+  --canvas-card-label-color: var(--text-faint);
+  --canvas-color-1: 242, 119, 122;
+  --canvas-color-2: 232, 163, 92;
+  --canvas-color-3: 227, 192, 92;
+  --canvas-color-4: 99, 201, 154;
+  --canvas-color-5: 82, 188, 211;
+  --canvas-color-6: 169, 139, 245;
+}
+
+.canvas-node-container {
+  border-radius: var(--radius-m);
+}
+
+/* --------------------------------------------------------------------------
+   12. Motion, focus, responsive, print
+   -------------------------------------------------------------------------- */
+
+/* Panes that don't have focus recede — keeps a four-pane layout calm. */
+body.nocturne-dim-inactive
+  .workspace-split.mod-root
+  .workspace-leaf:not(.mod-active)
+  .view-content {
+  opacity: 0.72;
+  transition: opacity var(--nocturne-slow) var(--nocturne-ease);
+}
+body.nocturne-dim-inactive
+  .workspace-split.mod-root
+  .workspace-leaf.mod-active
+  .view-content {
+  opacity: 1;
+}
+
+body.nocturne-no-motion *,
+body.nocturne-no-motion *::before,
+body.nocturne-no-motion *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Phone: drop the decorative layers, keep the palette. */
+@media (max-width: 768px) {
+  body {
+    --nocturne-reading-width: 100%;
+  }
+  .workspace-split.mod-root .workspace-leaf-content {
+    border: none;
+    border-radius: 0;
+  }
+  body.nocturne-translucent-chrome .workspace-split.mod-left-split,
+  body.nocturne-translucent-chrome .workspace-split.mod-right-split {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--background-secondary);
+  }
+}
+
+@media print {
+  .markdown-rendered h1 {
+    -webkit-text-fill-color: currentColor;
+    background: none;
+    color: #000;
+  }
+  .callout {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+  .markdown-rendered pre {
+    box-shadow: none;
+  }
+}

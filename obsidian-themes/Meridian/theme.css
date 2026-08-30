@@ -1,0 +1,490 @@
+/* ==========================================================================
+   MERIDIAN — an editorial theme for Obsidian
+   Level 3 of 4: designed, with a point of view.
+
+   Design brief: a well-set journal. Warm ink on warm ground, a serif reading
+   face with real hierarchy, terracotta and teal as a two-note accent chord,
+   numbered headings, framed code, dressed callouts. Opinionated but still
+   readable for eight hours straight.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Palette — two accents, warm neutrals
+   -------------------------------------------------------------------------- */
+
+.theme-light {
+  --color-base-00: #fdfbf7;
+  --color-base-05: #f8f4ed;
+  --color-base-10: #f2ece2;
+  --color-base-20: #e7dfd1;
+  --color-base-25: #ddd3c2;
+  --color-base-30: #d0c4b0;
+  --color-base-35: #bfb098;
+  --color-base-40: #a6957b;
+  --color-base-50: #877661;
+  --color-base-60: #6a5b4a;
+  --color-base-70: #4b4034;
+  --color-base-100: #2a231b;
+
+  --accent-warm: #b1573a;   /* terracotta */
+  --accent-cool: #2b7a78;   /* teal */
+  --accent-gold: #b0842a;
+
+  --color-accent-1: var(--accent-warm);
+  --color-accent-2: #c76c4e;
+  --color-accent: var(--accent-warm);
+
+  --color-red: #b1573a;
+  --color-orange: #c07b28;
+  --color-yellow: #b0842a;
+  --color-green: #4a7c3f;
+  --color-cyan: #2b7a78;
+  --color-blue: #35618c;
+  --color-purple: #6f5091;
+  --color-pink: #a8497a;
+
+  /* RGB triplets — Obsidian derives callout, graph and canvas
+     colours from these, so they must track the palette above. */
+  --color-red-rgb: 177, 87, 58;
+  --color-orange-rgb: 192, 123, 40;
+  --color-yellow-rgb: 176, 132, 42;
+  --color-green-rgb: 74, 124, 63;
+  --color-cyan-rgb: 43, 122, 120;
+  --color-blue-rgb: 53, 97, 140;
+  --color-purple-rgb: 111, 80, 145;
+  --color-pink-rgb: 168, 73, 122;
+  --color-accent-rgb: 177, 87, 58;
+
+  --background-primary: var(--color-base-00);
+  --background-primary-alt: var(--color-base-05);
+  --background-secondary: var(--color-base-05);
+  --background-secondary-alt: var(--color-base-10);
+  --background-modifier-border: var(--color-base-20);
+  --background-modifier-border-hover: var(--color-base-25);
+  --background-modifier-border-focus: var(--accent-cool);
+  --background-modifier-hover: rgba(42, 35, 27, 0.05);
+  --background-modifier-active-hover: rgba(177, 87, 58, 0.1);
+  --background-modifier-form-field: #fffdf9;
+
+  --text-normal: var(--color-base-100);
+  --text-muted: var(--color-base-60);
+  --text-faint: var(--color-base-40);
+  --text-selection: rgba(43, 122, 120, 0.16);
+  --text-highlight-bg: rgba(224, 186, 96, 0.42);
+
+  --shadow-s: 0 1px 2px rgba(60, 45, 30, 0.07);
+  --shadow-l: 0 12px 34px rgba(60, 45, 30, 0.14),
+    0 3px 8px rgba(60, 45, 30, 0.08);
+}
+
+.theme-dark {
+  --color-base-00: #1a1714;
+  --color-base-05: #201c19;
+  --color-base-10: #26221e;
+  --color-base-20: #302b26;
+  --color-base-25: #3a342d;
+  --color-base-30: #453e36;
+  --color-base-35: #544c42;
+  --color-base-40: #6b6153;
+  --color-base-50: #8b8072;
+  --color-base-60: #a89d8e;
+  --color-base-70: #c8bfb2;
+  --color-base-100: #ece5da;
+
+  --accent-warm: #e08a63;
+  --accent-cool: #5fbfae;
+  --accent-gold: #d7ac5a;
+
+  --color-accent-1: var(--accent-warm);
+  --color-accent-2: #ee9d78;
+  --color-accent: var(--accent-warm);
+
+  --color-red: #e07a63;
+  --color-orange: #dd9a52;
+  --color-yellow: #d7ac5a;
+  --color-green: #86b877;
+  --color-cyan: #5fbfae;
+  --color-blue: #6f9fce;
+  --color-purple: #a98cc9;
+  --color-pink: #d98cb3;
+
+  /* RGB triplets — Obsidian derives callout, graph and canvas
+     colours from these, so they must track the palette above. */
+  --color-red-rgb: 224, 122, 99;
+  --color-orange-rgb: 221, 154, 82;
+  --color-yellow-rgb: 215, 172, 90;
+  --color-green-rgb: 134, 184, 119;
+  --color-cyan-rgb: 95, 191, 174;
+  --color-blue-rgb: 111, 159, 206;
+  --color-purple-rgb: 169, 140, 201;
+  --color-pink-rgb: 217, 140, 179;
+  --color-accent-rgb: 224, 138, 99;
+
+  --background-primary: var(--color-base-00);
+  --background-primary-alt: var(--color-base-05);
+  --background-secondary: var(--color-base-05);
+  --background-secondary-alt: var(--color-base-10);
+  --background-modifier-border: var(--color-base-20);
+  --background-modifier-border-hover: var(--color-base-30);
+  --background-modifier-border-focus: var(--accent-cool);
+  --background-modifier-hover: rgba(255, 245, 230, 0.05);
+  --background-modifier-active-hover: rgba(224, 138, 99, 0.14);
+  --background-modifier-form-field: var(--color-base-05);
+
+  --text-normal: var(--color-base-100);
+  --text-muted: var(--color-base-60);
+  --text-faint: var(--color-base-40);
+  --text-selection: rgba(95, 191, 174, 0.2);
+  --text-highlight-bg: rgba(215, 172, 90, 0.3);
+
+  --shadow-s: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --shadow-l: 0 14px 38px rgba(0, 0, 0, 0.6), 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   2. Type — a serif that earns its keep
+   -------------------------------------------------------------------------- */
+
+body {
+  --font-text-theme: "Source Serif 4", "Source Serif Pro", "Iowan Old Style",
+    Charter, Georgia, serif;
+  --font-interface-theme: "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --font-monospace-theme: "iA Writer Duo S", "JetBrains Mono", "SF Mono",
+    ui-monospace, monospace;
+
+  --font-text-size: 17.5px;
+  --line-height-normal: 1.68;
+  --file-line-width: 40rem;
+  --p-spacing: 1rem;
+
+  --bold-weight: 660;
+  --bold-color: var(--text-normal);
+  --italic-color: inherit;
+
+  --radius-s: 4px;
+  --radius-m: 6px;
+  --radius-l: 10px;
+  --radius-xl: 14px;
+
+  --link-color: var(--accent-cool);
+  --link-color-hover: var(--accent-warm);
+  --link-decoration: underline;
+  --link-decoration-color: color-mix(in srgb, var(--accent-cool) 40%, transparent);
+  --link-decoration-thickness: 1px;
+  --link-external-color: var(--accent-cool);
+  --link-unresolved-color: var(--accent-warm);
+  --link-unresolved-opacity: 0.55;
+
+  --divider-color: var(--background-modifier-border);
+  --hr-color: var(--background-modifier-border);
+
+  --input-radius: var(--radius-m);
+  --modal-radius: var(--radius-l);
+
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: var(--color-base-25);
+  --scrollbar-active-thumb-bg: var(--color-base-35);
+}
+
+body {
+  --h1-size: 2em;
+  --h2-size: 1.55em;
+  --h3-size: 1.26em;
+  --h4-size: 1.1em;
+  --h5-size: 1em;
+  --h6-size: 0.86em;
+
+  --h1-weight: 620;
+  --h2-weight: 620;
+  --h3-weight: 620;
+  --h4-weight: 640;
+  --h5-weight: 640;
+  --h6-weight: 660;
+
+  --h1-color: var(--text-normal);
+  --h2-color: var(--text-normal);
+  --h3-color: var(--accent-warm);
+  --h4-color: var(--text-normal);
+  --h5-color: var(--text-muted);
+  --h6-color: var(--accent-cool);
+  --h6-variant: uppercase;
+
+  --h1-line-height: 1.2;
+  --heading-spacing: calc(var(--p-spacing) * 2.4);
+}
+
+.markdown-rendered h1 {
+  letter-spacing: -0.02em;
+}
+.markdown-rendered h6 {
+  letter-spacing: 0.12em;
+}
+
+/* H1 sits above a rule the width of the measure; H2 gets a short accent rule. */
+.markdown-rendered h1 {
+  padding-bottom: 0.3em;
+  border-bottom: 2px solid var(--background-modifier-border);
+}
+.markdown-rendered h2::after {
+  content: "";
+  display: block;
+  width: 2.2em;
+  height: 2px;
+  margin-top: 0.35em;
+  background: var(--accent-warm);
+  opacity: 0.7;
+}
+
+/* Auto-numbered H2/H3 in reading view — an editorial touch that also helps
+   long research notes stay navigable. Reset per note. */
+.markdown-preview-view,
+.markdown-rendered {
+  counter-reset: meridian-h2;
+}
+.markdown-rendered h2 {
+  counter-increment: meridian-h2;
+  counter-reset: meridian-h3;
+}
+.markdown-rendered h3 {
+  counter-increment: meridian-h3;
+}
+.markdown-rendered h2::before {
+  content: counter(meridian-h2) "  ";
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+.markdown-rendered h3::before {
+  content: counter(meridian-h2) "." counter(meridian-h3) "  ";
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+/* Drop the numbering where it would be noise. */
+.markdown-embed .markdown-rendered h2::before,
+.markdown-embed .markdown-rendered h3::before,
+.callout .markdown-rendered h2::before,
+.callout .markdown-rendered h3::before {
+  content: none;
+}
+
+/* --------------------------------------------------------------------------
+   3. Chrome — quiet frame around loud content
+   -------------------------------------------------------------------------- */
+
+body {
+  --titlebar-background: var(--background-secondary-alt);
+  --titlebar-background-focused: var(--background-secondary-alt);
+  --ribbon-background: var(--background-secondary-alt);
+  --ribbon-background-collapsed: var(--background-secondary-alt);
+
+  --tab-background-active: var(--background-primary);
+  --tab-radius-active: var(--radius-m);
+  --tab-outline-color: var(--background-modifier-border);
+  --tab-outline-width: 1px;
+  --tab-divider-color: transparent;
+  --tab-font-size: 0.85em;
+  --tab-font-weight: 500;
+
+  --nav-item-size: 0.87em;
+  --nav-item-weight: 450;
+  --nav-item-weight-active: 640;
+  --nav-item-color: var(--text-muted);
+  --nav-item-color-hover: var(--text-normal);
+  --nav-item-color-active: var(--accent-warm);
+  --nav-item-background-active: var(--background-modifier-active-hover);
+  --nav-indentation-guide-color: var(--background-modifier-border);
+
+  --metadata-label-text-color: var(--text-faint);
+  --metadata-divider-color: var(--background-modifier-border);
+}
+
+.workspace-tab-header.is-active .workspace-tab-header-inner-title {
+  color: var(--text-normal);
+}
+
+.workspace-split.mod-left-split .workspace-tabs,
+.workspace-split.mod-right-split .workspace-tabs {
+  background: var(--background-secondary);
+}
+
+/* Sidebar section labels in the same small-caps voice as H6. */
+.nav-header .nav-buttons-container,
+.workspace-leaf-content[data-type="outline"] .tree-item-self {
+  letter-spacing: 0.02em;
+}
+
+/* --------------------------------------------------------------------------
+   4. Blocks — callouts, code, tables, quotes
+   -------------------------------------------------------------------------- */
+
+body {
+  --blockquote-border-thickness: 0;
+  --blockquote-color: var(--text-normal);
+  --blockquote-background-color: transparent;
+  --blockquote-style: normal;
+
+  --code-background: var(--background-secondary-alt);
+  --code-normal: var(--text-normal);
+  --code-size: 0.85em;
+  --code-radius: var(--radius-s);
+
+  --table-header-background: var(--background-secondary-alt);
+  --table-header-weight: 660;
+  --table-row-alt-background: var(--background-primary-alt);
+  --table-row-background-hover: var(--background-modifier-hover);
+  --table-border-color: var(--background-modifier-border);
+
+  --tag-background: color-mix(in srgb, var(--accent-cool) 12%, transparent);
+  --tag-color: var(--accent-cool);
+  --tag-radius: 4px;
+  --tag-padding-x: 7px;
+  --tag-padding-y: 2px;
+  --tag-decoration: none;
+  --tag-border-width: 0;
+  --tag-size: 0.8em;
+
+  --checkbox-radius: 4px;
+  --checkbox-color: var(--accent-cool);
+  --checkbox-color-hover: var(--accent-warm);
+  --checkbox-marker-color: var(--background-primary);
+  --checkbox-border-color: var(--color-base-35);
+  --checklist-done-color: var(--text-faint);
+
+  --embed-background: var(--background-primary-alt);
+  --embed-border-left: 3px solid var(--accent-cool);
+  --embed-padding: var(--size-4-3) var(--size-4-4);
+
+  --callout-padding: var(--size-4-3) var(--size-4-4);
+  --callout-radius: var(--radius-m);
+  --callout-border-width: 0 0 0 3px;
+  --callout-border-opacity: 0.6;
+  --callout-title-size: 0.9em;
+  --callout-title-weight: 660;
+}
+
+/* Pull-quotes: a real hanging quotation mark instead of a bar. */
+.markdown-rendered blockquote {
+  position: relative;
+  margin: calc(var(--p-spacing) * 1.4) 0;
+  padding: 0.1em 0 0.1em 2.1em;
+  font-style: italic;
+  color: var(--text-muted);
+}
+.markdown-rendered blockquote::before {
+  content: "\201C";
+  position: absolute;
+  left: 0;
+  top: -0.12em;
+  font-size: 2.6em;
+  line-height: 1;
+  color: var(--accent-warm);
+  opacity: 0.35;
+  font-style: normal;
+}
+/* Callouts are blockquotes too — don't dress those. */
+.markdown-rendered blockquote.callout::before {
+  content: none;
+}
+.markdown-rendered blockquote.callout {
+  padding: var(--callout-padding);
+  font-style: normal;
+  color: var(--text-normal);
+}
+
+/* Callout titles in small caps, body slightly muted. */
+.callout-title-inner {
+  letter-spacing: 0.02em;
+}
+.callout {
+  border: 1px solid
+    color-mix(in srgb, rgb(var(--callout-color)) 28%, transparent);
+  border-left-width: 3px;
+  background: color-mix(in srgb, rgb(var(--callout-color)) 7%, var(--background-primary));
+}
+
+/* Code blocks get a top rail carrying the language name. */
+.markdown-rendered pre {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  padding-top: 1.9em;
+  position: relative;
+  background: var(--background-secondary-alt);
+}
+.markdown-rendered pre > code[class*="language-"]::before {
+  content: attr(class);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0.28em 0.9em;
+  font-family: var(--font-interface-theme);
+  font-size: 0.7em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  background: var(--background-secondary);
+  border-bottom: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m) var(--radius-m) 0 0;
+}
+
+/* Tables: ruled, with a tinted header and tabular figures. */
+.markdown-rendered table {
+  border-collapse: collapse;
+  font-size: 0.94em;
+  font-variant-numeric: tabular-nums;
+}
+.markdown-rendered thead th {
+  border-bottom: 2px solid var(--background-modifier-border-hover);
+  letter-spacing: 0.02em;
+}
+
+/* Footnotes and superscripts, set properly. */
+.markdown-rendered .footnote-backref,
+.markdown-rendered sup.footnote-ref {
+  color: var(--accent-warm);
+  font-weight: 600;
+}
+
+/* Ornamental rule. */
+.markdown-rendered hr {
+  border: none;
+  height: 1.4em;
+  margin: calc(var(--p-spacing) * 2) 0;
+  background: none;
+  text-align: center;
+}
+.markdown-rendered hr::after {
+  content: "\2766";
+  color: var(--text-faint);
+  font-size: 1.1em;
+}
+
+/* --------------------------------------------------------------------------
+   5. Graph, canvas, print
+   -------------------------------------------------------------------------- */
+
+body {
+  --graph-line: var(--color-base-30);
+  --graph-node: var(--text-muted);
+  --graph-node-focused: var(--accent-warm);
+  --graph-node-tag: var(--accent-cool);
+  --graph-node-attachment: var(--accent-gold);
+  --graph-node-unresolved: var(--text-faint);
+
+  --canvas-background: var(--background-secondary-alt);
+  --canvas-dot-pattern: var(--color-base-25);
+  --canvas-card-label-color: var(--text-faint);
+}
+
+@media print {
+  .markdown-rendered h2::before,
+  .markdown-rendered h3::before {
+    color: #666;
+  }
+  .markdown-rendered blockquote::before {
+    color: #999;
+  }
+}
