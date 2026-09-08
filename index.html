@@ -92,7 +92,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=34">
+  <link rel="stylesheet" href="styles.css?v=35">
 </head>
 <body>
   <!-- Navigation -->
@@ -442,6 +442,52 @@
               <p>Established foundations for AI/ML adoption across the product life cycle.</p>
             </div>
           </div>
+          <div class="informed-figures" id="informed-figures">
+            <div class="informed-figures-head">
+              <h4>The Papers’ Figures, Made Interactive</h4>
+              <p>The two INFORMED papers each carried one figure. The first mapped how far regulatory data would have to travel along four dimensions of big data. The second redrew drug development from a linear pipeline into a system with three layers. Both are rebuilt here as instruments rather than pictures.</p>
+            </div>
+            <div class="informed-tabs" role="tablist" aria-label="INFORMED figures">
+              <button class="informed-tab" role="tab" id="tab-fourv" aria-selected="true" aria-controls="fig-fourv" type="button">The four V’s of big data</button>
+              <button class="informed-tab" role="tab" id="tab-systems" aria-selected="false" aria-controls="fig-systems" tabindex="-1" type="button">Traditional vs systems view</button>
+            </div>
+
+            <div class="informed-fig" id="fig-fourv" role="tabpanel" aria-labelledby="tab-fourv">
+              <div class="informed-fig-grid">
+                <div class="informed-fig-canvas">
+                  <div id="fourv-figure" class="fourv-wrap"></div>
+                  <div class="fig-controls" aria-label="Presets">
+                    <button class="fig-btn fourv-preset" data-preset="baseline" aria-pressed="true" type="button">2017 baseline</button>
+                    <button class="fig-btn fourv-preset" data-preset="portfolio" aria-pressed="false" type="button">INFORMED portfolio</button>
+                    <button class="fig-btn fourv-preset" data-preset="holistic" aria-pressed="false" type="button">Holistic edge</button>
+                  </div>
+                  <p class="fig-hint">Click any ring to move an axis. The shaded area is the capacity envelope the data would demand.</p>
+                </div>
+                <div class="informed-fig-panel" id="fourv-panel" aria-live="polite"></div>
+              </div>
+              <p class="informed-fig-caption">Adapted from Figure 1 of <a href="https://www.nature.com/articles/nrd.2017.26" target="_blank" rel="noopener">From big data to smart data: FDA’s INFORMED initiative</a>, Nature Reviews Drug Discovery, 2017. The numbered markers reproduce the paper’s placement of the 2017 baseline.</p>
+            </div>
+
+            <div class="informed-fig" id="fig-systems" role="tabpanel" aria-labelledby="tab-systems" hidden>
+              <div class="informed-fig-grid">
+                <div class="informed-fig-canvas">
+                  <div id="systems-figure" class="systems-wrap"></div>
+                  <div class="fig-controls systems-controls" aria-label="Steps">
+                    <button class="fig-btn fig-btn-icon systems-prev" type="button" aria-label="Previous step">&larr;</button>
+                    <button class="fig-btn systems-step" data-step="0" aria-pressed="true" type="button">Linear</button>
+                    <button class="fig-btn systems-step" data-step="1" aria-pressed="false" type="button">Micro</button>
+                    <button class="fig-btn systems-step" data-step="2" aria-pressed="false" type="button">Meso</button>
+                    <button class="fig-btn systems-step" data-step="3" aria-pressed="false" type="button">Macro</button>
+                    <button class="fig-btn fig-btn-icon systems-next" type="button" aria-label="Next step">&rarr;</button>
+                  </div>
+                  <p class="fig-hint">Step through the layers, or click any arc once it appears.</p>
+                </div>
+                <div class="informed-fig-panel" id="systems-panel" aria-live="polite"></div>
+              </div>
+              <p class="informed-fig-caption">Adapted from Figure 1 of <a href="https://www.nature.com/articles/nrd.2018.34" target="_blank" rel="noopener">INFORMED: an incubator at the US FDA for driving innovations in data science and agile technology</a>, Nature Reviews Drug Discovery, 2018, and its supplementary figure.</p>
+            </div>
+          </div>
+
           <div class="informed-references">
             <h4>References</h4>
             <a href="https://www.nature.com/articles/nrd.2017.26" class="informed-ref" target="_blank" rel="noopener">From Big Data to Smart Data: FDA's INFORMED Initiative <span>Nature Reviews Drug Discovery, 2017</span></a>
@@ -989,5 +1035,6 @@
   <script src="script.js?v=31"></script>
   <script src="neural-network.js?v=31"></script>
   <script src="convergence.js?v=2"></script>
+  <script src="informed.js?v=1"></script>
 </body>
 </html>
