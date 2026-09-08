@@ -27,7 +27,8 @@
       posts: [
         { t: 'The Discipline of Precision', s: 'On Brian Druker, targets, mechanisms, and testing unfashionable ideas in humans', u: 'the-discipline-of-precision' },
         { t: 'Precision Signals: James Gulley, MD, PhD', s: 'With James Gulley on the limits of biomarkers, the opacity of resistance, and the architecture of evidence in immuno-oncology', u: 'precision-signals-james-gulley-md' },
-        { t: 'Beyond Gold Standards: Sins of Omission and Sins of Commission', s: 'There are no gold standards in biomedicine, only methods that reached institutional consensus', u: 'beyond-gold-standards-sins-of-omission' }
+        { t: 'Beyond Gold Standards: Sins of Omission and Sins of Commission', s: 'There are no gold standards in biomedicine, only methods that reached institutional consensus', u: 'beyond-gold-standards-sins-of-omission' },
+        { t: 'Fifty Patients', s: 'How a fifty-patient single-arm study became evidence, and why regulatory standards emerge from consensus before they are written down', u: 'fifty-patients' }
       ]
     },
     tech: {
@@ -48,7 +49,8 @@
       posts: [
         { t: 'When the Rails Couldn’t Carry the Future', s: 'Infrastructure built for a world that no longer exists, and what the railroads teach biomedicine', u: 'when-the-rails-couldnt-carry-the' },
         { t: 'What Are We Spending Our Money On?', s: 'Storage costs, reimbursement, and capital budgets that keep AI out of clinical care', u: 'what-are-we-spending-our-money-on' },
-        { t: 'Everything is Changing Everywhere', s: 'With Daniel Arbess on why healthcare needs institutional, not just scientific, innovation', u: 'everything-is-changing-everywhere' }
+        { t: 'Everything is Changing Everywhere', s: 'With Daniel Arbess on why healthcare needs institutional, not just scientific, innovation', u: 'everything-is-changing-everywhere' },
+        { t: 'The Ship and the Signal', s: 'The FDA’s real-time clinical trial initiative and what continuous data flow means for evidence generation', u: 'the-ship-and-the-signal' }
       ]
     },
     ai: {
@@ -66,7 +68,8 @@
       posts: [
         { t: 'AI and the Reclamation of Scientific Abstraction', s: 'Using AI to generate new scientific abstractions, not just to accelerate analysis', u: 'ai-and-the-reclamation-of-scientific' },
         { t: 'Signal and Noise in Modern AI Research', s: 'Genuine innovation shifts how we think about problems; much of the literature does not', u: 'signal-and-noise-in-modern-ai-research' },
-        { t: 'The Last Interview', s: 'A conversation with a model before its retirement, and what attachment to a model reveals', u: 'the-last-interview' }
+        { t: 'The Last Interview', s: 'A conversation with a model before its retirement, and what attachment to a model reveals', u: 'the-last-interview' },
+        { t: 'Developing Standardized Metrics and Definitions for Foundation Models in Biomedicine', s: 'Which biomedical foundation models are genuinely foundational, and how to tell', u: 'developing-standardized-metrics-and' }
       ]
     },
     'med-tech': {
@@ -83,7 +86,8 @@
         { t: 'Impact of Broadening Trial Eligibility Criteria for Patients with Advanced Non-Small Cell Lung Cancer: Real-World Analysis of Select ASCO Recommendations', a: 'Harvey RD, Bruinooge SS, Chen L, ... Khozin S, et al.', j: 'Clinical Cancer Research, 2021', d: '10.1158/1078-0432.CCR-20-3857' }
       ],
       posts: [
-        { t: 'From Breakthrough to Breakdown: The $900 Million FDA Rejection Letter', s: 'What the RP1 decision says about “adequate and well-controlled” in a real-world era', u: 'from-breakthrough-to-breakdown-the' }
+        { t: 'From Breakthrough to Breakdown: The $900 Million FDA Rejection Letter', s: 'What the RP1 decision says about “adequate and well-controlled” in a real-world era', u: 'from-breakthrough-to-breakdown-the' },
+        { t: '42 Seconds', s: 'Inside the FDA’s first real-time clinical trial pilot with AstraZeneca and Amgen', u: '42-seconds' }
       ]
     },
     'med-ai': {
@@ -98,7 +102,8 @@
         { t: 'Real-World Imaging Data: Opportunities and Challenges', a: 'Wu J, de Araujo AL, Khozin S, et al.', j: 'JMIR Medical Informatics, 2026', d: '10.2196/88202' }
       ],
       posts: [
-        { t: 'The Signals Beneath the Noise', s: 'With Olivier Elemento and Cora Sternberg on why medical AI performs in studies and stalls in practice', u: 'the-signals-beneath-the-noise' }
+        { t: 'The Signals Beneath the Noise', s: 'With Olivier Elemento and Cora Sternberg on why medical AI performs in studies and stalls in practice', u: 'the-signals-beneath-the-noise' },
+        { t: 'Machine Learning Meets Clinical Trials: Harmonizing Data with Reality', s: 'The HARMONY initiative and a unified global approach to cancer clinical trial data', u: 'machine-learning-meets-clinical-trials' }
       ]
     },
     'tech-ai': {
@@ -131,6 +136,7 @@
       ],
       posts: [
         { t: 'Everything is a Signal', s: 'The future arrives as a collection of weak signals most people overlook', u: 'everything-is-a-signal' },
+        { t: 'The End of Disciplinary Sovereignty', s: 'Large language models abstract across medicine, finance, and science, dissolving the boundaries between disciplines', u: 'the-end-of-disciplinary-sovereignty' },
         { t: 'Ideas That Refuse to Die', s: 'With Peter Kolchinsky on the people and systems that decide whether an idea becomes a medicine', u: 'ideas-that-refuse-to-die' },
         { t: 'You Can’t Win Alone', s: 'On collective leadership, and why Precision Signals was built on the premise that progress happens when silos dissolve', u: 'you-cant-win-alone' }
       ]
