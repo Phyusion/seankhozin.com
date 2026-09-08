@@ -26,7 +26,7 @@
       ],
       posts: [
         { t: 'The Discipline of Precision', s: 'On Brian Druker, targets, mechanisms, and testing unfashionable ideas in humans', u: 'the-discipline-of-precision' },
-        { t: 'You Can’t Win Alone', s: 'With James Gulley on cancer immunotherapy and where intelligence fits in its future', u: 'you-cant-win-alone' },
+        { t: 'Precision Signals: James Gulley, MD, PhD', s: 'With James Gulley on the limits of biomarkers, the opacity of resistance, and the architecture of evidence in immuno-oncology', u: 'precision-signals-james-gulley-md' },
         { t: 'Beyond Gold Standards: Sins of Omission and Sins of Commission', s: 'There are no gold standards in biomedicine, only methods that reached institutional consensus', u: 'beyond-gold-standards-sins-of-omission' }
       ]
     },
@@ -132,7 +132,7 @@
       posts: [
         { t: 'Everything is a Signal', s: 'The future arrives as a collection of weak signals most people overlook', u: 'everything-is-a-signal' },
         { t: 'Ideas That Refuse to Die', s: 'With Peter Kolchinsky on the people and systems that decide whether an idea becomes a medicine', u: 'ideas-that-refuse-to-die' },
-        { t: 'Precision Signals', s: 'A conversation series built on the premise that progress happens when silos dissolve', u: 'precision-signals-episode-2-michelle' }
+        { t: 'You Can’t Win Alone', s: 'On collective leadership, and why Precision Signals was built on the premise that progress happens when silos dissolve', u: 'you-cant-win-alone' }
       ]
     }
   };
