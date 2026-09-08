@@ -13,13 +13,22 @@
   <meta property="og:url" content="https://www.seankhozin.com/">
   <meta property="og:title" content="Sean Khozin, MD, MPH — Physician-Scientist, Oncologist & AI Innovator">
   <meta property="og:description" content="Physician-scientist and oncologist advancing human health through the convergence of medicine, data science, and artificial intelligence. CEO of CEO Roundtable on Cancer & Project Data Sphere. Founder of Phyusion Bio.">
-  <meta property="og:image" content="https://www.seankhozin.com/sean-khozin.jpg">
   <meta property="og:locale" content="en_US">
   <meta property="og:site_name" content="Sean Khozin, MD, MPH">
+  <meta property="og:image" content="https://www.seankhozin.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sean Khozin, MD, MPH, physician-scientist, oncologist, and AI innovator">
+  <meta property="og:image" content="https://www.seankhozin.com/sean-khozin.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sean Khozin, MD, MPH — Physician-Scientist, Oncologist & AI Innovator">
+  <meta name="twitter:description" content="Physician-scientist and oncologist advancing human health through the convergence of medicine, data science, and artificial intelligence. CEO of CEO Roundtable on Cancer & Project Data Sphere. Founder of Phyusion Bio.">
+  <meta name="twitter:image" content="https://www.seankhozin.com/og-image.png">
+  <meta name="author" content="Sean Khozin, MD, MPH">
 
   <!-- Favicon -->
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <meta name="theme-color" content="#1e3a5f">
 
@@ -27,52 +36,55 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Sean Khozin",
-    "honorificSuffix": "MD, MPH",
-    "url": "https://www.seankhozin.com",
-    "image": "https://www.seankhozin.com/sean-khozin.jpg",
-    "jobTitle": "Chief Executive Officer",
-    "worksFor": [
+    "@graph": [
       {
-        "@type": "Organization",
-        "name": "CEO Roundtable on Cancer"
+        "@type": "Person",
+        "@id": "https://www.seankhozin.com/#person",
+        "name": "Sean Khozin",
+        "givenName": "Sean",
+        "familyName": "Khozin",
+        "honorificSuffix": "MD, MPH",
+        "alternateName": ["Dr. Sean Khozin", "Sean Khozin MD", "Sean Khozin, MD, MPH"],
+        "url": "https://www.seankhozin.com/",
+        "image": "https://www.seankhozin.com/sean-khozin.jpg",
+        "jobTitle": "Chief Executive Officer",
+        "worksFor": [
+          { "@type": "Organization", "name": "CEO Roundtable on Cancer" },
+          { "@type": "Organization", "name": "Project Data Sphere" },
+          { "@type": "Organization", "name": "Phyusion Bio", "url": "https://phyusionbio.com/" },
+          { "@type": "Organization", "name": "Massachusetts Institute of Technology" }
+        ],
+        "alumniOf": [
+          { "@type": "CollegeOrUniversity", "name": "University of Maryland School of Medicine" },
+          { "@type": "CollegeOrUniversity", "name": "George Washington University" },
+          { "@type": "CollegeOrUniversity", "name": "University of Maryland" }
+        ],
+        "description": "Physician-scientist and oncologist advancing human health through the convergence of medicine, data science, and artificial intelligence. CEO of CEO Roundtable on Cancer and Project Data Sphere, founder of Phyusion Bio, MIT Research Affiliate, and founding member of the FDA Oncology Center of Excellence.",
+        "knowsAbout": ["Oncology", "Artificial Intelligence", "Machine Learning", "Drug Discovery", "Real-World Evidence", "Data Science", "Digital Health", "Regulatory Science", "Clinical Trials"],
+        "sameAs": [
+          "https://www.linkedin.com/in/seankhozin",
+          "https://scholar.google.com/citations?user=R_yPHqUAAAAJ&hl=en",
+          "https://www.researchgate.net/profile/Sean-Khozin",
+          "https://www.youtube.com/@PrecisionSignals",
+          "https://www.insights.phyusionbio.com/",
+          "https://phyusionbio.com/"
+        ]
       },
       {
-        "@type": "Organization",
-        "name": "Project Data Sphere"
+        "@type": "WebSite",
+        "@id": "https://www.seankhozin.com/#website",
+        "url": "https://www.seankhozin.com/",
+        "name": "Sean Khozin, MD, MPH",
+        "about": { "@id": "https://www.seankhozin.com/#person" },
+        "inLanguage": "en-US"
       },
       {
-        "@type": "Organization",
-        "name": "Phyusion Bio"
-      },
-      {
-        "@type": "Organization",
-        "name": "Massachusetts Institute of Technology"
+        "@type": "ProfilePage",
+        "@id": "https://www.seankhozin.com/#profilepage",
+        "url": "https://www.seankhozin.com/",
+        "mainEntity": { "@id": "https://www.seankhozin.com/#person" },
+        "isPartOf": { "@id": "https://www.seankhozin.com/#website" }
       }
-    ],
-    "alumniOf": [
-      {
-        "@type": "CollegeOrUniversity",
-        "name": "University of Maryland School of Medicine"
-      },
-      {
-        "@type": "CollegeOrUniversity",
-        "name": "George Washington University"
-      },
-      {
-        "@type": "CollegeOrUniversity",
-        "name": "University of Maryland"
-      }
-    ],
-    "description": "Physician-scientist and oncologist advancing human health through the convergence of medicine, data science, and artificial intelligence.",
-    "knowsAbout": ["Oncology", "Artificial Intelligence", "Machine Learning", "Drug Discovery", "Real-World Evidence", "Data Science", "Digital Health"],
-    "sameAs": [
-      "https://www.linkedin.com/in/seankhozin",
-      "https://scholar.google.com/citations?user=R_yPHqUAAAAJ&hl=en",
-      "https://www.researchgate.net/profile/Sean-Khozin",
-      "https://www.youtube.com/@PrecisionSignals",
-      "https://www.insights.phyusionbio.com/"
     ]
   }
   </script>
@@ -173,7 +185,7 @@
         <span class="section-label">The Work</span>
         <h2 class="section-title">Three Fields, One Convergence</h2>
       </div>
-      <p class="convergence-lead">Dr. Khozin's work sits where medicine, technology, and artificial intelligence meet. Select a field to see what it contributes and the publications behind it. The center is where the three become something new.</p>
+      <p class="convergence-lead">Sean Khozin's work sits where medicine, technology, and artificial intelligence meet. Select a field to see what it contributes and the publications behind it. The center is where the three become something new.</p>
 
       <div class="convergence-grid">
         <div class="convergence-figure">
@@ -240,7 +252,7 @@
           </div>
         </div>
 
-        <div class="convergence-panel" id="convergence-panel" aria-live="polite"></div>
+        <div class="convergence-panel" id="convergence-panel" aria-live="polite"><div class="convergence-fade"><span class="convergence-tag">Convergence</span><h3 class="convergence-title">Where the three overlap, the unit of evidence changes.</h3><p class="lead">Medicine supplies the questions and the ground truth. Technology makes biology continuously measurable at the level of the individual. AI turns those measurements into models that can be interrogated, updated, and acted on.</p><p>Together they make the life sciences behave less like a sequence of one-off experiments and more like a learning system: trials that borrow strength from external data without giving up randomization, evidence generated at the point of care and not only in the trial, disease classified by mechanism instead of anatomy, and therapies matched to an individual rather than a population average.</p><p>This is the thread through Dr. Khozin’s career, from the clinic to the FDA to Johnson &amp; Johnson, CancerLinQ, and Phyusion Bio: not any single field, but the operating system that connects them.</p><div class="convergence-refs"><h4>Peer-Reviewed</h4><div class="research-pub-list"><a href="https://doi.org/10.1377/hlthaff.2017.1579" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Health Affairs, 2018</span><span class="research-pub-title">Real-World Evidence in Support of Precision Medicine: Clinico-Genomic Cancer Data as a Case Study</span><span class="research-pub-authors">Agarwala V, Khozin S, Singal G, et al.</span></a><a href="https://doi.org/10.1200/JCO.19.03094" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Journal of Clinical Oncology, 2020</span><span class="research-pub-title">Status Update on Data Required to Build a Learning Health System</span><span class="research-pub-authors">Bertagnolli MM, Anderson B, Norsworthy K, ... Khozin S.</span></a><a href="https://doi.org/10.1038/s41467-022-33192-1" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nature Communications, 2022</span><span class="research-pub-title">The Design and Evaluation of Hybrid Controlled Trials That Leverage External Data and Randomization</span><span class="research-pub-authors">Ventz S, Khozin S, Louv B, et al.</span></a><a href="https://doi.org/10.1093/oncolo/oyae138" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">The Oncologist, 2024</span><span class="research-pub-title">Unleashing the Power of Clinical Trial Data: A Proposal for Enhancing Informed Consent and Data Sharing</span><span class="research-pub-authors">Trippa L, Khozin S.</span></a></div></div><div class="convergence-refs substack"><h4>From the Substack</h4><div class="research-pub-list"><a href="https://www.insights.phyusionbio.com/p/everything-is-a-signal" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio</span><span class="research-pub-title">Everything is a Signal</span><span class="research-pub-authors">The future arrives as a collection of weak signals most people overlook</span></a><a href="https://www.insights.phyusionbio.com/p/the-end-of-disciplinary-sovereignty" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio</span><span class="research-pub-title">The End of Disciplinary Sovereignty</span><span class="research-pub-authors">Large language models abstract across medicine, finance, and science, dissolving the boundaries between disciplines</span></a><a href="https://www.insights.phyusionbio.com/p/ideas-that-refuse-to-die" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio</span><span class="research-pub-title">Ideas That Refuse to Die</span><span class="research-pub-authors">With Peter Kolchinsky on the people and systems that decide whether an idea becomes a medicine</span></a><a href="https://www.insights.phyusionbio.com/p/you-cant-win-alone" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio</span><span class="research-pub-title">You Can’t Win Alone</span><span class="research-pub-authors">On collective leadership, and why Precision Signals was built on the premise that progress happens when silos dissolve</span></a></div></div></div></div>
       </div>
     </div>
   </section>
