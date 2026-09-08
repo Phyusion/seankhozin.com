@@ -208,6 +208,74 @@ img { max-width: 100%; display: block; }
 .highlight-number { font-family: var(--font-serif); font-size: 2rem; font-weight: 500; color: var(--accent); line-height: 1; margin-bottom: 0.25rem; }
 .highlight-label { font-size: 0.75rem; font-weight: 500; color: var(--text-2); letter-spacing: 0.05em; text-transform: uppercase; }
 
+/* --- Convergence (Venn) --- */
+.section-convergence { --section-bg: var(--bg); }
+.convergence-lead {
+  font-size: 1.125rem; line-height: 1.8; color: var(--text-2); max-width: 760px; margin: -1.5rem 0 3.5rem;
+}
+.convergence-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3rem 4rem; align-items: start; }
+.convergence-figure { position: sticky; top: calc(var(--nav-h) + 5.5rem); }
+.venn { width: 100%; max-width: 540px; height: auto; display: block; margin: 0 auto; overflow: visible; }
+
+.venn-region { cursor: pointer; outline: none; }
+.venn-region use { fill: var(--accent-subtle); transition: fill 250ms var(--ease); }
+.venn-region:hover use, .venn-region:focus-visible use { fill: #d3deec; }
+.venn-region.selected use { fill: var(--accent); }
+.venn-region text { pointer-events: none; user-select: none; transition: fill 250ms var(--ease), opacity 250ms var(--ease); }
+.venn-node-label { font-family: var(--font-serif); font-size: 24px; font-weight: 500; fill: var(--text); letter-spacing: -0.01em; }
+.venn-pair-label { font-family: var(--font-sans); font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; fill: var(--text-3); }
+.venn-center-label { font-family: var(--font-sans); font-size: 9.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; fill: var(--accent); }
+.venn-center-dot { fill: var(--gold); transition: fill 250ms var(--ease); }
+.venn-region.selected text { fill: #fff; }
+.venn-region.selected .venn-center-dot { fill: var(--gold-light); }
+.venn-outline { fill: none; stroke: var(--accent); stroke-opacity: 0.28; stroke-width: 1; pointer-events: none; }
+
+.venn-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin: 1.5rem auto 0; max-width: 540px; }
+.venn-pill {
+  font-family: var(--font-sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.04em;
+  color: var(--accent); background: transparent; border: 1px solid var(--border); border-radius: 4px;
+  padding: 0.4rem 0.875rem; cursor: pointer; transition: all 200ms var(--ease);
+}
+.venn-pill:hover { border-color: var(--accent); }
+.venn-pill[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.venn-pill-pair { color: var(--text-2); font-size: 0.6875rem; }
+.venn-pill-pair[aria-pressed="true"] { color: #fff; }
+
+.convergence-panel { min-width: 0; }
+.convergence-tag {
+  display: inline-block; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.75rem;
+}
+.convergence-title {
+  font-family: var(--font-serif); font-size: clamp(1.375rem, 2.4vw, 1.75rem); font-weight: 500;
+  letter-spacing: -0.01em; line-height: 1.3; color: var(--text); margin-bottom: 1.25rem; text-wrap: balance;
+}
+.convergence-panel .lead { font-size: 1.0625rem; line-height: 1.75; color: var(--text); margin-bottom: 1rem; }
+.convergence-panel p { font-size: 0.9375rem; line-height: 1.8; color: var(--text-2); margin-bottom: 1rem; max-width: 62ch; }
+.convergence-refs { margin-top: 2rem; }
+.convergence-refs h4 { font-size: 0.75rem; font-weight: 600; color: var(--text-3); margin-bottom: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.convergence-refs + .convergence-refs { margin-top: 1.5rem; }
+.convergence-refs .research-pub-list { gap: 0.625rem; }
+.convergence-refs .research-pub { padding: 0.875rem 1.25rem; }
+.convergence-refs .research-pub-title { font-size: 0.9375rem; }
+.convergence-refs .research-pub-authors { display: block; font-size: 0.75rem; color: var(--text-3); margin-top: 0.3rem; line-height: 1.5; }
+.convergence-refs.substack .research-journal { color: var(--accent-light); }
+.convergence-fade { animation: convergenceFade 350ms var(--ease) both; }
+@keyframes convergenceFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 1024px) {
+  .convergence-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .convergence-figure { position: static; }
+}
+@media (max-width: 560px) {
+  .venn-pair-label { display: none; }
+  .venn-node-label { font-size: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .convergence-fade { animation: none; }
+  .venn-region use, .venn-region text { transition: none; }
+}
+
 /* --- Roles --- */
 .section-roles { background: var(--surface-alt); --section-bg: var(--surface-alt); }
 .roles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }

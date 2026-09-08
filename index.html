@@ -80,7 +80,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=33">
+  <link rel="stylesheet" href="styles.css?v=34">
 </head>
 <body>
   <!-- Navigation -->
@@ -94,6 +94,7 @@
       </button>
       <ul class="nav-links" id="nav-links">
         <li><a href="#about">About</a></li>
+        <li><a href="#convergence">Convergence</a></li>
         <li><a href="#roles">Roles</a></li>
         <li><a href="#career">Career</a></li>
         <li><a href="#informed">INFORMED</a></li>
@@ -159,6 +160,87 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-band" data-band="neural"><canvas class="band-canvas"></canvas></div>
+
+  <!-- Convergence -->
+  <section class="section section-convergence" id="convergence">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">The Work</span>
+        <h2 class="section-title">Three Fields, One Convergence</h2>
+      </div>
+      <p class="convergence-lead">Dr. Khozin's work sits where medicine, technology, and artificial intelligence meet. Select a field to see what it contributes and the publications behind it. The center is where the three become something new.</p>
+
+      <div class="convergence-grid">
+        <div class="convergence-figure">
+          <svg class="venn" viewBox="0 0 640 600" role="group" aria-label="Venn diagram of medicine, technology, and AI">
+            <defs>
+              <circle id="venn-a" cx="232" cy="222" r="185"/>
+              <circle id="venn-b" cx="408" cy="222" r="185"/>
+              <circle id="venn-c" cx="320" cy="374" r="185"/>
+              <clipPath id="venn-ka"><use href="#venn-a"/></clipPath>
+              <clipPath id="venn-kb"><use href="#venn-b"/></clipPath>
+              <mask id="venn-not-bc" maskUnits="userSpaceOnUse" x="0" y="0" width="640" height="600"><rect width="640" height="600" fill="#fff"/><use href="#venn-b" fill="#000"/><use href="#venn-c" fill="#000"/></mask>
+              <mask id="venn-not-ac" maskUnits="userSpaceOnUse" x="0" y="0" width="640" height="600"><rect width="640" height="600" fill="#fff"/><use href="#venn-a" fill="#000"/><use href="#venn-c" fill="#000"/></mask>
+              <mask id="venn-not-ab" maskUnits="userSpaceOnUse" x="0" y="0" width="640" height="600"><rect width="640" height="600" fill="#fff"/><use href="#venn-a" fill="#000"/><use href="#venn-b" fill="#000"/></mask>
+              <mask id="venn-not-a" maskUnits="userSpaceOnUse" x="0" y="0" width="640" height="600"><rect width="640" height="600" fill="#fff"/><use href="#venn-a" fill="#000"/></mask>
+              <mask id="venn-not-b" maskUnits="userSpaceOnUse" x="0" y="0" width="640" height="600"><rect width="640" height="600" fill="#fff"/><use href="#venn-b" fill="#000"/></mask>
+              <mask id="venn-not-c" maskUnits="userSpaceOnUse" x="0" y="0" width="640" height="600"><rect width="640" height="600" fill="#fff"/><use href="#venn-c" fill="#000"/></mask>
+            </defs>
+
+            <g class="venn-region" data-region="med" role="button" tabindex="0" aria-label="Medicine">
+              <use href="#venn-a" mask="url(#venn-not-bc)"/>
+              <text class="venn-node-label" x="150" y="180" text-anchor="middle">Medicine</text>
+            </g>
+            <g class="venn-region" data-region="tech" role="button" tabindex="0" aria-label="Technology">
+              <use href="#venn-b" mask="url(#venn-not-ac)"/>
+              <text class="venn-node-label" x="492" y="180" text-anchor="middle">Technology</text>
+            </g>
+            <g class="venn-region" data-region="ai" role="button" tabindex="0" aria-label="Artificial intelligence">
+              <use href="#venn-c" mask="url(#venn-not-ab)"/>
+              <text class="venn-node-label" x="320" y="490" text-anchor="middle">AI</text>
+            </g>
+
+            <g class="venn-region" data-region="med-tech" role="button" tabindex="0" aria-label="Medicine and technology">
+              <g clip-path="url(#venn-ka)"><use href="#venn-b" mask="url(#venn-not-c)"/></g>
+              <text class="venn-pair-label" x="320" y="130" text-anchor="middle">Real-World Evidence</text>
+            </g>
+            <g class="venn-region" data-region="med-ai" role="button" tabindex="0" aria-label="Medicine and AI">
+              <g clip-path="url(#venn-ka)"><use href="#venn-c" mask="url(#venn-not-b)"/></g>
+              <text class="venn-pair-label" x="204" y="358" text-anchor="middle">Computable Disease</text>
+            </g>
+            <g class="venn-region" data-region="tech-ai" role="button" tabindex="0" aria-label="Technology and AI">
+              <g clip-path="url(#venn-kb)"><use href="#venn-c" mask="url(#venn-not-a)"/></g>
+              <text class="venn-pair-label" x="436" y="358" text-anchor="middle">Learning Systems</text>
+            </g>
+
+            <g class="venn-region selected" data-region="core" role="button" tabindex="0" aria-label="Convergence">
+              <g clip-path="url(#venn-ka)"><g clip-path="url(#venn-kb)"><use href="#venn-c"/></g></g>
+              <circle class="venn-center-dot" cx="320" cy="262" r="4"/>
+              <text class="venn-center-label" x="320" y="292" text-anchor="middle">Convergence</text>
+            </g>
+
+            <use class="venn-outline" href="#venn-a"/>
+            <use class="venn-outline" href="#venn-b"/>
+            <use class="venn-outline" href="#venn-c"/>
+          </svg>
+
+          <div class="venn-pills" aria-label="Choose a region">
+            <button class="venn-pill" data-region="med" aria-pressed="false" type="button">Medicine</button>
+            <button class="venn-pill" data-region="tech" aria-pressed="false" type="button">Technology</button>
+            <button class="venn-pill" data-region="ai" aria-pressed="false" type="button">AI</button>
+            <button class="venn-pill" data-region="core" aria-pressed="true" type="button">Convergence</button>
+            <button class="venn-pill venn-pill-pair" data-region="med-tech" aria-pressed="false" type="button">Med + Tech</button>
+            <button class="venn-pill venn-pill-pair" data-region="med-ai" aria-pressed="false" type="button">Med + AI</button>
+            <button class="venn-pill venn-pill-pair" data-region="tech-ai" aria-pressed="false" type="button">Tech + AI</button>
+          </div>
+        </div>
+
+        <div class="convergence-panel" id="convergence-panel" aria-live="polite"></div>
       </div>
     </div>
   </section>
@@ -894,5 +976,6 @@
 
   <script src="script.js?v=31"></script>
   <script src="neural-network.js?v=31"></script>
+  <script src="convergence.js?v=1"></script>
 </body>
 </html>
