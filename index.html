@@ -92,7 +92,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=42">
+  <link rel="stylesheet" href="styles.css?v=43">
 </head>
 <body>
   <!-- Navigation -->
@@ -1090,9 +1090,8 @@
             <div>
               <dt><abbr title="Net present value">NPV</abbr><span>Net present value</span></dt>
               <dd>
-                <p>The value, in today&rsquo;s dollars, of all the profit a successful drug is expected to earn over its commercial life. Each future year&rsquo;s cash flow is discounted, because a dollar received years from now is worth less than a dollar today: the capital could earn a return elsewhere in the meantime.</p>
-                <p class="roundtable-term-formula">NPV = &Sigma; CF<sub>t</sub> &divide; (1 + r)<sup>t</sup></p>
-                <p>Here CF<sub>t</sub> is the cash flow in year <i>t</i> and <i>r</i> is the discount rate, the return investors require for the risk they take (the cost of capital). At a 10% rate, $1 received in ten years is worth about 39&cent; today. NPV falls when revenue arrives later or capital costs more, and rises with better pricing, reimbursement and market access. In this formula it assumes the drug succeeds; the risk of failure is captured separately by P.</p>
+                <p>The value, in today&rsquo;s dollars, of all the profit a successful drug is expected to earn over its commercial life. Because sales arrive years in the future, each year&rsquo;s profit is discounted back to the present at the return investors require for the risk they take (the cost of capital): the further away the money, the less it is worth today. At a 10% annual rate, $1 earned ten years from now is worth about 39&cent; today.</p>
+                <p>NPV falls when revenue arrives later or capital costs more, and rises with better pricing, reimbursement and market access. It assumes the drug succeeds; the risk of failure is captured separately by P.</p>
               </dd>
             </div>
             <div>
@@ -1128,6 +1127,7 @@
             </div>
             <div class="roundtable-result" aria-live="polite">
               <span class="roundtable-result-label">NPV &times; P &divide; C</span>
+              <span class="roundtable-equation" aria-hidden="true"><span class="eq-term" id="eq-npv">$3.0B</span> &times; <span class="eq-term" id="eq-p">10%</span> &divide; <span class="eq-term" id="eq-c">$250M</span> =</span>
               <span class="roundtable-ratio" id="roundtable-ratio">1.20</span>
               <span class="roundtable-verdict" id="roundtable-verdict">Fundable: expected value exceeds cost</span>
               <div class="roundtable-presets">
@@ -1423,7 +1423,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=35"></script>
+  <script src="script.js?v=36"></script>
   <script src="neural-network.js?v=32"></script>
   <script src="convergence.js?v=3"></script>
   <script src="informed.js?v=2"></script>
