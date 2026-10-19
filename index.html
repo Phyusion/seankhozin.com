@@ -60,7 +60,7 @@
           { "@type": "CollegeOrUniversity", "name": "University of Maryland" }
         ],
         "description": "Physician-scientist and oncologist advancing human health through the convergence of medicine, data science, and artificial intelligence. CEO of CEO Roundtable on Cancer and Project Data Sphere, founder of Phyusion Bio, MIT Research Affiliate, and founding member of the FDA Oncology Center of Excellence.",
-        "knowsAbout": ["Oncology", "Artificial Intelligence", "Machine Learning", "Drug Discovery", "Real-World Evidence", "Data Science", "Digital Health", "Regulatory Science", "Clinical Trials"],
+        "knowsAbout": ["Oncology", "Artificial Intelligence", "Machine Learning", "Drug Discovery", "Real-World Evidence", "Data Science", "Digital Health", "Regulatory Science", "Clinical Trials", "Financial Engineering", "Biomedical Research Funding"],
         "sameAs": [
           "https://www.linkedin.com/in/seankhozin",
           "https://scholar.google.com/citations?user=R_yPHqUAAAAJ&hl=en",
@@ -92,7 +92,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=36">
+  <link rel="stylesheet" href="styles.css?v=37">
 </head>
 <body>
   <!-- Navigation -->
@@ -111,6 +111,7 @@
         <li><a href="#career">Career</a></li>
         <li><a href="#informed">INFORMED</a></li>
         <li><a href="#research">Research</a></li>
+        <li><a href="#finance">Finance</a></li>
         <li><a href="#music">Music</a></li>
         <li><a href="#boards">Boards</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -133,8 +134,7 @@
         </div>
       </div>
       <figure class="hero-figure">
-        <img src="NYC.jpg" alt="Lower Manhattan skyline seen from the water" fetchpriority="high">
-        <figcaption>New York City</figcaption>
+        <img src="whole-patient.jpg" alt="Paper collage of a patient assembled from imaging, genomic and clinical records" width="807" height="454" fetchpriority="high">
       </figure>
     </div>
   </header>
@@ -143,13 +143,13 @@
   <section class="section section-about" id="about">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag"><span class="section-label">01 / 09 &middot; About</span><b>Biography</b></div>
+        <div class="section-tag"><span class="section-label">01 / 10 &middot; About</span><b>Biography</b></div>
         <h2 class="section-title">At the nexus of medicine, technology &amp; <em>AI</em></h2>
       </div>
       <div class="about-portrait-grid">
         <div class="about-photo">
           <div class="about-photo-frame">
-            <img src="sean-khozin.jpg" alt="Dr. Sean Khozin" loading="lazy">
+            <img src="sean-khozin-portrait.jpg" alt="Dr. Sean Khozin" width="900" height="1600" loading="lazy" decoding="async">
           </div>
         </div>
         <div class="about-body">
@@ -183,7 +183,7 @@
   <section class="section section-convergence" id="convergence">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag"><span class="section-label">02 / 09 &middot; Convergence</span><b>The work</b></div>
+        <div class="section-tag"><span class="section-label">02 / 10 &middot; Convergence</span><b>The work</b></div>
         <h2 class="section-title">Three fields, one <em>convergence</em></h2>
       </div>
       <p class="convergence-lead">Dr. Khozin’s work sits where medicine, technology, and artificial intelligence meet. Select a field to see what it contributes and the publications behind it. The center is where the three become something new.</p>
@@ -258,28 +258,38 @@
 
       <div class="compare">
         <p class="compare-lead">Together the three make the life sciences behave less like a sequence of one-off experiments and more like a learning system.</p>
-        <div class="compare-table" role="table" aria-label="One-off experiments compared with a learning system">
-          <div class="compare-row" role="row">
-            <div class="compare-head" role="rowheader"><span class="compare-idx">01</span><span class="compare-name">Trial design</span></div>
-            <div class="compare-cell" role="cell"><span class="compare-label">One-off experiment</span>Each trial stands alone</div>
-            <div class="compare-cell is-point" role="cell"><span class="compare-label">Learning system</span>Borrows strength from external data, keeps randomization</div>
-          </div>
-          <div class="compare-row" role="row">
-            <div class="compare-head" role="rowheader"><span class="compare-idx">02</span><span class="compare-name">Evidence source</span></div>
-            <div class="compare-cell" role="cell"><span class="compare-label">One-off experiment</span>Generated only inside the trial</div>
-            <div class="compare-cell is-point" role="cell"><span class="compare-label">Learning system</span>Also generated at the point of care</div>
-          </div>
-          <div class="compare-row" role="row">
-            <div class="compare-head" role="rowheader"><span class="compare-idx">03</span><span class="compare-name">Disease taxonomy</span></div>
-            <div class="compare-cell" role="cell"><span class="compare-label">One-off experiment</span>Classified by anatomy</div>
-            <div class="compare-cell is-point" role="cell"><span class="compare-label">Learning system</span>Classified by mechanism</div>
-          </div>
-          <div class="compare-row" role="row">
-            <div class="compare-head" role="rowheader"><span class="compare-idx">04</span><span class="compare-name">Therapy matching</span></div>
-            <div class="compare-cell" role="cell"><span class="compare-label">One-off experiment</span>Fitted to a population average</div>
-            <div class="compare-cell is-point" role="cell"><span class="compare-label">Learning system</span>Matched to the individual</div>
-          </div>
-        </div>
+        <table class="compare-table">
+          <caption class="visually-hidden">How evidence is generated: one-off experiments compared with a learning system</caption>
+          <thead>
+            <tr>
+              <th scope="col"><span class="visually-hidden">Dimension</span></th>
+              <th scope="col">One-off experiment</th>
+              <th scope="col" class="is-point">Learning system</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><span class="compare-idx">01</span><span class="compare-name">Trial design</span></th>
+              <td>Each trial stands alone</td>
+              <td class="is-point">Borrows strength from external data, keeps randomization</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="compare-idx">02</span><span class="compare-name">Evidence source</span></th>
+              <td>Generated only inside the trial</td>
+              <td class="is-point">Also generated at the point of care</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="compare-idx">03</span><span class="compare-name">Disease taxonomy</span></th>
+              <td>Classified by anatomy</td>
+              <td class="is-point">Classified by mechanism</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="compare-idx">04</span><span class="compare-name">Therapy matching</span></th>
+              <td>Fitted to a population average</td>
+              <td class="is-point">Matched to the individual</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -290,13 +300,13 @@
   <section class="section section-roles" id="roles">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag"><span class="section-label">03 / 09 &middot; Current roles</span><b>2026</b></div>
+        <div class="section-tag"><span class="section-label">03 / 10 &middot; Current roles</span><b>2026</b></div>
         <h2 class="section-title">Leading at the <em>frontier</em></h2>
       </div>
       <div class="roles-grid">
         <div class="role-card">
           <div class="role-logo">
-            <img src="ceo.png" alt="CEO Roundtable on Cancer logo">
+            <img src="ceo.png" alt="CEO Roundtable on Cancer logo" width="760" height="240" loading="lazy" decoding="async">
           </div>
           <h3>CEO Roundtable on Cancer &amp; Project Data Sphere</h3>
           <p class="role-position">Chief Executive Officer</p>
@@ -307,7 +317,7 @@
         </div>
         <div class="role-card">
           <div class="role-logo">
-            <img src="phyusion.png?v=33" alt="Phyusion Bio logo" class="logo-wordmark">
+            <img src="phyusion.png?v=33" alt="Phyusion Bio logo" class="logo-wordmark" width="1200" height="312" loading="lazy" decoding="async">
           </div>
           <h3>Phyusion Bio</h3>
           <p class="role-position">Founder</p>
@@ -319,7 +329,7 @@
         </div>
         <div class="role-card">
           <div class="role-logo">
-            <img src="mit.png" alt="MIT logo">
+            <img src="mit.png" alt="MIT logo" width="3000" height="2000" loading="lazy" decoding="async">
           </div>
           <h3>Massachusetts Institute of Technology</h3>
           <p class="role-position">Research Affiliate</p>
@@ -330,7 +340,7 @@
         </div>
         <div class="role-card">
           <div class="role-logo">
-            <img src="precision.png?v=33" alt="Precision Signals logo" class="logo-stacked">
+            <img src="precision.png?v=33" alt="Precision Signals logo" class="logo-stacked" width="542" height="400" loading="lazy" decoding="async">
           </div>
           <h3>Precision Signals</h3>
           <p class="role-position">Host</p>
@@ -343,7 +353,7 @@
       <!-- Latest Episode Banner -->
       <div class="podcast-banner">
         <button class="podcast-banner-trigger" id="podcast-banner-trigger" aria-expanded="false" aria-controls="podcast-banner-panel">
-          <img src="2026-08-10_Precision_Signals_Logo_Lockup_Light.png" alt="Precision Signals" class="podcast-banner-logo">
+          <img src="precision-signals-lockup.png" alt="Precision Signals" class="podcast-banner-logo" width="400" height="304" loading="lazy" decoding="async">
           <span class="podcast-banner-text"><small>Podcast</small>Latest episode of Precision Signals</span>
           <svg class="podcast-banner-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
@@ -362,7 +372,7 @@
   <section class="section section-career" id="career">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag"><span class="section-label">04 / 09 &middot; Career</span><b>Present &rarr; training</b></div>
+        <div class="section-tag"><span class="section-label">04 / 10 &middot; Career</span><b>Present &rarr; training</b></div>
         <h2 class="section-title">From the clinic to the FDA to <em>AI</em></h2>
       </div>
       <div class="timeline">
@@ -456,7 +466,7 @@
   <section class="section section-informed" id="informed">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag"><span class="section-label">05 / 09 &middot; FDA INFORMED</span><b>U.S. FDA</b></div>
+        <div class="section-tag"><span class="section-label">05 / 10 &middot; FDA INFORMED</span><b>U.S. FDA</b></div>
         <h2 class="section-title">The FDA&rsquo;s first data science <em>incubator</em></h2>
       </div>
       <div class="informed-content">
@@ -553,7 +563,7 @@
   <section class="section section-research" id="research">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag"><span class="section-label">06 / 09 &middot; Research</span><b>Three programs</b></div>
+        <div class="section-tag"><span class="section-label">06 / 10 &middot; Research</span><b>Three programs</b></div>
         <h2 class="section-title">Modernizing how evidence is <em>generated</em></h2>
       </div>
       <p class="research-lead">Dr. Khozin's research spans regulatory science, clinical trial methodology, and data science, with a focus on modernizing how evidence is generated and applied in cancer drug development.</p>
@@ -561,59 +571,107 @@
       <!-- Precision Oncology and Regulatory Science -->
       <div class="research-cards">
       <div class="research-subsection research-card-expandable">
-        <img src="precision-oncology-bg.png" alt="Laboratory glassware beside a DNA helix" class="research-card-banner">
+        <img src="precision-oncology.jpg" alt="Laboratory glassware beside a DNA helix" class="research-card-banner" width="1376" height="768" loading="lazy" decoding="async">
         <div class="research-card-content">
           <div class="research-card-header">
             <div class="research-card-header-text">
               <h3 class="research-subsection-title">Precision Oncology and Regulatory Science</h3>
               <p class="research-subsection-desc">As a clinical investigator at the National Cancer Institute, Dr. Khozin conducted clinical research in thoracic oncology and rare tumors, contributing to early-phase trials of molecularly targeted agents and novel combination regimens in lung cancer and thymic epithelial tumors.</p>
             </div>
-            <button class="research-card-toggle" aria-expanded="false">
+            <button class="research-card-toggle" aria-expanded="false" aria-controls="research-card-body-1">
               <span class="research-card-toggle-text">Read more</span>
               <svg class="research-card-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
           </div>
-          <div class="research-card-body">
+          <div class="research-card-body" id="research-card-body-1">
             <div class="research-card-body-inner">
               <p class="research-subsection-desc">This work included studies of IGF-1R-targeted therapy in thymoma, survivin suppression in NSCLC, the identification of ALK rearrangements in rare lung cancer histologies, characterization of germline EGFR T790M mutations, and the use of FDG-PET imaging as a predictive and prognostic tool in thymic malignancies. At the FDA, Dr. Khozin led several landmark accelerated and regular approvals that defined the modern paradigm of biomarker-driven oncology, including ceritinib (ALK-positive NSCLC), erlotinib (EGFR-mutant NSCLC), osimertinib (EGFR T790M NSCLC), and atezolizumab (metastatic NSCLC).</p>
               <div class="research-pub-list" data-collapsible="true">
-                <a href="https://doi.org/10.1158/1078-0432.CCR-16-1773" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">Clinical Cancer Research</span>
-                  <span class="research-pub-title">Osimertinib for the Treatment of Metastatic EGFR T790M Mutation-Positive Non-Small Cell Lung Cancer</span>
+                <a href="https://doi.org/10.1200/CCI.19.00103" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">JCO Clinical Cancer Informatics &middot; 2020</span>
+                  <span class="research-pub-title">Patient-Centered Approach to Benefit-Risk Characterization Using Number Needed to Benefit and Number Needed to Harm: Advanced Non-Small Cell Lung Cancer</span>
                 </a>
-                <a href="https://doi.org/10.1158/1078-0432.CCR-14-3157" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">Clinical Cancer Research</span>
-                  <span class="research-pub-title">FDA Approval: Ceritinib for the Treatment of Metastatic ALK-Positive Non-Small Cell Lung Cancer</span>
-                </a>
-                <a href="https://doi.org/10.1634/theoncologist.2014-0089" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">The Oncologist</span>
-                  <span class="research-pub-title">U.S. FDA Approval Summary: Erlotinib for the First-Line Treatment of Metastatic NSCLC with EGFR Mutations</span>
+                <a href="https://doi.org/10.1038/s41416-020-01033-x" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">British Journal of Cancer &middot; 2020</span>
+                  <span class="research-pub-title">Pre-Clinical Animal Models Are Poor Predictors of Human Toxicities in Phase 1 Oncology Clinical Trials</span>
                 </a>
                 <a href="https://doi.org/10.1158/1078-0432.CCR-17-0540" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">Clinical Cancer Research</span>
+                  <span class="research-journal">Clinical Cancer Research &middot; 2017</span>
                   <span class="research-pub-title">U.S. FDA Approval Summary: Atezolizumab for Metastatic Non-Small Cell Lung Cancer</span>
                 </a>
+                <a href="https://doi.org/10.1001/jamaoncol.2017.1029" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">JAMA Oncology &middot; 2017</span>
+                  <span class="research-pub-title">Milestone Analyses of Immune Checkpoint Inhibitors, Targeted Therapy, and Conventional Therapy in Metastatic Non-Small Cell Lung Cancer Trials: A Meta-analysis</span>
+                </a>
+                <a href="https://doi.org/10.1158/1078-0432.CCR-16-1773" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Clinical Cancer Research &middot; 2016</span>
+                  <span class="research-pub-title">Osimertinib for the Treatment of Metastatic EGFR T790M Mutation-Positive Non-Small Cell Lung Cancer</span>
+                </a>
+                <a href="https://doi.org/10.1177/2168479016656030" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Therapeutic Innovation &amp; Regulatory Science &middot; 2016</span>
+                  <span class="research-pub-title">Expanded Access of Investigational Drugs: The Experience of the Center of Drug Evaluation and Research Over a 10-Year Period</span>
+                </a>
+                <a href="https://doi.org/10.1038/nrd.2016.189" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Nature Reviews Drug Discovery &middot; 2016</span>
+                  <span class="research-pub-title">Evaluating the Potential for Digital Submission of Expedited Premarket Safety Reports to the FDA</span>
+                </a>
+                <a href="https://doi.org/10.1016/j.jtho.2016.05.009" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Journal of Thoracic Oncology &middot; 2016</span>
+                  <span class="research-pub-title">Clinician Perspectives on Current Issues in Lung Cancer Drug Development</span>
+                </a>
+                <a href="https://doi.org/10.1158/1078-0432.CCR-15-2082" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Clinical Cancer Research &middot; 2016</span>
+                  <span class="research-pub-title">The Majority of Expedited Investigational New Drug Safety Reports Are Uninformative</span>
+                </a>
+                <a href="https://doi.org/10.1093/annonc/mdw008" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Annals of Oncology &middot; 2016</span>
+                  <span class="research-pub-title">Selumetinib with and without Erlotinib in KRAS Mutant and KRAS Wild-Type Advanced Non-Small-Cell Lung Cancer</span>
+                </a>
+                <a href="https://doi.org/10.1001/jamaoncol.2015.3934" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">JAMA Oncology &middot; 2016</span>
+                  <span class="research-pub-title">Benefit-Risk Summary of Nivolumab for Patients with Metastatic Squamous Cell Lung Cancer After Platinum-Based Chemotherapy: A Report from the US Food and Drug Administration</span>
+                </a>
+                <a href="https://doi.org/10.1158/1078-0432.CCR-14-3157" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Clinical Cancer Research &middot; 2015</span>
+                  <span class="research-pub-title">FDA Approval: Ceritinib for the Treatment of Metastatic ALK-Positive Non-Small Cell Lung Cancer</span>
+                </a>
+                <a href="https://doi.org/10.1038/nrd4651" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Nature Reviews Drug Discovery &middot; 2015</span>
+                  <span class="research-pub-title">Why Do Oncology Drugs Fail to Gain US Regulatory Approval?</span>
+                </a>
+                <a href="https://doi.org/10.1200/JCO.2014.59.0489" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Journal of Clinical Oncology &middot; 2015</span>
+                  <span class="research-pub-title">Overall Response Rate, Progression-Free Survival, and Overall Survival with Targeted and Standard Therapies in Advanced Non-Small-Cell Lung Cancer: US Food and Drug Administration Trial-Level and Patient-Level Analyses</span>
+                </a>
+                <a href="https://doi.org/10.1634/theoncologist.2014-0089" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">The Oncologist &middot; 2014</span>
+                  <span class="research-pub-title">U.S. FDA Approval Summary: Erlotinib for the First-Line Treatment of Metastatic NSCLC with EGFR Mutations</span>
+                </a>
                 <a href="https://doi.org/10.1016/S1470-2045(13)70596-5" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">The Lancet Oncology</span>
+                  <span class="research-journal">The Lancet Oncology &middot; 2014</span>
                   <span class="research-pub-title">Cixutumumab for Patients with Recurrent or Refractory Advanced Thymic Epithelial Tumours: A Multicentre, Open-Label, Phase 2 Trial</span>
                 </a>
                 <a href="https://doi.org/10.1158/1078-0432.CCR-12-2929" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">Clinical Cancer Research</span>
+                  <span class="research-journal">Clinical Cancer Research &middot; 2013</span>
                   <span class="research-pub-title"><sup>18</sup>F-FDG PET in the Management of Patients with Thymic Epithelial Tumors</span>
                 </a>
                 <a href="https://doi.org/10.1093/annonc/mdt249" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">Annals of Oncology</span>
+                  <span class="research-journal">Annals of Oncology &middot; 2013</span>
                   <span class="research-pub-title">A Phase I/II Study of Sepantronium Bromide (YM155, Survivin Suppressor) with Paclitaxel and Carboplatin in Patients with Advanced Non-Small-Cell Lung Cancer</span>
                 </a>
-                <a href="https://doi.org/10.1097/JTO.0b013e3182697a23" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">Journal of Thoracic Oncology</span>
-                  <span class="research-pub-title">Hepatoid Carcinoma of the Lung with Anaplastic Lymphoma Kinase Gene Rearrangement</span>
-                </a>
                 <a href="https://doi.org/10.1016/j.cllc.2013.01.005" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">Clinical Lung Cancer</span>
+                  <span class="research-journal">Clinical Lung Cancer &middot; 2013</span>
                   <span class="research-pub-title">Concurrent Molecular Alterations in Tumors with Germ Line Epidermal Growth Factor Receptor T790M Mutations</span>
                 </a>
-                <button class="research-pub-toggle" aria-expanded="false">Show all 9 publications</button>
+                <a href="https://doi.org/10.1097/JTO.0b013e3182697a23" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Journal of Thoracic Oncology &middot; 2012</span>
+                  <span class="research-pub-title">Hepatoid Carcinoma of the Lung with Anaplastic Lymphoma Kinase Gene Rearrangement</span>
+                </a>
+                <a href="https://doi.org/10.1200/JCO.2012.42.4556" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Journal of Clinical Oncology &middot; 2012</span>
+                  <span class="research-pub-title">Response to Crizotinib in ROS1-Rearranged Non-Small-Cell Lung Cancer</span>
+                </a>
+                <button class="research-pub-toggle" aria-expanded="false">Show all 21 publications</button>
               </div>
             </div>
           </div>
@@ -622,59 +680,111 @@
 
       <!-- Real-World Evidence and Clinical Trial Design -->
       <div class="research-subsection research-card-expandable">
-        <img src="rwe-bg.png" alt="Dr. Khozin working at a laptop in a library" class="research-card-banner">
+        <img src="rwe.jpg" alt="Dr. Khozin working at a laptop in a library" class="research-card-banner" width="1312" height="736" loading="lazy" decoding="async">
         <div class="research-card-content">
           <div class="research-card-header">
             <div class="research-card-header-text">
               <h3 class="research-subsection-title">Real-World Evidence and Clinical Trial Design</h3>
               <p class="research-subsection-desc">Dr. Khozin’s research has helped define the methodological foundations for using electronic health records and other real-world data to generate validated clinical endpoints, construct robust external control arms, and support regulatory decision-making in oncology.</p>
             </div>
-            <button class="research-card-toggle" aria-expanded="false">
+            <button class="research-card-toggle" aria-expanded="false" aria-controls="research-card-body-2">
               <span class="research-card-toggle-text">Read more</span>
               <svg class="research-card-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
           </div>
-          <div class="research-card-body">
+          <div class="research-card-body" id="research-card-body-2">
             <div class="research-card-body-inner">
               <p class="research-subsection-desc">His work demonstrated that real-world endpoints can meaningfully correlate with overall survival and be implemented at scale with scientific rigor. He has also advanced hybrid trial designs that integrate randomization with external data sources, developed approaches to improve the interpretation of clinical trials for underrepresented populations, and established practical frameworks for incorporating real-world evidence into both regulatory and treatment decisions.</p>
               <div class="research-pub-list" data-collapsible="true">
-                <a href="https://doi.org/10.1093/jnci/djx187" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">Journal of the National Cancer Institute</span>
-                  <span class="research-pub-title">Real-World Data for Clinical Evidence Generation in Oncology</span>
+                <a href="https://doi.org/10.2196/88202" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">JMIR Medical Informatics &middot; 2026</span>
+                  <span class="research-pub-title">Real-World Imaging Data: Opportunities and Challenges</span>
                 </a>
-                <a href="https://doi.org/10.1002/cncr.32383" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">Cancer</span>
-                  <span class="research-pub-title">Real-World Progression, Treatment, and Survival Outcomes During Rapid Adoption of Immunotherapy for Advanced NSCLC</span>
+                <a href="https://doi.org/10.1007/s12325-026-03537-z" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Advances in Therapy &middot; 2026</span>
+                  <span class="research-pub-title">Clinically Meaningful, Patient-Centered Endpoints for Real-World Evidence Generation in Breast Cancer: Perspectives from the Multidisciplinary TRIUMPH Initiative</span>
                 </a>
-                <a href="https://doi.org/10.1634/theoncologist.2018-0307" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">The Oncologist</span>
-                  <span class="research-pub-title">Real-World Outcomes of Patients with Metastatic NSCLC Treated with PD-1 Inhibitors in the Year Following U.S. Regulatory Approval</span>
+                <a href="https://doi.org/10.1007/s12325-025-03201-y" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Advances in Therapy &middot; 2025</span>
+                  <span class="research-pub-title">Real-World Evidence Acceptability and Use in Breast Cancer Treatment Decision-Making</span>
                 </a>
-                <a href="https://doi.org/10.1200/CCI.19.00013" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">JCO Clinical Cancer Informatics</span>
-                  <span class="research-pub-title">Characterizing the Feasibility and Performance of Real-World Tumor Progression End Points</span>
+                <a href="https://doi.org/10.1093/oncolo/oyae138" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">The Oncologist &middot; 2024</span>
+                  <span class="research-pub-title">Unleashing the Power of Clinical Trial Data: A Proposal for Enhancing Informed Consent and Data Sharing</span>
+                </a>
+                <a href="https://doi.org/10.3389/fmed.2023.1236462" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Frontiers in Medicine &middot; 2023</span>
+                  <span class="research-pub-title">Real-World Evidence for Regulatory Decision-Making: Updated Guidance from Around the World</span>
                 </a>
                 <a href="https://doi.org/10.1038/s41467-022-33192-1" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">Nature Communications</span>
+                  <span class="research-journal">Nature Communications &middot; 2022</span>
                   <span class="research-pub-title">The Design and Evaluation of Hybrid Controlled Trials That Leverage External Data and Randomization</span>
                 </a>
                 <a href="https://doi.org/10.1016/j.bbcan.2022.188825" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">Biochimica et Biophysica Acta Reviews on Cancer</span>
+                  <span class="research-journal">Biochimica et Biophysica Acta Reviews on Cancer &middot; 2022</span>
                   <span class="research-pub-title">A Novel Approach to Reducing Disparities in Health Outcomes by Enhancing Interpretation of Cancer Clinical Trials for Underrepresented Patient Groups</span>
                 </a>
-                <a href="https://doi.org/10.1007/s12325-025-03201-y" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">Advances in Therapy</span>
-                  <span class="research-pub-title">Real-World Evidence Acceptability and Use in Breast Cancer Treatment Decision-Making</span>
+                <a href="https://doi.org/10.1016/j.bbcan.2021.188575" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Biochimica et Biophysica Acta Reviews on Cancer &middot; 2021</span>
+                  <span class="research-pub-title">A Digital Highway for Data Fluidity and Data Equity in Precision Medicine</span>
                 </a>
-                <a href="https://doi.org/10.3389/fmed.2023.1236462" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">Frontiers in Medicine</span>
-                  <span class="research-pub-title">Real-World Evidence for Regulatory Decision-Making: Updated Guidance from Around the World</span>
+                <a href="https://doi.org/10.1136/jitc-2021-002896" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Journal for ImmunoTherapy of Cancer &middot; 2021</span>
+                  <span class="research-pub-title">Immune-Related Adverse Events Associated with Immune Checkpoint Inhibitors: A Call to Action for Collecting and Sharing Clinical Trial and Real-World Data</span>
+                </a>
+                <a href="https://doi.org/10.1158/1078-0432.CCR-20-3857" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Clinical Cancer Research &middot; 2021</span>
+                  <span class="research-pub-title">Impact of Broadening Trial Eligibility Criteria for Patients with Advanced Non-Small Cell Lung Cancer: Real-World Analysis of Select ASCO Recommendations</span>
+                </a>
+                <a href="https://doi.org/10.1200/JCO.19.03094" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Journal of Clinical Oncology &middot; 2020</span>
+                  <span class="research-pub-title">Status Update on Data Required to Build a Learning Health System</span>
+                </a>
+                <a href="https://doi.org/10.1002/cncr.32383" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Cancer &middot; 2019</span>
+                  <span class="research-pub-title">Real-World Progression, Treatment, and Survival Outcomes During Rapid Adoption of Immunotherapy for Advanced NSCLC</span>
+                </a>
+                <a href="https://doi.org/10.1200/CCI.19.00013" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">JCO Clinical Cancer Informatics &middot; 2019</span>
+                  <span class="research-pub-title">Characterizing the Feasibility and Performance of Real-World Tumor Progression End Points</span>
+                </a>
+                <a href="https://doi.org/10.1001/jama.2019.10650" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">JAMA &middot; 2019</span>
+                  <span class="research-pub-title">Association Between FDA Label Restriction and Immunotherapy and Chemotherapy Use in Bladder Cancer</span>
+                </a>
+                <a href="https://doi.org/10.1200/CCI.18.00155" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">JCO Clinical Cancer Informatics &middot; 2019</span>
+                  <span class="research-pub-title">An Exploratory Analysis of Real-World End Points for Assessing Outcomes Among Immunotherapy-Treated Patients with Advanced Non-Small Cell Lung Cancer</span>
+                </a>
+                <a href="https://doi.org/10.1634/theoncologist.2018-0307" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">The Oncologist &middot; 2018</span>
+                  <span class="research-pub-title">Real-World Outcomes of Patients with Metastatic NSCLC Treated with PD-1 Inhibitors in the Year Following U.S. Regulatory Approval</span>
                 </a>
                 <a href="https://doi.org/10.1377/hlthaff.2017.1579" class="research-pub" target="_blank" rel="noopener">
-                  <span class="research-journal">Health Affairs</span>
+                  <span class="research-journal">Health Affairs &middot; 2018</span>
                   <span class="research-pub-title">Real-World Evidence in Support of Precision Medicine: Clinico-Genomic Cancer Data as a Case Study</span>
                 </a>
-                <button class="research-pub-toggle" aria-expanded="false">Show all 9 publications</button>
+                <a href="https://doi.org/10.1136/bmjebm-2018-111111" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">BMJ Evidence-Based Medicine &middot; 2018</span>
+                  <span class="research-pub-title">Assessing Function of Electronic Health Records for Real-World Data Generation</span>
+                </a>
+                <a href="https://doi.org/10.1634/theoncologist.2017-0353" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">The Oncologist &middot; 2018</span>
+                  <span class="research-pub-title">Characteristics of Real-World Metastatic Non-Small Cell Lung Cancer Patients Treated with Nivolumab and Pembrolizumab During the Year Following Approval</span>
+                </a>
+                <a href="https://doi.org/10.1093/jnci/djx187" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Journal of the National Cancer Institute &middot; 2017</span>
+                  <span class="research-pub-title">Real-World Data for Clinical Evidence Generation in Oncology</span>
+                </a>
+                <a href="https://doi.org/10.1016/j.cell.2017.10.032" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">Cell &middot; 2017</span>
+                  <span class="research-pub-title">Core Clinical Data Elements for Cancer Genomic Repositories: A Multi-Stakeholder Consensus</span>
+                </a>
+                <a href="https://doi.org/10.1056/NEJMsb1702054" class="research-pub" target="_blank" rel="noopener">
+                  <span class="research-journal">The New England Journal of Medicine &middot; 2017</span>
+                  <span class="research-pub-title">Advantages of a Truly Open-Access Data-Sharing Model</span>
+                </a>
+                <button class="research-pub-toggle" aria-expanded="false">Show all 22 publications</button>
               </div>
             </div>
           </div>
@@ -683,19 +793,19 @@
 
       <!-- AI and ML in Drug Development -->
       <div class="research-subsection research-card-expandable">
-        <img src="ai-ml-bg.png" alt="Brain MRI scans connected to circuit traces" class="research-card-banner">
+        <img src="ai-ml.jpg" alt="Brain MRI scans connected to circuit traces" class="research-card-banner" width="1376" height="768" loading="lazy" decoding="async">
         <div class="research-card-content">
         <div class="research-card-header">
           <div class="research-card-header-text">
             <h3 class="research-subsection-title">Artificial Intelligence and Machine Learning in Drug Development</h3>
             <p class="research-subsection-desc">Dr. Khozin’s work in AI spans foundation models for oncology, LLM-based clinical trial data analysis, and regulatory frameworks for AI/ML adoption across the drug development life cycle.</p>
           </div>
-          <button class="research-card-toggle" aria-expanded="false">
+          <button class="research-card-toggle" aria-expanded="false" aria-controls="research-card-body-3">
             <span class="research-card-toggle-text">Read more</span>
             <svg class="research-card-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
-        <div class="research-card-body">
+        <div class="research-card-body" id="research-card-body-3">
           <div class="research-card-body-inner">
         <p class="research-subsection-desc">At the FDA, he established Information Exchange and Data Transformation (INFORMED), the agency’s first data science and technology incubator, which laid the groundwork for integrating AI and digital health into drug development and regulatory decision-making.</p>
         <p class="research-subsection-desc">A central focus of Dr. Khozin’s current work is modernizing how tumor burden is measured in clinical trials. In a large FDA-led meta-analysis of more than 14,000 patients enrolled in registration trials, he found that two independent radiologists reviewing the same scans agreed on tumor response classification only about 70% of the time. In ovarian and pancreatic cancers, discordance reached as high as 45%, with striking cases in which one reader determined a complete response while the other concluded progressive disease in the very same patient.</p>
@@ -703,42 +813,54 @@
 
         <div class="research-pub-list" data-collapsible="true">
           <a href="https://ai.nejm.org/doi/full/10.1056/AIra2401164" class="research-pub" target="_blank" rel="noopener">
-            <span class="research-journal">NEJM AI</span>
+            <span class="research-journal">NEJM AI &middot; 2025</span>
             <span class="research-pub-title">The Use of Artificial Intelligence for Cancer Therapeutic Decision-Making</span>
           </a>
-          <a href="https://ascpt.onlinelibrary.wiley.com/doi/10.1111/cts.70001" class="research-pub" target="_blank" rel="noopener">
-            <span class="research-journal">Clinical and Translational Science</span>
-            <span class="research-pub-title">AI for Cancer Classification</span>
-          </a>
           <a href="https://www.medrxiv.org/content/10.1101/2025.02.05.25321607v2" class="research-pub" target="_blank" rel="noopener">
-            <span class="research-journal">medRxiv</span>
+            <span class="research-journal">medRxiv &middot; 2025</span>
             <span class="research-pub-title">Artificial Intelligence in Biomedical Data Analysis: A Comparative Assessment of Large Language Models for Automated Clinical Trial Interpretation and Statistical Evaluation</span>
           </a>
+          <a href="https://ascpt.onlinelibrary.wiley.com/doi/10.1111/cts.70001" class="research-pub" target="_blank" rel="noopener">
+            <span class="research-journal">Clinical and Translational Science &middot; 2024</span>
+            <span class="research-pub-title">From Organs to Algorithms: Redefining Cancer Classification in the Age of Artificial Intelligence</span>
+          </a>
           <a href="https://doi.org/10.1038/s41746-019-0148-3" class="research-pub" target="_blank" rel="noopener">
-            <span class="research-journal">NPJ Digital Medicine</span>
+            <span class="research-journal">NPJ Digital Medicine &middot; 2019</span>
             <span class="research-pub-title">Artificial Intelligence and Machine Learning in Clinical Development: A Translational Perspective</span>
           </a>
-          <a href="https://doi.org/10.1038/nrd.2018.34" class="research-pub" target="_blank" rel="noopener">
-            <span class="research-journal">Nature Reviews Drug Discovery</span>
-            <span class="research-pub-title">INFORMED: An Incubator at the US FDA for Driving Innovations in Data Science and Agile Technology</span>
-          </a>
-          <a href="https://doi.org/10.1038/nrd.2017.26" class="research-pub" target="_blank" rel="noopener">
-            <span class="research-journal">Nature Reviews Drug Discovery</span>
-            <span class="research-pub-title">From Big Data to Smart Data: FDA's INFORMED Initiative</span>
-          </a>
           <a href="https://doi.org/10.1002/cpt.1441" class="research-pub" target="_blank" rel="noopener">
-            <span class="research-journal">Clinical Pharmacology and Therapeutics</span>
+            <span class="research-journal">Clinical Pharmacology and Therapeutics &middot; 2019</span>
             <span class="research-pub-title">Decentralized Trials in the Age of Real-World Evidence and Inclusivity in Clinical Investigations</span>
           </a>
           <a href="https://doi.org/10.1007/s12325-019-00970-1" class="research-pub" target="_blank" rel="noopener">
-            <span class="research-journal">Advances in Therapy</span>
+            <span class="research-journal">Advances in Therapy &middot; 2019</span>
             <span class="research-pub-title">Generating Real-World Tumor Burden Endpoints from Electronic Health Record Data: Comparison of RECIST, Radiology-Anchored, and Clinician-Anchored Approaches</span>
           </a>
           <a href="https://doi.org/10.1093/annonc/mdz060" class="research-pub" target="_blank" rel="noopener">
-            <span class="research-journal">Annals of Oncology</span>
+            <span class="research-journal">Annals of Oncology &middot; 2019</span>
             <span class="research-pub-title">Analysis of Time-to-Treatment Discontinuation of Targeted Therapy, Immunotherapy, and Chemotherapy in Clinical Trials of Patients with NSCLC</span>
           </a>
-          <button class="research-pub-toggle" aria-expanded="false">Show all 9 publications</button>
+          <a href="https://doi.org/10.1200/CCI.19.00046" class="research-pub" target="_blank" rel="noopener">
+            <span class="research-journal">JCO Clinical Cancer Informatics &middot; 2019</span>
+            <span class="research-pub-title">Machine-Learning and Stochastic Tumor Growth Models for Predicting Outcomes in Patients with Advanced Non-Small-Cell Lung Cancer</span>
+          </a>
+          <a href="https://doi.org/10.1038/s41746-019-0090-4" class="research-pub" target="_blank" rel="noopener">
+            <span class="research-journal">NPJ Digital Medicine &middot; 2019</span>
+            <span class="research-pub-title">Developing and Adopting Safe and Effective Digital Biomarkers to Improve Patient Outcomes</span>
+          </a>
+          <a href="https://doi.org/10.1038/nrd.2018.34" class="research-pub" target="_blank" rel="noopener">
+            <span class="research-journal">Nature Reviews Drug Discovery &middot; 2018</span>
+            <span class="research-pub-title">INFORMED: An Incubator at the US FDA for Driving Innovations in Data Science and Agile Technology</span>
+          </a>
+          <a href="https://doi.org/10.1038/nrd.2017.26" class="research-pub" target="_blank" rel="noopener">
+            <span class="research-journal">Nature Reviews Drug Discovery &middot; 2017</span>
+            <span class="research-pub-title">From Big Data to Smart Data: FDA's INFORMED Initiative</span>
+          </a>
+          <a href="https://doi.org/10.1038/nrd.2017.153" class="research-pub" target="_blank" rel="noopener">
+            <span class="research-journal">Nature Reviews Drug Discovery &middot; 2017</span>
+            <span class="research-pub-title">Biometric Monitoring Devices for Assessing End Points in Clinical Trials: Developing an Ecosystem</span>
+          </a>
+          <button class="research-pub-toggle" aria-expanded="false">Show all 12 publications</button>
         </div>
             </div>
           </div>
@@ -788,45 +910,45 @@
                   <th class="fda-matrix-row-header fda-matrix-row-label" rowspan="5"><span>Primary Investigator</span></th>
                   <th class="fda-matrix-row-header">CR</th>
                   <td class="fda-concordant">305</td>
-                  <td class="fda-discordant fda-seq-4" title="35.2% of row">250</td>
-                  <td class="fda-discordant fda-seq-3" title="16.3% of row">116</td>
-                  <td class="fda-discordant fda-seq-1" title="2.0% of row">14</td>
-                  <td class="fda-discordant fda-seq-2" title="3.5% of row">25</td>
+                  <td class="fda-discordant">250</td>
+                  <td class="fda-discordant">116</td>
+                  <td class="fda-discordant fda-crpd" title="Investigator CR, radiologist PD">14</td>
+                  <td class="fda-discordant">25</td>
                   <td class="fda-matrix-total">710</td>
                 </tr>
                 <tr>
                   <th class="fda-matrix-row-header">PR</th>
-                  <td class="fda-discordant fda-seq-2" title="5.1% of row">240</td>
+                  <td class="fda-discordant">240</td>
                   <td class="fda-concordant">3,366</td>
-                  <td class="fda-discordant fda-seq-3" title="19.4% of row">908</td>
-                  <td class="fda-discordant fda-seq-2" title="2.7% of row">126</td>
-                  <td class="fda-discordant fda-seq-1" title="0.7% of row">33</td>
+                  <td class="fda-discordant">908</td>
+                  <td class="fda-discordant">126</td>
+                  <td class="fda-discordant">33</td>
                   <td class="fda-matrix-total">4,673</td>
                 </tr>
                 <tr>
                   <th class="fda-matrix-row-header">SD</th>
-                  <td class="fda-discordant fda-seq-1" title="1.2% of row">64</td>
-                  <td class="fda-discordant fda-seq-3" title="16.4% of row">849</td>
+                  <td class="fda-discordant">64</td>
+                  <td class="fda-discordant">849</td>
                   <td class="fda-concordant">3,522</td>
-                  <td class="fda-discordant fda-seq-3" title="12.9% of row">668</td>
-                  <td class="fda-discordant fda-seq-1" title="1.4% of row">74</td>
+                  <td class="fda-discordant">668</td>
+                  <td class="fda-discordant">74</td>
                   <td class="fda-matrix-total">5,177</td>
                 </tr>
                 <tr>
                   <th class="fda-matrix-row-header">PD</th>
-                  <td class="fda-discordant fda-seq-1" title="0.3% of row">9</td>
-                  <td class="fda-discordant fda-seq-2" title="2.2% of row">58</td>
-                  <td class="fda-discordant fda-seq-3" title="19.5% of row">507</td>
+                  <td class="fda-discordant fda-crpd" title="Investigator PD, radiologist CR">9</td>
+                  <td class="fda-discordant">58</td>
+                  <td class="fda-discordant">507</td>
                   <td class="fda-concordant">1,890</td>
-                  <td class="fda-discordant fda-seq-2" title="5.2% of row">134</td>
+                  <td class="fda-discordant">134</td>
                   <td class="fda-matrix-total">2,598</td>
                 </tr>
                 <tr>
                   <th class="fda-matrix-row-header">NE</th>
-                  <td class="fda-discordant fda-seq-1" title="0.2% of row">1</td>
-                  <td class="fda-discordant fda-seq-2" title="2.5% of row">13</td>
-                  <td class="fda-discordant fda-seq-2" title="6.0% of row">31</td>
-                  <td class="fda-discordant fda-seq-2" title="9.4% of row">49</td>
+                  <td class="fda-discordant">1</td>
+                  <td class="fda-discordant">13</td>
+                  <td class="fda-discordant">31</td>
+                  <td class="fda-discordant">49</td>
                   <td class="fda-concordant">425</td>
                   <td class="fda-matrix-total">519</td>
                 </tr>
@@ -847,15 +969,12 @@
           </div>
           <div class="fda-table-legend">
             <span class="fda-legend-item"><span class="fda-legend-swatch fda-legend-concordant"></span>Concordant</span>
-            <span class="fda-legend-item"><span class="fda-legend-swatch fda-seq-1"></span>&lt;2% of row</span>
-            <span class="fda-legend-item"><span class="fda-legend-swatch fda-seq-2"></span>2&ndash;10%</span>
-            <span class="fda-legend-item"><span class="fda-legend-swatch fda-seq-3"></span>10&ndash;20%</span>
-            <span class="fda-legend-item"><span class="fda-legend-swatch fda-seq-4"></span>&gt;20%</span>
+            <span class="fda-legend-item"><span class="fda-legend-swatch fda-legend-crpd"></span>CR by one reader, PD by the other</span>
           </div>
           <p class="fda-table-note">
             Response categories per <strong>RECIST 1.1</strong> (Response Evaluation Criteria in Solid Tumors):
             CR = Complete Response &middot; PR = Partial Response &middot; SD = Stable Disease &middot; PD = Progressive Disease &middot; NE = Not Evaluable.
-            The highlighted diagonal cells are the only instances where both readers agreed on the same response classification.
+            The highlighted diagonal cells are the only instances where both readers agreed on the same response classification. The red cells mark the 23 patients read as a complete response by one reader and progressive disease by the other.
             Overall discordance across tumor types was approximately 30%, with notably higher rates in ovarian and pancreatic cancers.
           </p>
           <p class="fda-table-source">
@@ -865,7 +984,7 @@
           <div class="matrix-stats">
             <div class="matrix-stat"><span class="matrix-stat-num">69.5%</span><span class="matrix-stat-label">Overall concordance (9,508 / 13,677)</span></div>
             <div class="matrix-stat"><span class="matrix-stat-num">&le;45%</span><span class="matrix-stat-label">Discordance in ovarian and pancreatic cancers</span></div>
-            <div class="matrix-stat"><span class="matrix-stat-num">23</span><span class="matrix-stat-label">Patients read CR by one reader, PD by the other</span></div>
+            <div class="matrix-stat"><span class="matrix-stat-num is-crpd">23</span><span class="matrix-stat-label">Patients read CR by one reader, PD by the other</span></div>
           </div>
         </div>
         <div class="ai-initiatives">
@@ -921,11 +1040,81 @@
 
   <div class="section-band" data-band="formula"><canvas class="band-canvas"></canvas></div>
 
+  <!-- Financial Engineering -->
+  <section class="section section-finance" id="finance">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><span class="section-label">07 / 10 &middot; Financial engineering</span><b>With Andrew Lo &amp; Roger Stein</b></div>
+        <h2 class="section-title">New funding models for high-risk, high-reward <em>science</em></h2>
+      </div>
+      <p class="finance-lead">Breakthrough biomedical research is often too risky for any single investor, so promising programs stall for lack of capital. Dr. Khozin&rsquo;s work with Andrew Lo and Roger Stein examines financial engineering that changes the calculation: pooling many programs into one portfolio, issuing research-backed bonds against it, and using AI to estimate each program&rsquo;s odds of success more accurately.</p>
+
+      <ol class="finance-steps">
+        <li class="finance-step">
+          <span class="finance-step-num" aria-hidden="true">01</span>
+          <h3>Pool</h3>
+          <p>A megafund holds many drug-development programs at once. When their outcomes are not closely linked, the portfolio carries far less risk than any single project.</p>
+        </li>
+        <li class="finance-step">
+          <span class="finance-step-num" aria-hidden="true">02</span>
+          <h3>Securitize</h3>
+          <p>Research-backed obligations, bonds secured by the portfolio, open early-stage science to pension funds and other investors who rarely fund it directly.</p>
+        </li>
+        <li class="finance-step">
+          <span class="finance-step-num" aria-hidden="true">03</span>
+          <h3>Measure</h3>
+          <p>Machine-learning models that predict trial outcomes sharpen each program&rsquo;s probability of success, the input every financing model depends on.</p>
+        </li>
+      </ol>
+
+
+      <div class="finance-refs">
+        <div class="finance-ref-group">
+          <h3>Papers</h3>
+          <div class="research-pub-list">
+              <a href="https://doi.org/10.1038/s41599-025-05281-1" class="research-pub" target="_blank" rel="noopener">
+                <span class="research-journal">Humanities and Social Sciences Communications &middot; 2025</span>
+                <span class="research-pub-title">Towards a Framework for a New Research Ecosystem</span>
+                <span class="research-pub-authors">Savona R, Alberini CM, Alessi L, &hellip; Khozin S, &hellip; Stein RM</span>
+              </a>
+              <a href="https://doi.org/10.1016/j.bbcan.2022.188825" class="research-pub" target="_blank" rel="noopener">
+                <span class="research-journal">Biochimica et Biophysica Acta Reviews on Cancer &middot; 2022</span>
+                <span class="research-pub-title">A Novel Approach to Reducing Disparities in Health Outcomes by Enhancing Interpretation of Cancer Clinical Trials for Underrepresented Patient Groups</span>
+                <span class="research-pub-authors">Khozin S, Stein RM</span>
+              </a>
+              <a href="https://doi.org/10.1200/CCI.19.00046" class="research-pub" target="_blank" rel="noopener">
+                <span class="research-journal">JCO Clinical Cancer Informatics &middot; 2019</span>
+                <span class="research-pub-title">Machine-Learning and Stochastic Tumor Growth Models for Predicting Outcomes in Patients with Advanced Non-Small-Cell Lung Cancer</span>
+                <span class="research-pub-authors">Siah KW, Khozin S, Wong CH, Lo AW</span>
+              </a>
+          </div>
+        </div>
+        <div class="finance-ref-group">
+          <h3>From the Substack</h3>
+          <div class="research-pub-list">
+              <a href="https://www.insights.phyusionbio.com/p/the-algorithmic-advantage-venture" class="research-pub" target="_blank" rel="noopener">
+                <span class="research-journal">PhyusionBio &middot; 2024</span>
+                <span class="research-pub-title">The Algorithmic Advantage: Venture Capital&rsquo;s AI-Augmented Future</span>
+                <span class="research-pub-authors">Sean Khozin</span>
+              </a>
+              <a href="https://www.insights.phyusionbio.com/p/how-innovative-finance-can-drive" class="research-pub" target="_blank" rel="noopener">
+                <span class="research-journal">PhyusionBio &middot; 2023</span>
+                <span class="research-pub-title">How Innovative Finance Can Drive Innovative Science: The Case for Research Backed Obligations and &ldquo;Megafunds&rdquo;</span>
+                <span class="research-pub-authors">Roger M. Stein and Sean Khozin</span>
+              </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-band" data-band="neural"><canvas class="band-canvas"></canvas></div>
+
   <!-- Music -->
   <section class="section section-music" id="music">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag"><span class="section-label">07 / 09 &middot; Music</span><b>Perpetual Drift</b></div>
+        <div class="section-tag"><span class="section-label">08 / 10 &middot; Music</span><b>Perpetual Drift</b></div>
         <h2 class="section-title">Jazz meets classical in suspended <em>time</em></h2>
       </div>
       <div class="music-grid">
@@ -954,70 +1143,62 @@
   <section class="section section-boards" id="boards">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag"><span class="section-label">08 / 09 &middot; Leadership</span><b>Boards &amp; advisory</b></div>
+        <div class="section-tag"><span class="section-label">09 / 10 &middot; Leadership</span><b>Boards &amp; advisory</b></div>
         <h2 class="section-title">Select board appointments &amp; advisory <em>roles</em></h2>
       </div>
       <div class="boards-grid">
-        <div class="board-item" role="button" tabindex="0" aria-expanded="false">
-          <h3>Society for Translational Oncology</h3>
-          <span class="board-toggle" aria-hidden="true">+</span>
-          <div class="board-detail">
+        <div class="board-item">
+          <h3><button class="board-head" type="button" aria-expanded="false" aria-controls="board-detail-1"><span>Society for Translational Oncology</span><span class="board-toggle" aria-hidden="true">+</span></button></h3>
+          <div class="board-detail" id="board-detail-1">
             <p>A nonprofit bridging scientific discovery and clinical application in oncology, promoting equitable cancer care and fostering the translation of new therapies through education and global collaboration.</p>
             <a href="https://sto-online.org/" target="_blank" rel="noopener">Visit website &rarr;</a>
           </div>
         </div>
-        <div class="board-item" role="button" tabindex="0" aria-expanded="false">
-          <h3>Owkin</h3>
-          <span class="board-toggle" aria-hidden="true">+</span>
-          <div class="board-detail">
+        <div class="board-item">
+          <h3><button class="board-head" type="button" aria-expanded="false" aria-controls="board-detail-2"><span>Owkin</span><span class="board-toggle" aria-hidden="true">+</span></button></h3>
+          <div class="board-detail" id="board-detail-2">
             <p>An AI biotech company using machine learning and federated learning to accelerate drug discovery, optimize clinical trials, and develop AI-powered diagnostics from multimodal patient data.</p>
             <a href="https://www.owkin.com" target="_blank" rel="noopener">Visit website &rarr;</a>
           </div>
         </div>
-        <div class="board-item" role="button" tabindex="0" aria-expanded="false">
-          <h3>Jona</h3>
-          <span class="board-toggle" aria-hidden="true">+</span>
-          <div class="board-detail">
+        <div class="board-item">
+          <h3><button class="board-head" type="button" aria-expanded="false" aria-controls="board-detail-3"><span>Jona</span><span class="board-toggle" aria-hidden="true">+</span></button></h3>
+          <div class="board-detail" id="board-detail-3">
             <p>A personalized health company using AI to analyze the gut microbiome, delivering actionable insights on diet and lifestyle to help people identify root causes of chronic health issues.</p>
             <a href="https://jona.health/" target="_blank" rel="noopener">Visit website &rarr;</a>
           </div>
         </div>
-        <div class="board-item" role="button" tabindex="0" aria-expanded="false">
-          <h3>Atropos Health</h3>
-          <span class="board-toggle" aria-hidden="true">+</span>
-          <div class="board-detail">
+        <div class="board-item">
+          <h3><button class="board-head" type="button" aria-expanded="false" aria-controls="board-detail-4"><span>Atropos Health</span><span class="board-toggle" aria-hidden="true">+</span></button></h3>
+          <div class="board-detail" id="board-detail-4">
             <p>A Stanford spinout generating publication-grade real-world evidence in minutes using AI, closing the evidence gap where only 14% of daily medical decisions are backed by high-quality data.</p>
             <a href="https://www.atroposhealth.com/" target="_blank" rel="noopener">Visit website &rarr;</a>
           </div>
         </div>
-        <div class="board-item" role="button" tabindex="0" aria-expanded="false">
-          <h3>Alliance for AI in Healthcare</h3>
-          <span class="board-toggle" aria-hidden="true">+</span>
-          <div class="board-detail">
+        <div class="board-item">
+          <h3><button class="board-head" type="button" aria-expanded="false" aria-controls="board-detail-5"><span>Alliance for AI in Healthcare</span><span class="board-toggle" aria-hidden="true">+</span></button></h3>
+          <div class="board-detail" id="board-detail-5">
             <p>An international multi-stakeholder advocacy organization promoting the responsible development, regulation, and adoption of AI-powered healthcare solutions across industry, government, and academia.</p>
             <a href="https://www.theaaih.org/" target="_blank" rel="noopener">Visit website &rarr;</a>
           </div>
         </div>
-        <div class="board-item" role="button" tabindex="0" aria-expanded="false">
-          <h3>Digital Medicine Society</h3>
-          <span class="board-toggle" aria-hidden="true">+</span>
-          <div class="board-detail">
+        <div class="board-item">
+          <h3><button class="board-head" type="button" aria-expanded="false" aria-controls="board-detail-6"><span>Digital Medicine Society</span><span class="board-toggle" aria-hidden="true">+</span></button></h3>
+          <div class="board-detail" id="board-detail-6">
             <p>A global nonprofit advancing the ethical, effective, and equitable use of digital medicine by convening diverse stakeholders and producing open-source resources used by the FDA, NIH, and top pharma companies.</p>
             <a href="https://dimesociety.org/" target="_blank" rel="noopener">Visit website &rarr;</a>
           </div>
         </div>
-        <div class="board-item" role="button" tabindex="0" aria-expanded="false">
-          <h3>Cytometric Therapeutics</h3>
-          <span class="board-toggle" aria-hidden="true">+</span>
-          <div class="board-detail">
+        <div class="board-item">
+          <h3><button class="board-head" type="button" aria-expanded="false" aria-controls="board-detail-7"><span>Cytometric Therapeutics</span><span class="board-toggle" aria-hidden="true">+</span></button></h3>
+          <div class="board-detail" id="board-detail-7">
             <p>A biotech company developing precision oncology therapies through functional cytometric profiling, testing living tumor samples directly against therapeutic agents to treat cancers with minimal toxicity.</p>
             <a href="https://cytometric-therapeutics.com/" target="_blank" rel="noopener">Visit website &rarr;</a>
           </div>
         </div>
-        <div class="board-item" role="button" tabindex="0" aria-expanded="false">
-          <h3>Weave Bio</h3>
-          <span class="board-toggle" aria-hidden="true">+</span>
-          <div class="board-detail">
+        <div class="board-item">
+          <h3><button class="board-head" type="button" aria-expanded="false" aria-controls="board-detail-8"><span>Weave Bio</span><span class="board-toggle" aria-hidden="true">+</span></button></h3>
+          <div class="board-detail" id="board-detail-8">
             <p>An AI-native software company automating regulatory submissions for drug development, transforming source data into compliant, submission-ready dossiers across global health authorities.</p>
             <a href="https://www.weave.bio/" target="_blank" rel="noopener">Visit website &rarr;</a>
           </div>
@@ -1032,7 +1213,7 @@
   <section class="section section-contact" id="contact">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag"><span class="section-label">09 / 09 &middot; Connect</span><b>Correspondence</b></div>
+        <div class="section-tag"><span class="section-label">10 / 10 &middot; Connect</span><b>Correspondence</b></div>
         <h2 class="section-title">Get in <em>touch</em></h2>
       </div>
       <div class="contact-content">
@@ -1076,8 +1257,7 @@
 
         <div class="contact-side">
         <figure class="contact-photo">
-          <img src="Man_speaking_at_podium_3.jpg" alt="Dr. Khozin speaking at a podium" loading="lazy">
-          <figcaption>Speaking engagements</figcaption>
+          <img src="Man_speaking_at_podium_3.jpg" alt="Dr. Khozin speaking at a podium" width="1280" height="853" loading="lazy" decoding="async">
         </figure>
         <div class="contact-links">
           <a href="https://www.linkedin.com/in/seankhozin" class="contact-link" target="_blank" rel="noopener">
@@ -1114,7 +1294,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=32"></script>
+  <script src="script.js?v=33"></script>
   <script src="neural-network.js?v=32"></script>
   <script src="convergence.js?v=3"></script>
   <script src="informed.js?v=2"></script>
