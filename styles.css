@@ -654,13 +654,6 @@ button { font: inherit; }
 .roundtable-ratio { font: 900 clamp(64px, 8vw, 128px)/.82 var(--font-display); font-stretch: 72%; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
 .roundtable-ratio { font-size: min(clamp(64px, 8vw, 128px), 42cqi); }
 .roundtable-verdict { font: 800 17px/1.2 var(--font-display); font-stretch: 92%; }
-.roundtable-presets { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-.roundtable-preset {
-  min-height: 36px; padding: 0 12px; background: transparent; color: inherit; border: 2px solid currentColor; border-radius: 0; cursor: pointer;
-  font: 700 12px/1 var(--font-display); font-stretch: 88%; letter-spacing: .04em; text-transform: uppercase;
-}
-.roundtable-preset[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-.roundtable-result.is-below .roundtable-preset[aria-pressed="true"] { background: var(--paper); border-color: var(--paper); color: var(--vermilion); }
 .roundtable-credit { color: var(--on-ink-muted); font: 500 12px/1.4 var(--font-mono); }
 .roundtable-models { border-top: 2px solid var(--ink-rule); padding-top: 24px; display: grid; gap: 16px; }
 .frameworks { list-style: none; border-top: 2px solid var(--ink-rule); }
