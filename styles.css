@@ -681,6 +681,7 @@ button { font: inherit; }
 .framework-body[hidden] { display: none; }
 .framework-label { display: block; margin-bottom: 6px; color: var(--signal); font: 500 12px/1.2 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
 .framework-body p { color: var(--on-ink-muted); font-size: 15px; line-height: 1.5; }
+.framework-body .framework-credit { grid-column: 1 / -1; color: var(--stone); font: 500 12px/1.3 var(--font-mono); letter-spacing: .04em; }
 .roundtable-link { justify-self: start; flex: none; }
 .roundtable-themes { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 2px solid var(--ink-rule); }
 .roundtable-themes li { display: grid; gap: 10px; align-content: start; padding: 18px 20px 0 0; min-width: 0; }
