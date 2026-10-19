@@ -182,6 +182,39 @@
     });
   });
 
+  // CEORT roundtable: NPV x P / C calculator
+  const npvIn = document.getElementById('lever-npv');
+  const pIn = document.getElementById('lever-p');
+  const cIn = document.getElementById('lever-c');
+  if (npvIn && pIn && cIn) {
+    const ratioOut = document.getElementById('roundtable-ratio');
+    const verdictOut = document.getElementById('roundtable-verdict');
+    const result = ratioOut.closest('.roundtable-result');
+    const presets = document.querySelectorAll('.roundtable-preset');
+    const fmtMoney = millions => millions >= 1000 ? '$' + (millions / 1000).toFixed(1) + 'B' : '$' + Math.round(millions) + 'M';
+    const update = () => {
+      const npv = parseFloat(npvIn.value) * 1000; // millions
+      const p = parseFloat(pIn.value) / 100;
+      const c = parseFloat(cIn.value);
+      const ratio = npv * p / c;
+      document.getElementById('lever-npv-out').textContent = fmtMoney(npv);
+      document.getElementById('lever-p-out').textContent = Math.round(p * 100) + '%';
+      document.getElementById('lever-c-out').textContent = fmtMoney(c);
+      ratioOut.textContent = ratio.toFixed(2);
+      const fundable = ratio > 1;
+      result.classList.toggle('is-below', !fundable);
+      verdictOut.textContent = fundable ? 'Fundable: expected value exceeds cost' : 'Not fundable: cost exceeds expected value';
+      presets.forEach(b => b.setAttribute('aria-pressed', String(
+        +b.dataset.npv === parseFloat(npvIn.value) && +b.dataset.p === parseFloat(pIn.value) && +b.dataset.c === parseFloat(cIn.value))));
+    };
+    [npvIn, pIn, cIn].forEach(input => input.addEventListener('input', update));
+    presets.forEach(b => b.addEventListener('click', () => {
+      npvIn.value = b.dataset.npv; pIn.value = b.dataset.p; cIn.value = b.dataset.c;
+      update();
+    }));
+    update();
+  }
+
   // Auto-add fade-in to section children
   document.querySelectorAll('.section').forEach(section => {
     const header = section.querySelector('.section-header');
