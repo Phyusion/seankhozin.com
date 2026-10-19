@@ -1,0 +1,1264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sean Khozin Redesign v2</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: museum-catalogue index. Drawn 2px ink grid, wide uppercase titles, condensed numerals,
+   one signal-yellow element per view. Tokens from the Exhibit handoff (tokens/*.css). Paper-only by design. */
+:root{
+  --paper:#F8F5ED; --paper-2:#EFEBE0; --ink:#0A0A0A; --ink-2:#2B2A26; --graphite:#4E4C46;
+  --stone:#A5A29A; --stone-2:#CFCABD; --cobalt:#0B379E; --cobalt-deep:#072A7C; --cobalt-tint:#DCE2F2;
+  --signal:#FFE202; --signal-deep:#F2D300; --signal-tint:#FFF5A8;
+  --ink-panel:#1C1B18; --ink-rule:#3A3934; --on-ink-muted:#B8B4AA;
+  --seq-1:#ECEBEA; --seq-2:#C3CBDF; --seq-3:#7F92C3; --seq-4:#3D5BA6; --seq-5:#0B379E;
+
+  --font-display:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+
+  --size-display-xl:clamp(64px,11vw,176px);
+  --size-title:clamp(34px,4.6vw,68px);
+  --size-index:clamp(56px,7vw,120px);
+  --size-body:17px;
+
+  --page-margin:clamp(24px,4vw,96px);
+  --page-max:1440px;
+  --ease-snap:cubic-bezier(.2,0,0,1);
+  --dur-fast:90ms;
+  --shadow-offset:6px 6px 0 var(--ink);
+  --dots-paper:radial-gradient(circle at center,var(--on-ink-muted) 30%,transparent 33%) 0 0/14px 14px;
+  --dots-ink:radial-gradient(circle at center,var(--ink) 34%,transparent 36%) 0 0/14px 14px;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink-2);font:500 var(--size-body)/1.4 var(--font-display);font-stretch:90%}
+h1,h2,h3,h4{margin:0;color:var(--ink);text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+img{max-width:100%;display:block}
+a{color:var(--cobalt);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+a:hover{color:var(--ink);background:var(--signal)}
+::selection{background:var(--signal);color:var(--ink)}
+:focus-visible{outline:3px solid var(--cobalt);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+.wrap{max-width:var(--page-max);margin:0 auto;
+  padding-left:max(var(--page-margin),env(safe-area-inset-left,0px));
+  padding-right:max(var(--page-margin),env(safe-area-inset-right,0px))}
+.band{padding-block:clamp(64px,9vw,128px)}
+.band + .band{border-top:2px solid var(--ink)}
+.mono{font-family:var(--font-mono);font-stretch:100%}
+.meta{font:500 13px/1.2 var(--font-display);font-stretch:80%;letter-spacing:.06em;text-transform:uppercase}
+
+/* Mockup strip */
+.mock-strip{background:var(--cobalt);color:var(--paper)}
+.mock-strip .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:8px;font:500 12px/1.3 var(--font-mono);letter-spacing:.08em;text-transform:uppercase}
+
+/* Running head / nav */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:2px solid var(--ink)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:60px}
+.brand{display:inline-flex;gap:10px;align-items:center;white-space:nowrap;color:var(--ink);text-decoration:none;font:500 15px/1 var(--font-display);font-stretch:80%;letter-spacing:.04em;text-transform:uppercase}
+.brand b{font-weight:800;letter-spacing:0;text-transform:none;font-stretch:100%}
+.brand:hover{background:none;color:var(--cobalt)}
+.nav-links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;min-width:0}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{flex:none;padding:8px 10px;color:var(--ink);text-decoration:none;font:600 13px/1 var(--font-display);font-stretch:80%;letter-spacing:.06em;text-transform:uppercase;transition:background var(--dur-fast) var(--ease-snap)}
+.nav-links a:hover{background:var(--signal)}
+
+/* Section header pattern: mono catalogue tag, anchor bar, wide uppercase action title */
+.sh{display:grid;gap:28px;margin-bottom:clamp(40px,6vw,80px)}
+.tag{display:flex;justify-content:space-between;gap:24px;padding-bottom:14px;border-bottom:2px solid currentColor;color:var(--cobalt);font:500 clamp(12px,1.1vw,15px)/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase}
+.tag b{font-weight:600}
+.title{font:800 var(--size-title)/.98 var(--font-display);font-stretch:118%;letter-spacing:.005em;text-transform:uppercase;max-width:22ch}
+.title::before{content:"";display:block;width:160px;height:12px;background:currentColor;margin-bottom:28px}
+.title em{font-style:normal;color:var(--cobalt)}
+.deck{max-width:60ch;font-size:clamp(18px,1.5vw,21px);line-height:1.4;color:var(--ink-2)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 22px;border:2px solid var(--ink);border-radius:0;
+  font:800 15px/1 var(--font-display);font-stretch:88%;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;cursor:pointer;
+  transition:background var(--dur-fast) var(--ease-snap),color var(--dur-fast) var(--ease-snap),border-color var(--dur-fast) var(--ease-snap)}
+.btn:active{transform:translate(1px,1px)}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary:hover{background:var(--cobalt);border-color:var(--cobalt);color:var(--paper)}
+.btn-highlight{background:var(--signal);color:var(--ink)}
+.btn-highlight:hover{background:var(--signal-deep);color:var(--ink)}
+.btn-secondary{background:transparent;color:var(--ink)}
+.btn-secondary:hover{background:var(--ink);color:var(--paper)}
+.on-ink .btn-secondary{color:var(--paper);border-color:var(--paper)}
+.on-ink .btn-secondary:hover{background:var(--paper);color:var(--ink)}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px}
+
+/* Hero (ink ground, deck slide 1) */
+.hero{background:var(--ink);color:var(--paper);position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.62fr);gap:clamp(24px,4vw,64px);align-items:stretch}
+.hero-copy{display:flex;flex-direction:column;gap:clamp(24px,3vw,40px);padding-block:clamp(40px,6vw,88px)}
+.hero .tag{color:var(--on-ink-muted);border-color:var(--ink-rule)}
+.hero h1{color:var(--paper);font:900 var(--size-display-xl)/.84 var(--font-display);font-stretch:112%;letter-spacing:-.02em;text-transform:uppercase}
+.hero h1 span{display:block}
+.hero .creds{font:500 clamp(14px,1.3vw,18px)/1 var(--font-mono);letter-spacing:.12em;color:var(--on-ink-muted)}
+.hero .deck{color:var(--paper);max-width:40ch;font-size:clamp(19px,1.7vw,24px)}
+.hero-figure{position:relative;border-left:2px solid var(--ink-rule);margin:0 calc(-1 * max(var(--page-margin),env(safe-area-inset-right,0px))) 0 0;min-height:420px;overflow:hidden}
+.hero-figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:40% 50%}
+.hero-figure figcaption{position:absolute;left:0;bottom:0;background:var(--ink);color:var(--paper);padding:8px 12px}
+.vert{position:absolute;right:max(10px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);writing-mode:vertical-rl;color:var(--on-ink-muted)}
+
+/* About */
+.about{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,5vw,80px);align-items:start}
+.portrait{border:2px solid var(--ink);background:var(--paper-2);aspect-ratio:4/5;overflow:hidden;max-width:100%}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.portrait-cap{display:flex;justify-content:space-between;margin-top:10px;color:var(--graphite)}
+.prose{display:grid;gap:18px;max-width:62ch;font-size:clamp(17px,1.35vw,19px)}
+.prose .lede{font:700 clamp(21px,2vw,28px)/1.22 var(--font-display);font-stretch:92%;color:var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:clamp(32px,4vw,56px)}
+.stat{border-top:2px solid var(--ink);padding:16px 20px 0 0;display:grid;gap:8px}
+.stat + .stat{border-left:3px solid var(--ink);padding-left:20px}
+.stat .num{font:900 clamp(52px,5.6vw,92px)/.82 var(--font-display);font-stretch:72%;letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums}
+.stat .lab{font:700 15px/1.15 var(--font-display);font-stretch:88%;color:var(--cobalt)}
+
+/* Comparison table (the poster) */
+.cmp-grid{display:grid;grid-template-columns:minmax(0,1fr)}
+.cmp{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr);border-top:2px solid var(--ink)}
+.cmp > div{border-bottom:2px solid var(--ink)}
+.cmp .rowhead{display:flex;align-items:center;gap:clamp(10px,1.4vw,22px);padding:clamp(12px,1.2vw,18px) 12px clamp(12px,1.2vw,18px) 0}
+.cmp .idx{font:900 var(--size-index)/.8 var(--font-display);font-stretch:72%;letter-spacing:-.03em;color:var(--ink)}
+.cmp .rt{font:900 clamp(20px,2.4vw,40px)/.92 var(--font-display);font-stretch:88%;text-transform:uppercase;color:var(--ink)}
+.cmp .cell{padding:clamp(12px,1.4vw,22px) clamp(14px,1.6vw,24px)}
+.cmp .cell.l{border-left:3px solid var(--ink)}
+.cmp .cell.r{background:var(--signal)}
+.cmp .cl{font:700 clamp(15px,1.4vw,22px)/1.1 var(--font-display);font-stretch:88%;color:var(--cobalt)}
+.cmp .cell.r .cl{color:var(--ink)}
+.cmp .cb{font:500 clamp(15px,1.3vw,21px)/1.2 var(--font-display);font-stretch:88%;margin-top:4px;color:var(--ink-2)}
+.cmp .cell.r .cb{color:var(--ink)}
+.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:clamp(48px,6vw,96px)}
+.field{border-top:2px solid var(--ink);padding:18px 24px 0 0;display:grid;gap:10px;align-content:start}
+.field + .field{border-left:3px solid var(--ink);padding-left:24px}
+.field h3{font:900 clamp(24px,2.4vw,36px)/.92 var(--font-display);font-stretch:118%;text-transform:uppercase}
+.field .k{color:var(--cobalt)}
+.note{margin-top:28px;color:var(--graphite);font-size:15px;max-width:72ch}
+
+/* Roles */
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ink);border-left:2px solid var(--ink)}
+.card{border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);display:flex;flex-direction:column;gap:14px;padding:24px;min-width:0;background:var(--paper)}
+.card .logo{height:88px;background:#fff;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;padding:14px}
+.card .logo img{max-height:56px;width:auto;object-fit:contain}
+.card .k{color:var(--cobalt);font:700 14px/1.1 var(--font-display);font-stretch:88%;letter-spacing:.04em;text-transform:uppercase}
+.card h3{font:900 clamp(20px,1.7vw,24px)/1 var(--font-display);font-stretch:96%;text-transform:uppercase}
+.card p{font-size:16px;color:var(--ink-2)}
+.card .foot{margin-top:auto;padding-top:14px;border-top:1px solid var(--stone-2);display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.card .foot a{font:600 14px/1 var(--font-mono)}
+.podcast{margin-top:clamp(40px,5vw,72px);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);background:var(--ink);color:var(--paper)}
+.podcast .pc-copy{padding:clamp(24px,3vw,48px);display:flex;flex-direction:column;gap:18px;justify-content:space-between}
+.podcast h3{color:var(--paper);font:900 clamp(28px,3.4vw,52px)/.92 var(--font-display);font-stretch:112%;text-transform:uppercase}
+.podcast .tagline{color:var(--on-ink-muted)}
+.embed{aspect-ratio:16/9;max-width:100%;border-left:2px solid var(--ink-rule);background:var(--ink-panel);position:relative;display:flex;align-items:center;justify-content:center}
+.embed::before{content:"";position:absolute;inset:0;background:var(--dots-paper);opacity:.18}
+.embed.ep::before{display:none}
+.embed.ep img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ps-lockup{width:min(260px,100%);height:auto}
+.embed span{position:relative;background:var(--ink);padding:8px 12px;color:var(--on-ink-muted)}
+
+/* Career timeline */
+.tl{border-top:3px solid var(--ink)}
+.tl-row{display:grid;grid-template-columns:clamp(64px,7vw,112px) 120px minmax(0,1.1fr) minmax(0,1fr);gap:0 24px;align-items:baseline;padding-block:18px;border-bottom:2px solid var(--ink)}
+.tl-row .n{font:900 clamp(40px,4.4vw,68px)/.8 var(--font-display);font-stretch:72%;letter-spacing:-.03em;color:var(--ink)}
+.tl-row .s{font:500 13px/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--graphite)}
+.tl-row .s.now{color:var(--cobalt);font-weight:600}
+.tl-row h3{font:800 clamp(19px,1.7vw,24px)/1.05 var(--font-display);font-stretch:96%;text-transform:uppercase}
+.tl-row p{font-size:16px}
+
+/* INFORMED (yellow part-opener) */
+.informed{background:var(--signal);color:var(--ink)}
+.informed .tag{color:var(--ink)}
+.informed .title em{color:var(--ink);text-decoration:underline;text-decoration-thickness:.08em;text-underline-offset:.08em}
+.inf-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(32px,5vw,80px);align-items:start}
+.inf-year{font:900 clamp(96px,16vw,248px)/.78 var(--font-display);font-stretch:72%;letter-spacing:-.04em;color:var(--ink)}
+.inf-year-lab{margin-top:10px}
+.facts{margin:0;border-top:3px solid var(--ink)}
+.facts div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;padding-block:14px;border-bottom:2px solid var(--ink);align-items:baseline}
+.facts dd{margin:0;font:800 clamp(18px,1.6vw,22px)/1.15 var(--font-display);font-stretch:96%;color:var(--ink)}
+.inf-art{background:var(--ink);border:2px solid var(--ink);aspect-ratio:4/5;max-width:100%;overflow:hidden}
+.inf-art img{width:100%;height:100%;object-fit:contain}
+.informed .prose{color:var(--ink)}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:clamp(40px,5vw,72px)}
+.pillar{border-top:2px solid var(--ink);padding:18px 24px 0 0;display:grid;gap:10px;align-content:start}
+.pillar + .pillar{border-left:3px solid var(--ink);padding-left:24px}
+.pillar h3{font:900 clamp(22px,2vw,30px)/.95 var(--font-display);font-stretch:110%;text-transform:uppercase}
+.figs{margin-top:clamp(40px,5vw,72px);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:2px solid var(--ink);background:var(--paper)}
+.fig{padding:24px;display:grid;gap:12px;align-content:start}
+.fig + .fig{border-left:2px solid var(--ink)}
+.fig .k{color:var(--cobalt)}
+.fig h4{font:900 22px/1 var(--font-display);font-stretch:100%;text-transform:uppercase}
+.fig .ph{height:180px;background:var(--dots-ink);opacity:.14;border:2px solid var(--ink)}
+.informed a{color:var(--ink)}
+.informed a:hover{background:var(--ink);color:var(--signal)}
+
+/* Research */
+.areas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.area{background:var(--ink);color:var(--paper);display:flex;flex-direction:column;min-width:0}
+.area .art{aspect-ratio:16/9;max-width:100%;overflow:hidden;border-bottom:2px solid var(--ink-rule)}
+.area .art img{width:100%;height:100%;object-fit:cover}
+.area .body{padding:24px;display:flex;flex-direction:column;gap:14px;flex:1}
+.area .k{color:var(--on-ink-muted)}
+.area h3{color:var(--paper);font:900 clamp(22px,1.9vw,28px)/.95 var(--font-display);font-stretch:104%;text-transform:uppercase}
+.area p{color:var(--on-ink-muted);font-size:16px}
+.area .foot{margin-top:auto;padding-top:14px;border-top:1px solid var(--ink-rule);display:flex;justify-content:space-between;color:var(--paper)}
+.area .foot a{color:var(--paper)}
+.area .foot a:hover{color:var(--ink)}
+
+.sub{margin-top:clamp(72px,9vw,128px)}
+.sub .title{font-size:clamp(28px,3.6vw,52px);max-width:26ch}
+.matrix-wrap{overflow-x:auto;border:2px solid var(--ink);background:var(--paper)}
+.matrix{border-collapse:collapse;width:100%;min-width:640px;font:500 15px/1 var(--font-mono);font-variant-numeric:tabular-nums;text-align:right}
+.matrix th,.matrix td{padding:14px 16px;border:1px solid var(--stone-2)}
+.matrix thead th{font:700 14px/1 var(--font-display);font-stretch:88%;letter-spacing:.04em;text-transform:uppercase;color:var(--cobalt);border-bottom:2px solid var(--ink)}
+.matrix tbody th{text-align:left;font:700 14px/1 var(--font-display);font-stretch:88%;letter-spacing:.04em;color:var(--cobalt);border-right:2px solid var(--ink)}
+.matrix .axis{color:var(--graphite);font:500 12px/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;text-align:left}
+.matrix td.s1{background:var(--seq-1)} .matrix td.s2{background:var(--seq-2)}
+.matrix td.s3{background:var(--seq-3);color:var(--paper)} .matrix td.s4{background:var(--seq-4);color:var(--paper)}
+.matrix td.hit{background:var(--signal);color:var(--ink);font-weight:600;outline:2px solid var(--ink);outline-offset:-2px}
+.matrix .tot{color:var(--graphite);font-weight:400}
+.matrix tr.totals td,.matrix tr.totals th{border-top:2px solid var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:18px 28px;margin-top:16px;color:var(--graphite);font:500 13px/1.3 var(--font-mono)}
+.legend i{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin-right:8px;border:1px solid var(--ink)}
+.mx-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,.6fr);gap:clamp(24px,4vw,56px);align-items:start}
+.mx-stat{display:grid;gap:0}
+.mx-stat .stat{padding-right:0}
+.mx-stat .stat + .stat{border-left:0;padding-left:0;margin-top:24px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:2px solid var(--ink);margin-top:clamp(40px,5vw,64px)}
+.two > div{padding:20px 24px 0 0;display:grid;gap:10px;align-content:start}
+.two > div + div{border-left:3px solid var(--ink);padding-left:24px}
+.two h3{font:900 clamp(22px,2vw,30px)/.95 var(--font-display);font-stretch:110%;text-transform:uppercase}
+
+.pubs{border-top:3px solid var(--ink)}
+.pub{display:grid;grid-template-columns:minmax(160px,.4fr) minmax(0,1fr) 28px;gap:24px;align-items:baseline;padding-block:16px;border-bottom:2px solid var(--ink);color:var(--ink);text-decoration:none}
+.pub:hover{background:var(--signal-tint);color:var(--ink)}
+.pub .j{font:500 13px/1.3 var(--font-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--cobalt)}
+.pub .t{font:700 clamp(17px,1.4vw,20px)/1.2 var(--font-display);font-stretch:92%}
+.pub .ar{font:600 18px/1 var(--font-mono);text-align:right}
+.pubs-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.pubs-head h3{font:900 clamp(24px,2.4vw,36px)/.95 var(--font-display);font-stretch:112%;text-transform:uppercase}
+
+/* Music */
+.music{background:var(--ink);color:var(--paper)}
+.music .tag{color:var(--on-ink-muted);border-color:var(--ink-rule)}
+.music .title{color:var(--paper)}
+.music .title em{color:var(--on-ink-muted)}
+.music .deck{color:var(--on-ink-muted)}
+.mu-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px)}
+.essay{border:2px solid var(--ink-rule);background:var(--ink-panel);padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:16px}
+.essay .k{color:var(--on-ink-muted)}
+.essay h3{color:var(--paper);font:900 clamp(26px,2.6vw,40px)/.95 var(--font-display);font-stretch:112%;text-transform:uppercase}
+.essay .sub-t{color:var(--paper);font:700 19px/1.2 var(--font-display);font-stretch:92%}
+.essay p{color:var(--on-ink-muted)}
+.player{aspect-ratio:auto;min-height:240px;border:2px solid var(--ink-rule)}
+.mu-grid > *{min-width:0}
+
+/* Boards */
+.boards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ink)}
+.board{padding:20px 20px 20px 0;border-bottom:2px solid var(--ink);display:flex;flex-direction:column;gap:14px;min-width:0}
+.board:not(:nth-child(4n+1)){border-left:3px solid var(--ink);padding-left:20px}
+.board h3{font:900 clamp(19px,1.6vw,23px)/1 var(--font-display);font-stretch:100%;text-transform:uppercase}
+.board p{font-size:15px;color:var(--ink-2)}
+.board a{margin-top:auto;font:600 13px/1 var(--font-mono);letter-spacing:.04em;text-transform:uppercase;align-self:flex-start}
+
+/* Contact */
+.ct-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(32px,5vw,80px);align-items:start}
+form{display:grid;gap:18px}
+.fld{display:grid;gap:8px}
+.fld label{font:700 14px/1 var(--font-display);font-stretch:88%;letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
+.fld input,.fld textarea{font:500 17px/1.3 var(--font-display);font-stretch:90%;color:var(--ink);background:var(--paper);border:2px solid var(--ink);border-radius:0;padding:12px 14px;min-height:48px;width:100%}
+.fld textarea{min-height:140px;resize:vertical}
+.fld input:focus,.fld textarea:focus{outline:3px solid var(--cobalt);outline-offset:2px;box-shadow:3px 3px 0 var(--ink)}
+.form-msg{font:500 14px/1.3 var(--font-mono);color:var(--cobalt)}
+.links{border-top:3px solid var(--ink)}
+.links a{display:flex;justify-content:space-between;align-items:baseline;padding-block:18px;border-bottom:2px solid var(--ink);color:var(--ink);text-decoration:none;font:900 clamp(22px,2.2vw,32px)/1 var(--font-display);font-stretch:108%;text-transform:uppercase}
+.links a span{font:600 16px/1 var(--font-mono);color:var(--cobalt)}
+.links a:hover{background:var(--signal-tint)}
+
+.speak{margin:0;border:2px solid var(--ink);position:relative;aspect-ratio:3/2;max-width:100%;overflow:hidden}
+.speak img{width:100%;height:100%;object-fit:cover;object-position:60% 30%}
+.speak figcaption{position:absolute;left:0;bottom:0;background:var(--ink);color:var(--paper);padding:8px 12px}
+/* Neural-net dividers (from the live site), drawn in ink and cobalt on recessed paper */
+.section-band{position:relative;height:72px;overflow:hidden;background:var(--paper-2);border-block:2px solid var(--ink)}
+.section-band + .band{border-top:0}
+.band-canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y}
+
+/* Expandable cards, carried over from the live site's "Read more" and "+" behaviour */
+.areas{grid-auto-flow:row dense}
+.area.open{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}
+.area.open .art{aspect-ratio:auto;border-bottom:0;border-right:2px solid var(--ink-rule)}
+.area.open .art img{object-position:50% 25%}
+.more{display:grid;gap:14px}
+.apubs{border-top:2px solid var(--ink-rule);margin-top:6px}
+.apub{display:grid;gap:4px;padding-block:12px;border-bottom:1px solid var(--ink-rule);color:var(--paper);text-decoration:none}
+.apub:hover{background:var(--ink-panel);color:var(--signal)}
+.apub .j{font:500 12px/1.3 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--on-ink-muted)}
+.apub .t{font:700 16px/1.25 var(--font-display);font-stretch:92%}
+.apubs:not(.all) .extra{display:none}
+.xbtn,.pubs-toggle{display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 14px;background:transparent;color:var(--paper);border:2px solid var(--paper);border-radius:0;cursor:pointer;font:800 13px/1 var(--font-display);font-stretch:88%;letter-spacing:.04em;text-transform:uppercase;transition:background var(--dur-fast) var(--ease-snap),color var(--dur-fast) var(--ease-snap)}
+.pubs-toggle{justify-self:start}
+.xbtn i{font:600 18px/1 var(--font-mono);font-style:normal}
+.xbtn:hover,.pubs-toggle:hover,.xbtn[aria-expanded="true"]{background:var(--paper);color:var(--ink)}
+.area .foot{align-items:center}
+.board h3{margin:0}
+.board-head{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;width:100%;cursor:pointer;font:900 clamp(19px,1.6vw,23px)/1 var(--font-display);font-stretch:100%;text-transform:uppercase;color:var(--ink)}
+.board-head:focus-visible{outline:3px solid var(--cobalt);outline-offset:2px}
+.board-head i{flex:none;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--ink);font:600 18px/1 var(--font-mono);font-style:normal;transition:background var(--dur-fast) var(--ease-snap),color var(--dur-fast) var(--ease-snap)}
+.board-head:hover i{background:var(--signal)}
+.board-head[aria-expanded="true"] i{background:var(--ink);color:var(--paper)}
+.board-more{display:grid;gap:12px}
+@media (max-width:820px){.area.open{grid-template-columns:minmax(0,1fr)}.area.open .art{aspect-ratio:16/9;border-right:0;border-bottom:2px solid var(--ink-rule)}}
+
+footer{border-top:2px solid var(--ink)}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:24px;color:var(--graphite)}
+.sq{display:inline-block;width:12px;height:12px;background:var(--ink);margin-left:10px;vertical-align:-1px}
+
+/* Responsive: ruled rows collapse 4 → 2 → 1, rules kept as border-top */
+@media (max-width:1100px){
+  .cards,.boards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .board:not(:nth-child(4n+1)){border-left:0;padding-left:0}
+  .board:nth-child(2n){border-left:3px solid var(--ink);padding-left:20px}
+  .areas{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tl-row{grid-template-columns:clamp(56px,7vw,96px) minmax(0,1fr);gap:8px 20px}
+  .tl-row .s{grid-column:2;order:-1}
+  .tl-row .n{grid-row:span 3}
+  .tl-row h3,.tl-row p{grid-column:2}
+  .vert{display:none}
+}
+@media (max-width:820px){
+  .hero .wrap,.about,.inf-grid,.mu-grid,.ct-grid,.podcast,.mx-grid{grid-template-columns:minmax(0,1fr)}
+  .hero-figure{border-left:0;order:-1;min-height:240px;margin:0 calc(-1 * max(var(--page-margin),env(safe-area-inset-right,0px))) 0 calc(-1 * max(var(--page-margin),env(safe-area-inset-left,0px)))}
+  .embed{border-left:0;border-top:2px solid var(--ink-rule)}
+  .cmp{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .cmp .rowhead{grid-column:1 / -1;border-bottom:0!important;padding-bottom:4px}
+  .cmp .cell.l{border-left:0;padding-left:0}
+  .fields,.pillars,.two,.figs{grid-template-columns:minmax(0,1fr)}
+  .field + .field,.pillar + .pillar,.two > div + div{border-left:0;padding-left:0;margin-top:28px}
+  .fig + .fig{border-left:0;border-top:2px solid var(--ink)}
+  .inf-art{max-width:320px}
+  .portrait{max-width:420px}
+  .pub{grid-template-columns:minmax(0,1fr) 24px}
+  .pub .j{grid-column:1 / -1}
+}
+@media (max-width:560px){
+  .cards,.boards,.areas{grid-template-columns:minmax(0,1fr)}
+  .board:nth-child(2n){border-left:0;padding-left:0}
+  .stats{grid-template-columns:minmax(0,1fr)}
+  .stat + .stat{border-left:0;padding-left:0;margin-top:16px}
+  .cmp{grid-template-columns:minmax(0,1fr)}
+  .cmp .cell{padding-inline:0}
+  .cmp .cell.r{padding-inline:14px}
+  .cmp .cell.l{border-bottom:0!important}
+  .tag span:last-child,.tag b{display:none}
+  .brand span{display:none}
+  .nav .wrap{gap:12px}
+}
+</style>
+</head>
+<body>
+
+<div class="mock-strip"><div class="wrap"><span>Redesign mockup v2 · Exhibit system · Site photography in color</span><span>Not the live site</span></div></div>
+
+<nav class="nav" aria-label="Primary">
+  <div class="wrap">
+    <a class="brand" href="#top"><b>Sean Khozin</b><span aria-hidden="true">|</span><span>MD, MPH</span></a>
+    <div class="nav-links">
+      <a href="#about">About</a><a href="#convergence">Convergence</a><a href="#roles">Roles</a><a href="#career">Career</a><a href="#informed">INFORMED</a><a href="#research">Research</a><a href="#music">Music</a><a href="#boards">Boards</a><a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero on-ink" id="top">
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="tag"><span>Physician-Scientist · Oncologist · AI Innovator</span><b>Index No.01</b></div>
+      <h1><span>Sean</span><span>Khozin</span></h1>
+      <div class="creds">MD, MPH</div>
+      <p class="deck">Advancing human health through the convergence of medicine, data science, and artificial intelligence.</p>
+      <div class="btn-row">
+        <a class="btn btn-highlight" href="#contact">Get in touch →</a>
+        <a class="btn btn-secondary" href="https://www.insights.phyusionbio.com/">Read the Substack</a>
+        <a class="btn btn-secondary" href="#about">About</a>
+      </div>
+    </div>
+    <figure class="hero-figure">
+      <img src="img/nyc.jpg" alt="Lower Manhattan skyline seen from the water">
+      <figcaption class="meta">New York City</figcaption>
+    </figure>
+  </div>
+  </header>
+
+<main>
+
+<section class="band" id="about">
+  <div class="wrap">
+    <div class="sh">
+      <div class="tag"><span>01 / 09 · About</span><b>Biography</b></div>
+      <h2 class="title">At the nexus of medicine, technology &amp; <em>AI</em></h2>
+    </div>
+    <div class="about">
+      <div>
+        <div class="portrait"><img src="img/sean-khozin.jpg" alt="Dr. Sean Khozin"></div>
+        <div class="portrait-cap meta"><span>Dr. Sean Khozin</span><span>Plate 01</span></div>
+      </div>
+      <div>
+        <div class="prose">
+          <p class="lede">A physician-scientist and oncologist, internationally recognized for leveraging data science, AI, machine learning and real-world evidence to drive innovation in biomedical research.</p>
+          <p>A founding member of the FDA Oncology Center of Excellence, Dr. Khozin escaped the revolution in Iran and found his way to the United States, harmonizing his passion for patients and data into a career spanning startups, the FDA, Johnson &amp; Johnson, and pioneering AI ventures, all while pursuing his love of music.</p>
+          <p>His work bridges the gap between cutting-edge technology and clinical care, with a focus on harnessing advanced analytics and AI to accelerate drug discovery, optimize therapeutic development, and improve patient outcomes.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><span class="num">100+</span><span class="lab">Publications</span></div>
+          <div class="stat"><span class="num">6,000+</span><span class="lab">Citations</span></div>
+          <div class="stat"><span class="num">36+</span><span class="lab">h-index</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-band" data-band="neural" aria-hidden="true"><canvas class="band-canvas"></canvas></div>
+<section class="band" id="convergence">
+  <div class="wrap">
+    <div class="sh">
+      <div class="tag"><span>02 / 09 · Convergence</span><b>The work</b></div>
+      <h2 class="title">Where three fields overlap, the unit of evidence <em>changes</em></h2>
+      <p class="deck">Medicine, technology and AI together make the life sciences behave less like a sequence of one-off experiments and more like a learning system.</p>
+    </div>
+    <div class="cmp-grid">
+      <div class="cmp" role="table" aria-label="One-off experiments compared with a learning system">
+        <div class="rowhead" role="rowheader"><span class="idx">01</span><span class="rt">Trial design</span></div>
+        <div class="cell l" role="cell"><div class="cl">One-off experiment</div><div class="cb">Each trial stands alone</div></div>
+        <div class="cell r" role="cell"><div class="cl">Learning system</div><div class="cb">Borrows strength from external data, keeps randomization</div></div>
+
+        <div class="rowhead" role="rowheader"><span class="idx">02</span><span class="rt">Evidence source</span></div>
+        <div class="cell l" role="cell"><div class="cl">One-off experiment</div><div class="cb">Generated only inside the trial</div></div>
+        <div class="cell r" role="cell"><div class="cl">Learning system</div><div class="cb">Also generated at the point of care</div></div>
+
+        <div class="rowhead" role="rowheader"><span class="idx">03</span><span class="rt">Disease taxonomy</span></div>
+        <div class="cell l" role="cell"><div class="cl">One-off experiment</div><div class="cb">Classified by anatomy</div></div>
+        <div class="cell r" role="cell"><div class="cl">Learning system</div><div class="cb">Classified by mechanism</div></div>
+
+        <div class="rowhead" role="rowheader"><span class="idx">04</span><span class="rt">Therapy matching</span></div>
+        <div class="cell l" role="cell"><div class="cl">One-off experiment</div><div class="cb">Fitted to a population average</div></div>
+        <div class="cell r" role="cell"><div class="cl">Learning system</div><div class="cb">Matched to the individual</div></div>
+      </div>
+    </div>
+
+    <div class="fields">
+      <div class="field"><span class="meta k">Field I</span><h3>Medicine</h3><p>Supplies the questions and the ground truth.</p></div>
+      <div class="field"><span class="meta k">Field II</span><h3>Technology</h3><p>Makes biology continuously measurable at the level of the individual.</p></div>
+      <div class="field"><span class="meta k">Field III</span><h3>AI</h3><p>Turns those measurements into models that can be interrogated, updated, and acted on.</p></div>
+    </div>
+    <p class="note">This is the thread through Dr. Khozin’s career, from the clinic to the FDA to Johnson &amp; Johnson, CancerLinQ, and Phyusion Bio. The current interactive Venn and its reading lists would carry over, restyled in this system.</p>
+  </div>
+</section>
+
+<section class="band" id="roles">
+  <div class="wrap">
+    <div class="sh">
+      <div class="tag"><span>03 / 09 · Current roles</span><b>2026</b></div>
+      <h2 class="title">Leading at the <em>frontier</em></h2>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <div class="logo"><img src="img/ceo.png" alt="CEO Roundtable on Cancer"></div>
+        <span class="k">Chief Executive Officer</span>
+        <h3>CEO Roundtable on Cancer &amp; Project Data Sphere</h3>
+        <p>Directing public health programs and pioneering initiatives focused on the development of AI foundation models in oncology.</p>
+        <div class="foot"><a href="https://www.ceort.org/">ceort.org →</a></div>
+      </article>
+      <article class="card">
+        <div class="logo"><img src="img/phyusion.png" alt="Phyusion Bio"></div>
+        <span class="k">Founder</span>
+        <h3>Phyusion Bio</h3>
+        <p>Advancing innovations at the nexus of biology, technology, and AI to accelerate drug discovery and optimize therapeutic development.</p>
+        <div class="foot"><a href="https://phyusionbio.com/">phyusionbio.com →</a></div>
+      </article>
+      <article class="card">
+        <div class="logo"><img src="img/mit.png" alt="MIT"></div>
+        <span class="k">Research Affiliate</span>
+        <h3>Massachusetts Institute of Technology</h3>
+        <p>Novel applications of AI and machine learning to accelerate drug discovery and optimize therapeutic development strategies.</p>
+        <div class="foot"><a href="https://sites.mit.edu/khozin/">MIT profile →</a></div>
+      </article>
+      <article class="card">
+        <div class="logo"><img src="img/precision.png" alt="Precision Signals"></div>
+        <span class="k">Host</span>
+        <h3>Precision Signals</h3>
+        <p>A podcast from the CEO Roundtable on Cancer, examining the hard problems in oncology and practical solutions that connect science to patient impact.</p>
+        <div class="foot"><a href="https://www.youtube.com/@PrecisionSignals">YouTube →</a></div>
+      </article>
+    </div>
+
+    <div class="podcast on-ink">
+      <div class="pc-copy">
+        <span class="meta tagline">Latest episode</span>
+        <img class="ps-lockup" src="img/ps-lockup.png" alt="Precision Signals">
+        <p class="tagline">The hard problems in oncology, and the people working on them.</p>
+        <div class="btn-row"><a class="btn btn-secondary" href="https://www.youtube.com/@PrecisionSignals">Watch on YouTube</a></div>
+      </div>
+      <div class="embed ep"><img src="img/precision-signals.jpg" alt=""><span class="mono meta">Latest YouTube episode embeds here</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-band" data-band="neural" aria-hidden="true"><canvas class="band-canvas"></canvas></div>
+<section class="band" id="career">
+  <div class="wrap">
+    <div class="sh">
+      <div class="tag"><span>04 / 09 · Career</span><b>Present → training</b></div>
+      <h2 class="title">From the clinic to the FDA to <em>AI</em></h2>
+    </div>
+    <div class="tl">
+      <div class="tl-row"><span class="n">01</span><span class="s now">Present</span><h3>CEO, CEO Roundtable on Cancer &amp; Project Data Sphere</h3><p>Directing public health programs and pioneering AI foundation model initiatives in oncology.</p></div>
+      <div class="tl-row"><span class="n">02</span><span class="s now">Present</span><h3>Founder, Phyusion Bio &amp; Research Affiliate, MIT</h3><p>Novel applications of AI/ML to accelerate drug discovery and optimize therapeutic development.</p></div>
+      <div class="tl-row"><span class="n">03</span><span class="s">Previous</span><h3>CEO, CancerLinQ (ASCO)</h3><p>Led the restructuring and acquisition of the precision oncology enterprise leveraging real-world data and analytics.</p></div>
+      <div class="tl-row"><span class="n">04</span><span class="s">Previous</span><h3>Global Head of Data Strategy, Johnson &amp; Johnson</h3><p>Implemented data science solutions supporting the development of innovative medicines and vaccines.</p></div>
+      <div class="tl-row"><span class="n">05</span><span class="s">Previous</span><h3>Executive Director, FDA INFORMED</h3><p>Established the FDA’s first data science and technology incubator under special federal authorities.</p></div>
+      <div class="tl-row"><span class="n">06</span><span class="s">Previous</span><h3>Founding Member, FDA Oncology Center of Excellence</h3><p>Helped build and launch the OCE, shaping the agency’s approach to oncology drug regulation and review.</p></div>
+      <div class="tl-row"><span class="n">07</span><span class="s">Previous</span><h3>Clinical Investigator, National Cancer Institute</h3><p>Conducted clinical research in oncology at the U.S. National Cancer Institute.</p></div>
+      <div class="tl-row"><span class="n">08</span><span class="s">Previous</span><h3>Co-founder, Hello Health</h3><p>TechBio company developing telemedicine, point-of-care data visualization, and advanced analytical systems.</p></div>
+      <div class="tl-row"><span class="n">09</span><span class="s">Training</span><h3>Fellowship, National Cancer Institute</h3><p>Board-certified oncologist. Fellowship training following internal medicine residency.</p></div>
+      <div class="tl-row"><span class="n">10</span><span class="s">Education</span><h3>MD &amp; MPH</h3><p>MD, University of Maryland School of Medicine. MPH, George Washington University. BS, University of Maryland.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band informed" id="informed">
+  <div class="wrap">
+    <div class="sh">
+      <div class="tag"><span>05 / 09 · Initiative</span><b>U.S. FDA</b></div>
+      <h2 class="title">The FDA’s first data science <em>incubator</em></h2>
+    </div>
+    <div class="inf-grid">
+      <div>
+        <div class="inf-year">2015</div>
+        <div class="meta inf-year-lab">INFORMED launched with special HHS authorities</div>
+        <div class="prose" style="margin-top:32px">
+          <p class="lede">Information Exchange and Data Transformation (INFORMED) was a public-private collaboration sandbox to de-risk innovations with transformative potential.</p>
+          <p>The effort was instrumental in establishing the foundation for the use of real-world evidence, digital health solutions, and AI/ML in drug development and regulatory decision-making.</p>
+        </div>
+      </div>
+      <dl class="facts">
+        <div><dt class="meta">Launched</dt><dd>2015</dd></div>
+        <div><dt class="meta">Home</dt><dd>U.S. Food and Drug Administration</dd></div>
+        <div><dt class="meta">Authority</dt><dd>Special authorities from HHS</dd></div>
+        <div><dt class="meta">Model</dt><dd>Public-private collaboration sandbox</dd></div>
+        <div><dt class="meta">Published</dt><dd>Nature Reviews Drug Discovery, 2017 &amp; 2018</dd></div>
+      </dl>
+    </div>
+    <div class="pillars">
+      <div class="pillar"><span class="meta">Pillar I</span><h3>Real-world evidence</h3><p>Frameworks for integrating real-world data into regulatory decision-making.</p></div>
+      <div class="pillar"><span class="meta">Pillar II</span><h3>Digital health</h3><p>Smart devices and decentralized clinical trials.</p></div>
+      <div class="pillar"><span class="meta">Pillar III</span><h3>AI &amp; machine learning</h3><p>Foundations for AI/ML adoption across the product life cycle.</p></div>
+    </div>
+    <div class="figs">
+      <div class="fig"><span class="meta k">Figure 1 · Nature Reviews Drug Discovery, 2017</span><h4>The four V’s of big data</h4><div class="ph" aria-hidden="true"></div><p>Interactive radar carries over, redrawn in ink, cobalt and baseline grey. <a href="https://www.nature.com/articles/nrd.2017.26">From big data to smart data</a></p></div>
+      <div class="fig"><span class="meta k">Figure 1 · Nature Reviews Drug Discovery, 2018</span><h4>Traditional vs systems view</h4><div class="ph" aria-hidden="true"></div><p>Linear, micro, meso and macro layers, stepped through as before. <a href="https://www.nature.com/articles/nrd.2018.34">INFORMED: an incubator at the US FDA</a></p></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-band" data-band="neural" aria-hidden="true"><canvas class="band-canvas"></canvas></div>
+<section class="band" id="research">
+  <div class="wrap">
+    <div class="sh">
+      <div class="tag"><span>06 / 09 · Research</span><b>Three programs</b></div>
+      <h2 class="title">Modernizing how evidence is <em>generated</em></h2>
+      <p class="deck">Regulatory science, clinical trial methodology and data science, focused on how evidence is generated and applied in cancer drug development.</p>
+    </div>
+    <div class="areas">
+      <article class="area" id="area-a">
+        <div class="art"><img src="img/precision-oncology.jpg" alt="Laboratory glassware beside a DNA helix"></div>
+        <div class="body">
+          <span class="meta k">Program A</span>
+          <h3>Precision Oncology and Regulatory Science</h3>
+          <p>As a clinical investigator at the National Cancer Institute, Dr. Khozin conducted clinical research in thoracic oncology and rare tumors, contributing to early-phase trials of molecularly targeted agents and novel combination regimens in lung cancer and thymic epithelial tumors.</p>
+          <div class="more" id="area-a-more" hidden>
+            <p>This work included studies of IGF-1R-targeted therapy in thymoma, survivin suppression in NSCLC, the identification of ALK rearrangements in rare lung cancer histologies, characterization of germline EGFR T790M mutations, and the use of FDG-PET imaging as a predictive and prognostic tool in thymic malignancies. At the FDA, Dr. Khozin led several landmark accelerated and regular approvals that defined the modern paradigm of biomarker-driven oncology, including ceritinib (ALK-positive NSCLC), erlotinib (EGFR-mutant NSCLC), osimertinib (EGFR T790M NSCLC), and atezolizumab (metastatic NSCLC).</p>
+            <div class="apubs">
+              <a class="apub" href="https://doi.org/10.1158/1078-0432.CCR-16-1773"><span class="j">Clinical Cancer Research</span><span class="t">Osimertinib for the Treatment of Metastatic EGFR T790M Mutation-Positive Non-Small Cell Lung Cancer</span></a>
+              <a class="apub" href="https://doi.org/10.1158/1078-0432.CCR-14-3157"><span class="j">Clinical Cancer Research</span><span class="t">FDA Approval: Ceritinib for the Treatment of Metastatic ALK-Positive Non-Small Cell Lung Cancer</span></a>
+              <a class="apub" href="https://doi.org/10.1634/theoncologist.2014-0089"><span class="j">The Oncologist</span><span class="t">U.S. FDA Approval Summary: Erlotinib for the First-Line Treatment of Metastatic NSCLC with EGFR Mutations</span></a>
+              <a class="apub extra" href="https://doi.org/10.1158/1078-0432.CCR-17-0540"><span class="j">Clinical Cancer Research</span><span class="t">U.S. FDA Approval Summary: Atezolizumab for Metastatic Non-Small Cell Lung Cancer</span></a>
+              <a class="apub extra" href="https://doi.org/10.1016/S1470-2045(13)70596-5"><span class="j">The Lancet Oncology</span><span class="t">Cixutumumab for Patients with Recurrent or Refractory Advanced Thymic Epithelial Tumours: A Multicentre, Open-Label, Phase 2 Trial</span></a>
+              <a class="apub extra" href="https://doi.org/10.1158/1078-0432.CCR-12-2929"><span class="j">Clinical Cancer Research</span><span class="t">18F-FDG PET in the Management of Patients with Thymic Epithelial Tumors</span></a>
+              <a class="apub extra" href="https://doi.org/10.1093/annonc/mdt249"><span class="j">Annals of Oncology</span><span class="t">A Phase I/II Study of Sepantronium Bromide (YM155, Survivin Suppressor) with Paclitaxel and Carboplatin in Patients with Advanced Non-Small-Cell Lung Cancer</span></a>
+              <a class="apub extra" href="https://doi.org/10.1097/JTO.0b013e3182697a23"><span class="j">Journal of Thoracic Oncology</span><span class="t">Hepatoid Carcinoma of the Lung with Anaplastic Lymphoma Kinase Gene Rearrangement</span></a>
+              <a class="apub extra" href="https://doi.org/10.1016/j.cllc.2013.01.005"><span class="j">Clinical Lung Cancer</span><span class="t">Concurrent Molecular Alterations in Tumors with Germ Line Epidermal Growth Factor Receptor T790M Mutations</span></a>
+            </div>
+            <button class="pubs-toggle" type="button" aria-expanded="false">Show all 9 publications</button>
+          </div>
+          <div class="foot"><span class="mono meta">9 publications</span><button class="xbtn" type="button" aria-expanded="false" aria-controls="area-a-more"><span>Read more</span><i aria-hidden="true">+</i></button></div>
+        </div>
+      </article>
+      <article class="area" id="area-b">
+        <div class="art"><img src="img/rwe.jpg" alt="Dr. Khozin working at a laptop in a library"></div>
+        <div class="body">
+          <span class="meta k">Program B</span>
+          <h3>Real-World Evidence and Clinical Trial Design</h3>
+          <p>Dr. Khozin’s research has helped define the methodological foundations for using electronic health records and other real-world data to generate validated clinical endpoints, construct robust external control arms, and support regulatory decision-making in oncology.</p>
+          <div class="more" id="area-b-more" hidden>
+            <p>His work demonstrated that real-world endpoints can meaningfully correlate with overall survival and be implemented at scale with scientific rigor. He has also advanced hybrid trial designs that integrate randomization with external data sources, developed approaches to improve the interpretation of clinical trials for underrepresented populations, and established practical frameworks for incorporating real-world evidence into both regulatory and treatment decisions.</p>
+            <div class="apubs">
+              <a class="apub" href="https://doi.org/10.1093/jnci/djx187"><span class="j">Journal of the National Cancer Institute</span><span class="t">Real-World Data for Clinical Evidence Generation in Oncology</span></a>
+              <a class="apub" href="https://doi.org/10.1002/cncr.32383"><span class="j">Cancer</span><span class="t">Real-World Progression, Treatment, and Survival Outcomes During Rapid Adoption of Immunotherapy for Advanced NSCLC</span></a>
+              <a class="apub" href="https://doi.org/10.1634/theoncologist.2018-0307"><span class="j">The Oncologist</span><span class="t">Real-World Outcomes of Patients with Metastatic NSCLC Treated with PD-1 Inhibitors in the Year Following U.S. Regulatory Approval</span></a>
+              <a class="apub extra" href="https://doi.org/10.1200/CCI.19.00013"><span class="j">JCO Clinical Cancer Informatics</span><span class="t">Characterizing the Feasibility and Performance of Real-World Tumor Progression End Points</span></a>
+              <a class="apub extra" href="https://doi.org/10.1038/s41467-022-33192-1"><span class="j">Nature Communications</span><span class="t">The Design and Evaluation of Hybrid Controlled Trials That Leverage External Data and Randomization</span></a>
+              <a class="apub extra" href="https://doi.org/10.1016/j.bbcan.2022.188825"><span class="j">Biochimica et Biophysica Acta Reviews on Cancer</span><span class="t">A Novel Approach to Reducing Disparities in Health Outcomes by Enhancing Interpretation of Cancer Clinical Trials for Underrepresented Patient Groups</span></a>
+              <a class="apub extra" href="https://doi.org/10.1007/s12325-025-03201-y"><span class="j">Advances in Therapy</span><span class="t">Real-World Evidence Acceptability and Use in Breast Cancer Treatment Decision-Making</span></a>
+              <a class="apub extra" href="https://doi.org/10.3389/fmed.2023.1236462"><span class="j">Frontiers in Medicine</span><span class="t">Real-World Evidence for Regulatory Decision-Making: Updated Guidance from Around the World</span></a>
+              <a class="apub extra" href="https://doi.org/10.1377/hlthaff.2017.1579"><span class="j">Health Affairs</span><span class="t">Real-World Evidence in Support of Precision Medicine: Clinico-Genomic Cancer Data as a Case Study</span></a>
+            </div>
+            <button class="pubs-toggle" type="button" aria-expanded="false">Show all 9 publications</button>
+          </div>
+          <div class="foot"><span class="mono meta">9 publications</span><button class="xbtn" type="button" aria-expanded="false" aria-controls="area-b-more"><span>Read more</span><i aria-hidden="true">+</i></button></div>
+        </div>
+      </article>
+      <article class="area" id="area-c">
+        <div class="art"><img src="img/ai-ml.jpg" alt="Brain MRI scans connected to circuit traces"></div>
+        <div class="body">
+          <span class="meta k">Program C</span>
+          <h3>Artificial Intelligence and Machine Learning in Drug Development</h3>
+          <p>Dr. Khozin’s work in AI spans foundation models for oncology, LLM-based clinical trial data analysis, and regulatory frameworks for AI/ML adoption across the drug development life cycle.</p>
+          <div class="more" id="area-c-more" hidden>
+            <p>At the FDA, he established Information Exchange and Data Transformation (INFORMED), the agency’s first data science and technology incubator, which laid the groundwork for integrating AI and digital health into drug development and regulatory decision-making.</p><p>A central focus of Dr. Khozin’s current work is modernizing how tumor burden is measured in clinical trials. In a large FDA-led meta-analysis of more than 14,000 patients enrolled in registration trials, he found that two independent radiologists reviewing the same scans agreed on tumor response classification only about 70% of the time. In ovarian and pancreatic cancers, discordance reached as high as 45%, with striking cases in which one reader determined a complete response while the other concluded progressive disease in the very same patient.</p>
+            <div class="apubs">
+              <a class="apub" href="https://ai.nejm.org/doi/full/10.1056/AIra2401164"><span class="j">NEJM AI</span><span class="t">The Use of Artificial Intelligence for Cancer Therapeutic Decision-Making</span></a>
+              <a class="apub" href="https://ascpt.onlinelibrary.wiley.com/doi/10.1111/cts.70001"><span class="j">Clinical and Translational Science</span><span class="t">AI for Cancer Classification</span></a>
+              <a class="apub" href="https://www.medrxiv.org/content/10.1101/2025.02.05.25321607v2"><span class="j">medRxiv</span><span class="t">Artificial Intelligence in Biomedical Data Analysis: A Comparative Assessment of Large Language Models for Automated Clinical Trial Interpretation and Statistical Evaluation</span></a>
+              <a class="apub extra" href="https://doi.org/10.1038/s41746-019-0148-3"><span class="j">NPJ Digital Medicine</span><span class="t">Artificial Intelligence and Machine Learning in Clinical Development: A Translational Perspective</span></a>
+              <a class="apub extra" href="https://doi.org/10.1038/nrd.2018.34"><span class="j">Nature Reviews Drug Discovery</span><span class="t">INFORMED: An Incubator at the US FDA for Driving Innovations in Data Science and Agile Technology</span></a>
+              <a class="apub extra" href="https://doi.org/10.1038/nrd.2017.26"><span class="j">Nature Reviews Drug Discovery</span><span class="t">From Big Data to Smart Data: FDA's INFORMED Initiative</span></a>
+              <a class="apub extra" href="https://doi.org/10.1002/cpt.1441"><span class="j">Clinical Pharmacology and Therapeutics</span><span class="t">Decentralized Trials in the Age of Real-World Evidence and Inclusivity in Clinical Investigations</span></a>
+              <a class="apub extra" href="https://doi.org/10.1007/s12325-019-00970-1"><span class="j">Advances in Therapy</span><span class="t">Generating Real-World Tumor Burden Endpoints from Electronic Health Record Data: Comparison of RECIST, Radiology-Anchored, and Clinician-Anchored Approaches</span></a>
+              <a class="apub extra" href="https://doi.org/10.1093/annonc/mdz060"><span class="j">Annals of Oncology</span><span class="t">Analysis of Time-to-Treatment Discontinuation of Targeted Therapy, Immunotherapy, and Chemotherapy in Clinical Trials of Patients with NSCLC</span></a>
+              <a class="apub extra" href="https://www.wsj.com/articles/clinical-drug-trials-may-be-coming-to-your-doctors-office-1505256988?mod=article_inline"><span class="j">The Wall Street Journal</span><span class="t">Clinical Drug Trials May Be Coming to Your Doctor's Office</span></a>
+              <a class="apub extra" href="https://www.wsj.com/articles/open-your-app-and-say-ahh-1537397802"><span class="j">The Wall Street Journal</span><span class="t">Open Your App and Say Ahh</span></a>
+            </div>
+            <button class="pubs-toggle" type="button" aria-expanded="false">Show all 11 publications</button>
+          </div>
+          <div class="foot"><span class="mono meta">11 publications</span><button class="xbtn" type="button" aria-expanded="false" aria-controls="area-c-more"><span>Read more</span><i aria-hidden="true">+</i></button></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="sub">
+      <div class="sh">
+        <div class="tag"><span>06.1 · Inter-reader response classification</span><b>N = 13,677</b></div>
+        <h2 class="title">Two radiologists agree on tumor response only <em>70%</em> of the time</h2>
+        <p class="deck">An FDA meta-analysis of registration trials: primary investigator versus independent radiologist, per RECIST 1.1. Only the diagonal is agreement.</p>
+      </div>
+      <div class="mx-grid">
+        <div style="min-width:0">
+          <div class="matrix-wrap">
+            <table class="matrix">
+              <thead>
+                <tr><th class="axis" scope="col">Investigator ↓ / Radiologist →</th><th scope="col">CR</th><th scope="col">PR</th><th scope="col">SD</th><th scope="col">PD</th><th scope="col">NE</th><th scope="col">Total</th></tr>
+              </thead>
+              <tbody id="mx"></tbody>
+            </table>
+          </div>
+          <div class="legend">
+            <span><i style="background:var(--signal)"></i>Concordant</span>
+            <span><i style="background:var(--seq-1)"></i>&lt;2% of row</span>
+            <span><i style="background:var(--seq-2)"></i>2–10%</span>
+            <span><i style="background:var(--seq-3)"></i>10–20%</span>
+            <span><i style="background:var(--seq-4)"></i>&gt;20%</span>
+          </div>
+          <p class="note">CR = complete response · PR = partial response · SD = stable disease · PD = progressive disease · NE = not evaluable. Khozin et al., FDA meta-analysis, unpublished, 2017.</p>
+        </div>
+        <div class="mx-stat">
+          <div class="stat"><span class="num">69.5%</span><span class="lab">Overall concordance (9,508 / 13,677)</span></div>
+          <div class="stat"><span class="num">≤45%</span><span class="lab">Discordance in ovarian and pancreatic cancers</span></div>
+          <div class="stat"><span class="num">23</span><span class="lab">Patients read CR by one reader, PD by the other</span></div>
+        </div>
+      </div>
+      <div class="two">
+        <div><span class="meta" style="color:var(--cobalt)">Response · automated</span><h3>AutoRECIST</h3><p>Applies AI to automate and standardize tumor response assessment, producing reproducible, auditable response classifications at scale.</p></div>
+        <div><span class="meta" style="color:var(--cobalt)">Burden · continuous</span><h3>Total Tumor Burden Index</h3><p>Replaces categorical RECIST endpoints with a continuous volumetric measure across all lesions, capturing changes that binary categories miss.</p></div>
+      </div>
+    </div>
+
+    <div class="sub" id="pubs">
+      <div class="pubs-head"><h3>Selected publications</h3><span class="mono meta" style="color:var(--graphite)">7 of 100+</span></div>
+      <div class="pubs">
+        <a class="pub" href="https://ai.nejm.org/doi/full/10.1056/AIra2401164"><span class="j">NEJM AI</span><span class="t">The Use of Artificial Intelligence for Cancer Therapeutic Decision-Making</span><span class="ar">→</span></a>
+        <a class="pub" href="https://doi.org/10.1038/s41467-022-33192-1"><span class="j">Nature Communications · 2022</span><span class="t">The Design and Evaluation of Hybrid Controlled Trials That Leverage External Data and Randomization</span><span class="ar">→</span></a>
+        <a class="pub" href="https://doi.org/10.1038/nrd.2017.26"><span class="j">Nature Reviews Drug Discovery · 2017</span><span class="t">From Big Data to Smart Data: FDA’s INFORMED Initiative</span><span class="ar">→</span></a>
+        <a class="pub" href="https://doi.org/10.1093/jnci/djx187"><span class="j">Journal of the National Cancer Institute</span><span class="t">Real-World Data for Clinical Evidence Generation in Oncology</span><span class="ar">→</span></a>
+        <a class="pub" href="https://doi.org/10.1158/1078-0432.CCR-16-1773"><span class="j">Clinical Cancer Research</span><span class="t">Osimertinib for the Treatment of Metastatic EGFR T790M Mutation-Positive Non-Small Cell Lung Cancer</span><span class="ar">→</span></a>
+        <a class="pub" href="https://doi.org/10.1038/s41746-019-0148-3"><span class="j">NPJ Digital Medicine</span><span class="t">Artificial Intelligence and Machine Learning in Clinical Development: A Translational Perspective</span><span class="ar">→</span></a>
+        <a class="pub" href="https://www.wsj.com/articles/open-your-app-and-say-ahh-1537397802"><span class="j">The Wall Street Journal · Op-ed</span><span class="t">Open Your App and Say Ahh</span><span class="ar">→</span></a>
+      </div>
+      <div class="btn-row" style="margin-top:28px">
+        <a class="btn btn-primary" href="https://scholar.google.com/citations?user=R_yPHqUAAAAJ&amp;hl=en">Google Scholar</a>
+        <a class="btn btn-secondary" href="https://www.researchgate.net/profile/Sean-Khozin">ResearchGate</a>
+        <a class="btn btn-secondary" href="https://infranodus.com/idiopathic/SK_Research">Research graph →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band music on-ink" id="music">
+  <div class="wrap">
+    <div class="sh">
+      <div class="tag"><span>07 / 09 · Music</span><b>Perpetual Drift</b></div>
+      <h2 class="title">Jazz meets classical in suspended <em>time</em></h2>
+    </div>
+    <div class="mu-grid">
+      <div style="display:grid;gap:20px;align-content:start">
+        <div class="embed player"><span class="mono meta">Spotify artist player embeds here</span></div>
+        <div class="btn-row"><a class="btn btn-secondary" href="https://open.spotify.com/artist/145UBQhx3rVoiOWrpJx2Sg">Open in Spotify</a></div>
+      </div>
+      <article class="essay">
+        <span class="meta k">Featured essay</span>
+        <h3>Physiological harmony and dissonance</h3>
+        <p class="sub-t">The confluence of math, music, and medicine</p>
+        <p>The composition Perpetual Drift proposes that transitions in human physiology, detectable through computational methods, can also be heard as shifts in tonality and dissonance.</p>
+        <div class="btn-row"><a class="btn btn-secondary" href="https://www.insights.phyusionbio.com/p/physiological-harmony-and-dissonance">Read on Substack →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="section-band" data-band="neural" aria-hidden="true"><canvas class="band-canvas"></canvas></div>
+<section class="band" id="boards">
+  <div class="wrap">
+    <div class="sh">
+      <div class="tag"><span>08 / 09 · Leadership</span><b>Boards &amp; advisory</b></div>
+      <h2 class="title">Select board appointments &amp; advisory <em>roles</em></h2>
+    </div>
+    <div class="boards">
+      <div class="board"><h3><button class="board-head" type="button" aria-expanded="false" aria-controls="board-1"><span>Society for Translational Oncology</span><i aria-hidden="true">+</i></button></h3><div class="board-more" id="board-1" hidden><p>A nonprofit bridging scientific discovery and clinical application in oncology, promoting equitable cancer care and fostering the translation of new therapies through education and global collaboration.</p><a href="https://sto-online.org/">Website →</a></div></div>
+      <div class="board"><h3><button class="board-head" type="button" aria-expanded="false" aria-controls="board-2"><span>Owkin</span><i aria-hidden="true">+</i></button></h3><div class="board-more" id="board-2" hidden><p>An AI biotech company using machine learning and federated learning to accelerate drug discovery, optimize clinical trials, and develop AI-powered diagnostics from multimodal patient data.</p><a href="https://www.owkin.com">Website →</a></div></div>
+      <div class="board"><h3><button class="board-head" type="button" aria-expanded="false" aria-controls="board-3"><span>Jona</span><i aria-hidden="true">+</i></button></h3><div class="board-more" id="board-3" hidden><p>A personalized health company using AI to analyze the gut microbiome, delivering actionable insights on diet and lifestyle to help people identify root causes of chronic health issues.</p><a href="https://jona.health/">Website →</a></div></div>
+      <div class="board"><h3><button class="board-head" type="button" aria-expanded="false" aria-controls="board-4"><span>Atropos Health</span><i aria-hidden="true">+</i></button></h3><div class="board-more" id="board-4" hidden><p>A Stanford spinout generating publication-grade real-world evidence in minutes using AI, closing the evidence gap where only 14% of daily medical decisions are backed by high-quality data.</p><a href="https://www.atroposhealth.com/">Website →</a></div></div>
+      <div class="board"><h3><button class="board-head" type="button" aria-expanded="false" aria-controls="board-5"><span>Alliance for AI in Healthcare</span><i aria-hidden="true">+</i></button></h3><div class="board-more" id="board-5" hidden><p>An international multi-stakeholder advocacy organization promoting the responsible development, regulation, and adoption of AI-powered healthcare solutions across industry, government, and academia.</p><a href="https://www.theaaih.org/">Website →</a></div></div>
+      <div class="board"><h3><button class="board-head" type="button" aria-expanded="false" aria-controls="board-6"><span>Digital Medicine Society</span><i aria-hidden="true">+</i></button></h3><div class="board-more" id="board-6" hidden><p>A global nonprofit advancing the ethical, effective, and equitable use of digital medicine by convening diverse stakeholders and producing open-source resources used by the FDA, NIH, and top pharma companies.</p><a href="https://dimesociety.org/">Website →</a></div></div>
+      <div class="board"><h3><button class="board-head" type="button" aria-expanded="false" aria-controls="board-7"><span>Cytometric Therapeutics</span><i aria-hidden="true">+</i></button></h3><div class="board-more" id="board-7" hidden><p>A biotech company developing precision oncology therapies through functional cytometric profiling, testing living tumor samples directly against therapeutic agents to treat cancers with minimal toxicity.</p><a href="https://cytometric-therapeutics.com/">Website →</a></div></div>
+      <div class="board"><h3><button class="board-head" type="button" aria-expanded="false" aria-controls="board-8"><span>Weave Bio</span><i aria-hidden="true">+</i></button></h3><div class="board-more" id="board-8" hidden><p>An AI-native software company automating regulatory submissions for drug development, transforming source data into compliant, submission-ready dossiers across global health authorities.</p><a href="https://www.weave.bio/">Website →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-band" data-band="neural" aria-hidden="true"><canvas class="band-canvas"></canvas></div>
+<section class="band" id="contact">
+  <div class="wrap">
+    <div class="sh">
+      <div class="tag"><span>09 / 09 · Connect</span><b>Correspondence</b></div>
+      <h2 class="title">Get in <em>touch</em></h2>
+      <p class="deck">For research collaboration, speaking engagements, or work on AI-driven innovation in healthcare.</p>
+    </div>
+    <div class="ct-grid">
+      <form id="contact-form" novalidate>
+        <div class="fld"><label for="cf-name">Name</label><input id="cf-name" name="name" autocomplete="name"></div>
+        <div class="fld"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" autocomplete="email"></div>
+        <div class="fld"><label for="cf-msg">Message</label><textarea id="cf-msg" name="message"></textarea></div>
+        <div class="btn-row" style="align-items:center"><button class="btn btn-primary" type="submit">Send message</button><span class="form-msg" id="form-msg" role="status"></span></div>
+      </form>
+      <div style="display:grid;gap:32px;min-width:0">
+      <figure class="speak"><img src="img/podium.jpg" alt="Dr. Khozin speaking at a podium"><figcaption class="meta">Speaking engagements</figcaption></figure>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/seankhozin">LinkedIn <span>→</span></a>
+        <a href="https://www.insights.phyusionbio.com/">Substack <span>→</span></a>
+        <a href="https://scholar.google.com/citations?user=R_yPHqUAAAAJ&amp;hl=en">Google Scholar <span>→</span></a>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap meta">
+    <span>© 2026 Sean Khozin, MD, MPH</span>
+    <span>Index No.01<span class="sq" aria-hidden="true"></span></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var L=['CR','PR','SD','PD','NE'];
+  var M=[[305,250,116,14,25],[240,3366,908,126,33],[64,849,3522,668,74],[9,58,507,1890,134],[1,13,31,49,425]];
+  var fmt=function(n){return n.toLocaleString('en-US')};
+  var html='',col=[0,0,0,0,0];
+  M.forEach(function(r,i){
+    var tot=r.reduce(function(a,b){return a+b},0);
+    html+='<tr><th scope="row">'+L[i]+'</th>';
+    r.forEach(function(v,j){
+      col[j]+=v;var share=v/tot,c;
+      if(i===j)c='hit';else if(share<.02)c='s1';else if(share<.10)c='s2';else if(share<.20)c='s3';else c='s4';
+      html+='<td class="'+c+'" title="'+(share*100).toFixed(1)+'% of row">'+fmt(v)+'</td>';
+    });
+    html+='<td class="tot">'+fmt(tot)+'</td></tr>';
+  });
+  html+='<tr class="totals"><th scope="row">Total</th>'+col.map(function(v){return '<td class="tot">'+fmt(v)+'</td>'}).join('')+'<td class="tot">'+fmt(col.reduce(function(a,b){return a+b},0))+'</td></tr>';
+  document.getElementById('mx').innerHTML=html;
+
+  document.getElementById('contact-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    document.getElementById('form-msg').textContent='Mockup only. Messages are not sent.';
+  });
+
+  document.querySelectorAll('.xbtn').forEach(function(b){
+    b.addEventListener('click',function(){
+      var open=b.getAttribute('aria-expanded')!=='true',card=b.closest('.area');
+      b.setAttribute('aria-expanded',open);card.classList.toggle('open',open);
+      document.getElementById(b.getAttribute('aria-controls')).hidden=!open;
+      b.querySelector('span').textContent=open?'Show less':'Read more';
+      b.querySelector('i').textContent=open?'\u2212':'+';
+    });
+  });
+  document.querySelectorAll('.pubs-toggle').forEach(function(b){
+    var label=b.textContent;
+    b.addEventListener('click',function(){
+      var all=b.previousElementSibling.classList.toggle('all');
+      b.setAttribute('aria-expanded',all);b.textContent=all?'Show fewer':label;
+    });
+  });
+  document.querySelectorAll('.board-head').forEach(function(b){
+    b.addEventListener('click',function(){
+      var open=b.getAttribute('aria-expanded')!=='true';
+      b.setAttribute('aria-expanded',open);
+      document.getElementById(b.getAttribute('aria-controls')).hidden=!open;
+      b.querySelector('i').textContent=open?'\u2212':'+';
+    });
+  });
+})();
+</script>
+<script>
+// Neural-net section bands, ported from the live site's neural-network.js and recoloured to Exhibit ink and cobalt.
+(function() {
+  var bands = document.querySelectorAll('.section-band');
+  if (!bands.length) return;
+  var DPR = window.devicePixelRatio || 1;
+
+  var COL = {
+    node:    [10, 10, 10],     // --ink
+    wire:    [10, 10, 10],
+    signal:  [11, 55, 158],    // --cobalt
+    gold:    [11, 55, 158],
+    goldL:   [11, 55, 158],
+    formula: [43, 42, 38],     // --ink-2
+  };
+  function rgba(c, a) { return 'rgba('+c[0]+','+c[1]+','+c[2]+','+a+')'; }
+
+  var FORMULA_TEXTS = [
+    'f(x) = sigmoid(Wx + b)',
+    'L = -1/N \u03A3 y\u1D62 log(\u0177\u1D62)',
+    '\u2207W = \u2202L/\u2202W',
+    'softmax(z\u1D62) = e^z\u1D62 / \u03A3e^z\u2C7C',
+    'ReLU(x) = max(0, x)',
+    'P(y|x) = \u03C3(W\u1D40x + b)',
+    '\u03B1 = 0.001',
+    'W\u209C\u208A\u2081 = W\u209C - \u03B1\u2207L',
+    'z = W\u00B7x + b',
+    'a = \u03C3(z)',
+    'J(\u03B8) = 1/2m \u03A3(h\u03B8 - y)\u00B2',
+    'GELU(x) = x\u03A6(x)',
+    'Attention(Q,K,V)',
+    'H(p,q) = -\u03A3 p log q',
+    '\u03C3(x) = 1/(1 + e\u207B\u02E3)',
+    'BatchNorm(x) = \u03B3x\u0302 + \u03B2',
+    'dropout(x, p=0.5)',
+    'Adam: m\u209C = \u03B2\u2081m + (1-\u03B2\u2081)g',
+    'MSE = 1/n \u03A3(y - \u0177)\u00B2',
+    'F1 = 2\u00B7P\u00B7R/(P+R)',
+    'conv2d(x, k, stride=1)',
+  ];
+
+  // ============================================================
+  //  Per-band state
+  // ============================================================
+  var allBands = [];
+
+  function initBand(bandEl) {
+    var canvas = bandEl.querySelector('.band-canvas');
+    var ctx = canvas.getContext('2d');
+    var type = bandEl.getAttribute('data-band');
+    var state = { el: bandEl, canvas: canvas, ctx: ctx, type: type, W: 0, H: 0 };
+    state.mouse = { x: -9999, y: -9999 };
+    state.grabbed = null;
+
+    function cXY(e) {
+      var r = canvas.getBoundingClientRect();
+      return { x: e.clientX - r.left, y: e.clientY - r.top };
+    }
+
+    canvas.addEventListener('mousemove', function(e) {
+      var p = cXY(e);
+      state.mouse.x = p.x; state.mouse.y = p.y;
+      if (state.grabbed) {
+        state.grabbed.ref.x = p.x - state.grabbed.ox;
+        state.grabbed.ref.y = p.y - state.grabbed.oy;
+        if (state.grabbed.ref.vx !== undefined) state.grabbed.ref.vx = 0;
+      }
+    });
+    canvas.addEventListener('mouseleave', function() {
+      state.mouse.x = -9999; state.mouse.y = -9999;
+      if (state.grabbed) { state.grabbed.ref.grabbed = false; state.grabbed = null; }
+      canvas.style.cursor = '';
+    });
+    canvas.addEventListener('mousedown', function(e) {
+      var p = cXY(e);
+      if (type === 'formula') {
+        for (var i = state.formulas.length - 1; i >= 0; i--) {
+          var f = state.formulas[i];
+          ctx.font = f.size + "px 'Courier New', monospace";
+          var tw = ctx.measureText(f.text).width, pad = 6;
+          if (p.x >= f.x-pad && p.x <= f.x+tw+pad && p.y >= f.y-f.size-pad && p.y <= f.y+pad) {
+            f.grabbed = true;
+            state.grabbed = { ref: f, ox: p.x-f.x, oy: p.y-f.y };
+            canvas.style.cursor = 'grabbing'; return;
+          }
+        }
+      } else if (state.nodes) {
+        for (var ni = 0; ni < state.nodes.length; ni++) {
+          var nd = state.nodes[ni];
+          var dx = p.x-nd.x, dy = p.y-nd.y, hr = Math.max(nd.r*4, 14);
+          if (dx*dx+dy*dy < hr*hr) {
+            nd.grabbed = true;
+            state.grabbed = { ref: nd, ox: p.x-nd.x, oy: p.y-nd.y };
+            canvas.style.cursor = 'grabbing'; return;
+          }
+        }
+      }
+    });
+    canvas.addEventListener('mouseup', function() {
+      if (state.grabbed) { state.grabbed.ref.grabbed = false; state.grabbed = null; canvas.style.cursor = ''; }
+    });
+    // Safety: release grab if mouseup happens outside canvas
+    document.addEventListener('mouseup', function() {
+      if (state.grabbed) { state.grabbed.ref.grabbed = false; state.grabbed = null; canvas.style.cursor = ''; }
+    });
+
+    // Touch — highlight on tap, clear on release. Passive so scrolling isn't blocked.
+    canvas.addEventListener('touchstart', function(e) {
+      if (e.touches.length === 1) {
+        var p = cXY(e.touches[0]);
+        state.mouse.x = p.x; state.mouse.y = p.y;
+      }
+    }, { passive: true });
+    canvas.addEventListener('touchmove', function(e) {
+      if (e.touches.length === 1) {
+        var p = cXY(e.touches[0]);
+        state.mouse.x = p.x; state.mouse.y = p.y;
+      }
+    }, { passive: true });
+    canvas.addEventListener('touchend', function() {
+      state.mouse.x = -9999; state.mouse.y = -9999;
+    }, { passive: true });
+    canvas.addEventListener('touchcancel', function() {
+      state.mouse.x = -9999; state.mouse.y = -9999;
+    }, { passive: true });
+
+    allBands.push(state);
+    return state;
+  }
+
+  // ============================================================
+  //  Build neural band — horizontal row of nodes with curved arcs
+  // ============================================================
+  function buildNeural(s) {
+    s.nodes = []; s.connections = []; s.signals = [];
+    var W = s.W, H = s.H;
+    var padX = 20, padY = 8;
+    // Repeat small multi-layer networks across the width
+    var layerDef = [2, 4, 5, 4, 2]; // nodes per layer in each block
+    var maxPerLayer = 5;
+    var layerCount = layerDef.length;
+    var layerSpacing = 50;
+    var blockWidth = (layerCount - 1) * layerSpacing;
+    var blockGap = 30;
+    var numBlocks = Math.max(1, Math.floor((W - padX * 2 + blockGap) / (blockWidth + blockGap)));
+    var totalWidth = numBlocks * blockWidth + (numBlocks - 1) * blockGap;
+    var startX = (W - totalWidth) / 2;
+    var nodeSpacing = (H - padY * 2) / (maxPerLayer - 1);
+
+    for (var b = 0; b < numBlocks; b++) {
+      var bx = startX + b * (blockWidth + blockGap);
+      var blockStart = s.nodes.length;
+      // Create nodes layer by layer
+      for (var l = 0; l < layerCount; l++) {
+        var count = layerDef[l];
+        var x = bx + l * layerSpacing;
+        var sy = H / 2 - ((count - 1) * nodeSpacing) / 2;
+        for (var n = 0; n < count; n++) {
+          s.nodes.push({
+            x: x, y: sy + n * nodeSpacing,
+            r: 2.5 + Math.random() * 1.5,
+            phase: Math.random() * Math.PI * 2,
+            weight: (Math.random() * 2 - 1).toFixed(2),
+            layer: l,
+          });
+        }
+      }
+      // Connect adjacent layers within this block
+      var idx = blockStart;
+      for (var l2 = 0; l2 < layerCount - 1; l2++) {
+        var cC = layerDef[l2], nC = layerDef[l2 + 1];
+        var cS = idx, nS = idx + cC;
+        for (var a = 0; a < cC; a++) {
+          for (var bb = 0; bb < nC; bb++) {
+            // Skip some connections for visual clarity
+            if (Math.random() < 0.7) {
+              s.connections.push({ from: cS + a, to: nS + bb, weight: Math.random() });
+            }
+          }
+        }
+        idx += cC;
+      }
+    }
+  }
+
+  // ============================================================
+  //  Build formula band — ticker-style left-to-right
+  // ============================================================
+  function buildFormulas(s) {
+    s.formulas = [];
+    var W = s.W, H = s.H;
+    var count = Math.max(3, Math.floor(W / 200));
+    var spacing = W / count;
+    for (var i = 0; i < count; i++) {
+      s.formulas.push({
+        x: i * spacing + Math.random() * 30,
+        y: H/2 + (Math.random()-0.5) * H * 0.3 + 5,
+        vx: 0.15 + Math.random() * 0.15,
+        text: FORMULA_TEXTS[Math.floor(Math.random() * FORMULA_TEXTS.length)],
+        size: 10 + Math.floor(Math.random() * 3),
+        useGold: Math.random() < 0.25,
+      });
+    }
+  }
+
+  // ============================================================
+  //  Resize
+  // ============================================================
+  function resizeBand(s) {
+    var rect = s.el.getBoundingClientRect();
+    s.W = rect.width; s.H = rect.height;
+    s.canvas.width = s.W * DPR; s.canvas.height = s.H * DPR;
+    s.canvas.style.width = s.W + 'px'; s.canvas.style.height = s.H + 'px';
+    s.ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    if (s.type === 'neural') buildNeural(s);
+    else buildFormulas(s);
+  }
+
+  // ============================================================
+  //  Update
+  // ============================================================
+  var frame = 0;
+
+  function updateNeural(s) {
+    for (var i = 0; i < s.nodes.length; i++) {
+      if (!s.nodes[i].grabbed) s.nodes[i].phase += 0.008;
+    }
+    if (frame % 2 === 0 && s.signals.length < 60 && s.connections.length > 0) {
+      var numSpawn = 2 + Math.floor(Math.random() * 4);
+      for (var sp = 0; sp < numSpawn; sp++) {
+        var c = s.connections[Math.floor(Math.random() * s.connections.length)];
+        s.signals.push({ conn: c, t: 0, speed: 0.003 + Math.random() * 0.005, bright: Math.random() > 0.5 });
+      }
+    }
+    for (var si = s.signals.length - 1; si >= 0; si--) {
+      s.signals[si].t += s.signals[si].speed;
+      if (s.signals[si].t > 1) s.signals.splice(si, 1);
+    }
+  }
+
+  function updateFormulas(s) {
+    for (var i = 0; i < s.formulas.length; i++) {
+      var f = s.formulas[i];
+      if (!f.grabbed) f.x += f.vx;
+      if (!f.grabbed && f.x > s.W + 100) {
+        f.x = -200;
+        f.text = FORMULA_TEXTS[Math.floor(Math.random() * FORMULA_TEXTS.length)];
+      }
+    }
+  }
+
+  // ============================================================
+  //  Draw neural band
+  // ============================================================
+  function drawNeural(s) {
+    var ctx = s.ctx, mouse = s.mouse;
+    ctx.clearRect(0, 0, s.W, s.H);
+
+    // Find hovered node index
+    var hovIdx = -1;
+    if (!s.grabbed && mouse.x > -9000) {
+      for (var hi = 0; hi < s.nodes.length; hi++) {
+        var hd = s.nodes[hi];
+        var hdx = mouse.x-hd.x, hdy = mouse.y-hd.y, hr = Math.max(hd.r*4, 14);
+        if (hdx*hdx+hdy*hdy < hr*hr) { hovIdx = hi; break; }
+      }
+    }
+    // Also check grabbed
+    for (var gi = 0; gi < s.nodes.length; gi++) {
+      if (s.nodes[gi].grabbed) { hovIdx = gi; break; }
+    }
+
+    // Connections — straight lines between layers
+    for (var ci = 0; ci < s.connections.length; ci++) {
+      var c = s.connections[ci];
+      var a = s.nodes[c.from], b = s.nodes[c.to];
+      var isHighlighted = (c.from === hovIdx || c.to === hovIdx);
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.strokeStyle = isHighlighted ? rgba(COL.gold, 0.8) : rgba(COL.wire, 0.10 + c.weight * 0.10);
+      ctx.lineWidth = isHighlighted ? 1.8 : 0.5;
+      ctx.stroke();
+    }
+
+    // Signals traveling left-to-right along connections
+    for (var si = 0; si < s.signals.length; si++) {
+      var sig = s.signals[si];
+      var sa = s.nodes[sig.conn.from], sb = s.nodes[sig.conn.to];
+      var t = sig.t;
+      var px = sa.x + (sb.x - sa.x) * t;
+      var py = sa.y + (sb.y - sa.y) * t;
+      var fade = t < 0.15 ? t/0.15 : t > 0.85 ? (1-t)/0.15 : 1;
+
+      // Trail
+      var trT = Math.max(0, t - 0.12);
+      ctx.beginPath();
+      ctx.moveTo(sa.x + (sb.x-sa.x)*trT, sa.y + (sb.y-sa.y)*trT);
+      ctx.lineTo(px, py);
+      ctx.strokeStyle = rgba(sig.bright ? COL.gold : COL.signal, fade * 0.35);
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Dot
+      ctx.beginPath(); ctx.arc(px, py, 2, 0, Math.PI*2);
+      ctx.fillStyle = rgba(sig.bright ? COL.gold : COL.signal, fade * 0.8);
+      ctx.fill();
+    }
+
+    // Nodes
+    for (var ni = 0; ni < s.nodes.length; ni++) {
+      var nd = s.nodes[ni];
+      var isAct = nd.grabbed || ni === hovIdx;
+      var pulse = 0.6 + 0.4 * Math.sin(nd.phase);
+      var r = nd.r * (isAct ? 1.4 : 1);
+
+      ctx.beginPath(); ctx.arc(nd.x, nd.y, r, 0, Math.PI*2);
+      ctx.fillStyle = rgba(COL.node, isAct ? 0.95 : 0.4 + 0.15*pulse);
+      ctx.fill();
+      ctx.strokeStyle = rgba(COL.node, isAct ? 1 : 0.5 + 0.2*pulse);
+      ctx.lineWidth = isAct ? 2 : 1;
+      ctx.stroke();
+
+      ctx.beginPath(); ctx.arc(nd.x, nd.y, r*0.35, 0, Math.PI*2);
+      ctx.fillStyle = rgba(COL.signal, isAct ? 1 : 0.35*pulse);
+      ctx.fill();
+
+      if (isAct) {
+        ctx.font = "500 10px 'IBM Plex Mono', monospace";
+        ctx.fillStyle = rgba(COL.goldL, 0.95);
+        ctx.fillText('w='+nd.weight, nd.x+r+4, nd.y-3);
+      }
+    }
+
+    // Set cursor based on hover state
+    if (!s.grabbed) {
+      s.canvas.style.cursor = hovIdx >= 0 ? 'grab' : '';
+    }
+  }
+
+  // ============================================================
+  //  Draw formula band
+  // ============================================================
+  function drawFormulas(s) {
+    var ctx = s.ctx, mouse = s.mouse;
+    ctx.clearRect(0, 0, s.W, s.H);
+
+    var anyFormulaHovered = false;
+    for (var fi = 0; fi < s.formulas.length; fi++) {
+      var f = s.formulas[fi];
+      ctx.font = f.size + "px 'Courier New', monospace";
+      var tw = ctx.measureText(f.text).width, pad = 6;
+      var isHov = !s.grabbed && mouse.x > -9000 &&
+        mouse.x >= f.x-pad && mouse.x <= f.x+tw+pad &&
+        mouse.y >= f.y-f.size-pad && mouse.y <= f.y+pad;
+      var isAct = f.grabbed || isHov;
+      if (isHov) anyFormulaHovered = true;
+
+      var alpha = isAct ? 1 : 0.55;
+      ctx.font = (isAct ? 'bold ' : '') + f.size + "px 'Courier New', monospace";
+      ctx.fillStyle = f.useGold ? rgba(COL.goldL, alpha) : rgba(COL.formula, alpha);
+      ctx.fillText(f.text, f.x, f.y);
+    }
+
+    // Set cursor based on hover state
+    if (!s.grabbed) {
+      s.canvas.style.cursor = anyFormulaHovered ? 'grab' : '';
+    }
+  }
+
+  // ============================================================
+  //  Visibility observer — only animate bands in viewport
+  // ============================================================
+  var visibleBands = new Set();
+  var observer = null;
+  if (typeof IntersectionObserver !== 'undefined') {
+    observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        var idx = -1;
+        for (var i = 0; i < allBands.length; i++) {
+          if (allBands[i].el === entry.target) { idx = i; break; }
+        }
+        if (idx >= 0) {
+          if (entry.isIntersecting) visibleBands.add(idx);
+          else visibleBands.delete(idx);
+        }
+      });
+    }, { rootMargin: '100px' });
+  }
+
+  // ============================================================
+  //  Init
+  // ============================================================
+  for (var bi = 0; bi < bands.length; bi++) {
+    var s = initBand(bands[bi]);
+    resizeBand(s);
+    if (observer) observer.observe(bands[bi]);
+    else visibleBands.add(allBands.length - 1);
+  }
+
+  window.addEventListener('resize', function() {
+    for (var i = 0; i < allBands.length; i++) resizeBand(allBands[i]);
+  });
+
+  // ============================================================
+  //  Main loop
+  // ============================================================
+  var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function animate() {
+    frame++;
+    visibleBands.forEach(function(idx) {
+      var s = allBands[idx];
+      if (s.type === 'neural') { updateNeural(s); drawNeural(s); }
+      else { updateFormulas(s); drawFormulas(s); }
+    });
+    if (!still) requestAnimationFrame(animate);
+  }
+  if (still) { allBands.forEach(function(s, i) { visibleBands.add(i); }); }
+  animate();
+
+})();
+</script>
+</body>
+</html>
