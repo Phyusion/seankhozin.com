@@ -628,7 +628,6 @@ button { font: inherit; }
 .roundtable-terms dt span { color: var(--on-ink-muted); font: 500 12px/1.2 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
 .roundtable-terms dd { margin: 0; display: grid; gap: 10px; max-width: 76ch; }
 .roundtable-terms dd p { color: var(--on-ink-muted); font-size: 15px; line-height: 1.5; }
-.roundtable-terms .roundtable-term-formula { color: var(--paper); font: 600 16px/1.4 var(--font-mono); }
 .roundtable-terms sub, .roundtable-terms sup { font-size: .7em; }
 @media (max-width: 560px) { .roundtable-terms > div { grid-template-columns: minmax(0, 1fr); } }
 .roundtable-calc-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: stretch; }
@@ -647,6 +646,11 @@ button { font: inherit; }
 .roundtable-result { display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: clamp(20px, 2.4vw, 32px); background: var(--signal); color: var(--ink); transition: background var(--dur) var(--ease-snap), color var(--dur) var(--ease-snap); container-type: inline-size; }
 .roundtable-result.is-below { background: var(--vermilion); color: var(--paper); }
 .roundtable-result-label { font: 500 13px/1.2 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
+.roundtable-equation { font: 600 clamp(15px, 1.5vw, 20px)/1.3 var(--font-mono); font-variant-numeric: tabular-nums; }
+.eq-term { display: inline-block; padding: 0 3px; transition: background var(--dur-slow) var(--ease-snap), color var(--dur-slow) var(--ease-snap); }
+.eq-term.is-changing { background: var(--ink); color: var(--signal); transition: none; }
+.roundtable-result.is-below .eq-term.is-changing { background: var(--paper); color: var(--vermilion); }
+@media (prefers-reduced-motion: reduce) { .eq-term { transition: none; } }
 .roundtable-ratio { font: 900 clamp(64px, 8vw, 128px)/.82 var(--font-display); font-stretch: 72%; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
 .roundtable-ratio { font-size: min(clamp(64px, 8vw, 128px), 42cqi); }
 .roundtable-verdict { font: 800 17px/1.2 var(--font-display); font-stretch: 92%; }
@@ -760,10 +764,10 @@ button { font: inherit; }
 .board-detail a { font: 600 13px/1 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
 
 /* --- Contact --- */
-.contact-content > .lead { max-width: 40ch; margin: calc(-1 * clamp(16px, 3vw, 40px)) 0 clamp(32px, 4vw, 56px); font-weight: 500; }
-.contact-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
-.contact-main, .contact-side { min-width: 0; }
-.contact-side { display: grid; gap: 32px; }
+.section-contact { padding-bottom: clamp(48px, 6vw, 80px); }
+.contact-main > .lead { max-width: 40ch; font-weight: 500; }
+.contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+.contact-main { min-width: 0; display: grid; gap: 28px; align-content: start; }
 .contact-form-trigger {
   width: 100%; display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 0 20px;
   background: var(--ink); color: var(--paper); border: 2px solid var(--ink); border-radius: 0; cursor: pointer;
@@ -799,7 +803,7 @@ button { font: inherit; }
 .form-submit:hover { background: var(--signal-deep); }
 .form-submit:active { transform: translate(1px, 1px); }
 .form-submit-icon { width: 18px; height: 18px; }
-.contact-photo { aspect-ratio: 3 / 2; max-width: 100%; overflow: hidden; border: 2px solid var(--ink); }
+.contact-photo { margin: 0; aspect-ratio: 4 / 3; max-width: 100%; overflow: hidden; border: 2px solid var(--ink); }
 .contact-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 30%; }
 .contact-links { border-top: 3px solid var(--ink); }
 .contact-link {
@@ -812,7 +816,7 @@ button { font: inherit; }
 
 /* --- DNA helix --- */
 .dna-wrapper {
-  display: flex; justify-content: center; align-items: center; padding: 0 0 24px; background: var(--paper);
+  display: flex; justify-content: flex-start; align-items: center; padding: 0;
   opacity: 0; transform: translateY(12px); transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
 }
 .dna-wrapper.visible { opacity: 1; transform: none; }

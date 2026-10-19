@@ -207,9 +207,18 @@
       const p = parseFloat(pIn.value) / 100;
       const c = parseFloat(cIn.value);
       const ratio = npv * p / c;
-      document.getElementById('lever-npv-out').textContent = fmtMoney(npv);
-      document.getElementById('lever-p-out').textContent = Math.round(p * 100) + '%';
-      document.getElementById('lever-c-out').textContent = fmtMoney(c);
+      const values = { npv: fmtMoney(npv), p: Math.round(p * 100) + '%', c: fmtMoney(c) };
+      Object.keys(values).forEach(key => {
+        document.getElementById('lever-' + key + '-out').textContent = values[key];
+        // The live equation shows each value; a value that just changed flashes
+        const term = document.getElementById('eq-' + key);
+        if (term.textContent !== values[key]) {
+          term.textContent = values[key];
+          term.classList.add('is-changing');
+          clearTimeout(term.flashTimer);
+          term.flashTimer = setTimeout(() => term.classList.remove('is-changing'), 220);
+        }
+      });
       ratioOut.textContent = ratio.toFixed(2);
       const fundable = ratio > 1;
       result.classList.toggle('is-below', !fundable);
