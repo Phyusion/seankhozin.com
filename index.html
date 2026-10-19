@@ -92,7 +92,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=41">
+  <link rel="stylesheet" href="styles.css?v=42">
 </head>
 <body>
   <!-- Navigation -->
@@ -1086,6 +1086,28 @@
             <h4>The economics of a single program</h4>
             <p>Andrew Lo&rsquo;s fundamental law of healthcare finance states the test every program must pass: its expected value must exceed its cost, <span class="roundtable-formula">NPV &times; P &divide; C &gt; 1</span>. Each lever maps to part of Dr. Khozin&rsquo;s work. Move one to see where the program lands.</p>
           </div>
+          <dl class="roundtable-terms">
+            <div>
+              <dt><abbr title="Net present value">NPV</abbr><span>Net present value</span></dt>
+              <dd>
+                <p>The value, in today&rsquo;s dollars, of all the profit a successful drug is expected to earn over its commercial life. Each future year&rsquo;s cash flow is discounted, because a dollar received years from now is worth less than a dollar today: the capital could earn a return elsewhere in the meantime.</p>
+                <p class="roundtable-term-formula">NPV = &Sigma; CF<sub>t</sub> &divide; (1 + r)<sup>t</sup></p>
+                <p>Here CF<sub>t</sub> is the cash flow in year <i>t</i> and <i>r</i> is the discount rate, the return investors require for the risk they take (the cost of capital). At a 10% rate, $1 received in ten years is worth about 39&cent; today. NPV falls when revenue arrives later or capital costs more, and rises with better pricing, reimbursement and market access. In this formula it assumes the drug succeeds; the risk of failure is captured separately by P.</p>
+              </dd>
+            </div>
+            <div>
+              <dt>P<span>Probability of success</span></dt>
+              <dd><p>The likelihood that a program reaches regulatory approval from its current stage of development. Multiplying NPV by P gives the program&rsquo;s expected value.</p></dd>
+            </div>
+            <div>
+              <dt>C<span>Cost of development</span></dt>
+              <dd><p>The total investment required to bring the drug to approval, including preclinical work and every phase of clinical trials.</p></dd>
+            </div>
+            <div>
+              <dt>&gt; 1<span>The threshold</span></dt>
+              <dd><p>When expected value exceeds cost, the ratio is above 1 and the program is worth funding. Below 1, rational investors pass, however promising the science.</p></dd>
+            </div>
+          </dl>
           <div class="roundtable-calc-grid">
             <div class="roundtable-levers">
               <div class="lever">

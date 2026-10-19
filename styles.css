@@ -621,6 +621,16 @@ button { font: inherit; }
 .roundtable-calc h4, .roundtable-models h4 { color: var(--paper); font: 900 clamp(20px, 1.9vw, 26px)/1 var(--font-display); font-stretch: 104%; text-transform: uppercase; }
 .roundtable-calc-head p { max-width: 70ch; color: var(--on-ink-muted); }
 .roundtable-formula { color: var(--paper); font: 600 15px/1 var(--font-mono); white-space: nowrap; }
+.roundtable-terms { border-top: 1px solid var(--ink-rule); }
+.roundtable-terms > div { display: grid; grid-template-columns: minmax(150px, .28fr) minmax(0, 1fr); gap: 8px 32px; padding-block: 14px; border-bottom: 1px solid var(--ink-rule); }
+.roundtable-terms dt { display: grid; gap: 4px; align-content: start; color: var(--paper); font: 900 22px/1 var(--font-display); font-stretch: 100%; }
+.roundtable-terms dt abbr { text-decoration: none; }
+.roundtable-terms dt span { color: var(--on-ink-muted); font: 500 12px/1.2 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
+.roundtable-terms dd { margin: 0; display: grid; gap: 10px; max-width: 76ch; }
+.roundtable-terms dd p { color: var(--on-ink-muted); font-size: 15px; line-height: 1.5; }
+.roundtable-terms .roundtable-term-formula { color: var(--paper); font: 600 16px/1.4 var(--font-mono); }
+.roundtable-terms sub, .roundtable-terms sup { font-size: .7em; }
+@media (max-width: 560px) { .roundtable-terms > div { grid-template-columns: minmax(0, 1fr); } }
 .roundtable-calc-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: stretch; }
 .roundtable-levers { display: grid; gap: 22px; }
 .lever { display: grid; gap: 8px; }
