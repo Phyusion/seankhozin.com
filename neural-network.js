@@ -7,12 +7,12 @@
   var DPR = window.devicePixelRatio || 1;
 
   var COL = {
-    node:    [30, 58, 95],
-    wire:    [30, 58, 95],
-    signal:  [45, 90, 142],
-    gold:    [176, 141, 87],
-    goldL:   [160, 120, 60],
-    formula: [40, 65, 100],
+    node:    [10, 10, 10],    // ink
+    wire:    [10, 10, 10],
+    signal:  [11, 55, 158],   // cobalt
+    gold:    [11, 55, 158],
+    goldL:   [11, 55, 158],
+    formula: [43, 42, 38],    // ink-2
   };
   function rgba(c, a) { return 'rgba('+c[0]+','+c[1]+','+c[2]+','+a+')'; }
 
@@ -77,7 +77,7 @@
       if (type === 'formula') {
         for (var i = state.formulas.length - 1; i >= 0; i--) {
           var f = state.formulas[i];
-          ctx.font = f.size + "px 'Courier New', monospace";
+          ctx.font = f.size + "px 'IBM Plex Mono', monospace";
           var tw = ctx.measureText(f.text).width, pad = 6;
           if (p.x >= f.x-pad && p.x <= f.x+tw+pad && p.y >= f.y-f.size-pad && p.y <= f.y+pad) {
             f.grabbed = true;
@@ -279,7 +279,7 @@
       ctx.beginPath();
       ctx.moveTo(a.x, a.y);
       ctx.lineTo(b.x, b.y);
-      ctx.strokeStyle = isHighlighted ? rgba(COL.gold, 0.8) : rgba(COL.wire, 0.08 + c.weight * 0.07);
+      ctx.strokeStyle = isHighlighted ? rgba(COL.gold, 0.8) : rgba(COL.wire, 0.10 + c.weight * 0.10);
       ctx.lineWidth = isHighlighted ? 1.8 : 0.5;
       ctx.stroke();
     }
@@ -327,7 +327,7 @@
       ctx.fill();
 
       if (isAct) {
-        ctx.font = '9px monospace';
+        ctx.font = "500 10px 'IBM Plex Mono', monospace";
         ctx.fillStyle = rgba(COL.goldL, 0.95);
         ctx.fillText('w='+nd.weight, nd.x+r+4, nd.y-3);
       }
@@ -349,7 +349,7 @@
     var anyFormulaHovered = false;
     for (var fi = 0; fi < s.formulas.length; fi++) {
       var f = s.formulas[fi];
-      ctx.font = f.size + "px 'Courier New', monospace";
+      ctx.font = f.size + "px 'IBM Plex Mono', monospace";
       var tw = ctx.measureText(f.text).width, pad = 6;
       var isHov = !s.grabbed && mouse.x > -9000 &&
         mouse.x >= f.x-pad && mouse.x <= f.x+tw+pad &&
@@ -358,7 +358,7 @@
       if (isHov) anyFormulaHovered = true;
 
       var alpha = isAct ? 1 : 0.55;
-      ctx.font = (isAct ? 'bold ' : '') + f.size + "px 'Courier New', monospace";
+      ctx.font = (isAct ? 'bold ' : '') + f.size + "px 'IBM Plex Mono', monospace";
       ctx.fillStyle = f.useGold ? rgba(COL.goldL, alpha) : rgba(COL.formula, alpha);
       ctx.fillText(f.text, f.x, f.y);
     }
@@ -446,10 +446,10 @@
   ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
 
   var COL = {
-    strand1: [30, 58, 95],    // accent navy
-    strand2: [176, 141, 87],  // gold
-    rung:    [45, 90, 142],   // signal blue
-    glow:    [30, 58, 95],
+    strand1: [10, 10, 10],    // ink
+    strand2: [11, 55, 158],   // cobalt
+    rung:    [78, 76, 70],    // graphite
+    glow:    [10, 10, 10],
   };
   function rgba(c, a) { return 'rgba('+c[0]+','+c[1]+','+c[2]+','+a+')'; }
 

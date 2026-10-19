@@ -47,23 +47,55 @@
 
   // Sticky section headers
   const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
+  // Measured on scroll rather than with an IntersectionObserver, so a jump past a
+  // section (nav link, scroll restore) still lands with the header in the right state.
+  const stickyHeaders = [];
   document.querySelectorAll('.section-header').forEach(header => {
     var sentinel = document.createElement('div');
     sentinel.className = 'section-header-sentinel';
     sentinel.setAttribute('aria-hidden', 'true');
     header.parentElement.insertBefore(sentinel, header);
-
-    var stickyObserver = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          var isAbove = entry.boundingClientRect.top < navHeight;
-          header.classList.toggle('stuck', !entry.isIntersecting && isAbove);
-        });
-      },
-      { rootMargin: '-' + (navHeight + 1) + 'px 0px 0px 0px' }
-    );
-    stickyObserver.observe(sentinel);
+    stickyHeaders.push({ header, sentinel });
   });
+  // The headers stay in flow at full size; a fixed running head under the nav
+  // carries the current section's tag and title, so nothing shifts while scrolling.
+  const runner = document.createElement('div');
+  runner.className = 'section-runner';
+  runner.setAttribute('aria-hidden', 'true');
+  runner.innerHTML = '<div class="section-runner-inner"><span class="section-runner-title"></span><span class="section-runner-tag"></span></div>';
+  document.body.appendChild(runner);
+  const runnerTitle = runner.querySelector('.section-runner-title');
+  const runnerTag = runner.querySelector('.section-runner-tag');
+  let runnerFor = null;
+
+  let stickyQueued = false;
+  const updateStuck = () => {
+    stickyQueued = false;
+    const navH = nav.getBoundingClientRect().height || navHeight;
+    let current = null;
+    stickyHeaders.forEach(item => {
+      const { header, sentinel } = item;
+      const passed = header.getBoundingClientRect().bottom < navH;
+      header.classList.toggle('stuck', passed);
+      const section = header.closest('.section');
+      if (passed && section && section.getBoundingClientRect().bottom > navH + 60) current = item;
+    });
+    if (current && current !== runnerFor) {
+      const label = current.header.querySelector('.section-label');
+      const title = current.header.querySelector('.section-title');
+      runnerTag.innerHTML = label ? label.innerHTML : '';
+      runnerTitle.innerHTML = title ? title.innerHTML : '';
+      runner.dataset.section = current.header.closest('.section').id || '';
+    }
+    runnerFor = current;
+    runner.classList.toggle('visible', !!current);
+  };
+  const queueStuck = () => {
+    if (!stickyQueued) { stickyQueued = true; requestAnimationFrame(updateStuck); }
+  };
+  window.addEventListener('scroll', queueStuck, { passive: true });
+  window.addEventListener('resize', queueStuck);
+  updateStuck();
 
   // Expandable contact form
   const formTrigger = document.getElementById('contact-form-trigger');
@@ -131,6 +163,25 @@
       btn.setAttribute('aria-expanded', isExpanded);
       const total = list.querySelectorAll('.research-pub').length;
       btn.textContent = isExpanded ? 'Show fewer' : 'Show all ' + total + ' publications';
+    });
+  });
+
+  // Expandable board cards (click, Enter or Space; links inside still navigate)
+  document.querySelectorAll('.board-item').forEach(item => {
+    const toggleItem = () => {
+      const isOpen = item.classList.toggle('expanded');
+      item.setAttribute('aria-expanded', isOpen);
+    };
+    item.addEventListener('click', e => {
+      if (e.target.closest('a')) return;
+      toggleItem();
+    });
+    item.addEventListener('keydown', e => {
+      if (e.target !== item) return;
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleItem();
+      }
     });
   });
 

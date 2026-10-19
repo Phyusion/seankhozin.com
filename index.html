@@ -30,7 +30,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <meta name="theme-color" content="#1e3a5f">
+  <meta name="theme-color" content="#0A0A0A">
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -91,14 +91,14 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=35">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=36">
 </head>
 <body>
   <!-- Navigation -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">SK</a>
+      <a href="#" class="nav-logo"><b>Sean Khozin</b><span aria-hidden="true">|</span><span class="nav-logo-sub">MD, MPH</span></a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
         <span></span>
         <span></span>
@@ -120,21 +120,22 @@
 
   <!-- Hero -->
   <header class="hero" id="hero">
-    <div class="hero-bg" id="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Physician-Scientist &bull; Oncologist &bull; AI Innovator</p>
-      <h1 class="hero-name">Sean Khozin</h1>
-      <p class="hero-title">MD, MPH</p>
-      <p class="hero-subtitle">Advancing human health through the convergence of medicine, data science, and artificial intelligence.</p>
-      <div class="hero-cta">
-        <a href="#about" class="btn btn-outline">Learn More</a>
-        <a href="https://www.insights.phyusionbio.com/" class="btn btn-outline" target="_blank" rel="noopener">Substack</a>
-        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow"><span>Physician-Scientist &middot; Oncologist &middot; AI Innovator</span><b>Index No.01</b></div>
+        <h1 class="hero-name"><span>Sean</span> <span>Khozin</span></h1>
+        <p class="hero-title">MD, MPH</p>
+        <p class="hero-subtitle">Advancing human health through the convergence of medicine, data science, and artificial intelligence.</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-highlight">Get in Touch &rarr;</a>
+          <a href="https://www.insights.phyusionbio.com/" class="btn btn-outline" target="_blank" rel="noopener">Substack</a>
+          <a href="#about" class="btn btn-outline">Learn More</a>
+        </div>
       </div>
-    </div>
-    <div class="hero-scroll">
-      <div class="scroll-indicator"></div>
+      <figure class="hero-figure">
+        <img src="NYC.jpg" alt="Lower Manhattan skyline seen from the water" fetchpriority="high">
+        <figcaption>New York City</figcaption>
+      </figure>
     </div>
   </header>
 
@@ -142,8 +143,8 @@
   <section class="section section-about" id="about">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">About</span>
-        <h2 class="section-title">At the Nexus of Medicine, Technology &amp; AI</h2>
+        <div class="section-tag"><span class="section-label">01 / 09 &middot; About</span><b>Biography</b></div>
+        <h2 class="section-title">At the nexus of medicine, technology &amp; <em>AI</em></h2>
       </div>
       <div class="about-portrait-grid">
         <div class="about-photo">
@@ -182,8 +183,8 @@
   <section class="section section-convergence" id="convergence">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">The Work</span>
-        <h2 class="section-title">Three Fields, One Convergence</h2>
+        <div class="section-tag"><span class="section-label">02 / 09 &middot; Convergence</span><b>The work</b></div>
+        <h2 class="section-title">Three fields, one <em>convergence</em></h2>
       </div>
       <p class="convergence-lead">Dr. Khozin’s work sits where medicine, technology, and artificial intelligence meet. Select a field to see what it contributes and the publications behind it. The center is where the three become something new.</p>
 
@@ -254,6 +255,32 @@
 
         <div class="convergence-panel" id="convergence-panel" aria-live="polite"><div class="convergence-fade"><span class="convergence-tag">Convergence</span><h3 class="convergence-title">Where the three overlap, the unit of evidence changes.</h3><p class="lead">Medicine supplies the questions and the ground truth. Technology makes biology continuously measurable at the level of the individual. AI turns those measurements into models that can be interrogated, updated, and acted on.</p><p>Together they make the life sciences behave less like a sequence of one-off experiments and more like a learning system: trials that borrow strength from external data without giving up randomization, evidence generated at the point of care and not only in the trial, disease classified by mechanism instead of anatomy, and therapies matched to an individual rather than a population average.</p><p>This is the thread through Dr. Khozin’s career, from the clinic to the FDA to Johnson &amp; Johnson, CancerLinQ, and Phyusion Bio: not any single field, but the operating system that connects them.</p><div class="convergence-refs"><h4>Peer-Reviewed</h4><div class="research-pub-list"><a href="https://doi.org/10.1377/hlthaff.2017.1579" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Health Affairs, 2018</span><span class="research-pub-title">Real-World Evidence in Support of Precision Medicine: Clinico-Genomic Cancer Data as a Case Study</span><span class="research-pub-authors">Agarwala V, Khozin S, Singal G, et al.</span></a><a href="https://doi.org/10.1200/JCO.19.03094" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Journal of Clinical Oncology, 2020</span><span class="research-pub-title">Status Update on Data Required to Build a Learning Health System</span><span class="research-pub-authors">Bertagnolli MM, Anderson B, Norsworthy K, ... Khozin S.</span></a><a href="https://doi.org/10.1038/s41467-022-33192-1" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nature Communications, 2022</span><span class="research-pub-title">The Design and Evaluation of Hybrid Controlled Trials That Leverage External Data and Randomization</span><span class="research-pub-authors">Ventz S, Khozin S, Louv B, et al.</span></a><a href="https://doi.org/10.1093/oncolo/oyae138" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">The Oncologist, 2024</span><span class="research-pub-title">Unleashing the Power of Clinical Trial Data: A Proposal for Enhancing Informed Consent and Data Sharing</span><span class="research-pub-authors">Trippa L, Khozin S.</span></a></div></div><div class="convergence-refs substack"><h4>From the Substack</h4><div class="research-pub-list"><a href="https://www.insights.phyusionbio.com/p/everything-is-a-signal" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio</span><span class="research-pub-title">Everything is a Signal</span><span class="research-pub-authors">The future arrives as a collection of weak signals most people overlook</span></a><a href="https://www.insights.phyusionbio.com/p/the-end-of-disciplinary-sovereignty" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio</span><span class="research-pub-title">The End of Disciplinary Sovereignty</span><span class="research-pub-authors">Large language models abstract across medicine, finance, and science, dissolving the boundaries between disciplines</span></a><a href="https://www.insights.phyusionbio.com/p/ideas-that-refuse-to-die" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio</span><span class="research-pub-title">Ideas That Refuse to Die</span><span class="research-pub-authors">With Peter Kolchinsky on the people and systems that decide whether an idea becomes a medicine</span></a><a href="https://www.insights.phyusionbio.com/p/you-cant-win-alone" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio</span><span class="research-pub-title">You Can’t Win Alone</span><span class="research-pub-authors">On collective leadership, and why Precision Signals was built on the premise that progress happens when silos dissolve</span></a></div></div></div></div>
       </div>
+
+      <div class="compare">
+        <p class="compare-lead">Together the three make the life sciences behave less like a sequence of one-off experiments and more like a learning system.</p>
+        <div class="compare-table" role="table" aria-label="One-off experiments compared with a learning system">
+          <div class="compare-row" role="row">
+            <div class="compare-head" role="rowheader"><span class="compare-idx">01</span><span class="compare-name">Trial design</span></div>
+            <div class="compare-cell" role="cell"><span class="compare-label">One-off experiment</span>Each trial stands alone</div>
+            <div class="compare-cell is-point" role="cell"><span class="compare-label">Learning system</span>Borrows strength from external data, keeps randomization</div>
+          </div>
+          <div class="compare-row" role="row">
+            <div class="compare-head" role="rowheader"><span class="compare-idx">02</span><span class="compare-name">Evidence source</span></div>
+            <div class="compare-cell" role="cell"><span class="compare-label">One-off experiment</span>Generated only inside the trial</div>
+            <div class="compare-cell is-point" role="cell"><span class="compare-label">Learning system</span>Also generated at the point of care</div>
+          </div>
+          <div class="compare-row" role="row">
+            <div class="compare-head" role="rowheader"><span class="compare-idx">03</span><span class="compare-name">Disease taxonomy</span></div>
+            <div class="compare-cell" role="cell"><span class="compare-label">One-off experiment</span>Classified by anatomy</div>
+            <div class="compare-cell is-point" role="cell"><span class="compare-label">Learning system</span>Classified by mechanism</div>
+          </div>
+          <div class="compare-row" role="row">
+            <div class="compare-head" role="rowheader"><span class="compare-idx">04</span><span class="compare-name">Therapy matching</span></div>
+            <div class="compare-cell" role="cell"><span class="compare-label">One-off experiment</span>Fitted to a population average</div>
+            <div class="compare-cell is-point" role="cell"><span class="compare-label">Learning system</span>Matched to the individual</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -263,8 +290,8 @@
   <section class="section section-roles" id="roles">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">Current Roles</span>
-        <h2 class="section-title">Leading at the Frontier</h2>
+        <div class="section-tag"><span class="section-label">03 / 09 &middot; Current roles</span><b>2026</b></div>
+        <h2 class="section-title">Leading at the <em>frontier</em></h2>
       </div>
       <div class="roles-grid">
         <div class="role-card">
@@ -275,7 +302,7 @@
           <p class="role-position">Chief Executive Officer</p>
           <p>Directing public health programs and pioneering initiatives focused on the development of AI foundation models in oncology.</p>
           <div class="role-links">
-            <a href="https://www.ceort.org/" class="role-link" target="_blank" rel="noopener">ceort.org</a>
+            <a href="https://www.ceort.org/" class="role-link" target="_blank" rel="noopener">ceort.org &rarr;</a>
           </div>
         </div>
         <div class="role-card">
@@ -287,7 +314,7 @@
           <p class="role-parent">Subsidiary of Phyusion</p>
           <p>Advancing innovations at the nexus of biology, technology, and AI to accelerate drug discovery and optimize therapeutic development.</p>
           <div class="role-links">
-            <a href="https://phyusionbio.com/" class="role-link" target="_blank" rel="noopener">phyusionbio.com</a>
+            <a href="https://phyusionbio.com/" class="role-link" target="_blank" rel="noopener">phyusionbio.com &rarr;</a>
           </div>
         </div>
         <div class="role-card">
@@ -298,7 +325,7 @@
           <p class="role-position">Research Affiliate</p>
           <p>Focusing on novel applications of AI and machine learning technologies to accelerate drug discovery and optimize therapeutic development strategies.</p>
           <div class="role-links">
-            <a href="https://sites.mit.edu/khozin/" class="role-link" target="_blank" rel="noopener">MIT Profile</a>
+            <a href="https://sites.mit.edu/khozin/" class="role-link" target="_blank" rel="noopener">MIT Profile &rarr;</a>
           </div>
         </div>
         <div class="role-card">
@@ -309,15 +336,15 @@
           <p class="role-position">Host</p>
           <p>A podcast from the CEO Roundtable on Cancer, examining the hard problems in oncology and exploring practical solutions that connect science to patient impact.</p>
           <div class="role-links">
-            <a href="https://www.youtube.com/@PrecisionSignals" class="role-link" target="_blank" rel="noopener">YouTube</a>
+            <a href="https://www.youtube.com/@PrecisionSignals" class="role-link" target="_blank" rel="noopener">YouTube &rarr;</a>
           </div>
         </div>
       </div>
       <!-- Latest Episode Banner -->
       <div class="podcast-banner">
         <button class="podcast-banner-trigger" id="podcast-banner-trigger" aria-expanded="false" aria-controls="podcast-banner-panel">
-          <img src="precision-signals-logo.png?v=33" alt="Precision Signals" class="podcast-banner-logo">
-          <span class="podcast-banner-text">Latest Episode of Precision Signals</span>
+          <img src="2026-08-10_Precision_Signals_Logo_Lockup_Light.png" alt="Precision Signals" class="podcast-banner-logo">
+          <span class="podcast-banner-text"><small>Podcast</small>Latest episode of Precision Signals</span>
           <svg class="podcast-banner-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="podcast-banner-panel" id="podcast-banner-panel">
@@ -335,12 +362,12 @@
   <section class="section section-career" id="career">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">Career</span>
-        <h2 class="section-title">Professional Journey</h2>
+        <div class="section-tag"><span class="section-label">04 / 09 &middot; Career</span><b>Present &rarr; training</b></div>
+        <h2 class="section-title">From the clinic to the FDA to <em>AI</em></h2>
       </div>
       <div class="timeline">
         <div class="timeline-item">
-          <div class="timeline-marker"></div>
+          <span class="timeline-num" aria-hidden="true">01</span>
           <div class="timeline-content">
             <span class="timeline-label">Present</span>
             <h3>CEO, CEO Roundtable on Cancer &amp; Project Data Sphere</h3>
@@ -348,7 +375,7 @@
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-marker"></div>
+          <span class="timeline-num" aria-hidden="true">02</span>
           <div class="timeline-content">
             <span class="timeline-label">Present</span>
             <h3>Founder, Phyusion Bio &amp; Research Affiliate, MIT</h3>
@@ -356,7 +383,7 @@
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-marker"></div>
+          <span class="timeline-num" aria-hidden="true">03</span>
           <div class="timeline-content">
             <span class="timeline-label">Previous</span>
             <h3>CEO, CancerLinQ (ASCO)</h3>
@@ -364,7 +391,7 @@
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-marker"></div>
+          <span class="timeline-num" aria-hidden="true">04</span>
           <div class="timeline-content">
             <span class="timeline-label">Previous</span>
             <h3>Global Head of Data Strategy, Johnson &amp; Johnson</h3>
@@ -372,7 +399,7 @@
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-marker"></div>
+          <span class="timeline-num" aria-hidden="true">05</span>
           <div class="timeline-content">
             <span class="timeline-label">Previous</span>
             <h3>Executive Director, FDA INFORMED</h3>
@@ -380,7 +407,7 @@
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-marker"></div>
+          <span class="timeline-num" aria-hidden="true">06</span>
           <div class="timeline-content">
             <span class="timeline-label">Previous</span>
             <h3>Founding Member, FDA Oncology Center of Excellence</h3>
@@ -388,7 +415,7 @@
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-marker"></div>
+          <span class="timeline-num" aria-hidden="true">07</span>
           <div class="timeline-content">
             <span class="timeline-label">Previous</span>
             <h3>Clinical Investigator, National Cancer Institute</h3>
@@ -396,7 +423,7 @@
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-marker"></div>
+          <span class="timeline-num" aria-hidden="true">08</span>
           <div class="timeline-content">
             <span class="timeline-label">Previous</span>
             <h3>Co-founder, Hello Health</h3>
@@ -404,7 +431,7 @@
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-marker"></div>
+          <span class="timeline-num" aria-hidden="true">09</span>
           <div class="timeline-content">
             <span class="timeline-label">Training</span>
             <h3>Fellowship, National Cancer Institute</h3>
@@ -412,7 +439,7 @@
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-marker"></div>
+          <span class="timeline-num" aria-hidden="true">10</span>
           <div class="timeline-content">
             <span class="timeline-label">Education</span>
             <h3>MD &amp; MPH</h3>
@@ -429,14 +456,27 @@
   <section class="section section-informed" id="informed">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">Initiative</span>
-        <h2 class="section-title">FDA INFORMED</h2>
+        <div class="section-tag"><span class="section-label">05 / 09 &middot; FDA INFORMED</span><b>U.S. FDA</b></div>
+        <h2 class="section-title">The FDA&rsquo;s first data science <em>incubator</em></h2>
       </div>
       <div class="informed-content">
         <div class="informed-text">
-          <p class="lead">Information Exchange and Data Transformation (INFORMED) was launched in 2015 at the U.S. FDA with special authorities from the Department of Health and Human Services.</p>
-          <p>As a technology and data science incubator, INFORMED was designed as a public-private collaboration sandbox to de-risk innovations with transformative potential in biomedical research and therapeutic development.</p>
-          <p>The effort was instrumental in establishing the foundation for the use of real-world evidence, digital health solutions, and AI/ML in drug development and regulatory decision-making.</p>
+          <div class="informed-intro">
+            <div class="informed-intro-copy">
+              <div class="informed-year" aria-hidden="true">2015</div>
+              <p class="informed-year-label">INFORMED launched with special HHS authorities</p>
+              <p class="lead">Information Exchange and Data Transformation (INFORMED) was launched in 2015 at the U.S. FDA with special authorities from the Department of Health and Human Services.</p>
+              <p>As a technology and data science incubator, INFORMED was designed as a public-private collaboration sandbox to de-risk innovations with transformative potential in biomedical research and therapeutic development.</p>
+              <p>The effort was instrumental in establishing the foundation for the use of real-world evidence, digital health solutions, and AI/ML in drug development and regulatory decision-making.</p>
+            </div>
+            <dl class="informed-facts">
+              <div><dt>Launched</dt><dd>2015</dd></div>
+              <div><dt>Home</dt><dd>U.S. Food and Drug Administration</dd></div>
+              <div><dt>Authority</dt><dd>Special authorities from HHS</dd></div>
+              <div><dt>Model</dt><dd>Public-private collaboration sandbox</dd></div>
+              <div><dt>Published</dt><dd>Nature Reviews Drug Discovery, 2017 &amp; 2018</dd></div>
+            </dl>
+          </div>
           <div class="informed-pillars">
             <div class="pillar">
               <h4>Real-World Evidence</h4>
@@ -513,14 +553,15 @@
   <section class="section section-research" id="research">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">Research</span>
-        <h2 class="section-title">Research</h2>
+        <div class="section-tag"><span class="section-label">06 / 09 &middot; Research</span><b>Three programs</b></div>
+        <h2 class="section-title">Modernizing how evidence is <em>generated</em></h2>
       </div>
       <p class="research-lead">Dr. Khozin's research spans regulatory science, clinical trial methodology, and data science, with a focus on modernizing how evidence is generated and applied in cancer drug development.</p>
 
       <!-- Precision Oncology and Regulatory Science -->
+      <div class="research-cards">
       <div class="research-subsection research-card-expandable">
-        <img src="precision-oncology-bg.png" alt="Precision Oncology" class="research-card-banner">
+        <img src="precision-oncology-bg.png" alt="Laboratory glassware beside a DNA helix" class="research-card-banner">
         <div class="research-card-content">
           <div class="research-card-header">
             <div class="research-card-header-text">
@@ -581,7 +622,7 @@
 
       <!-- Real-World Evidence and Clinical Trial Design -->
       <div class="research-subsection research-card-expandable">
-        <img src="rwe-bg.png" alt="Real-World Evidence" class="research-card-banner">
+        <img src="rwe-bg.png" alt="Dr. Khozin working at a laptop in a library" class="research-card-banner">
         <div class="research-card-content">
           <div class="research-card-header">
             <div class="research-card-header-text">
@@ -642,7 +683,7 @@
 
       <!-- AI and ML in Drug Development -->
       <div class="research-subsection research-card-expandable">
-        <img src="ai-ml-bg.png" alt="AI and Machine Learning visualization" class="research-card-banner">
+        <img src="ai-ml-bg.png" alt="Brain MRI scans connected to circuit traces" class="research-card-banner">
         <div class="research-card-content">
         <div class="research-card-header">
           <div class="research-card-header-text">
@@ -659,123 +700,7 @@
         <p class="research-subsection-desc">At the FDA, he established Information Exchange and Data Transformation (INFORMED), the agency’s first data science and technology incubator, which laid the groundwork for integrating AI and digital health into drug development and regulatory decision-making.</p>
         <p class="research-subsection-desc">A central focus of Dr. Khozin’s current work is modernizing how tumor burden is measured in clinical trials. In a large FDA-led meta-analysis of more than 14,000 patients enrolled in registration trials, he found that two independent radiologists reviewing the same scans agreed on tumor response classification only about 70% of the time. In ovarian and pancreatic cancers, discordance reached as high as 45%, with striking cases in which one reader determined a complete response while the other concluded progressive disease in the very same patient.</p>
 
-        <!-- FDA Meta-Analysis Concordance Matrix -->
-        <div class="fda-table-wrapper">
-          <div class="fda-table-header">
-            <h4 class="fda-table-title">Inter-Reader Response Classification</h4>
-            <p class="fda-table-subtitle">Primary Investigator vs. Independent Radiologist &middot; N = 13,677</p>
-          </div>
-          <div class="fda-table-scroll">
-            <table class="fda-matrix">
-              <colgroup>
-                <col style="width:1rem">
-                <col style="width:3rem">
-                <col span="5">
-                <col>
-              </colgroup>
-              <thead>
-                <tr>
-                  <th class="fda-matrix-corner" colspan="2"></th>
-                  <th colspan="5" class="fda-matrix-group-header">Independent Radiologist</th>
-                  <th class="fda-matrix-group-header"></th>
-                </tr>
-                <tr>
-                  <th class="fda-matrix-corner" colspan="2"></th>
-                  <th>CR</th>
-                  <th>PR</th>
-                  <th>SD</th>
-                  <th>PD</th>
-                  <th>NE</th>
-                  <th class="fda-matrix-total-header">Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th class="fda-matrix-row-header fda-matrix-row-label" rowspan="5"><span>Primary Investigator</span></th>
-                  <th class="fda-matrix-row-header">CR</th>
-                  <td class="fda-concordant">305</td>
-                  <td class="fda-discordant">250</td>
-                  <td class="fda-discordant">116</td>
-                  <td class="fda-discordant">14</td>
-                  <td class="fda-discordant">25</td>
-                  <td class="fda-matrix-total">710</td>
-                </tr>
-                <tr>
-                  <th class="fda-matrix-row-header">PR</th>
-                  <td class="fda-discordant">240</td>
-                  <td class="fda-concordant">3,366</td>
-                  <td class="fda-discordant">908</td>
-                  <td class="fda-discordant">126</td>
-                  <td class="fda-discordant">33</td>
-                  <td class="fda-matrix-total">4,673</td>
-                </tr>
-                <tr>
-                  <th class="fda-matrix-row-header">SD</th>
-                  <td class="fda-discordant">64</td>
-                  <td class="fda-discordant">849</td>
-                  <td class="fda-concordant">3,522</td>
-                  <td class="fda-discordant">668</td>
-                  <td class="fda-discordant">74</td>
-                  <td class="fda-matrix-total">5,177</td>
-                </tr>
-                <tr>
-                  <th class="fda-matrix-row-header">PD</th>
-                  <td class="fda-discordant">9</td>
-                  <td class="fda-discordant">58</td>
-                  <td class="fda-discordant">507</td>
-                  <td class="fda-concordant">1,890</td>
-                  <td class="fda-discordant">134</td>
-                  <td class="fda-matrix-total">2,598</td>
-                </tr>
-                <tr>
-                  <th class="fda-matrix-row-header">NE</th>
-                  <td class="fda-discordant">1</td>
-                  <td class="fda-discordant">13</td>
-                  <td class="fda-discordant">31</td>
-                  <td class="fda-discordant">49</td>
-                  <td class="fda-concordant">425</td>
-                  <td class="fda-matrix-total">519</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th class="fda-matrix-corner"></th>
-                  <th class="fda-matrix-row-header fda-matrix-total-header">Total</th>
-                  <td class="fda-matrix-total">619</td>
-                  <td class="fda-matrix-total">4,536</td>
-                  <td class="fda-matrix-total">5,084</td>
-                  <td class="fda-matrix-total">2,747</td>
-                  <td class="fda-matrix-total">691</td>
-                  <td class="fda-matrix-total fda-matrix-grand-total">13,677</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-          <div class="fda-table-legend">
-            <span class="fda-legend-item"><span class="fda-legend-swatch fda-legend-concordant"></span>Concordant</span>
-            <span class="fda-legend-item"><span class="fda-legend-swatch fda-legend-discordant"></span>Discordant</span>
-          </div>
-          <p class="fda-table-note">
-            Response categories per <strong>RECIST 1.1</strong> (Response Evaluation Criteria in Solid Tumors):
-            CR = Complete Response &middot; PR = Partial Response &middot; SD = Stable Disease &middot; PD = Progressive Disease &middot; NE = Not Evaluable.
-            The highlighted diagonal cells are the only instances where both readers agreed on the same response classification.
-            Overall discordance across tumor types was approximately 30%, with notably higher rates in ovarian and pancreatic cancers.
-          </p>
-          <p class="fda-table-source">
-            FDA meta-analysis of studies submitted to the agency &middot; Khozin <em>et al.</em>, <em>Unpublished</em>, 2017.
-          </p>
-        </div>
 
-        <div class="ai-initiative">
-          <h4 class="ai-initiative-title">AutoRECIST</h4>
-          <p class="research-subsection-desc">AutoRECIST applies AI to automate and standardize tumor response assessment, eliminating inter-reader variability that undermines the reliability of clinical trial endpoints. By replacing subjective radiologist interpretation with algorithmic consistency, AutoRECIST produces reproducible, auditable response classifications at scale.</p>
-        </div>
-
-        <div class="ai-initiative">
-          <h4 class="ai-initiative-title">Total Tumor Burden Index (TTBI)</h4>
-          <p class="research-subsection-desc">TTBI replaces conventional categorical RECIST endpoints with a continuous volumetric measure of total disease burden. By integrating 3D tumor segmentation across all lesions, TTBI enables earlier and more granular detection of treatment effect, capturing changes that binary response categories miss.</p>
-        </div>
-        
         <div class="research-pub-list" data-collapsible="true">
           <a href="https://ai.nejm.org/doi/full/10.1056/AIra2401164" class="research-pub" target="_blank" rel="noopener">
             <span class="research-journal">NEJM AI</span>
@@ -816,6 +741,143 @@
           <button class="research-pub-toggle" aria-expanded="false">Show all 9 publications</button>
         </div>
             </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <!-- Inter-reader concordance -->
+      <div class="research-subsection research-matrix">
+        <div class="matrix-head">
+          <div class="section-tag"><span>06.1 &middot; Inter-reader response classification</span><b>N = 13,677</b></div>
+          <h3 class="matrix-title">Two radiologists agree on tumor response only <em>70%</em> of the time</h3>
+          <p class="research-subsection-desc">In a large FDA-led meta-analysis of patients enrolled in registration trials, two independent radiologists reviewing the same scans agreed on tumor response classification only about 70% of the time. In ovarian and pancreatic cancers, discordance reached as high as 45%.</p>
+        </div>
+        <div class="matrix-grid">
+        <div class="fda-table-wrapper">
+          <div class="fda-table-header">
+            <h4 class="fda-table-title">Inter-Reader Response Classification</h4>
+            <p class="fda-table-subtitle">Primary Investigator vs. Independent Radiologist &middot; N = 13,677</p>
+          </div>
+          <div class="fda-table-scroll">
+            <table class="fda-matrix">
+              <colgroup>
+                <col style="width:1rem">
+                <col style="width:3rem">
+                <col span="5">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="fda-matrix-corner" colspan="2"></th>
+                  <th colspan="5" class="fda-matrix-group-header">Independent Radiologist</th>
+                  <th class="fda-matrix-group-header"></th>
+                </tr>
+                <tr>
+                  <th class="fda-matrix-corner" colspan="2"></th>
+                  <th>CR</th>
+                  <th>PR</th>
+                  <th>SD</th>
+                  <th>PD</th>
+                  <th>NE</th>
+                  <th class="fda-matrix-total-header">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th class="fda-matrix-row-header fda-matrix-row-label" rowspan="5"><span>Primary Investigator</span></th>
+                  <th class="fda-matrix-row-header">CR</th>
+                  <td class="fda-concordant">305</td>
+                  <td class="fda-discordant fda-seq-4" title="35.2% of row">250</td>
+                  <td class="fda-discordant fda-seq-3" title="16.3% of row">116</td>
+                  <td class="fda-discordant fda-seq-1" title="2.0% of row">14</td>
+                  <td class="fda-discordant fda-seq-2" title="3.5% of row">25</td>
+                  <td class="fda-matrix-total">710</td>
+                </tr>
+                <tr>
+                  <th class="fda-matrix-row-header">PR</th>
+                  <td class="fda-discordant fda-seq-2" title="5.1% of row">240</td>
+                  <td class="fda-concordant">3,366</td>
+                  <td class="fda-discordant fda-seq-3" title="19.4% of row">908</td>
+                  <td class="fda-discordant fda-seq-2" title="2.7% of row">126</td>
+                  <td class="fda-discordant fda-seq-1" title="0.7% of row">33</td>
+                  <td class="fda-matrix-total">4,673</td>
+                </tr>
+                <tr>
+                  <th class="fda-matrix-row-header">SD</th>
+                  <td class="fda-discordant fda-seq-1" title="1.2% of row">64</td>
+                  <td class="fda-discordant fda-seq-3" title="16.4% of row">849</td>
+                  <td class="fda-concordant">3,522</td>
+                  <td class="fda-discordant fda-seq-3" title="12.9% of row">668</td>
+                  <td class="fda-discordant fda-seq-1" title="1.4% of row">74</td>
+                  <td class="fda-matrix-total">5,177</td>
+                </tr>
+                <tr>
+                  <th class="fda-matrix-row-header">PD</th>
+                  <td class="fda-discordant fda-seq-1" title="0.3% of row">9</td>
+                  <td class="fda-discordant fda-seq-2" title="2.2% of row">58</td>
+                  <td class="fda-discordant fda-seq-3" title="19.5% of row">507</td>
+                  <td class="fda-concordant">1,890</td>
+                  <td class="fda-discordant fda-seq-2" title="5.2% of row">134</td>
+                  <td class="fda-matrix-total">2,598</td>
+                </tr>
+                <tr>
+                  <th class="fda-matrix-row-header">NE</th>
+                  <td class="fda-discordant fda-seq-1" title="0.2% of row">1</td>
+                  <td class="fda-discordant fda-seq-2" title="2.5% of row">13</td>
+                  <td class="fda-discordant fda-seq-2" title="6.0% of row">31</td>
+                  <td class="fda-discordant fda-seq-2" title="9.4% of row">49</td>
+                  <td class="fda-concordant">425</td>
+                  <td class="fda-matrix-total">519</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th class="fda-matrix-corner"></th>
+                  <th class="fda-matrix-row-header fda-matrix-total-header">Total</th>
+                  <td class="fda-matrix-total">619</td>
+                  <td class="fda-matrix-total">4,536</td>
+                  <td class="fda-matrix-total">5,084</td>
+                  <td class="fda-matrix-total">2,747</td>
+                  <td class="fda-matrix-total">691</td>
+                  <td class="fda-matrix-total fda-matrix-grand-total">13,677</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="fda-table-legend">
+            <span class="fda-legend-item"><span class="fda-legend-swatch fda-legend-concordant"></span>Concordant</span>
+            <span class="fda-legend-item"><span class="fda-legend-swatch fda-seq-1"></span>&lt;2% of row</span>
+            <span class="fda-legend-item"><span class="fda-legend-swatch fda-seq-2"></span>2&ndash;10%</span>
+            <span class="fda-legend-item"><span class="fda-legend-swatch fda-seq-3"></span>10&ndash;20%</span>
+            <span class="fda-legend-item"><span class="fda-legend-swatch fda-seq-4"></span>&gt;20%</span>
+          </div>
+          <p class="fda-table-note">
+            Response categories per <strong>RECIST 1.1</strong> (Response Evaluation Criteria in Solid Tumors):
+            CR = Complete Response &middot; PR = Partial Response &middot; SD = Stable Disease &middot; PD = Progressive Disease &middot; NE = Not Evaluable.
+            The highlighted diagonal cells are the only instances where both readers agreed on the same response classification.
+            Overall discordance across tumor types was approximately 30%, with notably higher rates in ovarian and pancreatic cancers.
+          </p>
+          <p class="fda-table-source">
+            FDA meta-analysis of studies submitted to the agency &middot; Khozin <em>et al.</em>, <em>Unpublished</em>, 2017.
+          </p>
+        </div>
+          <div class="matrix-stats">
+            <div class="matrix-stat"><span class="matrix-stat-num">69.5%</span><span class="matrix-stat-label">Overall concordance (9,508 / 13,677)</span></div>
+            <div class="matrix-stat"><span class="matrix-stat-num">&le;45%</span><span class="matrix-stat-label">Discordance in ovarian and pancreatic cancers</span></div>
+            <div class="matrix-stat"><span class="matrix-stat-num">23</span><span class="matrix-stat-label">Patients read CR by one reader, PD by the other</span></div>
+          </div>
+        </div>
+        <div class="ai-initiatives">
+          <div class="ai-initiative">
+            <span class="ai-initiative-kicker">Response &middot; automated</span>
+            <h4 class="ai-initiative-title">AutoRECIST</h4>
+            <p class="research-subsection-desc">AutoRECIST applies AI to automate and standardize tumor response assessment, eliminating inter-reader variability that undermines the reliability of clinical trial endpoints. By replacing subjective radiologist interpretation with algorithmic consistency, AutoRECIST produces reproducible, auditable response classifications at scale.</p>
+          </div>
+          <div class="ai-initiative">
+            <span class="ai-initiative-kicker">Burden &middot; continuous</span>
+            <h4 class="ai-initiative-title">Total Tumor Burden Index (TTBI)</h4>
+            <p class="research-subsection-desc">TTBI replaces conventional categorical RECIST endpoints with a continuous volumetric measure of total disease burden. By integrating 3D tumor segmentation across all lesions, TTBI enables earlier and more granular detection of treatment effect, capturing changes that binary response categories miss.</p>
           </div>
         </div>
       </div>
@@ -863,23 +925,23 @@
   <section class="section section-music" id="music">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">Music</span>
-        <h2 class="section-title">Jazz Meets Classical in Suspended Time</h2>
+        <div class="section-tag"><span class="section-label">07 / 09 &middot; Music</span><b>Perpetual Drift</b></div>
+        <h2 class="section-title">Jazz meets classical in suspended <em>time</em></h2>
       </div>
-        <div class="music-embed">
-          <iframe style="border-radius: 12px;" src="https://open.spotify.com/embed/artist/145UBQhx3rVoiOWrpJx2Sg?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="music-cta">
-          <a href="https://open.spotify.com/artist/145UBQhx3rVoiOWrpJx2Sg" class="btn btn-outline music-btn" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="margin-right: 0.5rem;"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-            Open in Spotify
-          </a>
+      <div class="music-grid">
+        <div class="music-player">
+          <div class="music-embed">
+            <iframe src="https://open.spotify.com/embed/artist/145UBQhx3rVoiOWrpJx2Sg?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Sean Khozin on Spotify"></iframe>
+          </div>
+          <div class="music-cta">
+            <a href="https://open.spotify.com/artist/145UBQhx3rVoiOWrpJx2Sg" class="btn btn-outline music-btn" target="_blank" rel="noopener">Open in Spotify</a>
+          </div>
         </div>
         <div class="music-article">
           <p class="music-article-label">Featured Essay</p>
           <h4>Physiological Harmony and Dissonance</h4>
           <p class="music-article-subtitle">The Confluence of Math, Music, and Medicine</p>
-          <p>How physiological state changes can be represented musically &mdash; the composition <em>Perpetual Drift</em> proposes that transitions in human physiology, detectable through computational methods, can also be heard as shifts in tonality and dissonance.</p>
+          <p>How physiological state changes can be represented musically: the composition <em>Perpetual Drift</em> proposes that transitions in human physiology, detectable through computational methods, can also be heard as shifts in tonality and dissonance.</p>
           <a href="https://www.insights.phyusionbio.com/p/physiological-harmony-and-dissonance" class="btn btn-outline music-btn" target="_blank" rel="noopener">Read on Substack &rarr;</a>
         </div>
       </div>
@@ -892,69 +954,69 @@
   <section class="section section-boards" id="boards">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">Leadership</span>
-        <h2 class="section-title">Select Board Appointments &amp; Advisory Roles</h2>
+        <div class="section-tag"><span class="section-label">08 / 09 &middot; Leadership</span><b>Boards &amp; advisory</b></div>
+        <h2 class="section-title">Select board appointments &amp; advisory <em>roles</em></h2>
       </div>
       <div class="boards-grid">
-        <div class="board-item" onclick="this.classList.toggle('expanded')">
+        <div class="board-item" role="button" tabindex="0" aria-expanded="false">
           <h3>Society for Translational Oncology</h3>
-          <span class="board-toggle">+</span>
+          <span class="board-toggle" aria-hidden="true">+</span>
           <div class="board-detail">
             <p>A nonprofit bridging scientific discovery and clinical application in oncology, promoting equitable cancer care and fostering the translation of new therapies through education and global collaboration.</p>
             <a href="https://sto-online.org/" target="_blank" rel="noopener">Visit website &rarr;</a>
           </div>
         </div>
-        <div class="board-item" onclick="this.classList.toggle('expanded')">
+        <div class="board-item" role="button" tabindex="0" aria-expanded="false">
           <h3>Owkin</h3>
-          <span class="board-toggle">+</span>
+          <span class="board-toggle" aria-hidden="true">+</span>
           <div class="board-detail">
             <p>An AI biotech company using machine learning and federated learning to accelerate drug discovery, optimize clinical trials, and develop AI-powered diagnostics from multimodal patient data.</p>
             <a href="https://www.owkin.com" target="_blank" rel="noopener">Visit website &rarr;</a>
           </div>
         </div>
-        <div class="board-item" onclick="this.classList.toggle('expanded')">
+        <div class="board-item" role="button" tabindex="0" aria-expanded="false">
           <h3>Jona</h3>
-          <span class="board-toggle">+</span>
+          <span class="board-toggle" aria-hidden="true">+</span>
           <div class="board-detail">
             <p>A personalized health company using AI to analyze the gut microbiome, delivering actionable insights on diet and lifestyle to help people identify root causes of chronic health issues.</p>
             <a href="https://jona.health/" target="_blank" rel="noopener">Visit website &rarr;</a>
           </div>
         </div>
-        <div class="board-item" onclick="this.classList.toggle('expanded')">
+        <div class="board-item" role="button" tabindex="0" aria-expanded="false">
           <h3>Atropos Health</h3>
-          <span class="board-toggle">+</span>
+          <span class="board-toggle" aria-hidden="true">+</span>
           <div class="board-detail">
             <p>A Stanford spinout generating publication-grade real-world evidence in minutes using AI, closing the evidence gap where only 14% of daily medical decisions are backed by high-quality data.</p>
             <a href="https://www.atroposhealth.com/" target="_blank" rel="noopener">Visit website &rarr;</a>
           </div>
         </div>
-        <div class="board-item" onclick="this.classList.toggle('expanded')">
+        <div class="board-item" role="button" tabindex="0" aria-expanded="false">
           <h3>Alliance for AI in Healthcare</h3>
-          <span class="board-toggle">+</span>
+          <span class="board-toggle" aria-hidden="true">+</span>
           <div class="board-detail">
             <p>An international multi-stakeholder advocacy organization promoting the responsible development, regulation, and adoption of AI-powered healthcare solutions across industry, government, and academia.</p>
             <a href="https://www.theaaih.org/" target="_blank" rel="noopener">Visit website &rarr;</a>
           </div>
         </div>
-        <div class="board-item" onclick="this.classList.toggle('expanded')">
+        <div class="board-item" role="button" tabindex="0" aria-expanded="false">
           <h3>Digital Medicine Society</h3>
-          <span class="board-toggle">+</span>
+          <span class="board-toggle" aria-hidden="true">+</span>
           <div class="board-detail">
             <p>A global nonprofit advancing the ethical, effective, and equitable use of digital medicine by convening diverse stakeholders and producing open-source resources used by the FDA, NIH, and top pharma companies.</p>
             <a href="https://dimesociety.org/" target="_blank" rel="noopener">Visit website &rarr;</a>
           </div>
         </div>
-        <div class="board-item" onclick="this.classList.toggle('expanded')">
+        <div class="board-item" role="button" tabindex="0" aria-expanded="false">
           <h3>Cytometric Therapeutics</h3>
-          <span class="board-toggle">+</span>
+          <span class="board-toggle" aria-hidden="true">+</span>
           <div class="board-detail">
             <p>A biotech company developing precision oncology therapies through functional cytometric profiling, testing living tumor samples directly against therapeutic agents to treat cancers with minimal toxicity.</p>
             <a href="https://cytometric-therapeutics.com/" target="_blank" rel="noopener">Visit website &rarr;</a>
           </div>
         </div>
-        <div class="board-item" onclick="this.classList.toggle('expanded')">
+        <div class="board-item" role="button" tabindex="0" aria-expanded="false">
           <h3>Weave Bio</h3>
-          <span class="board-toggle">+</span>
+          <span class="board-toggle" aria-hidden="true">+</span>
           <div class="board-detail">
             <p>An AI-native software company automating regulatory submissions for drug development, transforming source data into compliant, submission-ready dossiers across global health authorities.</p>
             <a href="https://www.weave.bio/" target="_blank" rel="noopener">Visit website &rarr;</a>
@@ -970,11 +1032,13 @@
   <section class="section section-contact" id="contact">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">Connect</span>
-        <h2 class="section-title">Get in Touch</h2>
+        <div class="section-tag"><span class="section-label">09 / 09 &middot; Connect</span><b>Correspondence</b></div>
+        <h2 class="section-title">Get in <em>touch</em></h2>
       </div>
       <div class="contact-content">
         <p class="lead">Interested in collaborating on research, speaking engagements, or advancing AI-driven innovation in healthcare?</p>
+        <div class="contact-grid">
+        <div class="contact-main">
 
         <!-- Expandable Contact Form -->
         <div class="contact-form-wrapper">
@@ -1008,7 +1072,13 @@
             </form>
           </div>
         </div>
+        </div>
 
+        <div class="contact-side">
+        <figure class="contact-photo">
+          <img src="Man_speaking_at_podium_3.jpg" alt="Dr. Khozin speaking at a podium" loading="lazy">
+          <figcaption>Speaking engagements</figcaption>
+        </figure>
         <div class="contact-links">
           <a href="https://www.linkedin.com/in/seankhozin" class="contact-link" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -1022,6 +1092,8 @@
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
             Google Scholar
           </a>
+        </div>
+        </div>
         </div>
       </div>
     </div>
@@ -1037,13 +1109,14 @@
     <div class="container">
       <div class="footer-content">
         <p>&copy; 2026 Sean Khozin, MD, MPH. All rights reserved.</p>
+        <p class="footer-mark">Index No.01<span aria-hidden="true"></span></p>
       </div>
     </div>
   </footer>
 
-  <script src="script.js?v=31"></script>
-  <script src="neural-network.js?v=31"></script>
-  <script src="convergence.js?v=2"></script>
-  <script src="informed.js?v=1"></script>
+  <script src="script.js?v=32"></script>
+  <script src="neural-network.js?v=32"></script>
+  <script src="convergence.js?v=3"></script>
+  <script src="informed.js?v=2"></script>
 </body>
 </html>
