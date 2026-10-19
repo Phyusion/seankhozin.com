@@ -182,6 +182,16 @@
     });
   });
 
+  // Financing frameworks: each row expands to its technical definition
+  document.querySelectorAll('.framework-head').forEach(head => {
+    const body = document.getElementById(head.getAttribute('aria-controls'));
+    head.addEventListener('click', () => {
+      const isOpen = head.getAttribute('aria-expanded') !== 'true';
+      head.setAttribute('aria-expanded', String(isOpen));
+      body.hidden = !isOpen;
+    });
+  });
+
   // CEORT roundtable: NPV x P / C calculator
   const npvIn = document.getElementById('lever-npv');
   const pIn = document.getElementById('lever-p');
