@@ -92,7 +92,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=39">
+  <link rel="stylesheet" href="styles.css?v=40">
 </head>
 <body>
   <!-- Navigation -->
@@ -1069,9 +1069,9 @@
 
       <article class="roundtable" aria-labelledby="roundtable-title">
         <div class="roundtable-head">
-          <div class="roundtable-tag"><span>CEO Roundtable on Cancer &middot; New York</span><b>March 3, 2025</b></div>
+          <div class="roundtable-tag"><span>CEO Roundtable on Cancer &middot; Initiative</span><b>Created and led by Dr. Khozin</b></div>
           <h3 id="roundtable-title">Financing cancer innovation</h3>
-          <p>Dr. Khozin created and leads this initiative at the CEO Roundtable on Cancer to engineer new ways of funding high-risk cancer research. He designed the March 2025 roundtable, co-hosted by IPG Health, and set its central problem: an era in which it is &ldquo;costlier to discover, harder to develop, and less rewarding to succeed.&rdquo; He then led leaders from science, finance and policy toward the financing structures below, building on a keynote by MIT&rsquo;s Andrew Lo.</p>
+          <p>Dr. Khozin created and leads this initiative to engineer new ways of funding high-risk cancer research. Its premise is that the binding constraint on progress is increasingly financial rather than scientific: oncology has entered an era in which it is &ldquo;costlier to discover, harder to develop, and less rewarding to succeed.&rdquo; The work treats drug development as a problem of risk, time and evidence, and designs capital structures to match each. Its March 2025 roundtable brought together leaders from science, finance and policy around that agenda, opening with a keynote by MIT&rsquo;s Andrew Lo.</p>
         </div>
 
         <div class="roundtable-calc">
@@ -1111,12 +1111,50 @@
         </div>
 
         <div class="roundtable-models">
-          <h4>Funding models the roundtable proposed</h4>
-          <ul>
-            <li><b>Venture philanthropy</b>Patient groups and foundations invest directly in drug development, as the Cystic Fibrosis Foundation did.</li>
-            <li><b>Public-private partnerships</b>Government and private investors share the risk of early-stage cancer research.</li>
-            <li><b>Long-horizon funds</b>Capital committed for 15 to 20 years, modeled on infrastructure finance, instead of the usual five.</li>
-            <li><b>Tech-transfer funds</b>One multi-compound entity develops university discoveries without scientists leaving academia.</li>
+          <h4>Novel financing frameworks</h4>
+          <ul class="frameworks">
+            <li class="framework">
+              <h5><button class="framework-head" type="button" aria-expanded="false" aria-controls="framework-1"><span class="framework-name">Megafunds &amp; research-backed obligations</span><span class="framework-sub">Portfolio finance for drug development</span><span class="board-toggle" aria-hidden="true">+</span></button></h5>
+              <div class="framework-body" id="framework-1" hidden>
+                <div><span class="framework-label">How it works</span><p>A single vehicle holds a large, diversified portfolio of development programs across stages, targets and mechanisms. It is financed with a layered capital structure: equity at the bottom and tranches of research-backed obligations, bonds repaid from licensing, milestone and royalty income, above it. Because programs that are weakly correlated rarely fail together, the portfolio&rsquo;s volatility falls far below that of any single asset.</p></div>
+                <div><span class="framework-label">How it helps</span><p>Turns assets too risky for any one investor into an instrument that pension funds and insurers can hold, lowering the cost of capital, the NPV lever in the formula above.</p></div>
+              </div>
+            </li>
+            <li class="framework">
+              <h5><button class="framework-head" type="button" aria-expanded="false" aria-controls="framework-2"><span class="framework-name">Long-horizon funds</span><span class="framework-sub">Capital matched to development timelines</span><span class="board-toggle" aria-hidden="true">+</span></button></h5>
+              <div class="framework-body" id="framework-2" hidden>
+                <div><span class="framework-label">How it works</span><p>Funds with 15- to 20-year terms, modeled on infrastructure finance, raised from patient capital such as endowments, sovereign funds and insurers. Income from later-stage assets or royalties can support the fund over its life, so early programs are not abandoned when a conventional 10-year venture fund must return capital.</p></div>
+                <div><span class="framework-label">How it helps</span><p>Removes forced exits midway through development and aligns the duration of capital with the 10 to 20 years a cancer therapy takes to reach patients.</p></div>
+              </div>
+            </li>
+            <li class="framework">
+              <h5><button class="framework-head" type="button" aria-expanded="false" aria-controls="framework-3"><span class="framework-name">Venture philanthropy &amp; patient-driven capital</span><span class="framework-sub">Mission-aligned investment with recycled returns</span><span class="board-toggle" aria-hidden="true">+</span></button></h5>
+              <div class="framework-body" id="framework-3" hidden>
+                <div><span class="framework-label">How it works</span><p>Foundations and patient advocacy organizations fund development programs directly, structured so that success returns royalties or milestone payments to the funder. Those returns are reinvested in the next programs, as the Cystic Fibrosis Foundation did in backing the therapies that transformed its disease.</p></div>
+                <div><span class="framework-label">How it helps</span><p>Directs capital to high unmet need that markets underweight, such as pancreatic and esophageal cancer, and creates an evergreen pool of funding.</p></div>
+              </div>
+            </li>
+            <li class="framework">
+              <h5><button class="framework-head" type="button" aria-expanded="false" aria-controls="framework-4"><span class="framework-name">Public-private partnerships</span><span class="framework-sub">Shared risk in the valley of death</span><span class="board-toggle" aria-hidden="true">+</span></button></h5>
+              <div class="framework-body" id="framework-4" hidden>
+                <div><span class="framework-label">How it works</span><p>Government co-investment, first-loss capital, guarantees or advance commitments that absorb part of the downside of early-stage research, alongside private investors who take the remainder.</p></div>
+                <div><span class="framework-label">How it helps</span><p>Reduces the effective risk and duration private capital must bear, drawing investment into the gap between promising preclinical science and first-in-human trials.</p></div>
+              </div>
+            </li>
+            <li class="framework">
+              <h5><button class="framework-head" type="button" aria-expanded="false" aria-controls="framework-5"><span class="framework-name">Tech-transfer funds</span><span class="framework-sub">A shared pipeline for academic discovery</span><span class="board-toggle" aria-hidden="true">+</span></button></h5>
+              <div class="framework-body" id="framework-5" hidden>
+                <div><span class="framework-label">How it works</span><p>A single multi-compound entity in-licenses promising assets from many universities and medical centers and builds the development infrastructure around them, so that scientists can remain in academia while their discoveries advance.</p></div>
+                <div><span class="framework-label">How it helps</span><p>Converts stranded academic intellectual property into an investable portfolio, sharing risk across compounds and lowering development cost through shared expertise.</p></div>
+              </div>
+            </li>
+            <li class="framework">
+              <h5><button class="framework-head" type="button" aria-expanded="false" aria-controls="framework-6"><span class="framework-name">Quantitative &amp; AI risk models</span><span class="framework-sub">Measuring the probability of success</span><span class="board-toggle" aria-hidden="true">+</span></button></h5>
+              <div class="framework-body" id="framework-6" hidden>
+                <div><span class="framework-label">How it works</span><p>Methods from quantitative finance and machine-learning models trained on clinical-trial data that estimate each program&rsquo;s probability of technical and regulatory success, and how outcomes correlate across a portfolio. Dr. Khozin&rsquo;s research with Andrew Lo combined machine learning with tumor-growth models to predict outcomes in advanced lung cancer.</p></div>
+                <div><span class="framework-label">How it helps</span><p>Gives investors a defensible estimate of P, the input every financing structure depends on, so capital can be priced to the real risk rather than to uncertainty.</p></div>
+              </div>
+            </li>
           </ul>
         </div>
 
@@ -1348,7 +1386,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=34"></script>
+  <script src="script.js?v=35"></script>
   <script src="neural-network.js?v=32"></script>
   <script src="convergence.js?v=3"></script>
   <script src="informed.js?v=2"></script>
