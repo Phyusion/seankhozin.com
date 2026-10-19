@@ -882,9 +882,12 @@ button { font: inherit; }
   .podcast-banner-trigger { flex-wrap: wrap; }
 }
 
+@media (max-width: 400px) {
+  .section-title { font-size: clamp(24px, 8.2vw, 32px); }
+}
+
 @media (max-width: 560px) {
   :root { --nav-h: 60px; }
-  .nav-logo-sub, .nav-logo span[aria-hidden] { display: none; }
   .hero-eyebrow b, .section-tag b, .section-runner-tag { display: none; }
   .about-highlights { grid-template-columns: minmax(0, 1fr); }
   .highlight-card + .highlight-card { border-left: 0; padding-left: 0; margin-top: 16px; }
