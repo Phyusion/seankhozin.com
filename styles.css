@@ -764,10 +764,10 @@ button { font: inherit; }
 .board-detail a { font: 600 13px/1 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
 
 /* --- Contact --- */
-.contact-content > .lead { max-width: 40ch; margin: calc(-1 * clamp(16px, 3vw, 40px)) 0 clamp(32px, 4vw, 56px); font-weight: 500; }
-.contact-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
-.contact-main, .contact-side { min-width: 0; }
-.contact-side { display: grid; gap: 32px; }
+.section-contact { padding-bottom: clamp(48px, 6vw, 80px); }
+.contact-main > .lead { max-width: 40ch; font-weight: 500; }
+.contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+.contact-main { min-width: 0; display: grid; gap: 28px; align-content: start; }
 .contact-form-trigger {
   width: 100%; display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 0 20px;
   background: var(--ink); color: var(--paper); border: 2px solid var(--ink); border-radius: 0; cursor: pointer;
@@ -803,7 +803,7 @@ button { font: inherit; }
 .form-submit:hover { background: var(--signal-deep); }
 .form-submit:active { transform: translate(1px, 1px); }
 .form-submit-icon { width: 18px; height: 18px; }
-.contact-photo { aspect-ratio: 3 / 2; max-width: 100%; overflow: hidden; border: 2px solid var(--ink); }
+.contact-photo { margin: 0; aspect-ratio: 4 / 3; max-width: 100%; overflow: hidden; border: 2px solid var(--ink); }
 .contact-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 30%; }
 .contact-links { border-top: 3px solid var(--ink); }
 .contact-link {
@@ -816,7 +816,7 @@ button { font: inherit; }
 
 /* --- DNA helix --- */
 .dna-wrapper {
-  display: flex; justify-content: center; align-items: center; padding: 0 0 24px; background: var(--paper);
+  display: flex; justify-content: flex-start; align-items: center; padding: 0;
   opacity: 0; transform: translateY(12px); transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
 }
 .dna-wrapper.visible { opacity: 1; transform: none; }

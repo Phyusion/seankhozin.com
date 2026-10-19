@@ -150,9 +150,8 @@
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  function render(key) {
+  function html(key) {
     var r = REGIONS[key];
-    if (!r) return;
     var h = '<div class="convergence-fade">';
     h += '<span class="convergence-tag">' + esc(r.tag) + '</span>';
     h += '<h3 class="convergence-title">' + esc(r.title) + '</h3>';
@@ -182,8 +181,37 @@
       h += '</div></div>';
     }
     h += '</div>';
-    panel.innerHTML = h;
+    return h;
   }
+
+  function render(key) {
+    if (!REGIONS[key]) return;
+    panel.innerHTML = html(key);
+  }
+
+  // Reserve the height of the tallest region so switching regions never
+  // changes the page height (which made the page jump while scrolled).
+  function reserveHeight() {
+    var probe = document.createElement('div');
+    probe.className = 'convergence-panel';
+    probe.setAttribute('aria-hidden', 'true');
+    probe.style.cssText = 'position:absolute;left:-9999px;top:0;visibility:hidden;width:' + panel.clientWidth + 'px';
+    document.body.appendChild(probe);
+    var tallest = 0;
+    for (var key in REGIONS) {
+      if (!REGIONS.hasOwnProperty(key)) continue;
+      probe.innerHTML = html(key);
+      tallest = Math.max(tallest, probe.offsetHeight);
+    }
+    document.body.removeChild(probe);
+    panel.style.minHeight = tallest + 'px';
+  }
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(reserveHeight, 150);
+  });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(reserveHeight);
 
   function select(key) {
     var regions = document.querySelectorAll('.venn-region');
@@ -208,4 +236,5 @@
   }
 
   select('core');
+  reserveHeight();
 })();

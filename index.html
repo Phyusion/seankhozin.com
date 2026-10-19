@@ -92,7 +92,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=43">
+  <link rel="stylesheet" href="styles.css?v=45">
 </head>
 <body>
   <!-- Navigation -->
@@ -1347,10 +1347,12 @@
         <h2 class="section-title">Get in <em>touch</em></h2>
       </div>
       <div class="contact-content">
-        <p class="lead">Interested in collaborating on research, speaking engagements, or advancing AI-driven innovation in healthcare?</p>
         <div class="contact-grid">
+        <figure class="contact-photo">
+          <img src="Man_speaking_at_podium_3.jpg" alt="Dr. Khozin speaking at a podium" width="1280" height="853" loading="lazy" decoding="async">
+        </figure>
         <div class="contact-main">
-
+        <p class="lead">Interested in collaborating on research, speaking engagements, or advancing AI-driven innovation in healthcare?</p>
         <!-- Expandable Contact Form -->
         <div class="contact-form-wrapper">
           <button class="contact-form-trigger" id="contact-form-trigger" aria-expanded="false" aria-controls="contact-form-panel">
@@ -1383,12 +1385,6 @@
             </form>
           </div>
         </div>
-        </div>
-
-        <div class="contact-side">
-        <figure class="contact-photo">
-          <img src="Man_speaking_at_podium_3.jpg" alt="Dr. Khozin speaking at a podium" width="1280" height="853" loading="lazy" decoding="async">
-        </figure>
         <div class="contact-links">
           <a href="https://www.linkedin.com/in/seankhozin" class="contact-link" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -1403,16 +1399,13 @@
             Google Scholar
           </a>
         </div>
+        <div class="dna-wrapper" aria-hidden="true"><canvas id="dna-canvas"></canvas></div>
         </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- DNA Helix -->
-  <div class="dna-wrapper">
-    <canvas id="dna-canvas"></canvas>
-  </div>
 
   <!-- Footer -->
   <footer class="footer">
@@ -1425,7 +1418,7 @@
 
   <script src="script.js?v=36"></script>
   <script src="neural-network.js?v=32"></script>
-  <script src="convergence.js?v=3"></script>
+  <script src="convergence.js?v=4"></script>
   <script src="informed.js?v=2"></script>
 </body>
 </html>
