@@ -166,22 +166,19 @@
     });
   });
 
-  // Expandable board cards (click, Enter or Space; links inside still navigate)
+  // Expandable board cards: the heading is a real button; a click anywhere else
+  // on the card does the same, except on the website link inside it.
   document.querySelectorAll('.board-item').forEach(item => {
+    const head = item.querySelector('.board-head');
+    if (!head) return;
     const toggleItem = () => {
       const isOpen = item.classList.toggle('expanded');
-      item.setAttribute('aria-expanded', isOpen);
+      head.setAttribute('aria-expanded', String(isOpen));
     };
+    head.addEventListener('click', toggleItem);
     item.addEventListener('click', e => {
-      if (e.target.closest('a')) return;
+      if (e.target.closest('a, .board-head')) return;
       toggleItem();
-    });
-    item.addEventListener('keydown', e => {
-      if (e.target !== item) return;
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleItem();
-      }
     });
   });
 
