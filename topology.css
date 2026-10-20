@@ -193,12 +193,13 @@ html:not(.js) .pipe-controls { display: none; }
 .eroom-svg { width: 100%; height: auto; display: block; overflow: visible; font-family: var(--font-mono); }
 .eroom-grid { stroke: var(--stone-2); stroke-width: 1; }
 .eroom-axis { stroke: var(--ink); stroke-width: 2; }
-.eroom-tick { font-size: 11px; fill: var(--graphite); }
+.eroom-tick { font-size: 12px; fill: var(--graphite); }
 .eroom-line { fill: none; stroke: var(--ink); stroke-width: 3; }
 .eroom-past { fill: none; stroke: var(--cobalt); stroke-width: 6; stroke-linecap: square; }
 .eroom-dot { fill: var(--signal); stroke: var(--ink); stroke-width: 2.5; }
 .eroom-guide { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 4; }
-.eroom-note { font-size: 10.5px; fill: var(--graphite); }
+.eroom-note { font-size: 11px; fill: var(--graphite); }
+.eroom-half { fill: var(--paper); stroke: var(--ink); stroke-width: 1.5; }
 .eroom-slider { display: block; padding: 6px 18px 16px; }
 .eroom-slider input { width: 100%; accent-color: var(--ink); }
 
