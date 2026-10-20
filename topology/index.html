@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Topology — Sean Khozin, MD, MPH</title>
+  <meta name="description" content="In-depth examinations of the themes that run through Sean Khozin’s work and research, beginning with The Simulator’s Dilemma: why better molecules are not better medicines.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.seankhozin.com/topology/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.seankhozin.com/topology/">
+  <meta property="og:title" content="Topology — Sean Khozin, MD, MPH">
+  <meta property="og:description" content="In-depth examinations of the themes that run through Sean Khozin’s work and research.">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Sean Khozin, MD, MPH">
+  <meta property="og:image" content="https://www.seankhozin.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Topology — Sean Khozin, MD, MPH">
+  <meta name="twitter:description" content="In-depth examinations of the themes that run through Sean Khozin’s work and research.">
+  <meta name="twitter:image" content="https://www.seankhozin.com/og-image.png">
+  <meta name="author" content="Sean Khozin, MD, MPH">
+
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <meta name="theme-color" content="#0A0A0A">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "The Simulator’s Dilemma",
+    "description": "Why AI that designs better molecules has not yet produced better medicines, and why its biggest opportunity is discovering the human biology that decides whether a drug works.",
+    "url": "https://www.seankhozin.com/topology/#simulators-dilemma",
+    "author": { "@id": "https://www.seankhozin.com/#person", "@type": "Person", "name": "Sean Khozin" },
+    "isPartOf": { "@id": "https://www.seankhozin.com/#website" },
+    "inLanguage": "en-US"
+  }
+  </script>
+
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=59">
+  <link rel="stylesheet" href="../topology.css?v=1">
+</head>
+<body class="page-topology">
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="../" class="nav-logo"><b>Sean Khozin</b><span aria-hidden="true">|</span><span class="nav-logo-sub">MD, MPH</span></a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../#about">About</a></li>
+        <li><a href="../#convergence">Convergence</a></li>
+        <li><a href="./" aria-current="page">Topology</a></li>
+        <li><a href="../#roles">Roles</a></li>
+        <li><a href="../#career">Career</a></li>
+        <li><a href="../#informed">INFORMED</a></li>
+        <li><a href="../#research">Research</a></li>
+        <li><a href="../#finance">Finance</a></li>
+        <li><a href="../#music">Music</a></li>
+        <li><a href="../#boards">Boards</a></li>
+        <li><a href="../#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Opener -->
+  <header class="topo-hero">
+    <div class="container">
+      <div class="hero-eyebrow"><span>Topology &middot; Themes in depth</span><b>01 theme</b></div>
+      <h1 class="topo-hero-title">Topology</h1>
+      <p class="topo-hero-sub">In-depth examinations of the themes that run through Dr. Khozin&rsquo;s work and research. Each follows one argument from the evidence to what should change, and links to the others where the ideas meet.</p>
+      <ol class="theme-list topo-hero-list">
+        <li>
+          <a href="#simulators-dilemma" class="theme-row">
+            <span class="theme-num">01</span>
+            <span class="theme-text">
+              <span class="theme-kicker">AI &middot; Drug discovery &middot; Human biology</span>
+              <span class="theme-name">The Simulator&rsquo;s Dilemma</span>
+              <span class="theme-desc">Why better molecules are not better medicines.</span>
+            </span>
+            <span class="theme-arrow" aria-hidden="true">&darr;</span>
+          </a>
+        </li>
+      </ol>
+    </div>
+  </header>
+
+  <!-- Theme 01 -->
+  <section class="section section-theme" id="simulators-dilemma">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><span class="section-label">Theme 01 &middot; The Simulator&rsquo;s Dilemma</span><b>AI &middot; Drug discovery</b></div>
+        <h2 class="section-title">The Simulator&rsquo;s <em>Dilemma</em></h2>
+      </div>
+
+      <div class="theme-open">
+        <p class="lead">Better molecules are not better medicines.</p>
+        <p class="theme-standfirst">Artificial intelligence can now predict how molecules fit together, read the genome&rsquo;s regulatory code and write proteins evolution never made. Yet the productivity of drug development has not moved. This theme follows one molecule through the tools of its day and through today&rsquo;s, and argues that AI&rsquo;s biggest opportunity is not designing the molecule. It is discovering the human biology that decides whether the molecule works.</p>
+      </div>
+
+      <ol class="brief">
+        <li><span class="brief-num">01</span><h3>The tools are real</h3><p>Structure prediction, genome models and protein language models are a genuine step change in how molecules are engineered.</p></li>
+        <li><span class="brief-num">02</span><h3>The outcomes have not changed</h3><p>AI-discovered molecules pass Phase I at 80&ndash;90% but Phase II at about 40%, in line with history. Drugs per R&amp;D dollar keep falling.</p></li>
+        <li><span class="brief-num">03</span><h3>The bottleneck is biology</h3><p>Fragmented data, labels drawn from human perception, products shipped without clinical proof and how little of human biology is mapped limit what any model can learn.</p></li>
+      </ol>
+
+      <div class="theme-body">
+        <nav class="theme-toc" aria-label="In this theme">
+          <p class="theme-toc-head">In this theme</p>
+          <ol>
+            <li><a href="#sd-bet"><span>I</span>A bet on simulation</a></li>
+            <li><a href="#sd-rg7112"><span>II</span>The molecule that could not</a></li>
+            <li><a href="#sd-tools"><span>III</span>New tools of the trade</a></li>
+            <li><a href="#sd-test"><span>IV</span>Would today&rsquo;s tools catch it?</a></li>
+            <li><a href="#sd-eroom"><span>V</span>Why Eroom&rsquo;s law won&rsquo;t break</a></li>
+            <li><a href="#sd-working"><span>VI</span>What&rsquo;s working today</a></li>
+            <li><a href="#sd-why"><span>VII</span>Why biology isn&rsquo;t moving</a></li>
+            <li><a href="#sd-forward"><span>VIII</span>The way forward</a></li>
+            <li><a href="#sd-connections"><span>&rarr;</span>Connections &amp; sources</a></li>
+          </ol>
+        </nav>
+
+        <article class="theme-article">
+
+          <!-- I -->
+          <section class="part" id="sd-bet" aria-labelledby="sd-bet-h">
+            <p class="part-num">Part I</p>
+            <h3 class="part-title" id="sd-bet-h">A bet on simulation</h3>
+            <blockquote class="pull">
+              <p>&ldquo;Every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it.&rdquo;</p>
+              <cite>McCarthy, Minsky, Rochester &amp; Shannon &middot; Dartmouth proposal &middot; August 31, 1955</cite>
+            </blockquote>
+            <p>The field began with a wager. If something can be described precisely enough, a machine can simulate it. Seventy years later the same wager has moved into biology: describe the protein, the cell or the patient precisely enough, and drug discovery becomes engineering.</p>
+            <p>The history of that wager is a reminder that progress is never a straight line. Eighty years of AI include two winters, each following a period when expectations ran ahead of what the methods could deliver.</p>
+
+            <figure class="figure figure-timeline" id="ai-timeline">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 1</span>Eighty years, two winters. Select a period.</figcaption>
+              <div class="tl-track" role="tablist" aria-label="Periods in the history of AI"></div>
+              <div class="tl-panel" aria-live="polite"></div>
+              <noscript><p class="figure-note">1943 McCulloch and Pitts model neurons as logic units &middot; 1956 Dartmouth workshop founds the field &middot; 1970s winter &middot; 1980s expert systems revive investment &middot; 1990s winter &middot; 2000s machine learning returns &middot; 2024 AlphaFold 3 and a Nobel Prize in Chemistry.</p></noscript>
+            </figure>
+          </section>
+
+          <!-- II -->
+          <section class="part" id="sd-rg7112" aria-labelledby="sd-rg7112-h">
+            <p class="part-num">Part II</p>
+            <h3 class="part-title" id="sd-rg7112-h">The molecule that could not</h3>
+            <p>RG7112 was designed to free the tumor suppressor p53 by blocking MDM2, the protein that holds p53 in check. Many tumors keep p53 silent this way, so releasing it is an elegant idea: switch the cell&rsquo;s own brake back on.</p>
+            <p>The molecule was built with the best tools of its day, and it passed every test those tools could set. Step through its development to see where it was stopped.</p>
+
+            <figure class="figure figure-pipeline" id="rg-pipeline">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 2</span>RG7112, stage by stage</figcaption>
+              <ol class="pipe-stages">
+                <li class="pipe-stage" data-stage="1">
+                  <button class="pipe-btn" type="button"><span class="pipe-n">1</span><span class="pipe-name">Lead discovery</span><span class="pipe-mark">Pass</span></button>
+                  <div class="pipe-detail"><p>Binding assays identified the nutlins, the first selective small-molecule antagonists of MDM2.</p><p class="cite-line">Vassilev et al., Science 2004</p></div>
+                </li>
+                <li class="pipe-stage" data-stage="2">
+                  <button class="pipe-btn" type="button"><span class="pipe-n">2</span><span class="pipe-name">Structure</span><span class="pipe-mark">Pass</span></button>
+                  <div class="pipe-detail"><p>X-ray crystallography showed how the molecules sit in MDM2&rsquo;s binding pocket (PDB 1RV1; RG7112 bound, 4IPF). In a binding assay, RG7112 reached an IC<sub>50</sub> of 0.018&nbsp;&micro;M.</p><p class="cite-line">Vu et al., ACS Med Chem Lett 2013</p></div>
+                </li>
+                <li class="pipe-stage" data-stage="3">
+                  <button class="pipe-btn" type="button"><span class="pipe-n">3</span><span class="pipe-name">Optimization</span><span class="pipe-mark">Pass</span></button>
+                  <div class="pipe-detail"><p>Structure-guided chemistry tuned potency and metabolism.</p><p class="cite-line">Vu et al., ACS Med Chem Lett 2013</p></div>
+                </li>
+                <li class="pipe-stage" data-stage="4">
+                  <button class="pipe-btn" type="button"><span class="pipe-n">4</span><span class="pipe-name">Pharmaco&shy;kinetics</span><span class="pipe-mark">Pass</span></button>
+                  <div class="pipe-detail"><p>Mouse pharmacokinetic modeling showed about four times the exposure at half the dose, with a half-life of 8.8 hours.</p><p class="cite-line">Vu et al., ACS Med Chem Lett 2013</p></div>
+                </li>
+                <li class="pipe-stage" data-stage="5">
+                  <button class="pipe-btn" type="button"><span class="pipe-n">5</span><span class="pipe-name">Efficacy</span><span class="pipe-mark">Pass</span></button>
+                  <div class="pipe-detail"><p>In SJSA-1 osteosarcoma xenografts, RG7112 inhibited tumor growth by 74% at 50&nbsp;mg/kg and caused regression at 100&nbsp;mg/kg.</p><p class="cite-line">Vu et al., ACS Med Chem Lett 2013</p></div>
+                </li>
+                <li class="pipe-stage" data-stage="6">
+                  <button class="pipe-btn" type="button"><span class="pipe-n">6</span><span class="pipe-name">Safety</span><span class="pipe-mark">Pass</span></button>
+                  <div class="pipe-detail"><p>Toxicology studies supported a favorable safety profile. Every preclinical gate was cleared.</p><p class="cite-line">Vu et al., ACS Med Chem Lett 2013</p></div>
+                </li>
+                <li class="pipe-stage pipe-clinic" data-stage="7">
+                  <button class="pipe-btn" type="button"><span class="pipe-n">7</span><span class="pipe-name">The clinic</span><span class="pipe-mark">Fail</span></button>
+                  <div class="pipe-detail">
+                    <p>In patients with MDM2-amplified liposarcoma, the drug did exactly what it was designed to do. And still it failed.</p>
+                    <div class="pipe-outcome">
+                      <div><span class="pipe-outcome-tag">Benefit</span><p>p53-pathway activation confirmed in tumor biopsies. Only one confirmed partial response.</p></div>
+                      <div class="is-harm"><span class="pipe-outcome-tag">Harm</span><p>Serious adverse events, including neutropenia and thrombocytopenia.</p></div>
+                    </div>
+                    <p class="cite-line">Ray-Coquard et al., Lancet Oncol 2012</p>
+                  </div>
+                </li>
+              </ol>
+              <div class="pipe-controls">
+                <button class="ctl-btn" type="button" data-pipe="prev" aria-label="Previous stage">&larr;</button>
+                <button class="ctl-btn ctl-primary" type="button" data-pipe="next">Next stage &rarr;</button>
+                <span class="pipe-progress" aria-live="polite"></span>
+              </div>
+            </figure>
+            <p class="verdict">It hit its target and missed the patient.</p>
+          </section>
+
+          <!-- III -->
+          <section class="part" id="sd-tools" aria-labelledby="sd-tools-h">
+            <p class="part-num">Part III</p>
+            <h3 class="part-title" id="sd-tools-h">New tools of the trade</h3>
+            <blockquote class="pull pull-small">
+              <p>&ldquo;For the very first time in human history, biology has the opportunity to be engineering, not science.&rdquo;</p>
+              <cite>Jensen Huang, 2023</cite>
+            </blockquote>
+            <p>A decade on, the toolkit looks transformed. Four families of models now cover the steps RG7112&rsquo;s chemists did by hand.</p>
+
+            <div class="tool-groups">
+              <div class="tool-group">
+                <h4 class="tool-group-title">Predicting how molecules fit together</h4>
+                <div class="tool-card"><h5>AlphaFold 3</h5><p>Predicts the joint structures of complexes: proteins, nucleic acids, small molecules and more.</p><p class="cite-line">Abramson et al., Nature 2024</p></div>
+                <div class="tool-card"><h5>RFdiffusion</h5><p>A diffusion model for de novo design of protein structure and function, such as new binders.</p><p class="cite-line">Watson et al., Nature 2023</p></div>
+              </div>
+              <div class="tool-group">
+                <h4 class="tool-group-title">Reading the genome&rsquo;s regulatory code</h4>
+                <div class="tool-card"><h5>AlphaGenome</h5><p>Takes 1&nbsp;Mb of DNA in and predicts thousands of functional tracks at up to single-base resolution. Matches or beats the best external models in 25 of 26 variant-effect evaluations.</p><p class="cite-line">Avsec et al., Nature 2026</p></div>
+                <div class="tool-card"><h5>Evo 2</h5><p>40 billion parameters, a 1&nbsp;Mb context, trained on more than 9 trillion nucleotides. Predicts and designs across DNA, RNA and proteins.</p><p class="cite-line">Brixi et al., Nature 2026</p></div>
+              </div>
+              <div class="tool-group">
+                <h4 class="tool-group-title">Writing proteins evolution never made</h4>
+                <div class="tool-card tool-card-stat"><h5>ESM3</h5><p>A multimodal generative language model that reasons over protein sequence, structure and function. It produced a bright new fluorescent protein only 58% identical to known ones: a distance equivalent to about 500 million years of evolution.</p><p class="cite-line">Hayes et al., Science 2025</p></div>
+              </div>
+              <div class="tool-group">
+                <h4 class="tool-group-title">Language models join the lab</h4>
+                <div class="tool-card"><h5>TxGemma</h5><p>Language models (2B, 9B and 27B) that predict therapeutic properties with natural-language reasoning. They match or beat the best generalist model on 64 of 66 tasks. Wet-lab validation is still a future step.</p><p class="cite-line">Google DeepMind, 2025</p></div>
+                <div class="tool-card"><h5>AI co-scientist</h5><p>A multi-agent system built on Gemini 2.0 that generates novel hypotheses and research proposals.</p><p class="cite-line">Google, 2025</p></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- IV -->
+          <section class="part" id="sd-test" aria-labelledby="sd-test-h">
+            <p class="part-num">Part IV</p>
+            <h3 class="part-title" id="sd-test-h">Would today&rsquo;s tools catch it?</h3>
+            <blockquote class="pull pull-small">
+              <p>&ldquo;It takes ten years and billions of dollars to design just one drug. We can maybe reduce that down from years to maybe months or maybe even weeks.&rdquo;</p>
+              <cite>Demis Hassabis, 2025</cite>
+            </blockquote>
+            <p>The promise is speed. The first clinical results look encouraging, until they reach the stage where efficacy in patients is tested.</p>
+
+            <div class="stat-row">
+              <div class="stat"><span class="stat-num">80&ndash;90%</span><span class="stat-label">Phase I success for AI-discovered molecules</span></div>
+              <div class="stat stat-point"><span class="stat-num">~40%</span><span class="stat-label">Phase II success: in line with historical industry rates</span></div>
+            </div>
+            <p class="cite-line">Analysis of AI-native biotech pipelines &middot; Jayatunga et al., Drug Discov Today 2024</p>
+
+            <p>Phase I mostly tests whether a molecule is safe enough to dose. Phase II is where it first has to help patients, and that is where the advantage disappears. To see why, run RG7112 through today&rsquo;s toolkit.</p>
+
+            <figure class="figure figure-toolkit" id="toolkit-test">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 3</span>RG7112 through today&rsquo;s toolkit</figcaption>
+              <div class="seg" role="group" aria-label="Show what today's tools would see or miss">
+                <button class="seg-btn" type="button" data-view="see" aria-pressed="true">What they would see</button>
+                <button class="seg-btn" type="button" data-view="miss" aria-pressed="false">What they would miss</button>
+              </div>
+              <div class="toolkit-cols" data-view="see">
+                <div class="toolkit-col toolkit-see">
+                  <h4>Within the models&rsquo; view</h4>
+                  <ul>
+                    <li><b>Binding pose in MDM2</b> from AlphaFold-class structure prediction</li>
+                    <li><b>Potency and drug-like properties</b> from property models</li>
+                  </ul>
+                </div>
+                <div class="toolkit-col toolkit-miss">
+                  <h4>Outside it</h4>
+                  <ul>
+                    <li><b>On-target p53 activation in bone-marrow progenitors</b>, which led to neutropenia in 6 patients and thrombocytopenia in 3</li>
+                    <li><b>The therapeutic window in humans</b></li>
+                  </ul>
+                </div>
+              </div>
+              <p class="figure-note">The toxicity was not an error in the chemistry. RG7112 did what it was designed to do, in human tissue the models never see. <span class="cite-line">Ray-Coquard et al., Lancet Oncol 2012</span></p>
+            </figure>
+          </section>
+
+          <!-- V -->
+          <section class="part" id="sd-eroom" aria-labelledby="sd-eroom-h">
+            <p class="part-num">Part V</p>
+            <h3 class="part-title" id="sd-eroom-h">Why Eroom&rsquo;s law won&rsquo;t break</h3>
+            <p>Moore&rsquo;s law, spelled backward. Since 1950, the number of new drugs approved per billion US dollars of R&amp;D has halved roughly every nine years: about an 80-fold decline, adjusted for inflation, despite huge advances in science, technology and management. AI-designed molecules have not bent the curve yet.</p>
+
+            <figure class="figure figure-eroom" id="eroom">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 4</span>Drugs approved per billion R&amp;D dollars, relative to 1950. Drag through the years.</figcaption>
+              <div class="eroom-readout" aria-live="polite"><span class="eroom-fold">1&times;</span><span class="eroom-text">1950: the baseline</span></div>
+              <div class="eroom-chart"></div>
+              <label class="eroom-slider"><span class="visually-hidden">Year</span><input type="range" min="1950" max="2010" step="1" value="1950"></label>
+              <p class="figure-note">Schematic of the published trend, not individual data points: an 80-fold decline from 1950 to 2010, inflation-adjusted. Since about 2010 the ratio has partly rebounded on rare-disease drugs, where genetics points to better targets. <span class="cite-line">Scannell et al., Nat Rev Drug Discov 2012 &middot; Ringel et al., Nat Rev Drug Discov 2020</span></p>
+            </figure>
+
+            <h4 class="part-sub">What we know often surprises us</h4>
+            <p>Single driver mutations are the exception: most patients with metastatic non-small cell lung cancer and other advanced cancers may not have tumors with a single driver. And even a true driver depends on context.</p>
+            <figure class="figure figure-bars">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 5</span>Vemurafenib, same mutation (BRAF V600E), objective response</figcaption>
+              <div class="hbars" role="img" aria-label="Objective response to vemurafenib: 48% in melanoma, about 5% (1 of 21) in colorectal cancer">
+                <div class="hbar"><span class="hbar-label">Melanoma</span><span class="hbar-track"><span class="hbar-fill" style="--v:48"></span></span><span class="hbar-val">48%</span></div>
+                <div class="hbar"><span class="hbar-label">Colorectal</span><span class="hbar-track"><span class="hbar-fill is-low" style="--v:4.8"></span></span><span class="hbar-val">~5% <small>(1 of 21)</small></span></div>
+              </div>
+              <p class="figure-note">Feedback signaling through EGFR in colorectal tumors explains part of the gap. <span class="cite-line">Chapman et al., NEJM 2011 &middot; Kopetz et al., J Clin Oncol 2015 &middot; Khozin, Kim &amp; Pazdur, Nat Rev Drug Discov 2017</span></p>
+            </figure>
+
+            <h4 class="part-sub">Our gold standards can be blunt tools</h4>
+            <p>Animal models are the standard gate between the bench and the clinic. In oncology, they predict human toxicity little better than a coin toss.</p>
+            <div class="stat-row stat-row-4">
+              <div class="stat"><span class="stat-num">108</span><span class="stat-label">Oncology drugs studied</span></div>
+              <div class="stat"><span class="stat-num">0.65</span><span class="stat-label">Median positive predictive value</span></div>
+              <div class="stat"><span class="stat-num">0.50</span><span class="stat-label">Median negative predictive value</span></div>
+              <div class="stat stat-point"><span class="stat-num">90%+</span><span class="stat-label">Of drugs safe and effective in animals that are not approved in humans</span></div>
+            </div>
+            <p class="cite-line">Animal-to-human toxicity in oncology &middot; Atkins et al., Br J Cancer 2020 &middot; FDA, Roadmap to Reducing Animal Testing, 2025</p>
+          </section>
+
+          <!-- VI -->
+          <section class="part" id="sd-working" aria-labelledby="sd-working-h">
+            <p class="part-num">Part VI</p>
+            <h3 class="part-title" id="sd-working-h">What&rsquo;s working today</h3>
+            <h4 class="part-sub">Engineering at full speed</h4>
+            <p>Where the biology is already understood, AI-assisted design is paying off. The clearest signal is in licensing: China-origin assets now account for a large share of big-ticket deals, built by applying fast, AI-assisted design at full scale to validated targets.</p>
+            <div class="stat-row">
+              <div class="stat"><span class="stat-num">42%</span><span class="stat-label">China-origin share of large-cap licensing deals ($50M+ upfront), H1 2026</span></div>
+              <div class="stat"><span class="stat-num">68%</span><span class="stat-label">Of upfront dollars in those deals</span></div>
+            </div>
+            <p class="cite-line">J.P. Morgan, Q2 2026 Biopharma Licensing and Venture Report</p>
+            <p>These molecules are mostly not first in class. They are better versions of known answers, and no new biological understanding is required to make them.</p>
+
+            <h4 class="part-sub">The quiet wins are in the back office</h4>
+            <div class="trio">
+              <div><h5>Ambient scribes</h5><p>Capturing clinical documentation.</p></div>
+              <div><h5>Documents</h5><p>Document management and drafting of regulatory submissions.</p></div>
+              <div><h5>Workflow</h5><p>Automation across business operations.</p></div>
+            </div>
+            <p class="aside-line">These improve efficiency, not biological insight.</p>
+          </section>
+
+          <!-- VII -->
+          <section class="part" id="sd-why" aria-labelledby="sd-why-h">
+            <p class="part-num">Part VII</p>
+            <h3 class="part-title" id="sd-why-h">Why biology isn&rsquo;t moving</h3>
+            <p>Four obstacles keep AI&rsquo;s progress in engineering from turning into progress in biology.</p>
+            <ol class="reasons-index">
+              <li><a href="#sd-fragmentation"><span>1</span>Fragmentation</a></li>
+              <li><a href="#sd-gold-standards"><span>2</span>Arbitrary gold standards</a></li>
+              <li><a href="#sd-not-saas"><span>3</span>Medicine is not SaaS</a></li>
+              <li><a href="#sd-limited-knowledge"><span>4</span>Limited knowledge of human biology</a></li>
+            </ol>
+
+            <div class="reason" id="sd-fragmentation">
+              <h4 class="reason-title"><span>1</span>Fragmentation</h4>
+              <p><b>Of data.</b> Trials, health records, imaging, omics and outcomes sit in separate silos. A model learns only the slice it can see, and no single slice contains the patient.</p>
+              <p><b>Of work.</b> AI itself was the by-product of one conversation across disciplines. In the 1940s and 1950s, neuroscience (McCulloch and Pitts&rsquo;s neuron as a logic unit, 1943), mathematics (Turing&rsquo;s work on logic and computability, 1936 and 1950) and computer science (stored programs and the Dartmouth workshop, 1956) were in the same room. Today they are super-specialized. Medicine and AI both need multidisciplinary work, and multidisciplinary data.</p>
+
+              <div class="thought">
+                <p class="thought-q">Suppose someone invented a biosensor and wanted to use it to make life-and-death diagnoses.</p>
+                <p class="thought-a">The reasonable answer today: that&rsquo;s premature. Convene a workshop. Talk to the FDA.</p>
+                <button class="ctl-btn" type="button" aria-expanded="false" aria-controls="ecg-reveal" data-reveal>Reveal the biosensor</button>
+                <div class="thought-reveal" id="ecg-reveal" hidden>
+                  <p class="thought-answer">It is the electrocardiogram.</p>
+                  <ol class="mini-timeline">
+                    <li><span>1887</span>Augustus Waller records the heart&rsquo;s electrical potential from the skin.</li>
+                    <li><span>1903</span>Willem Einthoven&rsquo;s string galvanometer is ready for use.</li>
+                    <li><span>1905</span>On March 22, Einthoven, a physiologist, and engineer Johannes Bosscha transmit an ECG by telephone line, about 1.5&nbsp;km.</li>
+                    <li><span>1924</span>Einthoven receives the Nobel Prize.</li>
+                  </ol>
+                  <p>Physiology and engineering, working together, moved it quickly into practice. The ECG, the X-ray (a physicist&rsquo;s discovery turned clinical tool) and MRI (physics, chemistry and medicine combined) all came from medicine and engineering sharing a bench. Each would be hard to develop today, across disciplinary and regulatory barriers.</p>
+                  <p class="cite-line">Hjelm &amp; Julius, J Telemed Telecare 2005 &middot; National Academy of Sciences</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="reason" id="sd-gold-standards">
+              <h4 class="reason-title"><span>2</span>Arbitrary gold standards</h4>
+              <p><b>Human sensory input is an unreliable instrument.</b> Much of the ground truth AI is trained on comes from people looking at images. In an FDA meta-analysis of 13,677 patients in registration trials, the investigator and an independent radiologist reading the same scans disagreed on tumor response about 30% of the time, and up to 45% in ovarian and pancreatic cancer. Assessments by eye vary within and between observers, in radiology and histopathology alike.</p>
+              <p class="crosslink"><span>Explore the data</span><a href="../#reader-agreement">The full reader-agreement matrix, cell by cell &rarr;</a></p>
+
+              <p><b>The labels themselves are historical accidents.</b> Consider what &ldquo;lung cancer&rdquo; means.</p>
+              <div class="label-stack">
+                <div class="label-layer"><span class="label-eye">Surgeon&rsquo;s eye</span><p><b>&ldquo;Lung cancer&rdquo;</b>: an early surgical observation of where a tumor sits.</p></div>
+                <div class="label-layer"><span class="label-eye">Pathologist&rsquo;s eye</span><p><b>&ldquo;Small cell&rdquo; vs &ldquo;non-small cell&rdquo;</b>: what a pathologist sees through a microscope. &ldquo;Non-small cell&rdquo; defines a cancer by what it is not.</p></div>
+                <div class="label-layer label-truth"><span class="label-eye">Underneath</span><p><b>Distinct molecular drivers</b>, grouped together as one disease.</p></div>
+              </div>
+              <p>Train AI on these labels and, at best, it learns to reproduce them faster: faster horses, not biological insight.</p>
+              <p class="cite-line">Khozin et al., FDA meta-analysis, 2017 &middot; Khozin, Clin Transl Sci 2024</p>
+            </div>
+
+            <div class="reason" id="sd-not-saas">
+              <h4 class="reason-title"><span>3</span>Medicine is not SaaS</h4>
+              <div class="playbooks">
+                <div><span class="playbook-tag">Software playbook</span><p class="playbook-motto">Ship it</p><p>A regulatory clearance feels like a launch. Technology companies and their investors shy away from clinical trials.</p></div>
+                <div class="is-point"><span class="playbook-tag">Medical product playbook</span><p class="playbook-motto">Prove it</p><p>Medical products need clinical validation. A 510(k) clearance alone does not win clinicians or payers.</p></div>
+              </div>
+              <p>The cost of confusing the two is real: Pear Therapeutics, a pioneer of FDA-authorized prescription digital therapeutics, filed for bankruptcy in 2023. Meanwhile the regulatory door to simulation has opened faster than industry has used it.</p>
+              <ol class="door">
+                <li><span class="door-date">Oct 2024</span><p>FDA Science Board report on new methods</p></li>
+                <li><span class="door-date">Apr 2025</span><p>Plan to phase out animal testing; AI toxicity data welcomed in IND applications</p></li>
+                <li><span class="door-date">Apr 2025</span><p>Roadmap: organ-on-chip, computational models, in vitro assays</p></li>
+                <li><span class="door-date">Mar 2026</span><p>Draft guidance: a validation framework</p></li>
+                <li class="door-next"><span class="door-date">Next</span><p>No validated simulation submission yet</p></li>
+              </ol>
+              <p class="aside-line">The door to simulation is open. No one has walked through.</p>
+            </div>
+
+            <div class="reason" id="sd-limited-knowledge">
+              <h4 class="reason-title"><span>4</span>Limited knowledge of human biology</h4>
+              <div class="sliver">
+                <div class="sliver-grid" aria-hidden="true"></div>
+                <div class="sliver-text">
+                  <p class="sliver-num">1&ndash;5%<span>?</span></p>
+                  <p>A plausible share of human biology that has been mapped: a sliver. And that counts only the known unknowns. What is truly known may be far less.</p>
+                  <p>A large share of human protein-coding genes remain poorly studied. A simulator cannot simulate what no one has measured.</p>
+                  <p class="cite-line">Kustatscher et al., Nat Methods 2022</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- VIII -->
+          <section class="part" id="sd-forward" aria-labelledby="sd-forward-h">
+            <p class="part-num">Part VIII</p>
+            <h3 class="part-title" id="sd-forward-h">The way forward</h3>
+
+            <h4 class="part-sub">Labels should come from mechanism, not from human sensory input</h4>
+            <p>From organs to algorithms: a bottom-up classification of disease that reduces reliance on subjective human interpretation.</p>
+            <table class="compare-table">
+              <caption class="visually-hidden">Current cancer classification compared with AI-driven classification</caption>
+              <thead>
+                <tr>
+                  <th scope="col"><span class="visually-hidden">Dimension</span></th>
+                  <th scope="col">Current classification</th>
+                  <th scope="col" class="is-point">AI-driven classification</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row"><span class="compare-idx">01</span><span class="compare-name">Primary basis</span></th><td>Anatomical location and histology</td><td class="is-point">Molecular, imaging and histopathological data, integrated</td></tr>
+                <tr><th scope="row"><span class="compare-idx">02</span><span class="compare-name">Precision</span></th><td>Limited by inter- and intra-observer variability</td><td class="is-point">Potentially more objective and reproducible</td></tr>
+                <tr><th scope="row"><span class="compare-idx">03</span><span class="compare-name">Novel features</span></th><td>Limited ability to find new subtypes</td><td class="is-point">Can identify de novo features and patterns</td></tr>
+                <tr><th scope="row"><span class="compare-idx">04</span><span class="compare-name">Biological relevance</span></th><td>May group heterogeneous cancers together</td><td class="is-point">Aims to reflect underlying disease mechanisms</td></tr>
+                <tr><th scope="row"><span class="compare-idx">05</span><span class="compare-name">Treatment matching</span></th><td>Often suboptimal</td><td class="is-point">Potential for more precise selection</td></tr>
+              </tbody>
+            </table>
+            <p class="cite-line">Adapted from Table 1, Khozin, Clin Transl Sci 2024</p>
+
+            <h4 class="part-sub">From big data to smart data: study the whole patient</h4>
+            <p>Moving from a reductionist center, a single structured table, to a holistic edge that spans the volume, variety, velocity and veracity of data: records, trials, sensors, imaging and omics, joined around one patient.</p>
+            <p class="crosslink"><span>Explore the figure</span><a href="../#informed-figures">The four V&rsquo;s capacity map, interactive &rarr;</a></p>
+
+            <h4 class="part-sub">Three moves to consider</h4>
+            <ol class="moves">
+              <li><span class="move-num">01</span><h5>Fund mechanism-based labels</h5><p>Replace labels from the human eye with molecular and multimodal ones.</p></li>
+              <li><span class="move-num">02</span><h5>Build whole-patient data</h5><p>Link trials, records, imaging and omics.</p></li>
+              <li><span class="move-num">03</span><h5>Validate where decisions are made</h5><p>Measure AI against human outcomes, not benchmarks.</p></li>
+            </ol>
+
+            <div class="closing">
+              <p class="closing-line">Better molecules are not better medicines.</p>
+              <p>AI&rsquo;s biggest opportunity is not designing the molecule. It is discovering the human biology that decides whether it works. RG7112 hit its target. It missed the patient.</p>
+              <blockquote class="pull pull-small">
+                <p>&ldquo;We can only see a short distance ahead, but we can see plenty there that needs to be done.&rdquo;</p>
+                <cite>Alan Turing, 1950</cite>
+              </blockquote>
+            </div>
+          </section>
+
+          <!-- Connections & sources -->
+          <section class="part part-refs" id="sd-connections" aria-labelledby="sd-connections-h">
+            <h3 class="part-title" id="sd-connections-h">Connections</h3>
+            <p>Where this theme meets the rest of the work. Future themes will link here as they are added.</p>
+            <ul class="connections">
+              <li><a href="../#reader-agreement"><span class="conn-where">Research</span><span class="conn-what">Inter-reader response classification: the 13,677-patient matrix behind &ldquo;arbitrary gold standards&rdquo;</span></a></li>
+              <li><a href="../#informed-figures"><span class="conn-where">INFORMED</span><span class="conn-what">From big data to smart data: the four V&rsquo;s and the systems view of drug development</span></a></li>
+              <li><a href="../#convergence"><span class="conn-where">Convergence</span><span class="conn-what">Disease classified by mechanism instead of anatomy, inside a learning system</span></a></li>
+            </ul>
+
+            <h3 class="part-title part-title-sources">Sources</h3>
+            <div class="research-pub-list sources">
+              <span class="research-pub"><span class="research-journal">Dartmouth proposal, 1955</span><span class="research-pub-title">A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence</span><span class="research-pub-authors">McCarthy J, Minsky ML, Rochester N, Shannon CE.</span></span>
+              <a href="https://doi.org/10.1007/BF02478259" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Bull Math Biophys, 1943</span><span class="research-pub-title">A logical calculus of the ideas immanent in nervous activity</span><span class="research-pub-authors">McCulloch WS, Pitts W.</span></a>
+              <a href="https://doi.org/10.1093/mind/LIX.236.433" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Mind, 1950</span><span class="research-pub-title">Computing machinery and intelligence</span><span class="research-pub-authors">Turing AM.</span></a>
+              <a href="https://doi.org/10.1126/science.1092472" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Science, 2004</span><span class="research-pub-title">In vivo activation of the p53 pathway by small-molecule antagonists of MDM2</span><span class="research-pub-authors">Vassilev LT, et al.</span></a>
+              <a href="https://doi.org/10.1021/ml4000657" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">ACS Med Chem Lett, 2013</span><span class="research-pub-title">Discovery of RG7112: a small-molecule MDM2 inhibitor in clinical development</span><span class="research-pub-authors">Vu B, et al.</span></a>
+              <a href="https://doi.org/10.1016/S1470-2045(12)70474-6" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Lancet Oncol, 2012</span><span class="research-pub-title">Effect of the MDM2 antagonist RG7112 on the P53 pathway in patients with MDM2-amplified, well-differentiated or dedifferentiated liposarcoma</span><span class="research-pub-authors">Ray-Coquard I, et al.</span></a>
+              <a href="https://doi.org/10.1038/s41586-024-07487-w" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nature, 2024</span><span class="research-pub-title">Accurate structure prediction of biomolecular interactions with AlphaFold 3</span><span class="research-pub-authors">Abramson J, et al.</span></a>
+              <a href="https://doi.org/10.1038/s41586-023-06415-8" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nature, 2023</span><span class="research-pub-title">De novo design of protein structure and function with RFdiffusion</span><span class="research-pub-authors">Watson JL, et al.</span></a>
+              <a href="https://doi.org/10.1038/s41586-025-10014-0" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nature, 2026</span><span class="research-pub-title">Advancing regulatory variant effect prediction with AlphaGenome</span><span class="research-pub-authors">Avsec &#381;, et al.</span></a>
+              <a href="https://doi.org/10.1038/s41586-026-10176-5" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nature, 2026</span><span class="research-pub-title">Genome modelling and design across all domains of life with Evo 2</span><span class="research-pub-authors">Brixi G, et al.</span></a>
+              <a href="https://doi.org/10.1126/science.ads0018" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Science, 2025</span><span class="research-pub-title">Simulating 500 million years of evolution with a language model</span><span class="research-pub-authors">Hayes T, et al.</span></a>
+              <a href="https://arxiv.org/abs/2504.06196" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">arXiv, 2025</span><span class="research-pub-title">TxGemma: efficient and agentic LLMs for therapeutics</span><span class="research-pub-authors">Google DeepMind and Google Research.</span></a>
+              <a href="https://arxiv.org/abs/2502.18864" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">arXiv, 2025</span><span class="research-pub-title">Towards an AI co-scientist</span><span class="research-pub-authors">Google.</span></a>
+              <a href="https://doi.org/10.1016/j.drudis.2024.104009" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Drug Discov Today, 2024</span><span class="research-pub-title">How successful are AI-discovered drugs in clinical trials? A first analysis and emerging lessons</span><span class="research-pub-authors">Jayatunga MKP, et al.</span></a>
+              <a href="https://doi.org/10.1038/nrd3681" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nat Rev Drug Discov, 2012</span><span class="research-pub-title">Diagnosing the decline in pharmaceutical R&amp;D efficiency</span><span class="research-pub-authors">Scannell JW, et al.</span></a>
+              <a href="https://doi.org/10.1038/d41573-020-00059-3" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nat Rev Drug Discov, 2020</span><span class="research-pub-title">Breaking Eroom&rsquo;s Law</span><span class="research-pub-authors">Ringel MS, et al.</span></a>
+              <a href="https://doi.org/10.1056/NEJMoa1103782" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">N Engl J Med, 2011</span><span class="research-pub-title">Improved survival with vemurafenib in melanoma with BRAF V600E mutation</span><span class="research-pub-authors">Chapman PB, et al.</span></a>
+              <a href="https://doi.org/10.1200/JCO.2015.63.2497" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">J Clin Oncol, 2015</span><span class="research-pub-title">Phase II pilot study of vemurafenib in patients with metastatic BRAF-mutated colorectal cancer</span><span class="research-pub-authors">Kopetz S, et al.</span></a>
+              <a href="https://doi.org/10.1038/nrd.2017.26" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nat Rev Drug Discov, 2017</span><span class="research-pub-title">From big data to smart data: FDA&rsquo;s INFORMED initiative</span><span class="research-pub-authors">Khozin S, Kim G, Pazdur R.</span></a>
+              <a href="https://doi.org/10.1038/s41416-020-01033-x" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Br J Cancer, 2020</span><span class="research-pub-title">Pre-clinical animal models are poor predictors of human toxicities in phase 1 oncology clinical trials</span><span class="research-pub-authors">Atkins JT, et al., Khozin S.</span></a>
+              <span class="research-pub"><span class="research-journal">U.S. FDA, 2025 &middot; 2026</span><span class="research-pub-title">Roadmap to Reducing Animal Testing in Preclinical Safety Studies; draft guidance on new approach methodologies</span><span class="research-pub-authors">U.S. Food and Drug Administration.</span></span>
+              <span class="research-pub"><span class="research-journal">J.P. Morgan, 2026</span><span class="research-pub-title">Q2 2026 Biopharma Licensing and Venture Report</span><span class="research-pub-authors">J.P. Morgan.</span></span>
+              <a href="https://doi.org/10.1258/135763305774472088" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">J Telemed Telecare, 2005</span><span class="research-pub-title">Centenary of tele-electrocardiography and telephonocardiography</span><span class="research-pub-authors">Hjelm NM, Julius HW.</span></a>
+              <a href="https://doi.org/10.1111/cts.70001" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Clin Transl Sci, 2024</span><span class="research-pub-title">From organs to algorithms: redefining cancer classification in the age of artificial intelligence</span><span class="research-pub-authors">Khozin S.</span></a>
+              <a href="https://doi.org/10.1038/s41592-022-01454-x" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nat Methods, 2022</span><span class="research-pub-title">Understudied proteins: opportunities and challenges for functional proteomics</span><span class="research-pub-authors">Kustatscher G, et al.</span></a>
+            </div>
+          </section>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p>&copy; 2026 Sean Khozin, MD, MPH. All rights reserved.</p>
+        <p><a href="../">Home</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js?v=39"></script>
+  <script src="../topology.js?v=1"></script>
+</body>
+</html>
