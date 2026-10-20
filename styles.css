@@ -759,6 +759,7 @@ button { font: inherit; }
   border-bottom: 2px solid var(--ink); cursor: pointer;
 }
 .board-item:not(:nth-child(3n+1)) { border-left: 3px solid var(--ink); padding-left: 20px; }
+.board-item:last-child:nth-child(3n+1) { grid-column: 1 / -1; }
 .board-item h3 { font: 900 clamp(19px, 1.6vw, 23px)/1 var(--font-display); font-stretch: 100%; text-transform: uppercase; }
 .board-head {
   width: 100%; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 0;
@@ -854,6 +855,7 @@ button { font: inherit; }
   .roles-grid, .boards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .board-item:not(:nth-child(3n+1)) { border-left: 0; padding-left: 0; }
   .board-item:nth-child(2n) { border-left: 3px solid var(--ink); padding-left: 20px; }
+  .board-item:last-child:nth-child(3n+1) { grid-column: auto; }
   .board-item:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .research-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .timeline-content { grid-template-columns: minmax(0, 1fr); }
