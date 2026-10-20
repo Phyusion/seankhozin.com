@@ -292,7 +292,7 @@ html:not(.js) .pipe-controls { display: none; }
 .closing .pull { margin: 28px 0 0; }
 .closing .pull cite { color: var(--ink); }
 
-/* Connections and sources */
+/* Connections and references */
 .part-refs { padding-bottom: 0; }
 .connections { list-style: none; margin-top: 20px; border-top: 3px solid var(--ink); }
 .connections li { border-bottom: 2px solid var(--ink); }
@@ -300,9 +300,9 @@ html:not(.js) .pipe-controls { display: none; }
 .connections a:hover { background: var(--signal); }
 .conn-where { font: 500 12px/1.6 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--cobalt); }
 .conn-what { font: 700 clamp(16px, 1.3vw, 19px)/1.25 var(--font-display); font-stretch: 92%; }
-.part-title-sources { margin-top: clamp(48px, 6vw, 72px); }
-.sources .research-pub-authors { display: block; margin-top: 4px; font-size: 14px; color: var(--graphite); }
-.sources span.research-pub:hover { background: none; }
+.part-title-refs { margin-top: clamp(48px, 6vw, 72px); }
+.references .research-pub-authors { display: block; margin-top: 4px; font-size: 14px; color: var(--graphite); }
+.references span.research-pub:hover { background: none; }
 
 /* --- Responsive --- */
 @media (max-width: 1100px) {
