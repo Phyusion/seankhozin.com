@@ -864,7 +864,7 @@ button { font: inherit; }
   .informed-fig-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1180px) {
   .nav-toggle { display: flex; }
   .nav-links {
     position: absolute; top: var(--nav-h); left: 0; right: 0; flex-direction: column; gap: 0;
@@ -961,3 +961,8 @@ button { font: inherit; }
   .theme-arrow { width: 44px; height: 44px; }
 }
 @media (prefers-reduced-motion: reduce) { .theme-arrow { transition: none; } }
+
+/* Nav link that leaves the homepage (Topology): outlined so it reads as a separate page */
+@media (min-width: 1181px) {
+  .nav-links a.nav-page { box-shadow: inset 0 0 0 2px var(--ink); margin-left: 4px; }
+}
