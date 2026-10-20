@@ -753,12 +753,12 @@ button { font: inherit; }
 .music-article .btn { align-self: flex-start; }
 
 /* --- Boards --- */
-.boards-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 2px solid var(--ink); }
+.boards-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 2px solid var(--ink); }
 .board-item {
   display: flex; flex-direction: column; min-width: 0; padding: 20px 20px 20px 0;
   border-bottom: 2px solid var(--ink); cursor: pointer;
 }
-.board-item:not(:nth-child(4n+1)) { border-left: 3px solid var(--ink); padding-left: 20px; }
+.board-item:not(:nth-child(3n+1)) { border-left: 3px solid var(--ink); padding-left: 20px; }
 .board-item h3 { font: 900 clamp(19px, 1.6vw, 23px)/1 var(--font-display); font-stretch: 100%; text-transform: uppercase; }
 .board-head {
   width: 100%; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 0;
@@ -852,8 +852,9 @@ button { font: inherit; }
 /* --- Responsive: ruled rows collapse 4 → 2 → 1 and keep their rules --- */
 @media (max-width: 1100px) {
   .roles-grid, .boards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .board-item:not(:nth-child(4n+1)) { border-left: 0; padding-left: 0; }
+  .board-item:not(:nth-child(3n+1)) { border-left: 0; padding-left: 0; }
   .board-item:nth-child(2n) { border-left: 3px solid var(--ink); padding-left: 20px; }
+  .board-item:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .research-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .timeline-content { grid-template-columns: minmax(0, 1fr); }
   .convergence-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
