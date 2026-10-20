@@ -654,13 +654,7 @@ button { font: inherit; }
 .roundtable-ratio { font: 900 clamp(64px, 8vw, 128px)/.82 var(--font-display); font-stretch: 72%; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
 .roundtable-ratio { font-size: min(clamp(64px, 8vw, 128px), 42cqi); }
 .roundtable-verdict { font: 800 17px/1.2 var(--font-display); font-stretch: 92%; }
-.calc-step { display: flex; align-items: baseline; gap: 12px; padding-top: 6px; color: var(--paper); font: 800 15px/1.2 var(--font-display); font-stretch: 96%; text-transform: uppercase; }
-.calc-step b { color: var(--signal); font: 600 12px/1.2 var(--font-mono); letter-spacing: .08em; }
-.calc-step-lead { max-width: 70ch; margin-top: -12px; color: var(--on-ink-muted); }
-.calc-try { list-style: none; counter-reset: try; display: grid; gap: 10px; max-width: 80ch; margin-top: -8px; }
-.calc-try li { counter-increment: try; display: grid; grid-template-columns: 28px minmax(0, 1fr); color: var(--on-ink-muted); font-size: 15px; line-height: 1.5; }
-.calc-try li::before { content: counter(try, upper-alpha); color: var(--signal); font: 600 13px/1.6 var(--font-mono); }
-.calc-try b { color: var(--paper); }
+.calc-step { display: block; padding-top: 6px; color: var(--signal); font: 600 12px/1.2 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
 .calc-takeaway { max-width: 76ch; padding-top: 14px; border-top: 1px solid var(--ink-rule); color: var(--paper); font-size: 16px; line-height: 1.5; }
 .roundtable-models { border-top: 2px solid var(--ink-rule); padding-top: 24px; display: grid; gap: 16px; }
 .frameworks { list-style: none; border-top: 2px solid var(--ink-rule); }

@@ -92,7 +92,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=51">
+  <link rel="stylesheet" href="styles.css?v=52">
 </head>
 <body>
   <!-- Navigation -->
@@ -1084,9 +1084,9 @@
         <div class="roundtable-calc">
           <div class="roundtable-calc-head">
             <h4>How a drug program gets funded</h4>
-            <p>Investors back a drug program only when what it is expected to earn outweighs what it will cost to develop. That test fits in one line: <span class="roundtable-formula">NPV &times; P &divide; C &gt; 1</span>. This short tutorial explains each term, then lets you run the test yourself.</p>
+            <p>Investors back a drug program only when what it is expected to earn outweighs what it will cost to develop. That test fits in one line: <span class="roundtable-formula">NPV &times; P &divide; C &gt; 1</span>.</p>
           </div>
-          <span class="calc-step"><b>Step 1</b> The terms</span>
+          <span class="calc-step">The terms</span>
           <dl class="roundtable-terms">
             <div>
               <dt><abbr title="Net present value">NPV</abbr><span>Net present value</span></dt>
@@ -1108,8 +1108,7 @@
               <dd><p>When expected value exceeds cost, the ratio is above 1 and the program is worth funding. Below 1, rational investors pass, however promising the science.</p></dd>
             </div>
           </dl>
-          <span class="calc-step"><b>Step 2</b> Run the test</span>
-          <p class="calc-step-lead">Set a program&rsquo;s value, its odds of approval and its development cost. The equation updates as you move each slider.</p>
+          <span class="calc-step">The model</span>
           <div class="roundtable-calc-grid">
             <div class="roundtable-levers">
               <div class="lever">
@@ -1135,13 +1134,7 @@
               <span class="roundtable-verdict" id="roundtable-verdict">Fundable: expected value exceeds cost</span>
             </div>
           </div>
-          <span class="calc-step"><b>Step 3</b> Try this</span>
-          <ol class="calc-try">
-            <li><span>Lower <b>P</b> from 10% to 7%. The ratio falls to 0.84: the same drug, in the same market, no longer attracts capital.</span></li>
-            <li><span>Keep P at 7% and cut <b>C</b> to $170M, as leaner trials might. The ratio recovers to 1.24.</span></li>
-            <li><span>Return P to 10% and C to $250M, then halve <b>NPV</b> to $1.5B, as a higher cost of capital or weaker reimbursement might. The ratio drops to 0.60.</span></li>
-          </ol>
-          <p class="calc-takeaway">Each lever belongs to a different field: science moves P, trial design and execution move C, and pricing, policy and finance move NPV. A small shift in any one of them can decide whether promising science is developed at all.</p>
+          <p class="calc-takeaway">The margins are thin. At the default inputs, lowering P from 10% to 7% takes the ratio from 1.20 to 0.84, and halving NPV takes it to 0.60. Each lever belongs to a different field: science moves P, trial design and execution move C, and pricing, policy and finance move NPV.</p>
         </div>
 
         <div class="roundtable-models">
