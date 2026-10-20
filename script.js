@@ -218,6 +218,18 @@
       clearTimeout(el.flashTimer);
       el.flashTimer = setTimeout(() => el.classList.remove('is-changing'), 220);
     };
+    const readout = document.getElementById('npv-readout');
+    let state = null;
+    let selected = null; // year shown in the readout
+    let pinned = false; // until a reader picks a year, the readout follows T
+    const showYear = t => {
+      if (!state) return;
+      selected = Math.min(Math.max(t, 1), state.T);
+      const f = state.flows[selected - 1];
+      readout.innerHTML = '<b>Year ' + selected + '</b> &middot; ' + term(f.cf, state.rPct, selected) + ' = ' + fmtMoney(f.pv) + ' today';
+      const sel = bars.querySelector('.sel');
+      if (sel) sel.setAttribute('x', (selected - 1) * 10);
+    };
     const update = () => {
       const dev = parseInt(devIn.value, 10);
       const cost = parseFloat(costIn.value);
@@ -255,8 +267,12 @@
       const max = Math.max(profit, 1), min = cost;
       const H = 100, zero = H * max / (max + min), scale = H / (max + min), W = 10;
       bars.setAttribute('viewBox', '0 0 ' + T * W + ' ' + H);
-      bars.setAttribute('aria-label', 'Cash flow by year, years 1 to ' + T + ': ' + dev + ' years of development costs, then ' + market + ' years of profit');
+      bars.setAttribute('aria-label', 'Cash flow by year, years 1 to ' + T + ': ' + dev + ' years of development costs, then ' + market + ' years of profit. Arrow keys step through the years.');
       bars.textContent = '';
+      const hl = document.createElementNS(SVG, 'rect');
+      hl.setAttribute('class', 'sel');
+      hl.setAttribute('y', 0); hl.setAttribute('width', W); hl.setAttribute('height', H);
+      bars.appendChild(hl);
       const rect = (cls, x, v) => {
         const el = document.createElementNS(SVG, 'rect');
         el.setAttribute('class', cls);
@@ -277,7 +293,25 @@
       line.setAttribute('y1', zero); line.setAttribute('y2', zero);
       line.setAttribute('vector-effect', 'non-scaling-stroke');
       bars.appendChild(line);
+      state = { T, flows, rPct };
+      showYear(pinned ? selected : T);
     };
+    // Inspect one year's term: hover or tap a bar, or step with the arrow keys
+    const yearAt = e => {
+      const box = bars.getBoundingClientRect();
+      return Math.floor((e.clientX - box.left) / box.width * state.T) + 1;
+    };
+    const pick = t => { pinned = true; showYear(t); };
+    bars.addEventListener('pointermove', e => pick(yearAt(e)));
+    bars.addEventListener('pointerdown', e => pick(yearAt(e)));
+    bars.addEventListener('keydown', e => {
+      const step = { ArrowLeft: -1, ArrowDown: -1, ArrowRight: 1, ArrowUp: 1 }[e.key];
+      if (e.key === 'Home') pick(1);
+      else if (e.key === 'End') pick(state.T);
+      else if (step) pick(selected + step);
+      else return;
+      e.preventDefault();
+    });
     [devIn, costIn, profitIn, marketIn, rIn].forEach(input => input.addEventListener('input', update));
     update();
   }

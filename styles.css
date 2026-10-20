@@ -670,11 +670,16 @@ button { font: inherit; }
 .npv-key { display: inline-block; width: 12px; height: 12px; }
 .npv-key-raw { border: 1px solid var(--on-ink-muted); }
 .npv-key-pv { background: var(--signal); }
-#npv-bars { display: block; width: 100%; height: clamp(120px, 14vw, 180px); }
+#npv-bars { display: block; width: 100%; height: clamp(120px, 14vw, 180px); cursor: crosshair; touch-action: pan-y; }
+#npv-bars:focus-visible { outline: 3px solid var(--signal); outline-offset: 4px; }
+#npv-bars .sel { fill: var(--paper); opacity: .12; }
 #npv-bars .raw { fill: none; stroke: var(--on-ink-muted); stroke-width: 1; }
 #npv-bars .pv { fill: var(--signal); }
 #npv-bars .pv.neg { fill: var(--vermilion); }
 #npv-bars .zero { stroke: var(--paper); stroke-width: 1; }
+.npv-readout { min-height: 1.4em; color: var(--paper); font: 600 15px/1.4 var(--font-mono); font-variant-numeric: tabular-nums; }
+.npv-readout b { color: var(--signal); font-weight: 600; }
+.npv-readout sup { font-size: .7em; line-height: 0; }
 .npv-axis { display: flex; justify-content: space-between; color: var(--on-ink-muted); font: 500 12px/1 var(--font-mono); }
 .roundtable-models { border-top: 2px solid var(--ink-rule); padding-top: 24px; display: grid; gap: 16px; }
 .frameworks { list-style: none; border-top: 2px solid var(--ink-rule); }

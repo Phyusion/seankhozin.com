@@ -92,7 +92,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=54">
+  <link rel="stylesheet" href="styles.css?v=55">
 </head>
 <body>
   <!-- Navigation -->
@@ -1154,7 +1154,8 @@
           </div>
           <div class="npv-chart">
             <div class="npv-legend"><span><i class="npv-key npv-key-raw" aria-hidden="true"></i>Cash flow in year t</span><span><i class="npv-key npv-key-pv" aria-hidden="true"></i>Its value today, CF&#8348; &divide; (1 + r)&#7511;</span></div>
-            <svg id="npv-bars" role="img" aria-label="Cash flow by year" preserveAspectRatio="none"></svg>
+            <p class="npv-readout" id="npv-readout" aria-live="polite"></p>
+            <svg id="npv-bars" role="img" tabindex="0" aria-label="Cash flow by year" preserveAspectRatio="none"></svg>
             <div class="npv-axis" aria-hidden="true"><span>Year 1</span><span id="npv-axis-end">Year 20</span></div>
           </div>
         </div>
@@ -1434,7 +1435,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=38"></script>
+  <script src="script.js?v=39"></script>
   <script src="neural-network.js?v=33"></script>
   <script src="convergence.js?v=4"></script>
   <script src="informed.js?v=2"></script>
