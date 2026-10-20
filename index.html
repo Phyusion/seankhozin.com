@@ -92,7 +92,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=53">
+  <link rel="stylesheet" href="styles.css?v=54">
 </head>
 <body>
   <!-- Navigation -->
@@ -1084,56 +1084,80 @@
         <div class="roundtable-calc">
           <div class="roundtable-calc-head">
             <h4>The economics of a single program</h4>
-            <p>Every drug program faces the same economic test: its expected value must exceed its cost, <span class="roundtable-formula">NPV &times; P &divide; C &gt; 1</span>. Science and trial design set the probability of success, development efficiency sets the cost, and pricing, policy and the cost of capital set the value. Use the sliders below to model a drug program: set its value if approved, its chance of approval and its development cost, and the calculator shows whether the program clears the threshold of 1 and would attract investment, or falls below it and would go unfunded.</p>
+            <p>A drug program is worth funding when the profit it is expected to earn, valued in today&rsquo;s dollars, exceeds what it costs to develop. Net present value (NPV) puts both in a single sum: every year&rsquo;s net cash flow, discounted back to the present.</p>
+          </div>
+          <div class="npv-formula" role="math" aria-label="NPV equals the sum, from year t equals 1 to T, of CF t divided by 1 plus r to the power t">
+            <span>NPV =</span>
+            <span class="npv-sigma" aria-hidden="true"><span>T</span><span class="npv-sigma-sign">&Sigma;</span><span>t = 1</span></span>
+            <span>CF<sub>t</sub> &divide; (1 + r)<sup>t</sup></span>
           </div>
           <dl class="roundtable-terms">
             <div>
-              <dt><abbr title="Net present value">NPV</abbr><span>Net present value</span></dt>
-              <dd>
-                <p>The value, in today&rsquo;s dollars, of all the profit a successful drug is expected to earn over its commercial life. Because sales arrive years in the future, each year&rsquo;s profit is discounted back to the present at the return investors require for the risk they take (the cost of capital): the further away the money, the less it is worth today. At a 10% annual rate, $1 earned ten years from now is worth about 39&cent; today.</p>
-                <p>NPV falls when revenue arrives later or capital costs more, and rises with better pricing, reimbursement and market access. It assumes the drug succeeds; the risk of failure is captured separately by P.</p>
-              </dd>
+              <dt><b>CF<sub>t</sub></b><span>Net cash flow in year t</span></dt>
+              <dd><p>The program&rsquo;s profit in year t: revenue minus every cost. During development it is negative, because the program spends money and earns nothing; after approval it turns positive as sales arrive.</p></dd>
             </div>
             <div>
-              <dt>P<span>Probability of success</span></dt>
-              <dd><p>The likelihood that a program reaches regulatory approval from its current stage of development. Multiplying NPV by P gives the program&rsquo;s expected value.</p></dd>
+              <dt>r<span>Discount rate</span></dt>
+              <dd><p>The annual return investors require for the risk they take, also called the cost of capital, written as a decimal (0.10 for 10%). At r = 0.10, $1 earned ten years from now is worth about 39&cent; today.</p></dd>
             </div>
             <div>
-              <dt>C<span>Cost of development</span></dt>
-              <dd><p>The total investment required to bring the drug to approval, including preclinical work and every phase of clinical trials.</p></dd>
+              <dt>t<span>Years from today</span></dt>
+              <dd><p>How far in the future a cash flow arrives. Each year&rsquo;s cash flow is divided by (1 + r) once for every year it lies ahead, so distant profit counts for less than near-term profit.</p></dd>
             </div>
             <div>
-              <dt>&gt; 1<span>The threshold</span></dt>
-              <dd><p>When expected value exceeds cost, the ratio is above 1 and the program is worth funding. Below 1, rational investors pass, however promising the science.</p></dd>
+              <dt>T<span>Last year of commercial life</span></dt>
+              <dd><p>The final year the drug earns, usually when its patents expire and generics enter. It equals the years spent in development plus the years on the market.</p></dd>
+            </div>
+            <div>
+              <dt>NPV &gt; 0<span>The threshold</span></dt>
+              <dd><p>A positive NPV means the program returns more than its cost of capital and is worth funding. Below zero, rational investors pass, however promising the science.</p></dd>
             </div>
           </dl>
           <div class="roundtable-calc-grid">
             <div class="roundtable-levers">
               <div class="lever">
-                <div class="lever-row"><label for="lever-npv">NPV of a successful drug</label><output id="lever-npv-out" for="lever-npv">$3.0B</output></div>
-                <input type="range" id="lever-npv" min="0.5" max="10" step="0.1" value="3">
-                <p>Raised by reimbursement, market access and a lower cost of capital.</p>
+                <div class="lever-row"><label for="lever-dev">Years in development</label><output id="lever-dev-out" for="lever-dev">8</output></div>
+                <input type="range" id="lever-dev" min="1" max="15" step="1" value="8">
+                <p>Years 1 to approval, when CF<sub>t</sub> is negative. Shortened by streamlined trials and real-world data.</p>
               </div>
               <div class="lever">
-                <div class="lever-row"><label for="lever-p">Probability of success (P)</label><output id="lever-p-out" for="lever-p">10%</output></div>
-                <input type="range" id="lever-p" min="1" max="50" step="1" value="10">
-                <p>Raised by better science and patient selection, such as biomarker-driven trials and AI.</p>
+                <div class="lever-row"><label for="lever-cost">Development cost per year</label><output id="lever-cost-out" for="lever-cost">$60M</output></div>
+                <input type="range" id="lever-cost" min="10" max="200" step="5" value="60">
+                <p>Spending on preclinical work and clinical trials.</p>
               </div>
               <div class="lever">
-                <div class="lever-row"><label for="lever-c">Cost of development (C)</label><output id="lever-c-out" for="lever-c">$250M</output></div>
-                <input type="range" id="lever-c" min="50" max="1000" step="10" value="250">
-                <p>Lowered by streamlined trials and real-world data.</p>
+                <div class="lever-row"><label for="lever-profit">Profit per year on the market</label><output id="lever-profit-out" for="lever-profit">$350M</output></div>
+                <input type="range" id="lever-profit" min="0" max="1000" step="10" value="350">
+                <p>CF<sub>t</sub> after approval. Raised by pricing, reimbursement and market access.</p>
+              </div>
+              <div class="lever">
+                <div class="lever-row"><label for="lever-market">Years on the market</label><output id="lever-market-out" for="lever-market">12</output></div>
+                <input type="range" id="lever-market" min="1" max="20" step="1" value="12">
+                <p>From approval to patent expiry. T is development plus market years.</p>
+              </div>
+              <div class="lever">
+                <div class="lever-row"><label for="lever-r">Discount rate (r)</label><output id="lever-r-out" for="lever-r">10%</output></div>
+                <input type="range" id="lever-r" min="1" max="25" step="0.5" value="10">
+                <p>Lowered when risk can be pooled and shared, as in the frameworks below.</p>
               </div>
             </div>
             <div class="roundtable-result" aria-live="polite">
-              <span class="roundtable-result-label">NPV &times; P &divide; C</span>
-              <span class="roundtable-equation" aria-hidden="true"><span class="eq-term" id="eq-npv">$3.0B</span> &times; <span class="eq-term" id="eq-p">10%</span> &divide; <span class="eq-term" id="eq-c">$250M</span> =</span>
-              <span class="roundtable-ratio" id="roundtable-ratio">1.20</span>
-              <span class="roundtable-verdict" id="roundtable-verdict">Fundable: expected value exceeds cost</span>
+              <span class="roundtable-result-label">NPV = &Sigma; CF<sub>t</sub> &divide; (1 + r)<sup>t</sup></span>
+              <span class="roundtable-equation" aria-hidden="true"><span class="eq-term" id="eq-first"></span> + &hellip; + <span class="eq-term" id="eq-last"></span> =</span>
+              <span class="roundtable-ratio" id="roundtable-ratio">$0.8B</span>
+              <span class="roundtable-verdict" id="roundtable-verdict">Worth funding: NPV is positive</span>
+              <dl class="npv-split">
+                <div><dt>Development, years 1&ndash;<span id="npv-dev-years">8</span></dt><dd id="npv-dev">&minus;$320M</dd></div>
+                <div><dt>Market, years <span id="npv-mkt-years">9&ndash;20</span></dt><dd id="npv-mkt">$1.1B</dd></div>
+              </dl>
             </div>
           </div>
+          <div class="npv-chart">
+            <div class="npv-legend"><span><i class="npv-key npv-key-raw" aria-hidden="true"></i>Cash flow in year t</span><span><i class="npv-key npv-key-pv" aria-hidden="true"></i>Its value today, CF&#8348; &divide; (1 + r)&#7511;</span></div>
+            <svg id="npv-bars" role="img" aria-label="Cash flow by year" preserveAspectRatio="none"></svg>
+            <div class="npv-axis" aria-hidden="true"><span>Year 1</span><span id="npv-axis-end">Year 20</span></div>
+          </div>
         </div>
-
         <div class="roundtable-models">
           <h4>Novel financing frameworks</h4>
           <p class="roundtable-models-lead">Dr. Khozin&rsquo;s work focuses on the following financing structures and how they can be applied to correct those failures. Select one for how it works and how it helps.</p>
@@ -1142,7 +1166,7 @@
               <h5><button class="framework-head" type="button" aria-expanded="false" aria-controls="framework-1"><span class="framework-name">Megafunds &amp; research-backed obligations</span><span class="framework-sub">Portfolio finance for drug development</span><span class="board-toggle" aria-hidden="true">+</span></button></h5>
               <div class="framework-body" id="framework-1" hidden>
                 <div><span class="framework-label">How it works</span><p>A single vehicle holds a large, diversified portfolio of development programs across stages, targets and mechanisms. It is financed with a layered capital structure: equity at the bottom and tranches of research-backed obligations, bonds repaid from licensing, milestone and royalty income, above it. Because programs that are weakly correlated rarely fail together, the portfolio&rsquo;s volatility falls far below that of any single asset.</p></div>
-                <div><span class="framework-label">How it helps</span><p>Turns assets too risky for any one investor into an instrument that pension funds and insurers can hold, lowering the cost of capital, the NPV lever in the formula above.</p></div>
+                <div><span class="framework-label">How it helps</span><p>Turns assets too risky for any one investor into an instrument that pension funds and insurers can hold, lowering the cost of capital, r in the formula above.</p></div>
               </div>
             </li>
             <li class="framework">
@@ -1177,7 +1201,7 @@
               <h5><button class="framework-head" type="button" aria-expanded="false" aria-controls="framework-6"><span class="framework-name">Quantitative &amp; AI risk models</span><span class="framework-sub">Measuring the probability of success</span><span class="board-toggle" aria-hidden="true">+</span></button></h5>
               <div class="framework-body" id="framework-6" hidden>
                 <div><span class="framework-label">How it works</span><p>Methods from quantitative finance and machine-learning models trained on clinical-trial data that estimate each program&rsquo;s probability of technical and regulatory success, and how outcomes correlate across a portfolio. Dr. Khozin&rsquo;s research with Andrew Lo combined machine learning with tumor-growth models to predict outcomes in advanced lung cancer.</p></div>
-                <div><span class="framework-label">How it helps</span><p>Gives investors a defensible estimate of P, the input every financing structure depends on, so capital can be priced to the real risk rather than to uncertainty.</p></div>
+                <div><span class="framework-label">How it helps</span><p>Gives investors a defensible estimate of the odds of success, the input every financing structure depends on, so capital can be priced to the real risk rather than to uncertainty.</p></div>
               </div>
             </li>
           </ul>
@@ -1410,7 +1434,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=37"></script>
+  <script src="script.js?v=38"></script>
   <script src="neural-network.js?v=33"></script>
   <script src="convergence.js?v=4"></script>
   <script src="informed.js?v=2"></script>

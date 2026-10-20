@@ -192,38 +192,93 @@
     });
   });
 
-  // CEORT roundtable: NPV x P / C calculator
-  const npvIn = document.getElementById('lever-npv');
-  const pIn = document.getElementById('lever-p');
-  const cIn = document.getElementById('lever-c');
-  if (npvIn && pIn && cIn) {
-    const ratioOut = document.getElementById('roundtable-ratio');
+  // NPV calculator: NPV = sum over t = 1..T of CF_t / (1 + r)^t
+  const devIn = document.getElementById('lever-dev');
+  if (devIn) {
+    const costIn = document.getElementById('lever-cost');
+    const profitIn = document.getElementById('lever-profit');
+    const marketIn = document.getElementById('lever-market');
+    const rIn = document.getElementById('lever-r');
+    const npvOut = document.getElementById('roundtable-ratio');
     const verdictOut = document.getElementById('roundtable-verdict');
-    const result = ratioOut.closest('.roundtable-result');
-    const fmtMoney = millions => millions >= 1000 ? '$' + (millions / 1000).toFixed(1) + 'B' : '$' + Math.round(millions) + 'M';
-    const update = () => {
-      const npv = parseFloat(npvIn.value) * 1000; // millions
-      const p = parseFloat(pIn.value) / 100;
-      const c = parseFloat(cIn.value);
-      const ratio = npv * p / c;
-      const values = { npv: fmtMoney(npv), p: Math.round(p * 100) + '%', c: fmtMoney(c) };
-      Object.keys(values).forEach(key => {
-        document.getElementById('lever-' + key + '-out').textContent = values[key];
-        // The live equation shows each value; a value that just changed flashes
-        const term = document.getElementById('eq-' + key);
-        if (term.textContent !== values[key]) {
-          term.textContent = values[key];
-          term.classList.add('is-changing');
-          clearTimeout(term.flashTimer);
-          term.flashTimer = setTimeout(() => term.classList.remove('is-changing'), 220);
-        }
-      });
-      ratioOut.textContent = ratio.toFixed(2);
-      const fundable = ratio > 1;
-      result.classList.toggle('is-below', !fundable);
-      verdictOut.textContent = fundable ? 'Fundable: expected value exceeds cost' : 'Not fundable: cost exceeds expected value';
+    const result = npvOut.closest('.roundtable-result');
+    const bars = document.getElementById('npv-bars');
+    const SVG = 'http://www.w3.org/2000/svg';
+    const fmtMoney = millions => {
+      const sign = millions < 0 ? '\u2212' : '';
+      const m = Math.abs(millions);
+      return sign + (m >= 995 ? '$' + (m / 1000).toFixed(1) + 'B' : '$' + Math.round(m) + 'M');
     };
-    [npvIn, pIn, cIn].forEach(input => input.addEventListener('input', update));
+    const term = (cf, rPct, t) => fmtMoney(cf) + ' \u00f7 ' + (1 + rPct / 100).toFixed(rPct % 1 ? 3 : 2) + '<sup>' + t + '</sup>';
+    const setTerm = (id, html) => {
+      const el = document.getElementById(id);
+      if (el.innerHTML === html) return;
+      el.innerHTML = html;
+      el.classList.add('is-changing');
+      clearTimeout(el.flashTimer);
+      el.flashTimer = setTimeout(() => el.classList.remove('is-changing'), 220);
+    };
+    const update = () => {
+      const dev = parseInt(devIn.value, 10);
+      const cost = parseFloat(costIn.value);
+      const profit = parseFloat(profitIn.value);
+      const market = parseInt(marketIn.value, 10);
+      const rPct = parseFloat(rIn.value);
+      const r = rPct / 100;
+      const T = dev + market;
+      const flows = [];
+      let devPV = 0, mktPV = 0;
+      for (let t = 1; t <= T; t++) {
+        const cf = t <= dev ? -cost : profit;
+        const pv = cf / Math.pow(1 + r, t);
+        if (t <= dev) devPV += pv; else mktPV += pv;
+        flows.push({ cf, pv });
+      }
+      const npv = devPV + mktPV;
+      document.getElementById('lever-dev-out').textContent = dev;
+      document.getElementById('lever-cost-out').textContent = fmtMoney(cost);
+      document.getElementById('lever-profit-out').textContent = fmtMoney(profit);
+      document.getElementById('lever-market-out').textContent = market;
+      document.getElementById('lever-r-out').textContent = rPct.toFixed(rPct % 1 ? 1 : 0) + '%';
+      setTerm('eq-first', term(flows[0].cf, rPct, 1));
+      setTerm('eq-last', term(flows[T - 1].cf, rPct, T));
+      npvOut.textContent = fmtMoney(npv);
+      const fundable = npv > 0;
+      result.classList.toggle('is-below', !fundable);
+      verdictOut.textContent = fundable ? 'Worth funding: NPV is positive' : 'Not worth funding: NPV is negative';
+      document.getElementById('npv-dev-years').textContent = dev;
+      document.getElementById('npv-mkt-years').textContent = (dev + 1) + '\u2013' + T;
+      document.getElementById('npv-dev').textContent = fmtMoney(devPV);
+      document.getElementById('npv-mkt').textContent = fmtMoney(mktPV);
+      document.getElementById('npv-axis-end').textContent = 'Year ' + T;
+      // Bars: outline is the year's cash flow, solid is its value today
+      const max = Math.max(profit, 1), min = cost;
+      const H = 100, zero = H * max / (max + min), scale = H / (max + min), W = 10;
+      bars.setAttribute('viewBox', '0 0 ' + T * W + ' ' + H);
+      bars.setAttribute('aria-label', 'Cash flow by year, years 1 to ' + T + ': ' + dev + ' years of development costs, then ' + market + ' years of profit');
+      bars.textContent = '';
+      const rect = (cls, x, v) => {
+        const el = document.createElementNS(SVG, 'rect');
+        el.setAttribute('class', cls);
+        el.setAttribute('x', x);
+        el.setAttribute('width', W * 0.7);
+        el.setAttribute('y', v >= 0 ? zero - v * scale : zero);
+        el.setAttribute('height', Math.abs(v) * scale);
+        el.setAttribute('vector-effect', 'non-scaling-stroke');
+        bars.appendChild(el);
+      };
+      flows.forEach((f, i) => {
+        rect('pv' + (f.cf < 0 ? ' neg' : ''), i * W + W * 0.15, f.pv);
+        rect('raw', i * W + W * 0.15, f.cf);
+      });
+      const line = document.createElementNS(SVG, 'line');
+      line.setAttribute('class', 'zero');
+      line.setAttribute('x1', 0); line.setAttribute('x2', T * W);
+      line.setAttribute('y1', zero); line.setAttribute('y2', zero);
+      line.setAttribute('vector-effect', 'non-scaling-stroke');
+      bars.appendChild(line);
+    };
+    [devIn, costIn, profitIn, marketIn, rIn].forEach(input => input.addEventListener('input', update));
     update();
   }
 
