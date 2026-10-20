@@ -200,7 +200,6 @@
     const ratioOut = document.getElementById('roundtable-ratio');
     const verdictOut = document.getElementById('roundtable-verdict');
     const result = ratioOut.closest('.roundtable-result');
-    const presets = document.querySelectorAll('.roundtable-preset');
     const fmtMoney = millions => millions >= 1000 ? '$' + (millions / 1000).toFixed(1) + 'B' : '$' + Math.round(millions) + 'M';
     const update = () => {
       const npv = parseFloat(npvIn.value) * 1000; // millions
@@ -223,14 +222,8 @@
       const fundable = ratio > 1;
       result.classList.toggle('is-below', !fundable);
       verdictOut.textContent = fundable ? 'Fundable: expected value exceeds cost' : 'Not fundable: cost exceeds expected value';
-      presets.forEach(b => b.setAttribute('aria-pressed', String(
-        +b.dataset.npv === parseFloat(npvIn.value) && +b.dataset.p === parseFloat(pIn.value) && +b.dataset.c === parseFloat(cIn.value))));
     };
     [npvIn, pIn, cIn].forEach(input => input.addEventListener('input', update));
-    presets.forEach(b => b.addEventListener('click', () => {
-      npvIn.value = b.dataset.npv; pIn.value = b.dataset.p; cIn.value = b.dataset.c;
-      update();
-    }));
     update();
   }
 
