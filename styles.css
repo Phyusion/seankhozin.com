@@ -653,7 +653,7 @@ button { font: inherit; }
 .roundtable-result.is-below .eq-term.is-changing { background: var(--paper); color: var(--vermilion); }
 @media (prefers-reduced-motion: reduce) { .eq-term { transition: none; } }
 .roundtable-ratio { font: 900 clamp(64px, 8vw, 128px)/.82 var(--font-display); font-stretch: 72%; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
-.roundtable-ratio { font-size: min(clamp(64px, 8vw, 128px), 42cqi); }
+.roundtable-ratio { font-size: min(clamp(56px, 8vw, 128px), 23cqi); }
 .roundtable-verdict { font: 800 17px/1.2 var(--font-display); font-stretch: 92%; }
 .npv-formula { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 14px; padding: 18px 0; border-block: 1px solid var(--ink-rule); color: var(--paper); font: 600 clamp(20px, 2.4vw, 30px)/1 var(--font-mono); }
 .npv-formula sub, .npv-formula sup, .roundtable-result-label sub, .roundtable-result-label sup, .lever p sub { font-size: .65em; line-height: 0; }
