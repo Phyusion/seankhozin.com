@@ -124,16 +124,16 @@
   if (eroom) {
     var START = 1950, END = 2010, FOLD = 80;
     var fold = function (y) { return Math.pow(FOLD, (y - START) / (END - START)); };
-    var W = 640, H = 300, L = 56, R = 16, T = 16, B = 34;
-    var x = function (y) { return L + (y - START) / (2020 - START) * (W - L - R); };
-    // y axis: relative output from 1 (top) to 1/100 (bottom), log scale
-    var yv = function (rel) { return T + (-Math.log10(rel) / 2) * (H - T - B); };
+    var W = 560, H = 300, L = 52, R = 30, T = 20, B = 34;
+    var x = function (y) { return L + (y - START) / (END - START) * (W - L - R); };
+    // y axis: drugs per dollar relative to 1950, log scale from 1 (top) to 1/80 (bottom)
+    var yv = function (rel) { return T + (-Math.log10(rel) / Math.log10(FOLD)) * (H - T - B); };
     var svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, class: 'eroom-svg', role: 'img', 'aria-label': 'Schematic: drugs approved per billion R&D dollars fell about 80-fold from 1950 to 2010, halving roughly every nine years' });
-    [1, 0.1, 0.01].forEach(function (v, i) {
-      svgEl('line', { x1: L, x2: W - R, y1: yv(v), y2: yv(v), class: 'eroom-grid' }, svg);
-      svgEl('text', { x: L - 8, y: yv(v) + 4, 'text-anchor': 'end', class: 'eroom-tick' }, svg).textContent = ['1×', '1/10', '1/100'][i];
+    [[1, '1×'], [0.1, '1/10'], [1 / FOLD, '1/80']].forEach(function (t) {
+      svgEl('line', { x1: L, x2: W - R, y1: yv(t[0]), y2: yv(t[0]), class: 'eroom-grid' }, svg);
+      svgEl('text', { x: L - 8, y: yv(t[0]) + 4, 'text-anchor': 'end', class: 'eroom-tick' }, svg).textContent = t[1];
     });
-    for (var yr = 1950; yr <= 2020; yr += 10) {
+    for (var yr = START; yr <= END; yr += 10) {
       svgEl('text', { x: x(yr), y: H - 12, 'text-anchor': 'middle', class: 'eroom-tick' }, svg).textContent = yr;
     }
     svgEl('line', { x1: L, x2: L, y1: T, y2: H - B, class: 'eroom-axis' }, svg);
@@ -144,12 +144,16 @@
       return d.join(' ');
     };
     svgEl('path', { d: pts(END), class: 'eroom-line' }, svg);
+    // One mark at each halving, about every nine and a half years
+    var halfYears = (END - START) / (Math.log(FOLD) / Math.LN2);
+    ['1/2', '1/4', '1/8', '1/16', '1/32', '1/64'].forEach(function (label, k) {
+      var hy = START + halfYears * (k + 1);
+      svgEl('circle', { cx: x(hy), cy: yv(1 / fold(hy)), r: 3.5, class: 'eroom-half' }, svg);
+      svgEl('text', { x: x(hy) + 7, y: yv(1 / fold(hy)) - 7, class: 'eroom-note' }, svg).textContent = label;
+    });
     var past = svgEl('path', { d: pts(START), class: 'eroom-past' }, svg);
     var guide = svgEl('line', { class: 'eroom-guide' }, svg);
     var dot = svgEl('circle', { r: 7, class: 'eroom-dot' }, svg);
-    var note = svgEl('text', { x: x(END) + 8, y: yv(1 / fold(END)) - 18, 'text-anchor': 'start', class: 'eroom-note' }, svg);
-    note.textContent = 'Rebound';
-    svgEl('text', { x: x(END) + 8, y: yv(1 / fold(END)) - 5, 'text-anchor': 'start', class: 'eroom-note' }, svg).textContent = 'after 2010';
     eroom.querySelector('.eroom-chart').appendChild(svg);
 
     var input = eroom.querySelector('input');
@@ -163,9 +167,10 @@
       dot.setAttribute('cy', yv(1 / f));
       guide.setAttribute('x1', x(y)); guide.setAttribute('x2', x(y));
       guide.setAttribute('y1', yv(1 / f)); guide.setAttribute('y2', H - B);
-      foldOut.textContent = (y === START ? '1' : f < 10 ? f.toFixed(1) : Math.round(f)) + '×';
-      textOut.textContent = y === START ? '1950: the baseline' : y + ': fewer drugs per inflation-adjusted R&D dollar than in 1950';
-      input.setAttribute('aria-valuetext', y + ', ' + foldOut.textContent + ' fewer drugs per dollar than 1950');
+      var n = f < 10 ? f.toFixed(1) : String(Math.round(f));
+      foldOut.textContent = y === START ? '1950' : n + '× fewer';
+      textOut.textContent = y === START ? 'The baseline: drugs approved per billion R&D dollars' : 'drugs per inflation-adjusted R&D dollar in ' + y + ' than in 1950';
+      input.setAttribute('aria-valuetext', y === START ? '1950, baseline' : y + ', ' + n + ' times fewer drugs per dollar than 1950');
     };
     input.addEventListener('input', update);
     update();
