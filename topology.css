@@ -53,6 +53,7 @@
 .theme-article p + p { margin-top: 14px; }
 /* a paragraph that follows a table, grid, list or figure gets room to breathe */
 .part > :not(p):not(h3) + p:not(.cite-line):not(.crosslink) { margin-top: 28px; }
+.part > p + .pull, .part > p + blockquote { margin-top: 28px; }
 .part { padding-bottom: clamp(56px, 7vw, 96px); scroll-margin-top: calc(var(--nav-h) + 56px); }
 .part + .part { padding-top: clamp(24px, 3vw, 40px); border-top: 3px solid var(--ink); }
 .reason, .figure { scroll-margin-top: calc(var(--nav-h) + 56px); }
@@ -700,7 +701,7 @@ html:not(.js) .pipe-controls { display: none; }
 .ep-dot:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 2px; }
 .ep-axis .ep-track { height: 22px; border-bottom: 0; }
 .ep-axis .ep-track span { position: absolute; top: 4px; transform: translateX(-50%); font: 500 11px var(--font-mono); color: var(--graphite); }
-.theme-article .ep-readout { max-width: none; min-height: 3.2em; margin: 14px 18px 0; padding: 10px 12px; border: 2px solid var(--ink); font-size: 15px; }
+.theme-article .ep-readout { max-width: none; min-height: 3.2em; margin: 14px 18px 18px; padding: 10px 12px; border: 2px solid var(--ink); font-size: 15px; }
 
 /* The ledger */
 .ledger { margin-top: 24px; border-top: 3px solid var(--ink); }
