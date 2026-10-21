@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Topology — Sean Khozin, MD, MPH</title>
-  <meta name="description" content="In-depth examinations of the themes that run through Sean Khozin’s work and research, including The Simulator’s Dilemma, From Organs to Algorithms and The Broken Instrument.">
+  <meta name="description" content="In-depth examinations of the themes that run through Sean Khozin’s work and research, including The Simulator’s Dilemma, From Organs to Algorithms, The Broken Instrument and There Is No Average Patient.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.seankhozin.com/topology/">
 
@@ -56,6 +56,15 @@
         "author": { "@id": "https://www.seankhozin.com/#person", "@type": "Person", "name": "Sean Khozin" },
         "isPartOf": { "@id": "https://www.seankhozin.com/#website" },
         "inLanguage": "en-US"
+      },
+      {
+        "@type": "Article",
+        "headline": "There Is No Average Patient",
+        "description": "Why cancer trial results drift from real-world outcomes when trials under-enroll key patient groups, with a calculator that reweights subgroup results to the population a clinician actually treats.",
+        "url": "https://www.seankhozin.com/topology/#no-average-patient",
+        "author": { "@id": "https://www.seankhozin.com/#person", "@type": "Person", "name": "Sean Khozin" },
+        "isPartOf": { "@id": "https://www.seankhozin.com/#website" },
+        "inLanguage": "en-US"
       }
     ]
   }
@@ -66,7 +75,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=61">
-  <link rel="stylesheet" href="../topology.css?v=5">
+  <link rel="stylesheet" href="../topology.css?v=6">
 </head>
 <body class="page-topology">
   <!-- Navigation -->
@@ -97,7 +106,7 @@
   <!-- Opener -->
   <header class="topo-hero">
     <div class="container">
-      <div class="hero-eyebrow"><span>Topology &middot; Themes in depth</span><b>03 themes</b></div>
+      <div class="hero-eyebrow"><span>Topology &middot; Themes in depth</span><b>04 themes</b></div>
       <h1 class="topo-hero-title">Topology</h1>
       <p class="topo-hero-sub">In-depth examinations of the themes that run through Dr. Khozin&rsquo;s work and research. Each follows one argument from the evidence to what should change, and links to the others where the ideas meet.</p>
       <ol class="theme-list topo-hero-list">
@@ -130,6 +139,17 @@
               <span class="theme-kicker">Measurement &middot; Endpoints &middot; Imaging</span>
               <span class="theme-name">The Broken Instrument</span>
               <span class="theme-desc">How the ruler beneath cancer drug approvals shapes what gets found.</span>
+            </span>
+            <span class="theme-arrow" aria-hidden="true">&darr;</span>
+          </a>
+        </li>
+        <li>
+          <a href="#no-average-patient" class="theme-row">
+            <span class="theme-num">04</span>
+            <span class="theme-text">
+              <span class="theme-kicker">Trials &middot; External validity &middot; Equity &middot; Tool</span>
+              <span class="theme-name">There Is No Average Patient</span>
+              <span class="theme-desc">Why trial results drift from real-world outcomes, and a tool to reweight them for the patients you treat.</span>
             </span>
             <span class="theme-arrow" aria-hidden="true">&darr;</span>
           </a>
@@ -522,6 +542,7 @@
             <ul class="connections">
               <li><a href="#organs-to-algorithms"><span class="conn-where">Theme 02</span><span class="conn-what">From Organs to Algorithms: how disease labels arose, and a classification built from mechanism up</span></a></li>
               <li><a href="#broken-instrument"><span class="conn-where">Theme 03</span><span class="conn-what">The Broken Instrument: what reader disagreement does to trials and the drug pipeline</span></a></li>
+              <li><a href="#no-average-patient"><span class="conn-where">Theme 04</span><span class="conn-what">There Is No Average Patient: trial populations versus real ones, with a reweighting tool</span></a></li>
               <li><a href="../#reader-agreement"><span class="conn-where">Research</span><span class="conn-what">Inter-reader response classification: the 13,677-patient matrix behind &ldquo;arbitrary gold standards&rdquo;</span></a></li>
               <li><a href="../#informed-figures"><span class="conn-where">INFORMED</span><span class="conn-what">From big data to smart data: the four V&rsquo;s and the systems view of drug development</span></a></li>
               <li><a href="../#convergence"><span class="conn-where">Convergence</span><span class="conn-what">Disease classified by mechanism instead of anatomy, inside a learning system</span></a></li>
@@ -624,6 +645,7 @@
               <cite>Sean Khozin &middot; The Ghost in the Statistical Machine, 2026</cite>
             </blockquote>
             <p>The average patient, the figure every trial reports, exists nowhere except in the aggregate. A classification that lumps different diseases together widens that average and hides the patients a drug could have helped.</p>
+            <p class="crosslink"><span>Theme 04</span><a href="#rw-tool">Reweight a trial for the patients you treat &rarr;</a></p>
           </section>
 
           <!-- III -->
@@ -1052,6 +1074,7 @@
             </div>
             <p class="cite-line">Griffith, &hellip; Khozin, &hellip; Miksad, Adv Ther 2019</p>
             <p>So the variable on which approval rests is absent from the data routine care generates, and trial results cannot be checked against practice on the same scale.</p>
+            <p class="crosslink"><span>Theme 04</span><a href="#no-average-patient">Who trials leave out, and a tool to adjust for it: There Is No Average Patient &rarr;</a></p>
 
             <h4 class="part-sub">&ldquo;Who has validated ORR as a surrogate?&rdquo;</h4>
             <p>A true surrogate, in Ross Prentice&rsquo;s 1989 definition, must capture the treatment&rsquo;s effect on the outcome that matters, so that once the surrogate is known, no residual effect remains. Response rate has never been validated this way. When Dr. Khozin, early in his FDA tenure, described response rate as a surrogate, Robert Temple, then deputy center director for clinical science, asked the question above. It had no answer.</p>
@@ -1150,6 +1173,276 @@
     </div>
   </section>
 
+  <!-- Theme 04 -->
+  <section class="section section-theme" id="no-average-patient">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><span class="section-label">Theme 04 &middot; There Is No Average Patient</span><b>Trials &middot; External validity &middot; Equity</b></div>
+        <h2 class="section-title">There Is No <em>Average Patient</em></h2>
+      </div>
+
+      <div class="theme-open">
+        <p class="lead">A trial reports what happened to the people it enrolled. The clinic treats everyone else.</p>
+        <p class="theme-standfirst">Real-world outcomes for patients with cancer are often worse than those reported in the trials that led to a drug&rsquo;s approval. Part of the gap comes from who gets into trials: narrow eligibility, a handful of specialized sites, and unequal access leave older patients, patients with other illnesses, and many minority groups underrepresented. This theme shows how much that gap can change a drug&rsquo;s expected benefit, even when the drug works equally well for everyone, and gives clinicians and researchers a tool to make the adjustment themselves.</p>
+      </div>
+
+      <ol class="brief">
+        <li><span class="brief-num">01</span><h3>Trials enroll a narrower world</h3><p>Fewer than half of exclusion criteria in major trials are strongly justified, and many groups enroll at a fraction of their share of the disease.</p></li>
+        <li><span class="brief-num">02</span><h3>The gap appears even without heterogeneity</h3><p>In a worked example, a trial reports 13 patients treated per benefit. The same drug, equally effective in everyone, needs 18 in the real-world mix.</p></li>
+        <li><span class="brief-num">03</span><h3>The adjustment is arithmetic</h3><p>Reweight the trial&rsquo;s subgroup results to the patients you actually treat. The tool below does it in your browser.</p></li>
+      </ol>
+
+      <div class="theme-body">
+        <nav class="theme-toc" aria-label="In this theme">
+          <p class="theme-toc-head">In this theme</p>
+          <ol>
+            <li><a href="#ap-ghost"><span>I</span>The ghost of the average</a></li>
+            <li><a href="#ap-who"><span>II</span>Who gets into trials</a></li>
+            <li><a href="#ap-errors"><span>III</span>Three kinds of error</a></li>
+            <li><a href="#ap-surprise"><span>IV</span>Same drug, different answer</a></li>
+            <li><a href="#rw-tool"><span>V</span>Reweight the trial</a></li>
+            <li><a href="#ap-limits"><span>VI</span>What the tool cannot do</a></li>
+            <li><a href="#ap-fix"><span>VII</span>Fixing the trial itself</a></li>
+            <li><a href="#ap-connections"><span>&rarr;</span>Connections &amp; references</a></li>
+          </ol>
+        </nav>
+
+        <article class="theme-article">
+
+          <!-- I -->
+          <section class="part" id="ap-ghost" aria-labelledby="ap-ghost-h">
+            <p class="part-num">Part I</p>
+            <h3 class="part-title" id="ap-ghost-h">The ghost of the average</h3>
+            <p>In 1747, aboard HMS Salisbury, James Lind divided twelve sailors with scurvy into pairs and gave each pair a different remedy. The pair given citrus recovered. Lind had invented the controlled trial, and with it a figure that would shape medicine for three centuries: the average patient, who exists nowhere except in the aggregate.</p>
+            <blockquote class="pull">
+              <p>&ldquo;The Average Patient does not exist, yet its statistical ghost has served us well. It has saved millions. But it has also exacted a heavy price: the systematic erasure of the particular in service of the universal.&rdquo;</p>
+              <cite>Sean Khozin &middot; The Ghost in the Statistical Machine, 2026</cite>
+            </blockquote>
+            <p>Randomized trials are built for internal validity: making sure the observed effect is real for the people studied. What they trade away is external validity: whether the result holds for the people who will actually be treated. Clinicians at the point of care usually know their patients far more granularly than any trial&rsquo;s average, yet are expected to accept its result at face value.</p>
+          </section>
+
+          <!-- II -->
+          <section class="part" id="ap-who" aria-labelledby="ap-who-h">
+            <p class="part-num">Part II</p>
+            <h3 class="part-title" id="ap-who-h">Who gets into trials</h3>
+            <div class="stat-row stat-row-3">
+              <div class="stat"><span class="stat-num">47%</span><span class="stat-label">Of exclusion criteria in high-impact trials graded &ldquo;strongly justified&rdquo;</span></div>
+              <div class="stat"><span class="stat-num">22%</span><span class="stat-label">Black patients&rsquo; enrollment in FDA oncology approval trials, relative to their share of US cancer incidence</span></div>
+              <div class="stat stat-point"><span class="stat-num">48%</span><span class="stat-label">Of real-world advanced lung cancer patients excluded by three traditional criteria</span></div>
+            </div>
+            <p class="cite-line">Van Spall et al., JAMA 2007 &middot; Loree et al., JAMA Oncol 2019 &middot; Harvey, &hellip; Khozin, &hellip; Kim, Clin Cancer Res 2021</p>
+            <p>The pattern is old and persistent. In National Cancer Institute cooperative group trials from 2000 to 2002, about 3% of patients aged 30 to 64 enrolled, against 1.3% of those aged 65 to 74 and 0.5% of those 75 and older; Black and Hispanic patients enrolled at lower rates than White patients. Across 230 trials behind FDA oncology approvals from 2008 to 2018, Black patients made up 3.1% of participants and Hispanic patients 6.1%.</p>
+            <p>The renal cancer trial Dr. Khozin and Roger Stein use as an example enrolled patients who were overwhelmingly White or Asian, although about 12% of real-world patients with renal cell carcinoma are Black: an underrepresentation of at least 95%. In 2022, FDA declined to approve a PD-1 inhibitor whose pivotal trial was conducted in a single country, a signal that representativeness had become a regulatory question.</p>
+            <p class="cite-line">Murthy, Krumholz &amp; Gross, JAMA 2004 &middot; Loree et al., JAMA Oncol 2019 &middot; Khozin &amp; Stein, BBA Rev Cancer 2022</p>
+          </section>
+
+          <!-- III -->
+          <section class="part" id="ap-errors" aria-labelledby="ap-errors-h">
+            <p class="part-num">Part III</p>
+            <h3 class="part-title" id="ap-errors-h">Three kinds of error</h3>
+            <p>A trial&rsquo;s estimate can miss the real-world effect for three distinct reasons. Trial design takes care of the first. The third is measurable, and usually ignored.</p>
+            <ol class="moves">
+              <li><span class="move-num">01</span><h5>Sampling variability</h5><p>Chance. Handled by powering the trial and setting a threshold such as p &lt; 0.05.</p></li>
+              <li><span class="move-num">02</span><h5>Unknown unknowns</h5><p>Confounders no one has measured yet. Only identifiable after new discoveries.</p></li>
+              <li><span class="move-num">03</span><h5>Sampling-frame error</h5><p>Known, measurable differences between the trial&rsquo;s population and the real one. This is what can be adjusted.</p></li>
+            </ol>
+            <p class="cite-line">After Figure 2, Khozin &amp; Stein, BBA Rev Cancer 2022</p>
+            <p>The usual account says external validity fails when a treatment works differently in different groups, those groups have different chances of entering the trial, and the two are correlated. Those conditions are sufficient. They are not all necessary. The trial&rsquo;s answer can drift from the real world&rsquo;s even when the drug works the same in every group.</p>
+          </section>
+
+          <!-- IV -->
+          <section class="part" id="ap-surprise" aria-labelledby="ap-surprise-h">
+            <p class="part-num">Part IV</p>
+            <h3 class="part-title" id="ap-surprise-h">Same drug, different answer</h3>
+            <p>Consider a hypothetical cancer and three groups of patients with different untreated death rates: 80% in group A, 16.7% in group B and 75% in group C. The real-world patient population is 1.1% A, 33.5% B and 65.3% C. A trial with restrictive criteria enrolls 30% A, no B and 70% C. The new drug cuts the risk of death by 10% in relative terms.</p>
+            <table class="compare-table compare-3">
+              <caption class="visually-hidden">Absolute risk reduction and number needed to treat in the trial and in the real world</caption>
+              <thead>
+                <tr>
+                  <th scope="col"><span class="visually-hidden">Measure</span></th>
+                  <th scope="col">Trial, as reported</th>
+                  <th scope="col">Real world, same effect for all</th>
+                  <th scope="col" class="is-point">Real world, no effect in group B</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row"><span class="compare-name">Absolute risk reduction</span></th><td>7.6%</td><td>5.6%</td><td class="is-point">5.0%</td></tr>
+                <tr><th scope="row"><span class="compare-name">Treated per benefit</span></th><td>13</td><td>18 (+38%)</td><td class="is-point">20 (+54%)</td></tr>
+              </tbody>
+            </table>
+            <p class="cite-line">Examples 3 and 4, Table 2, Khozin &amp; Stein, BBA Rev Cancer 2022 &middot; hypothetical numbers</p>
+            <p>The trial is not wrong about its own patients. It is answering a question about a population that does not exist. And the error can run the other way: a trial that excludes the patients most likely to benefit understates a drug&rsquo;s value, and patients go without a treatment that would have helped them.</p>
+          </section>
+
+          <!-- V: the tool -->
+          <section class="part part-tool" id="rw-tool" aria-labelledby="rw-tool-h">
+            <p class="part-num">Part V &middot; Tool</p>
+            <h3 class="part-title" id="rw-tool-h">Reweight the trial</h3>
+            <p>Enter the groups that matter for your question: age bands, comorbidity, performance status, ancestry, or anything else a trial reports by subgroup. For each, give its share of the trial, its share of the population you treat, its event rate without treatment, and the treatment&rsquo;s effect. The tool recomputes what the trial would have reported for your population, and for one patient.</p>
+
+            <div class="rw" id="reweight">
+              <div class="rw-tabs" role="tablist" aria-label="Calculator mode">
+                <button class="rw-tab" role="tab" type="button" aria-selected="true" aria-controls="rw-full" id="rw-tab-full">Reweight by subgroup</button>
+                <button class="rw-tab" role="tab" type="button" aria-selected="false" aria-controls="rw-quick" id="rw-tab-quick">Quick estimate</button>
+              </div>
+
+              <div class="rw-panel" id="rw-full" role="tabpanel" aria-labelledby="rw-tab-full">
+                <div class="rw-presets"><span>Start from</span>
+                  <button class="ctl-btn" type="button" data-preset="same">Example: same effect for all</button>
+                  <button class="ctl-btn" type="button" data-preset="differ">Example: no effect in group B</button>
+                  <button class="ctl-btn" type="button" data-preset="blank">Two age groups</button>
+                </div>
+
+                <div class="rw-options">
+                  <fieldset><legend>Treatment effect</legend>
+                    <label><input type="radio" name="rw-mode" value="same"> Same in every group</label>
+                    <label><input type="radio" name="rw-mode" value="each"> Different by group</label>
+                  </fieldset>
+                  <fieldset><legend>Effect expressed as</legend>
+                    <label><input type="radio" name="rw-scale" value="rr"> Relative risk reduction</label>
+                    <label><input type="radio" name="rw-scale" value="or"> Odds ratio</label>
+                  </fieldset>
+                  <label class="rw-common"><span class="rw-common-label">Relative reduction for every group, %</span><input type="number" name="rw-common" step="1" value="10"></label>
+                </div>
+
+                <div class="rw-rows"></div>
+                <button class="ctl-btn rw-add" type="button">+ Add a group</button>
+
+                <div class="rw-composition">
+                  <div class="rw-bar" data-pop="t"><span>Trial</span><span class="rw-bar-fill"></span></div>
+                  <div class="rw-bar" data-pop="r"><span>Real world</span><span class="rw-bar-fill"></span></div>
+                  <ul class="rw-rep"></ul>
+                </div>
+
+                <div class="rw-results" aria-live="polite">
+                  <div class="rw-col">
+                    <h4>Trial, as reported</h4>
+                    <dl>
+                      <div><dt>Event rate, untreated</dt><dd data-out="tr-c"></dd></div>
+                      <div><dt>Event rate, treated</dt><dd data-out="tr-t"></dd></div>
+                      <div><dt>Absolute risk reduction</dt><dd data-out="tr-arr"></dd></div>
+                    </dl>
+                    <p class="rw-nnt"><b data-out="tr-nnt"></b><span data-out="tr-nnt-note"></span></p>
+                  </div>
+                  <div class="rw-col is-point">
+                    <h4>Your population</h4>
+                    <dl>
+                      <div><dt>Event rate, untreated</dt><dd data-out="rl-c"></dd></div>
+                      <div><dt>Event rate, treated</dt><dd data-out="rl-t"></dd></div>
+                      <div><dt>Absolute risk reduction</dt><dd data-out="rl-arr"></dd></div>
+                    </dl>
+                    <p class="rw-nnt"><b data-out="rl-nnt"></b><span data-out="rl-nnt-note"></span></p>
+                  </div>
+                  <p class="rw-diff" data-out="diff"></p>
+                </div>
+                <ul class="rw-warnings"></ul>
+
+                <div class="rw-patient">
+                  <h4>One patient</h4>
+                  <label><span>Your patient belongs to</span><select></select></label>
+                  <div class="stat-row stat-row-3">
+                    <div class="stat"><span class="stat-num" data-out="pt-c"></span><span class="stat-label">Event rate untreated</span></div>
+                    <div class="stat"><span class="stat-num" data-out="pt-t"></span><span class="stat-label">Event rate treated</span></div>
+                    <div class="stat stat-point"><span class="stat-num" data-out="pt-nnt"></span><span class="stat-label"><span data-out="pt-nnt-note"></span> (absolute reduction <span data-out="pt-arr"></span>)</span></div>
+                  </div>
+                  <p class="rw-flag" data-out="pt-flag"></p>
+                </div>
+
+                <div class="rw-actions">
+                  <button class="ctl-btn ctl-primary" type="button" data-rw="copy">Copy link to these numbers</button>
+                  <button class="ctl-btn" type="button" data-rw="print">Print</button>
+                </div>
+              </div>
+
+              <div class="rw-panel rw-quick" id="rw-quick" role="tabpanel" aria-labelledby="rw-tab-quick" hidden>
+                <p>When a trial reports only overall results, enter its event rates and the untreated event rate in your population. The tool carries the trial&rsquo;s effect across on two common assumptions; the gap between them shows how much the assumption matters.</p>
+                <div class="rw-quick-inputs">
+                  <label><span>Trial control arm event rate, %</span><input type="number" name="qp" min="0.1" max="99.9" step="0.1" value="76.5"></label>
+                  <label><span>Trial treatment arm event rate, %</span><input type="number" name="qa" min="0.1" max="99.9" step="0.1" value="68.9"></label>
+                  <label><span>Untreated event rate in your population, %</span><input type="number" name="qr" min="0.1" max="99.9" step="0.1" value="55.5"></label>
+                </div>
+                <table class="rw-quick-table">
+                  <thead><tr><th scope="col"></th><th scope="col">Treated event rate</th><th scope="col">Absolute reduction</th><th scope="col">Treated per benefit</th></tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Trial, as reported</th><td>&mdash;</td><td data-q="trial-arr"></td><td data-q="trial-nnt"></td></tr>
+                    <tr><th scope="row">Your population, same odds ratio</th><td data-q="or-t"></td><td data-q="or-arr"></td><td data-q="or-nnt"></td></tr>
+                    <tr><th scope="row">Your population, same relative risk</th><td data-q="rr-t"></td><td data-q="rr-arr"></td><td data-q="rr-nnt"></td></tr>
+                  </tbody>
+                </table>
+                <p class="cite-line">Same odds ratio: the first-order formula in Appendix A.2 of Khozin &amp; Stein, 2022, which assumes the effect does not differ across groups.</p>
+              </div>
+            </div>
+            <p class="figure-note rw-privacy">Everything is calculated in your browser. Nothing you enter is sent anywhere; the link you copy carries the numbers in its address.</p>
+          </section>
+
+          <!-- VI -->
+          <section class="part" id="ap-limits" aria-labelledby="ap-limits-h">
+            <p class="part-num">Part VI</p>
+            <h3 class="part-title" id="ap-limits-h">What the tool cannot do</h3>
+            <div class="trio">
+              <div><h5>Invent evidence</h5><p>For a group the trial left out, the effect you enter is an assumption. Try a range: no effect, the trial&rsquo;s effect, and something in between.</p></div>
+              <div><h5>See the unmeasured</h5><p>It corrects for differences you can measure, not for factors no one recorded.</p></div>
+              <div><h5>Model time</h5><p>It uses one outcome at one time point. Read survival at, say, two years off each arm&rsquo;s curve and enter one minus that value as the event rate.</p></div>
+            </div>
+            <p>The choice of scale matters. The paper&rsquo;s worked examples hold the <em>relative risk</em> constant across groups; its shortcut formula holds the <em>odds ratio</em> constant. They agree when events are rare and diverge when they are common, which is often the case in advanced cancer. Formal methods exist for richer data, including standardizing to a target population and correcting for selection into the trial, but they need patient-level data. This tool is the first-order version: enough to see whether the gap is large.</p>
+            <p class="cite-line">Cole &amp; Stuart, Am J Epidemiol 2010 &middot; Heckman, Econometrica 1979 &middot; Rothwell, Lancet 2005</p>
+          </section>
+
+          <!-- VII -->
+          <section class="part" id="ap-fix" aria-labelledby="ap-fix-h">
+            <p class="part-num">Part VII</p>
+            <h3 class="part-title" id="ap-fix-h">Fixing the trial itself</h3>
+            <p>Adjustment is a bridge. The lasting fix is trials that look like the patients who will be treated.</p>
+            <ol class="moves">
+              <li><span class="move-num">01</span><h5>Broaden eligibility</h5><p>In 10,500 real-world patients with advanced lung cancer, three traditional criteria excluded 48%. Broadened versions admitted 98%, adding more women, more patients aged 75 and older, and more with stage IV disease.</p></li>
+              <li><span class="move-num">02</span><h5>Bring trials to patients</h5><p>Decentralized and pragmatic designs reach patients beyond a few specialized centers.</p></li>
+              <li><span class="move-num">03</span><h5>Borrow strength from real-world data</h5><p>Hybrid trials combine randomization with external control data from completed studies and health records.</p></li>
+            </ol>
+            <p class="cite-line">Harvey, &hellip; Khozin, &hellip; Kim, Clin Cancer Res 2021 &middot; Khozin &amp; Coravos, Clin Pharmacol Ther 2019 &middot; Ventz, Khozin, &hellip; Trippa, Nat Commun 2022</p>
+            <p>Real-world data already shows the gap. In the first year after approval, patients with metastatic lung cancer treated with PD-1 inhibitors in community clinics had a median overall survival of 8.0 months, shorter than in the pivotal trials, possibly because of narrow trial eligibility.</p>
+            <p class="cite-line">Khozin et al., Oncologist 2019</p>
+            <div class="closing">
+              <p class="closing-line">There is no average patient.</p>
+              <p>The Belmont Report&rsquo;s principle of justice asks that the benefits of research not flow only to those who can reach it. A trial that leaves patients out cannot tell us how they will fare. Until trials include them, the least we can do is adjust for their absence, out loud, with the numbers on the table.</p>
+            </div>
+          </section>
+
+          <!-- Connections & references -->
+          <section class="part part-refs" id="ap-connections" aria-labelledby="ap-connections-h">
+            <h3 class="part-title" id="ap-connections-h">Connections</h3>
+            <ul class="connections">
+              <li><a href="#broken-instrument"><span class="conn-where">Theme 03</span><span class="conn-what">The Broken Instrument: the trial measurement that cannot be reconstructed in routine care</span></a></li>
+              <li><a href="#oa-promise"><span class="conn-where">Theme 02</span><span class="conn-what">From Organs to Algorithms: the promise of 100%, and why the matching fails</span></a></li>
+              <li><a href="../#convergence"><span class="conn-where">Convergence</span><span class="conn-what">Real-world evidence, and therapies matched to an individual rather than a population average</span></a></li>
+            </ul>
+
+            <h3 class="part-title part-title-refs">Further reading</h3>
+            <div class="research-pub-list references">
+              <a href="https://www.insights.phyusionbio.com/p/the-ghost-in-the-statistical-machine" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2026</span><span class="research-pub-title">The Ghost in the Statistical Machine and the Illusion of the Average Patient</span><span class="research-pub-authors">A brief history of precision in medicine and FDA&rsquo;s evolution</span></a>
+              <a href="https://www.insights.phyusionbio.com/p/machine-learning-meets-clinical-trials" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2024</span><span class="research-pub-title">Machine Learning Meets Clinical Trials: Harmonizing Data with Reality</span><span class="research-pub-authors">Dataset shift in clinical algorithms and external validity in trials</span></a>
+            </div>
+
+            <h3 class="part-title part-title-refs">References</h3>
+            <div class="research-pub-list references">
+              <a href="https://doi.org/10.1016/j.bbcan.2022.188825" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">BBA Rev Cancer, 2022</span><span class="research-pub-title">A novel approach to reducing disparities in health outcomes by enhancing interpretation of cancer clinical trials for underrepresented patient groups</span><span class="research-pub-authors">Khozin S, Stein RM.</span></a>
+              <a href="https://doi.org/10.1016/S0140-6736(04)17670-8" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Lancet, 2005</span><span class="research-pub-title">External validity of randomised controlled trials: &ldquo;to whom do the results of this trial apply?&rdquo;</span><span class="research-pub-authors">Rothwell PM.</span></a>
+              <a href="https://doi.org/10.1001/jama.297.11.1233" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">JAMA, 2007</span><span class="research-pub-title">Eligibility criteria of randomized controlled trials published in high-impact general medical journals: a systematic sampling review</span><span class="research-pub-authors">Van Spall HGC, Toren A, Kiss A, Fowler RA.</span></a>
+              <a href="https://doi.org/10.1001/jama.291.22.2720" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">JAMA, 2004</span><span class="research-pub-title">Participation in cancer clinical trials: race-, sex-, and age-based disparities</span><span class="research-pub-authors">Murthy VH, Krumholz HM, Gross CP.</span></a>
+              <a href="https://doi.org/10.1001/jamaoncol.2019.1870" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">JAMA Oncol, 2019</span><span class="research-pub-title">Disparity of race reporting and representation in clinical trials leading to cancer drug approvals from 2008 to 2018</span><span class="research-pub-authors">Loree JM, et al.</span></a>
+              <a href="https://doi.org/10.1093/aje/kwq084" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Am J Epidemiol, 2010</span><span class="research-pub-title">Generalizing evidence from randomized clinical trials to target populations: the ACTG 320 trial</span><span class="research-pub-authors">Cole SR, Stuart EA.</span></a>
+              <a href="https://doi.org/10.2307/1912352" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Econometrica, 1979</span><span class="research-pub-title">Sample selection bias as a specification error</span><span class="research-pub-authors">Heckman JJ.</span></a>
+              <a href="https://doi.org/10.1158/1078-0432.CCR-20-3857" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Clin Cancer Res, 2021</span><span class="research-pub-title">Impact of broadening trial eligibility criteria for patients with advanced non-small cell lung cancer: real-world analysis of select ASCO-Friends recommendations</span><span class="research-pub-authors">Harvey RD, et al., including Khozin S.</span></a>
+              <a href="https://doi.org/10.1634/theoncologist.2018-0307" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Oncologist, 2019</span><span class="research-pub-title">Real-world outcomes of patients with metastatic non-small cell lung cancer treated with programmed cell death protein 1 inhibitors in the year following U.S. regulatory approval</span><span class="research-pub-authors">Khozin S, et al.</span></a>
+              <a href="https://doi.org/10.1002/cpt.1441" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Clin Pharmacol Ther, 2019</span><span class="research-pub-title">Decentralized trials in the age of real-world evidence and inclusivity in clinical investigations</span><span class="research-pub-authors">Khozin S, Coravos A.</span></a>
+              <a href="https://doi.org/10.1038/s41467-022-33192-1" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nat Commun, 2022</span><span class="research-pub-title">The design and evaluation of hybrid controlled trials that leverage external data and randomization</span><span class="research-pub-authors">Ventz S, Khozin S, et al.</span></a>
+              <a href="https://www.hhs.gov/ohrp/regulations-and-policy/belmont-report/index.html" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">US DHEW, 1979</span><span class="research-pub-title">The Belmont Report: ethical principles and guidelines for the protection of human subjects of research</span><span class="research-pub-authors">National Commission for the Protection of Human Subjects.</span></a>
+            </div>
+          </section>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
@@ -1160,6 +1453,6 @@
   </footer>
 
   <script src="../script.js?v=39"></script>
-  <script src="../topology.js?v=4"></script>
+  <script src="../topology.js?v=5"></script>
 </body>
 </html>

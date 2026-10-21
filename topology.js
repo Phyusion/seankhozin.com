@@ -9,6 +9,7 @@
 //     splits, re-sorting tumors, the alien solution
 //  7. The Broken Instrument: reading a scan, attenuation, waterfalls,
 //     the coin flip at the cutoff
+//  8. There Is No Average Patient: the Reweight the Trial calculator
 // ================================================================
 (function () {
   'use strict';
@@ -508,6 +509,236 @@
     tIn.addEventListener('input', updateCoin);
     sIn.addEventListener('input', updateCoin);
     updateCoin();
+  }
+
+  // ---------------------------------------------------------------
+  // 8. There Is No Average Patient: Reweight the Trial
+  //    Reweights subgroup results from the trial's mix to the mix of
+  //    patients actually treated (Khozin & Stein, BBA Rev Cancer 2022).
+  // ---------------------------------------------------------------
+  var rw = document.getElementById('reweight');
+  if (rw) {
+    var PRESETS = {
+      same: { mode: 'same', scale: 'rr', common: 10, groups: [
+        { n: 'Group A', t: 30, r: 1.1, c: 80, e: 10 },
+        { n: 'Group B', t: 0, r: 33.5, c: 16.7, e: 10 },
+        { n: 'Group C', t: 70, r: 65.3, c: 75, e: 10 } ] },
+      differ: { mode: 'each', scale: 'rr', common: 10, groups: [
+        { n: 'Group A', t: 30, r: 1.1, c: 80, e: 10 },
+        { n: 'Group B', t: 0, r: 33.5, c: 16.7, e: 0 },
+        { n: 'Group C', t: 70, r: 65.3, c: 75, e: 10 } ] },
+      blank: { mode: 'same', scale: 'rr', common: 20, groups: [
+        { n: 'Younger than 70', t: 80, r: 55, c: 40, e: 20 },
+        { n: '70 and older', t: 20, r: 45, c: 55, e: 20 } ] }
+    };
+    var COLORS = ['var(--ink)', 'var(--cobalt)', 'var(--signal)', 'var(--stone)', 'var(--vermilion)', 'var(--cobalt-tint)'];
+    var state = JSON.parse(JSON.stringify(PRESETS.same));
+    try {
+      var qs = new URLSearchParams(location.search).get('rw');
+      if (qs) { var parsed = JSON.parse(qs); if (parsed && parsed.groups && parsed.groups.length >= 2) state = parsed; }
+    } catch (e) { /* ignore a malformed link */ }
+
+    var body = rw.querySelector('.rw-rows');
+    var q = function (sel) { return rw.querySelector(sel); };
+    var clamp = function (v, lo, hi) { v = parseFloat(v); return isNaN(v) ? lo : Math.min(hi, Math.max(lo, v)); };
+    var pct = function (x, d) { return (x * 100).toFixed(d === undefined ? 1 : d) + '%'; };
+    var treated = function (c, e) {
+      if (state.scale === 'or') { var o = Math.max(0.0001, e); return o * c / (1 - c + o * c); }
+      return Math.min(1, Math.max(0, c * (1 - e / 100)));
+    };
+    var nntText = function (arr) {
+      if (Math.abs(arr) < 1e-9) return { big: '—', note: 'No difference between arms' };
+      if (arr > 0) return { big: String(Math.round(1 / arr)), note: 'treated for one to benefit' };
+      return { big: String(Math.round(-1 / arr)), note: 'treated for one to be harmed' };
+    };
+    var esc = function (s) { return String(s).replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; }); };
+
+    var drawRows = function () {
+      body.innerHTML = '';
+      state.groups.forEach(function (g, i) {
+        var row = document.createElement('div');
+        row.className = 'rw-row';
+        row.innerHTML =
+          '<span class="rw-swatch" style="background:' + COLORS[i % COLORS.length] + '"></span>' +
+          '<label class="rw-cell rw-name"><span>Group</span><input type="text" data-k="n" value="' + esc(g.n) + '" maxlength="40"></label>' +
+          '<label class="rw-cell"><span>Share of trial, %</span><input type="number" data-k="t" min="0" max="100" step="0.1" value="' + g.t + '"></label>' +
+          '<label class="rw-cell"><span>Share of real world, %</span><input type="number" data-k="r" min="0" max="100" step="0.1" value="' + g.r + '"></label>' +
+          '<label class="rw-cell"><span>Event rate untreated, %</span><input type="number" data-k="c" min="0" max="100" step="0.1" value="' + g.c + '"></label>' +
+          '<label class="rw-cell rw-effect"><span>' + (state.scale === 'or' ? 'Odds ratio' : 'Relative reduction, %') + '</span><input type="number" data-k="e" step="' + (state.scale === 'or' ? '0.01' : '1') + '" value="' + g.e + '"></label>' +
+          '<button class="rw-remove" type="button" aria-label="Remove ' + esc(g.n) + '"' + (state.groups.length <= 2 ? ' disabled' : '') + '>&times;</button>';
+        row.querySelectorAll('input').forEach(function (inp) {
+          inp.addEventListener('input', function () {
+            var k = inp.dataset.k;
+            if (k === 'n') g.n = inp.value || ('Group ' + (i + 1));
+            else if (k === 'e') g.e = state.scale === 'or' ? clamp(inp.value, 0.01, 20) : clamp(inp.value, -200, 100);
+            else g[k] = clamp(inp.value, 0, 100);
+            compute(false);
+          });
+        });
+        row.querySelector('.rw-remove').addEventListener('click', function () { state.groups.splice(i, 1); drawAll(); });
+        body.appendChild(row);
+      });
+      rw.classList.toggle('is-same', state.mode === 'same');
+      q('.rw-add').disabled = state.groups.length >= 6;
+    };
+
+    var syncControls = function () {
+      rw.querySelectorAll('[name="rw-mode"]').forEach(function (r) { r.checked = r.value === state.mode; });
+      rw.querySelectorAll('[name="rw-scale"]').forEach(function (r) { r.checked = r.value === state.scale; });
+      var ce = q('[name="rw-common"]');
+      ce.value = state.common;
+      ce.step = state.scale === 'or' ? '0.01' : '1';
+      q('.rw-common-label').textContent = state.scale === 'or' ? 'Odds ratio for every group' : 'Relative reduction for every group, %';
+    };
+
+    var linkTimer;
+    var compute = function (fromLoad) {
+      var G = state.groups;
+      var sumT = 0, sumR = 0;
+      G.forEach(function (g) { sumT += g.t; sumR += g.r; });
+      var warn = [];
+      if (sumT <= 0 || sumR <= 0) {
+        q('.rw-results').classList.add('is-empty');
+        q('.rw-warnings').innerHTML = '<li>Enter at least one group with a share above zero in both the trial and the real world.</li>';
+        return;
+      }
+      q('.rw-results').classList.remove('is-empty');
+      var calc = function (key, sum) {
+        var C = 0, T = 0;
+        G.forEach(function (g) {
+          var w = g[key] / sum, c = g.c / 100;
+          var e = state.mode === 'same' ? state.common : g.e;
+          C += w * c; T += w * treated(c, e);
+        });
+        return { C: C, T: T, arr: C - T };
+      };
+      var tr = calc('t', sumT), rl = calc('r', sumR);
+      var put = function (k, v) { var el = q('[data-out="' + k + '"]'); if (el) el.textContent = v; };
+      put('tr-c', pct(tr.C)); put('tr-t', pct(tr.T)); put('tr-arr', pct(tr.arr));
+      put('rl-c', pct(rl.C)); put('rl-t', pct(rl.T)); put('rl-arr', pct(rl.arr));
+      var nt = nntText(tr.arr), nr = nntText(rl.arr);
+      put('tr-nnt', nt.big); put('tr-nnt-note', nt.note); put('rl-nnt', nr.big); put('rl-nnt-note', nr.note);
+      var diff = '';
+      if (tr.arr > 0 && rl.arr > 0) {
+        // compare the rounded numbers people see, as the paper does
+        var ch = (Math.round(1 / rl.arr) / Math.round(1 / tr.arr) - 1) * 100;
+        diff = Math.abs(ch) < 0.5 ? 'The same benefit as the trial reports'
+          : (ch > 0 ? '+' + Math.round(ch) + '% more patients treated per benefit than the trial reports'
+                    : Math.round(-ch) + '% fewer patients treated per benefit than the trial reports');
+      } else if (tr.arr > 0 && rl.arr <= 0) diff = 'The benefit reported in the trial disappears in this population';
+      put('diff', diff);
+
+      // composition bars and representation
+      ['t', 'r'].forEach(function (key) {
+        var bar = q('.rw-bar[data-pop="' + key + '"] .rw-bar-fill');
+        var sum = key === 't' ? sumT : sumR;
+        bar.innerHTML = G.map(function (g, i) {
+          var w = g[key] / sum * 100;
+          return w > 0 ? '<i style="width:' + w + '%;background:' + COLORS[i % COLORS.length] + '" title="' + esc(g.n) + ': ' + w.toFixed(1) + '%"></i>' : '';
+        }).join('');
+      });
+      var rep = q('.rw-rep');
+      rep.innerHTML = G.map(function (g, i) {
+        var t = g.t / sumT, r = g.r / sumR;
+        var ratio = r > 0 ? t / r : null;
+        var tag = ratio === null ? 'Not in the real-world mix' : t === 0 ? 'Absent from the trial' : ratio < 0.5 ? 'Under-represented' : ratio > 2 ? 'Over-represented' : 'Roughly proportional';
+        var cls = t === 0 ? 'is-absent' : (ratio !== null && ratio < 0.5) ? 'is-under' : '';
+        return '<li class="' + cls + '"><span class="rw-swatch" style="background:' + COLORS[i % COLORS.length] + '"></span><b>' + esc(g.n) + '</b><span>' + (t * 100).toFixed(1) + '% of trial vs ' + (r * 100).toFixed(1) + '% of real world' + (ratio !== null && t > 0 ? ' (' + ratio.toFixed(2) + '×)' : '') + '</span><em>' + tag + '</em></li>';
+      }).join('');
+
+      G.forEach(function (g) {
+        if (g.t === 0 && g.r > 0) warn.push('<b>' + esc(g.n) + '</b> was not in the trial. Its treatment effect is an assumption, not evidence: test a range of values.');
+      });
+      if (Math.abs(sumT - 100) > 0.5) warn.push('Trial shares add up to ' + sumT.toFixed(1) + '%. They have been rescaled to 100%.');
+      if (Math.abs(sumR - 100) > 0.5) warn.push('Real-world shares add up to ' + sumR.toFixed(1) + '%. They have been rescaled to 100%.');
+      q('.rw-warnings').innerHTML = warn.map(function (w) { return '<li>' + w + '</li>'; }).join('');
+
+      // one patient
+      var sel = q('.rw-patient select');
+      var keep = sel.value;
+      sel.innerHTML = G.map(function (g, i) { return '<option value="' + i + '">' + esc(g.n) + '</option>'; }).join('');
+      if (keep !== '' && +keep < G.length) sel.value = keep;
+      var pg = G[+sel.value || 0];
+      var pc = pg.c / 100, pt = treated(pc, state.mode === 'same' ? state.common : pg.e);
+      var pn = nntText(pc - pt);
+      put('pt-c', pct(pc)); put('pt-t', pct(pt)); put('pt-arr', pct(pc - pt)); put('pt-nnt', pn.big); put('pt-nnt-note', pn.note);
+      put('pt-flag', pg.t === 0 ? 'This group was absent from the trial: treat this estimate as a hypothesis.' : '');
+
+      if (!fromLoad) {
+        clearTimeout(linkTimer);
+        linkTimer = setTimeout(function () {
+          try {
+            var u = new URL(location.href);
+            u.searchParams.set('rw', JSON.stringify(state));
+            history.replaceState(null, '', u.pathname + u.search + '#rw-tool');
+          } catch (e) { /* history unavailable */ }
+        }, 300);
+      }
+    };
+    var drawAll = function (fromLoad) { syncControls(); drawRows(); compute(fromLoad); };
+
+    rw.querySelectorAll('[name="rw-mode"]').forEach(function (r) {
+      r.addEventListener('change', function () { state.mode = r.value; drawAll(); });
+    });
+    rw.querySelectorAll('[name="rw-scale"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        state.scale = r.value;
+        // switch to a neutral default on the new scale
+        state.common = state.scale === 'or' ? 0.7 : 10;
+        state.groups.forEach(function (g) { g.e = state.common; });
+        drawAll();
+      });
+    });
+    q('[name="rw-common"]').addEventListener('input', function (ev) {
+      state.common = state.scale === 'or' ? clamp(ev.target.value, 0.01, 20) : clamp(ev.target.value, -200, 100);
+      compute(false);
+    });
+    q('.rw-add').addEventListener('click', function () {
+      state.groups.push({ n: 'Group ' + String.fromCharCode(65 + state.groups.length), t: 0, r: 0, c: 50, e: state.common });
+      drawAll();
+    });
+    rw.querySelectorAll('[data-preset]').forEach(function (b) {
+      b.addEventListener('click', function () { state = JSON.parse(JSON.stringify(PRESETS[b.dataset.preset])); drawAll(); });
+    });
+    q('.rw-patient select').addEventListener('change', function () { compute(false); });
+    q('[data-rw="copy"]').addEventListener('click', function (ev) {
+      var btn = ev.currentTarget;
+      var done = function () { btn.textContent = 'Link copied'; setTimeout(function () { btn.textContent = 'Copy link to these numbers'; }, 1800); };
+      try { navigator.clipboard.writeText(location.href).then(done, function () { window.prompt('Copy this link:', location.href); }); }
+      catch (e) { window.prompt('Copy this link:', location.href); }
+    });
+    q('[data-rw="print"]').addEventListener('click', function () { window.print(); });
+
+    // Quick estimate: trial rates plus a real-world baseline (appendix A.2)
+    var quick = q('.rw-quick');
+    var updQuick = function () {
+      var p = clamp(quick.querySelector('[name="qp"]').value, 0.1, 99.9) / 100;
+      var a = clamp(quick.querySelector('[name="qa"]').value, 0.1, 99.9) / 100;
+      var r = clamp(quick.querySelector('[name="qr"]').value, 0.1, 99.9) / 100;
+      var odds = function (x) { return x / (1 - x); };
+      var orT = odds(a) / odds(p);
+      var xOR = orT * odds(r) / (1 + orT * odds(r));
+      var xRR = Math.min(1, r * a / p);
+      var setq = function (k, v) { quick.querySelector('[data-q="' + k + '"]').textContent = v; };
+      setq('trial-arr', pct(p - a)); setq('trial-nnt', nntText(p - a).big);
+      setq('or-t', pct(xOR)); setq('or-arr', pct(r - xOR)); setq('or-nnt', nntText(r - xOR).big);
+      setq('rr-t', pct(xRR)); setq('rr-arr', pct(r - xRR)); setq('rr-nnt', nntText(r - xRR).big);
+    };
+    quick.querySelectorAll('input').forEach(function (i) { i.addEventListener('input', updQuick); });
+    updQuick();
+
+    // Tabs
+    var tabs = rw.querySelectorAll('.rw-tab');
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        tabs.forEach(function (o) { var on = o === t; o.setAttribute('aria-selected', String(on)); document.getElementById(o.getAttribute('aria-controls')).hidden = !on; });
+      });
+    });
+
+    drawAll(true);
+    if (new URLSearchParams(location.search).get('rw') && location.hash === '#rw-tool') {
+      setTimeout(function () { var el = document.getElementById('rw-tool'); if (el) el.scrollIntoView(); }, 50);
+    }
   }
 
   // 5c. Contents: mark the part in view
