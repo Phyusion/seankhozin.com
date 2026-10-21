@@ -74,6 +74,15 @@
         "author": { "@id": "https://www.seankhozin.com/#person", "@type": "Person", "name": "Sean Khozin" },
         "isPartOf": { "@id": "https://www.seankhozin.com/#website" },
         "inLanguage": "en-US"
+      },
+      {
+        "@type": "Article",
+        "headline": "The Patient-Centered Estimand",
+        "description": "Why hazard ratios fail patients, how to translate a trial result into the number of patients treated for one to benefit and one to be harmed, and a calculator that does it for any trial.",
+        "url": "https://www.seankhozin.com/topology/#patient-centered-estimand",
+        "author": { "@id": "https://www.seankhozin.com/#person", "@type": "Person", "name": "Sean Khozin" },
+        "isPartOf": { "@id": "https://www.seankhozin.com/#website" },
+        "inLanguage": "en-US"
       }
     ]
   }
@@ -84,7 +93,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=61">
-  <link rel="stylesheet" href="../topology.css?v=6">
+  <link rel="stylesheet" href="../topology.css?v=7">
 </head>
 <body class="page-topology">
   <!-- Navigation -->
@@ -115,7 +124,7 @@
   <!-- Opener -->
   <header class="topo-hero">
     <div class="container">
-      <div class="hero-eyebrow"><span>Topology &middot; Themes in depth</span><b>04 themes</b></div>
+      <div class="hero-eyebrow"><span>Topology &middot; Themes in depth</span><b>05 themes</b></div>
       <h1 class="topo-hero-title">Topology</h1>
       <p class="topo-hero-sub">In-depth examinations of the themes that run through Dr. Khozin&rsquo;s work and research. Each follows one argument from the evidence to what should change, and links to the others where the ideas meet.</p>
       <ol class="theme-list topo-hero-list">
@@ -159,6 +168,17 @@
               <span class="theme-kicker">Trials &middot; External validity &middot; Equity &middot; Tool</span>
               <span class="theme-name">There Is No Average Patient</span>
               <span class="theme-desc">Why trial results drift from real-world outcomes, and a tool to reweight them for the patients you treat.</span>
+            </span>
+            <span class="theme-arrow" aria-hidden="true">&darr;</span>
+          </a>
+        </li>
+        <li>
+          <a href="#patient-centered-estimand" class="theme-row">
+            <span class="theme-num">05</span>
+            <span class="theme-text">
+              <span class="theme-kicker">Benefit &amp; risk &middot; Statistics &middot; Tool</span>
+              <span class="theme-name">The Patient-Centered Estimand</span>
+              <span class="theme-desc">From relative hazard to absolute benefit, and a tool to translate any trial into patients helped and harmed.</span>
             </span>
             <span class="theme-arrow" aria-hidden="true">&darr;</span>
           </a>
@@ -552,6 +572,7 @@
               <li><a href="#organs-to-algorithms"><span class="conn-where">Theme 02</span><span class="conn-what">From Organs to Algorithms: how disease labels arose, and a classification built from mechanism up</span></a></li>
               <li><a href="#broken-instrument"><span class="conn-where">Theme 03</span><span class="conn-what">The Broken Instrument: what reader disagreement does to trials and the drug pipeline</span></a></li>
               <li><a href="#no-average-patient"><span class="conn-where">Theme 04</span><span class="conn-what">There Is No Average Patient: trial populations versus real ones, with a reweighting tool</span></a></li>
+              <li><a href="#patient-centered-estimand"><span class="conn-where">Theme 05</span><span class="conn-what">The Patient-Centered Estimand: from hazard ratios to patients helped and harmed</span></a></li>
               <li><a href="../#reader-agreement"><span class="conn-where">Research</span><span class="conn-what">Inter-reader response classification: the 13,677-patient matrix behind &ldquo;arbitrary gold standards&rdquo;</span></a></li>
               <li><a href="../#informed-figures"><span class="conn-where">INFORMED</span><span class="conn-what">From big data to smart data: the four V&rsquo;s and the systems view of drug development</span></a></li>
               <li><a href="../#convergence"><span class="conn-where">Convergence</span><span class="conn-what">Disease classified by mechanism instead of anatomy, inside a learning system</span></a></li>
@@ -691,6 +712,7 @@
               </div>
               <p class="figure-note">Averages across subpopulations, number needed to benefit. Each row shows one patient who benefits among those treated. <span class="cite-line">Raju, Khozin et al., JCO Clin Cancer Inform 2020</span></p>
             </figure>
+            <p class="crosslink"><span>Theme 05</span><a href="#patient-centered-estimand">How these numbers are computed, trial by trial, and a tool to compute them: The Patient-Centered Estimand &rarr;</a></p>
             <p>The same pattern shows up in response rates. With doublet chemotherapy in morphologically defined non-small cell lung cancer, responses hover around 30%. In molecularly defined settings they routinely reach 50&ndash;90%.</p>
             <p class="cite-line">Khozin, The Simulator&rsquo;s Dilemma, Revisited, 2026</p>
             <p>And when machine-learning models were trained on patient-level data from 17 FDA-submitted lung cancer trials, biomarker status was the strongest predictor of response, progression-free survival and overall survival. But single biomarkers had limited predictive value, especially PD-L1 for immunotherapy. The authors concluded that going further requires composite, multiomic signatures: a classification built from many measurements at once.</p>
@@ -859,6 +881,7 @@
             <ul class="connections">
               <li><a href="#broken-instrument"><span class="conn-where">Theme 03</span><span class="conn-what">The Broken Instrument: the measurement beneath response rates, and its replacement</span></a></li>
               <li><a href="#simulators-dilemma"><span class="conn-where">Theme 01</span><span class="conn-what">The Simulator&rsquo;s Dilemma: why labels drawn from human perception limit what AI can learn about biology</span></a></li>
+              <li><a href="#patient-centered-estimand"><span class="conn-where">Theme 05</span><span class="conn-what">The Patient-Centered Estimand: the 4, 11 and 23 computed trial by trial, with benefit and harm side by side</span></a></li>
               <li><a href="../#reader-agreement"><span class="conn-where">Research</span><span class="conn-what">Inter-reader response classification: the 13,677-patient matrix</span></a></li>
               <li><a href="../#research"><span class="conn-where">Research</span><span class="conn-what">AutoRECIST and the Total Tumor Burden Index: measurement independent of inherited categories</span></a></li>
               <li><a href="../#convergence"><span class="conn-where">Convergence</span><span class="conn-what">Disease classified by mechanism instead of anatomy, inside a learning system</span></a></li>
@@ -1146,6 +1169,7 @@
             <ul class="connections">
               <li><a href="#sd-gold-standards"><span class="conn-where">Theme 01</span><span class="conn-what">The Simulator&rsquo;s Dilemma: human sensory input as an unreliable gold standard</span></a></li>
               <li><a href="#oa-negation"><span class="conn-where">Theme 02</span><span class="conn-what">From Organs to Algorithms: labels drawn from the human eye, and what models learn from them</span></a></li>
+              <li><a href="#pe-ruler"><span class="conn-where">Theme 05</span><span class="conn-what">The Patient-Centered Estimand: how the choice of endpoint changes the number needed to benefit</span></a></li>
               <li><a href="../#reader-agreement"><span class="conn-where">Research</span><span class="conn-what">Inter-reader response classification: the 13,677-patient matrix</span></a></li>
               <li><a href="../#tumor-ai"><span class="conn-where">Research</span><span class="conn-what">AutoRECIST and the Total Tumor Burden Index</span></a></li>
             </ul>
@@ -1421,6 +1445,7 @@
             <h3 class="part-title" id="ap-connections-h">Connections</h3>
             <ul class="connections">
               <li><a href="#broken-instrument"><span class="conn-where">Theme 03</span><span class="conn-what">The Broken Instrument: the trial measurement that cannot be reconstructed in routine care</span></a></li>
+              <li><a href="#patient-centered-estimand"><span class="conn-where">Theme 05</span><span class="conn-what">The Patient-Centered Estimand: translate the reweighted result into patients helped and harmed</span></a></li>
               <li><a href="#oa-promise"><span class="conn-where">Theme 02</span><span class="conn-what">From Organs to Algorithms: the promise of 100%, and why the matching fails</span></a></li>
               <li><a href="../#convergence"><span class="conn-where">Convergence</span><span class="conn-what">Real-world evidence, and therapies matched to an individual rather than a population average</span></a></li>
             </ul>
@@ -1452,6 +1477,351 @@
     </div>
   </section>
 
+  <!-- Theme 05 -->
+  <section class="section section-theme" id="patient-centered-estimand">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><span class="section-label">Theme 05 &middot; The Patient-Centered Estimand</span><b>Benefit &amp; risk &middot; Statistics &middot; Shared decisions</b></div>
+        <h2 class="section-title">The Patient-Centered <em>Estimand</em></h2>
+      </div>
+
+      <div class="theme-open">
+        <p class="lead">From relative hazard to absolute benefit.</p>
+        <p class="theme-standfirst">Cancer drugs are approved on hazard ratios: how much faster events happen on one arm than the other. A patient asks something else: if I take this, what are the chances it helps me, and what are the chances it hurts me? With colleagues at FDA and MIT, Dr. Khozin re-expressed thirty lung cancer trials that supported FDA decisions from 2003 to 2017 as the number of patients treated for one to benefit and for one to be harmed. This theme shows why the translation changes what a result means, and gives clinicians a tool to make it for any trial.</p>
+      </div>
+
+      <ol class="brief">
+        <li><span class="brief-num">01</span><h3>The hazard ratio is not the patient&rsquo;s number</h3><p>It is relative and averaged over time. The same ratio can mean three patients treated per benefit or thirty.</p></li>
+        <li><span class="brief-num">02</span><h3>Benefit has a clock and a ruler</h3><p>The number changes with when you look and with what you measure: response, progression or survival.</p></li>
+        <li><span class="brief-num">03</span><h3>The translation is arithmetic</h3><p>Enter a hazard ratio, the control arm&rsquo;s median and a time point. The tool below returns benefit and harm per patient.</p></li>
+      </ol>
+
+      <div class="theme-body">
+        <nav class="theme-toc" aria-label="In this theme">
+          <p class="theme-toc-head">In this theme</p>
+          <ol>
+            <li><a href="#pe-applause"><span>I</span>Forty-two seconds</a></li>
+            <li><a href="#pe-hazard"><span>II</span>What a hazard ratio is</a></li>
+            <li><a href="#pe-translate"><span>III</span>One in how many?</a></li>
+            <li><a href="#pe-clock"><span>IV</span>Benefit has a clock</a></li>
+            <li><a href="#pe-ruler"><span>V</span>Which ruler?</a></li>
+            <li><a href="#pe-ledger"><span>VI</span>The ledger</a></li>
+            <li><a href="#pe-frontier"><span>VII</span>The frontier</a></li>
+            <li><a href="#tt-tool"><span>VIII</span>Translate the trial</a></li>
+            <li><a href="#pe-limits"><span>IX</span>What the translation assumes</a></li>
+            <li><a href="#pe-estimand"><span>X</span>The patient&rsquo;s estimand</a></li>
+            <li><a href="#pe-connections"><span>&rarr;</span>Connections &amp; references</a></li>
+          </ol>
+        </nav>
+
+        <article class="theme-article">
+
+          <!-- I -->
+          <section class="part" id="pe-applause" aria-labelledby="pe-applause-h">
+            <p class="part-num">Part I</p>
+            <h3 class="part-title" id="pe-applause-h">Forty-two seconds</h3>
+            <p>When the results of RASolute 302 were first shown in May 2026, the audience applauded for 42 seconds. In patients with previously treated metastatic pancreatic cancer, the RAS inhibitor daraxonrasib had doubled median overall survival over chemotherapy, from 6.6 to 13.2 months, with a hazard ratio of 0.40.</p>
+            <p>A hazard ratio of 0.40 is usually read as &ldquo;a 60% reduction in the risk of death.&rdquo; That sentence is accurate and almost impossible to act on. Sixty percent of what, by when? The trial also reported the answer a patient can use: at 12 months, 53.3% of patients on daraxonrasib were alive against 18.7% on chemotherapy. Treat three patients, and one more of them is alive a year later.</p>
+            <div class="stat-row stat-row-3">
+              <div class="stat"><span class="stat-num">0.40</span><span class="stat-label">Hazard ratio for death</span></div>
+              <div class="stat"><span class="stat-num">+35</span><span class="stat-label">More patients alive at 12 months, per 100 treated</span></div>
+              <div class="stat stat-point"><span class="stat-num">3</span><span class="stat-label">Patients treated for one more to be alive at a year</span></div>
+            </div>
+            <p class="cite-line">RASolute 302, RAS G12 population &middot; as summarized in Khozin, 42 Seconds, 2026, and Gierulska et al., Cancers 2026</p>
+            <p>Most trials are not like this one. Their effects are smaller, which is where the translation matters most and is done least.</p>
+          </section>
+
+          <!-- II -->
+          <section class="part" id="pe-hazard" aria-labelledby="pe-hazard-h">
+            <p class="part-num">Part II</p>
+            <h3 class="part-title" id="pe-hazard-h">What a hazard ratio is, and is not</h3>
+            <p>A hazard is the rate at which events happen among patients who have not yet had one. The hazard ratio compares those rates between arms, and the Cox model averages the comparison over the whole follow-up. It is an efficient statistic for detecting a difference. It is a poor one for describing it.</p>
+            <ol class="moves">
+              <li><span class="move-num">01</span><h5>It is relative</h5><p>A 40% reduction means very different things when 80% of untreated patients will die within a year and when 8% will. Risk communication research is consistent: patients and physicians overestimate benefit when it is framed in relative terms.</p></li>
+              <li><span class="move-num">02</span><h5>It averages over time</h5><p>When hazards are not proportional, as when curves cross or separate late, a single ratio describes no moment of the trial. Its clinical meaning becomes difficult, if not impossible, to interpret.</p></li>
+              <li><span class="move-num">03</span><h5>It conditions on survival</h5><p>Later in follow-up, the ratio compares the patients still at risk in each arm, who are no longer comparable groups. Even in a perfect randomized trial, the period-specific ratio has a built-in selection bias.</p></li>
+            </ol>
+            <p class="cite-line">Gigerenzer et al., Psychol Sci Public Interest 2007 &middot; Uno et al., J Clin Oncol 2014 &middot; Hern&aacute;n, Epidemiology 2010</p>
+            <blockquote class="pull">
+              <p>&ldquo;We recommend using frequency statements instead of single-event probabilities, absolute risks instead of relative risks, mortality rates instead of survival rates, and natural frequencies instead of conditional probabilities.&rdquo;</p>
+              <cite>Gigerenzer, Gaissmaier, Kurz-Milcke, Schwartz &amp; Woloshin &middot; Helping Doctors and Patients Make Sense of Health Statistics, 2007</cite>
+            </blockquote>
+            <p>Regulators now have a word for the underlying question. The 2019 ICH E9(R1) addendum asks every trial to define its <em>estimand</em>: the treatment, the population, the outcome, how events such as switching therapy are handled, and the population-level summary that will describe the effect. The hazard ratio is one possible summary. It is not the only one, and it is rarely the one a patient would choose.</p>
+            <p class="cite-line">ICH E9(R1), Estimands and Sensitivity Analysis in Clinical Trials, 2019</p>
+          </section>
+
+          <!-- III -->
+          <section class="part" id="pe-translate" aria-labelledby="pe-translate-h">
+            <p class="part-num">Part III</p>
+            <h3 class="part-title" id="pe-translate-h">One in how many?</h3>
+            <p>In 1988, Andreas Laupacis, David Sackett and Robin Roberts proposed the number needed to treat: the inverse of the absolute difference in risk between arms. Douglas Altman later split it in two, the number needed to treat for one patient to benefit (NNB) and for one to be harmed (NNH), and in 1999, with Per Kragh Andersen, showed how to compute it for time-to-event outcomes such as survival.</p>
+            <div class="formula" role="math" aria-label="Number needed to benefit at time t equals one divided by the control arm survival at t raised to the hazard ratio, minus the control arm survival at t">
+              <p class="formula-eq">NNB(<i>t</i>) = 1 &frasl; ( <i>S</i><sub>c</sub>(<i>t</i>)<sup>HR</sup> &minus; <i>S</i><sub>c</sub>(<i>t</i>) )</p>
+              <p class="formula-key"><i>S</i><sub>c</sub>(<i>t</i>) is the share of control patients still event-free at time <i>t</i>. Under proportional hazards, the treated arm&rsquo;s share is that number raised to the hazard ratio. At the control arm&rsquo;s median, <i>S</i><sub>c</sub> = 0.5 and the formula becomes 1 &frasl; (0.5<sup>HR</sup> &minus; 0.5).</p>
+            </div>
+            <p class="cite-line">Laupacis, Sackett &amp; Roberts, N Engl J Med 1988 &middot; Altman, BMJ 1998 &middot; Altman &amp; Andersen, BMJ 1999 &middot; Raju, Khozin, et al., JCO Clin Cancer Inform 2020</p>
+            <p>The formula makes one thing plain that the hazard ratio hides: the same ratio produces a different number for every prognosis. Too little risk and there is little to prevent; too much and events happen before the drug can matter.</p>
+            <figure class="figure figure-samehr" id="same-hr">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 1</span>One hazard ratio, five prognoses. Benefit at 12 months.</figcaption>
+              <div class="att-controls">
+                <label><span>Hazard ratio <b data-out="hr"></b></span><input type="range" name="hr" min="30" max="95" step="1" value="70"></label>
+              </div>
+              <div class="hr-bars" aria-live="polite"></div>
+              <div class="figure-note">
+                <p>Each row is a patient group whose median survival without the drug differs. Bars show additional patients alive at 12 months per 100 treated; the number is how many must be treated for one of them. With a hazard ratio of 0.70, it ranges from about 8 to 27.</p>
+                <p class="cite-line">Illustrative: constant hazards in each group, so survival at 12 months is 0.5<sup>12/median</sup></p>
+              </div>
+            </figure>
+          </section>
+
+          <!-- IV -->
+          <section class="part" id="pe-clock" aria-labelledby="pe-clock-h">
+            <p class="part-num">Part IV</p>
+            <h3 class="part-title" id="pe-clock-h">Benefit has a clock</h3>
+            <p>Because the number depends on <i>S</i><sub>c</sub>(<i>t</i>), it depends on <i>t</i>. Raju, Khozin and colleagues plotted it continuously and found it can change sign. In IPASS, gefitinib against chemotherapy in East Asian patients with lung adenocarcinoma, the overall hazard ratio for progression was 0.74. Underneath, patients with EGFR mutations did far better on gefitinib (hazard ratio 0.48) and patients without them did far worse (2.85). The two groups&rsquo; curves add up to a drug that harms early and helps later, and the number crosses from harm to benefit at the moment the Kaplan&ndash;Meier curves cross.</p>
+            <p class="cite-line">Mok et al., N Engl J Med 2009 &middot; Raju, Khozin, et al., JCO Clin Cancer Inform 2020, Figure 3</p>
+            <figure class="figure figure-mix" id="mixture">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 2</span>A mixed population. Extra patients free of progression, per 100 treated, over time.</figcaption>
+              <div class="att-controls">
+                <label><span>Share of patients with the mutation <b data-out="p"></b></span><input type="range" name="p" min="0" max="100" step="1" value="60"></label>
+              </div>
+              <div class="mix-chart"></div>
+              <ul class="chart-key" aria-hidden="true">
+                <li><i class="key-pos"></i>With the mutation (HR 0.48)</li>
+                <li><i class="key-neg"></i>Without (HR 2.85)</li>
+                <li><i class="key-all"></i>Whole trial population</li>
+              </ul>
+              <div class="stat-row stat-row-3 mix-stats" aria-live="polite">
+                <div class="stat"><span class="stat-num" data-out="early"></span><span class="stat-label">Worst point: per 100 treated, at <span data-out="early-t"></span></span></div>
+                <div class="stat"><span class="stat-num" data-out="cross"></span><span class="stat-label" data-out="cross-note">Months until harm turns into benefit</span></div>
+                <div class="stat stat-point"><span class="stat-num" data-out="nnb12"></span><span class="stat-label">At 12 months: <span data-out="nnb12-note"></span></span></div>
+              </div>
+              <div class="figure-note">
+                <p>About 60% of IPASS patients with a known mutation status were EGFR-positive. Move the slider to see how the population mix decides the overall answer: the fewer patients with the mutation, the deeper the early harm, the later it turns into benefit, and the smaller the benefit at a year.</p>
+                <p class="cite-line">Illustrative model using the published subgroup hazard ratios and a 6-month control median for both groups; the observed IPASS curves crossed near 6 months</p>
+              </div>
+            </figure>
+            <p>The same pattern runs the other way in immunotherapy. In CheckMate 057, patients whose tumors expressed PD-L1 at 10% or more began benefiting from nivolumab early; the rest did not, and the overall survival curves crossed before they separated. A single hazard ratio averages all of this into one number that describes no actual patient at any actual time. The same arithmetic also connects to who is in the trial: change the mix of patients and the answer changes, the problem examined in <a href="#no-average-patient">Theme 04</a>.</p>
+            <p class="cite-line">Borghaei et al., N Engl J Med 2015 &middot; Raju, Khozin, et al., 2020, Figure 3B</p>
+          </section>
+
+          <!-- V -->
+          <section class="part" id="pe-ruler" aria-labelledby="pe-ruler-h">
+            <p class="part-num">Part V</p>
+            <h3 class="part-title" id="pe-ruler-h">Which ruler?</h3>
+            <p>A trial reporting response rate, progression-free survival and overall survival yields three numbers needed to benefit, and they need not agree. Across the thirty trials, the endpoint behind each NNB tracks its size as closely as the drug does.</p>
+            <figure class="figure figure-ruler" id="endpoints">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 3</span>Thirty lung cancer trials. Patients treated for one to benefit, by the endpoint it was computed from.</figcaption>
+              <div class="ep-chart"></div>
+              <ul class="chart-key" aria-hidden="true">
+                <li><i class="key-dot is-e"></i>Approved, targeted therapy in a molecularly selected population</li>
+                <li><i class="key-dot is-n"></i>Approved, unselected population</li>
+                <li><i class="key-dot is-w"></i>Withdrawn or not approved</li>
+              </ul>
+              <p class="ep-readout" aria-live="polite">Select a trial to see its details.</p>
+              <div class="figure-note">
+                <p>Response-based NNBs average 3.6, progression-based 6.1 and survival-based 14.7. Part of the difference is the drugs: most response-based results come from single-arm trials of targeted therapies in selected patients. Part is the ruler. Tumor shrinkage happens to more patients than survival gains do, and single-arm trials compare response against an assumed rather than a randomized control.</p>
+                <p class="cite-line">Data: Table 1, Raju, Khozin, Gurumurthi, Domike &amp; Woodcock, JCO Clin Cancer Inform 2020 &middot; point estimates; logarithmic scale</p>
+              </div>
+            </figure>
+            <p>The paper is explicit that NNBs from different endpoints are not comparable, and that the purpose of the number has to guide which one is used. A response-based NNB answers &ldquo;how many patients must be treated for one more tumor to shrink?&rdquo; That is a question about the instrument examined in <a href="#broken-instrument">Theme 03</a>, not about how long or how well a patient lives.</p>
+          </section>
+
+          <!-- VI -->
+          <section class="part" id="pe-ledger" aria-labelledby="pe-ledger-h">
+            <p class="part-num">Part VI</p>
+            <h3 class="part-title" id="pe-ledger-h">The ledger: benefit and harm</h3>
+            <p>The same arithmetic applies to harm. The number needed to harm is the inverse of the difference in adverse-event rates between arms. Put next to the number needed to benefit, it gives both sides of the decision on one scale: patients, not ratios.</p>
+            <p>Across the thirty trials, the numbers lined up with FDA&rsquo;s decisions. On average, about 4 patients were treated for one to benefit with approved targeted therapies in molecularly selected populations, 11 with approved therapies in unselected populations, and 23 with therapies that were withdrawn or not approved (<a href="#oa-numbers">Theme 02</a> draws the same result). For approved targeted therapies, the number needed to harm was usually negative in the paper&rsquo;s notation: fewer serious adverse events than the control arm.</p>
+            <div class="ledger">
+              <div class="ledger-row"><span class="ledger-trial">Cetuximab &middot; FLEX</span><span class="ledger-b"><b>21</b> treated per patient alive longer</span><span class="ledger-h"><b>9</b> treated per extra serious adverse event</span><em>Not approved</em></div>
+              <div class="ledger-row"><span class="ledger-trial">Bevacizumab &middot; E4599</span><span class="ledger-b"><b>14</b> treated per patient alive longer</span><span class="ledger-h"><b>9</b> treated per extra serious adverse event</span><em>Approved</em></div>
+              <div class="ledger-row"><span class="ledger-trial">Nivolumab &middot; CheckMate 057</span><span class="ledger-b"><b>10</b> treated per patient alive longer</span><span class="ledger-h"><b>2</b> treated per serious adverse event <i>avoided</i></span><em>Approved</em></div>
+            </div>
+            <p class="cite-line">Rounded from Table 1, Raju, Khozin, et al., 2020; harm is nonfatal serious adverse events</p>
+            <p>The ledger does not make the decision. Cetuximab and bevacizumab had similar counts of harm and were judged differently: a serious adverse event is not a death, and the counts do not weigh severity, duration or what a patient values. What the ledger does is put the trade-off in a form a patient can weigh.</p>
+          </section>
+
+          <!-- VII -->
+          <section class="part" id="pe-frontier" aria-labelledby="pe-frontier-h">
+            <p class="part-num">Part VII</p>
+            <h3 class="part-title" id="pe-frontier-h">The frontier</h3>
+            <p>The paper also asked how far lung cancer treatment had come. For each year, it took the best estimated median survival available to any type of patient and compared it with an untreated patient&rsquo;s median of about 6 months. The best median rose from 9 months in 2003 to 39.7 months in 2017, for patients with EGFR mutations. Translated at the untreated median, the number of patients treated for one to benefit fell from 7.7 to 2.5.</p>
+            <figure class="figure figure-frontier" id="frontier">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 4</span>From median survival to patients treated per benefit, against an untreated median of 6 months</figcaption>
+              <div class="att-controls">
+                <label><span>Median survival with the best available treatment <b data-out="m"></b></span><input type="range" name="m" min="8" max="48" step="0.1" value="39.7"></label>
+                <div class="att-presets"><span>Years</span><button class="ctl-btn" type="button" data-m="9">2003</button><button class="ctl-btn" type="button" data-m="39.7">2017</button></div>
+              </div>
+              <div class="fr-chart"></div>
+              <div class="stat-row stat-row-3 fr-stats" aria-live="polite">
+                <div class="stat"><span class="stat-num" data-out="hr"></span><span class="stat-label">Implied hazard ratio against no treatment</span></div>
+                <div class="stat"><span class="stat-num" data-out="arr"></span><span class="stat-label">More patients alive at 6 months, per 100</span></div>
+                <div class="stat stat-point"><span class="stat-num" data-out="nnb"></span><span class="stat-label">Treated for one to benefit</span></div>
+              </div>
+              <div class="figure-note">
+                <p><b>The floor is 2.</b> At the untreated median, half of untreated patients are still alive, so no treatment can save more than the other half: at most one extra survivor for every two treated. By 2017 the frontier was near that floor. Measured later in the disease, the same treatments show more room, and the paper notes the frontier shifts lower when calculated at a lower survival percentile.</p>
+                <p class="cite-line">Raju, Khozin, et al., 2020, Figure 5 &middot; hazard ratio estimated as 6 &divide; median, which assumes constant hazards</p>
+              </div>
+            </figure>
+          </section>
+
+          <!-- VIII: the tool -->
+          <section class="part part-tool" id="tt-tool" aria-labelledby="tt-tool-h">
+            <p class="part-num">Part VIII &middot; Tool</p>
+            <h3 class="part-title" id="tt-tool-h">Translate the trial</h3>
+            <p>Enter what nearly every trial report contains: the hazard ratio, the control arm&rsquo;s median and the adverse-event rates in each arm. Choose the time point your patient cares about. The tool returns benefit and harm per patient and checks its own estimate against any landmark rate the trial reported.</p>
+
+            <div class="rw tt" id="translate">
+              <div class="rw-panel">
+                <div class="rw-presets"><span>Start from</span>
+                  <button class="ctl-btn" type="button" data-preset="ras302">RASolute 302</button>
+                  <button class="ctl-btn" type="button" data-preset="cm017">CheckMate 017</button>
+                  <button class="ctl-btn" type="button" data-preset="cm057">CheckMate 057</button>
+                  <button class="ctl-btn" type="button" data-preset="kn024">KEYNOTE-024</button>
+                  <button class="ctl-btn" type="button" data-preset="alex">ALEX</button>
+                  <button class="ctl-btn" type="button" data-preset="flex">FLEX</button>
+                </div>
+                <p class="tt-source" data-out="source"></p>
+
+                <div class="tt-inputs">
+                  <fieldset class="tt-group">
+                    <legend>Benefit</legend>
+                    <label class="rw-cell"><span>Outcome</span>
+                      <select name="ep"><option value="os">Overall survival</option><option value="pfs">Progression-free survival</option></select></label>
+                    <label class="rw-cell"><span>Hazard ratio</span><input type="number" name="hr" min="0.05" max="5" step="0.01"></label>
+                    <label class="rw-cell"><span>Control arm median, months</span><input type="number" name="m" min="0.5" max="240" step="0.1"></label>
+                  </fieldset>
+                  <fieldset class="tt-group">
+                    <legend>Harm</legend>
+                    <label class="rw-cell tt-wide"><span>Adverse event counted</span><input type="text" name="hl" maxlength="60"></label>
+                    <label class="rw-cell"><span>Rate on control, %</span><input type="number" name="hc" min="0" max="100" step="0.1"></label>
+                    <label class="rw-cell"><span>Rate on treatment, %</span><input type="number" name="ht" min="0" max="100" step="0.1"></label>
+                  </fieldset>
+                </div>
+
+                <label class="tt-time"><span>Time point <b data-out="t"></b></span><input type="range" name="t" min="1" max="60" step="1"></label>
+
+                <div class="tt-chart" aria-hidden="true"></div>
+
+                <div class="rw-results" aria-live="polite">
+                  <div class="rw-col">
+                    <h4>At <span data-out="t2"></span></h4>
+                    <dl>
+                      <div><dt data-out="lbl-c"></dt><dd data-out="sc"></dd></div>
+                      <div><dt data-out="lbl-t"></dt><dd data-out="st"></dd></div>
+                      <div><dt>Difference, per 100 treated</dt><dd data-out="d100"></dd></div>
+                      <div><dt>Median on treatment, if hazards stay constant</dt><dd data-out="mt"></dd></div>
+                    </dl>
+                    <p class="tt-floor" data-out="floor"></p>
+                  </div>
+                  <div class="rw-col is-point">
+                    <h4>One in how many</h4>
+                    <p class="rw-nnt"><b data-out="nnb"></b><span data-out="nnb-note"></span></p>
+                    <p class="rw-nnt"><b data-out="nnh"></b><span data-out="nnh-note"></span></p>
+                  </div>
+                  <p class="rw-diff" data-out="ledger"></p>
+                </div>
+
+                <div class="tt-people">
+                  <h4>One hundred patients, treated</h4>
+                  <div class="tt-grid" role="img"></div>
+                  <ul class="chart-key">
+                    <li><i class="key-sq is-base"></i><span data-out="k-base"></span></li>
+                    <li><i class="key-sq is-gain"></i><span data-out="k-gain"></span></li>
+                    <li><i class="key-sq is-none"></i><span data-out="k-none"></span></li>
+                  </ul>
+                </div>
+
+                <table class="rw-quick-table tt-times">
+                  <caption class="visually-hidden">Patients treated for one to benefit at other time points</caption>
+                  <thead><tr><th scope="col">Time point</th><th scope="col">Control</th><th scope="col">Treatment</th><th scope="col">Per 100</th><th scope="col">Treated per benefit</th></tr></thead>
+                  <tbody></tbody>
+                </table>
+
+                <p class="tt-check" data-out="check"></p>
+                <ul class="rw-warnings"></ul>
+
+                <div class="rw-actions">
+                  <button class="ctl-btn ctl-primary" type="button" data-tt="copy">Copy link to these numbers</button>
+                  <button class="ctl-btn" type="button" data-tt="print">Print</button>
+                </div>
+              </div>
+            </div>
+            <p class="figure-note rw-privacy">Everything is calculated in your browser. Nothing you enter is sent anywhere; the link you copy carries the numbers in its address. Survival is modeled from the median, assuming a constant hazard in the control arm and a constant hazard ratio.</p>
+          </section>
+
+          <!-- IX -->
+          <section class="part" id="pe-limits" aria-labelledby="pe-limits-h">
+            <p class="part-num">Part IX</p>
+            <h3 class="part-title" id="pe-limits-h">What the translation assumes</h3>
+            <div class="trio">
+              <div><h5>Constant hazards</h5><p>Turning a median into a curve assumes the control arm&rsquo;s event rate is steady, and applying one hazard ratio assumes the effect is too. Immunotherapy curves with a long tail break both. When a trial reports landmark rates, use them.</p></div>
+              <div><h5>Uncertainty</h5><p>When the confidence interval of the absolute difference includes zero, the interval for the number needed to treat runs from benefit through infinity to harm. Altman suggested reporting it that way rather than as a single figure.</p></div>
+              <div><h5>Counts, not weights</h5><p>One more patient alive and one more serious adverse event are counted the same. They are not the same to the patient, and the tool leaves that weighing where it belongs.</p></div>
+            </div>
+            <p>Checked against the trials themselves, the model is close. For CheckMate 057 it estimates 9 patients treated per additional survivor at 12 months, against 8 from the reported rates; for RASolute 302, 3 against 3; for ALEX, 4 against 5. Where hazards are clearly not proportional, statisticians recommend a model-free summary such as the difference in restricted mean survival time: the months of life gained, on average, within a fixed window.</p>
+            <p class="cite-line">Altman, BMJ 1998 &middot; Altman &amp; Andersen, BMJ 1999 &middot; Uno et al., J Clin Oncol 2014</p>
+          </section>
+
+          <!-- X -->
+          <section class="part" id="pe-estimand" aria-labelledby="pe-estimand-h">
+            <p class="part-num">Part X</p>
+            <h3 class="part-title" id="pe-estimand-h">The patient&rsquo;s estimand</h3>
+            <p>The paper&rsquo;s conclusion is modest: numbers needed to benefit and to harm complement the hazard ratio, and reporting them could support shared decisions. The implication is larger. If the estimand is a choice, it can be chosen for the patient.</p>
+            <ol class="moves">
+              <li><span class="move-num">01</span><h5>Report absolute effects at set times</h5><p>Survival in each arm at prespecified landmarks, with confidence intervals, alongside every hazard ratio.</p></li>
+              <li><span class="move-num">02</span><h5>Put both sides on one scale</h5><p>Patients treated per benefit and per harm, by subgroup, in labels and in the clinic.</p></li>
+              <li><span class="move-num">03</span><h5>Choose summaries that survive the data</h5><p>When hazards are not proportional, prespecify a measure such as restricted mean survival time instead of a ratio that describes no one.</p></li>
+            </ol>
+            <div class="closing">
+              <p class="closing-line">One in how many?</p>
+              <p>It is the first question most patients ask and the last one most trial reports answer. A hazard ratio of 0.40 deserved 42 seconds of applause. It also deserved a sentence a patient could hold: treat three people, and one more of them will be alive next year.</p>
+            </div>
+          </section>
+
+          <!-- Connections & references -->
+          <section class="part part-refs" id="pe-connections" aria-labelledby="pe-connections-h">
+            <h3 class="part-title" id="pe-connections-h">Connections</h3>
+            <ul class="connections">
+              <li><a href="#no-average-patient"><span class="conn-where">Theme 04</span><span class="conn-what">There Is No Average Patient: reweight a trial to your population, then translate the result here</span></a></li>
+              <li><a href="#oa-numbers"><span class="conn-where">Theme 02</span><span class="conn-what">From Organs to Algorithms: 4, 11 and 23 patients treated per benefit, and what molecular selection buys</span></a></li>
+              <li><a href="#broken-instrument"><span class="conn-where">Theme 03</span><span class="conn-what">The Broken Instrument: why response-based numbers inherit the ruler&rsquo;s error</span></a></li>
+              <li><a href="../#convergence"><span class="conn-where">Convergence</span><span class="conn-what">Evidence built around the individual patient rather than the population average</span></a></li>
+            </ul>
+
+            <h3 class="part-title part-title-refs">Further reading</h3>
+            <div class="research-pub-list references">
+              <a href="https://www.insights.phyusionbio.com/p/42-seconds" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2026</span><span class="research-pub-title">42 Seconds</span><span class="research-pub-authors">RASolute 302 and the time between a result and the patients who need it</span></a>
+              <a href="https://www.insights.phyusionbio.com/p/the-misnomer-of-surrogate-endpoints" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2025</span><span class="research-pub-title">The Misnomer of Surrogate Endpoints in Oncology</span><span class="research-pub-authors">What it takes for an endpoint to capture a treatment effect</span></a>
+              <a href="https://www.insights.phyusionbio.com/p/the-ghost-in-the-statistical-machine" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2026</span><span class="research-pub-title">The Ghost in the Statistical Machine and the Illusion of the Average Patient</span><span class="research-pub-authors">A brief history of precision in medicine and FDA&rsquo;s evolution</span></a>
+            </div>
+
+            <h3 class="part-title part-title-refs">References</h3>
+            <div class="research-pub-list references">
+              <a href="https://doi.org/10.1200/CCI.19.00103" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">JCO Clin Cancer Inform, 2020</span><span class="research-pub-title">Patient-centered approach to benefit-risk characterization using number needed to benefit and number needed to harm: advanced non-small-cell lung cancer</span><span class="research-pub-authors">Raju GK, Khozin S, Gurumurthi K, Domike R, Woodcock J.</span></a>
+              <a href="https://doi.org/10.1056/NEJM198806303182605" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">N Engl J Med, 1988</span><span class="research-pub-title">An assessment of clinically useful measures of the consequences of treatment</span><span class="research-pub-authors">Laupacis A, Sackett DL, Roberts RS.</span></a>
+              <a href="https://doi.org/10.1136/bmj.317.7168.1309" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">BMJ, 1998</span><span class="research-pub-title">Confidence intervals for the number needed to treat</span><span class="research-pub-authors">Altman DG.</span></a>
+              <a href="https://doi.org/10.1136/bmj.319.7223.1492" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">BMJ, 1999</span><span class="research-pub-title">Calculating the number needed to treat for trials where the outcome is time to an event</span><span class="research-pub-authors">Altman DG, Andersen PK.</span></a>
+              <a href="https://doi.org/10.1097/EDE.0b013e3181c1ea43" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Epidemiology, 2010</span><span class="research-pub-title">The hazards of hazard ratios</span><span class="research-pub-authors">Hern&aacute;n MA.</span></a>
+              <a href="https://doi.org/10.1200/JCO.2014.55.2208" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">J Clin Oncol, 2014</span><span class="research-pub-title">Moving beyond the hazard ratio in quantifying the between-group difference in survival analysis</span><span class="research-pub-authors">Uno H, Claggett B, Tian L, et al.</span></a>
+              <a href="https://doi.org/10.1111/j.1539-6053.2008.00033.x" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Psychol Sci Public Interest, 2007</span><span class="research-pub-title">Helping doctors and patients make sense of health statistics</span><span class="research-pub-authors">Gigerenzer G, Gaissmaier W, Kurz-Milcke E, Schwartz LM, Woloshin S.</span></a>
+              <a href="https://database.ich.org/sites/default/files/E9-R1_Step4_Guideline_2019_1203.pdf" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">ICH, 2019</span><span class="research-pub-title">E9(R1) addendum on estimands and sensitivity analysis in clinical trials</span><span class="research-pub-authors">International Council for Harmonisation.</span></a>
+              <a href="https://doi.org/10.1056/NEJMoa0810699" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">N Engl J Med, 2009</span><span class="research-pub-title">Gefitinib or carboplatin-paclitaxel in pulmonary adenocarcinoma</span><span class="research-pub-authors">Mok TS, et al. (IPASS)</span></a>
+              <a href="https://doi.org/10.1056/NEJMoa1507643" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">N Engl J Med, 2015</span><span class="research-pub-title">Nivolumab versus docetaxel in advanced nonsquamous non-small-cell lung cancer</span><span class="research-pub-authors">Borghaei H, et al. (CheckMate 057)</span></a>
+              <a href="https://doi.org/10.1056/NEJMoa1504627" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">N Engl J Med, 2015</span><span class="research-pub-title">Nivolumab versus docetaxel in advanced squamous-cell non-small-cell lung cancer</span><span class="research-pub-authors">Brahmer J, et al. (CheckMate 017)</span></a>
+              <a href="https://doi.org/10.1056/NEJMoa1606774" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">N Engl J Med, 2016</span><span class="research-pub-title">Pembrolizumab versus chemotherapy for PD-L1-positive non-small-cell lung cancer</span><span class="research-pub-authors">Reck M, et al. (KEYNOTE-024)</span></a>
+              <a href="https://doi.org/10.1056/NEJMoa1704795" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">N Engl J Med, 2017</span><span class="research-pub-title">Alectinib versus crizotinib in untreated ALK-positive non-small-cell lung cancer</span><span class="research-pub-authors">Peters S, et al. (ALEX)</span></a>
+              <a href="https://doi.org/10.1016/S0140-6736(09)60569-9" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Lancet, 2009</span><span class="research-pub-title">Cetuximab plus chemotherapy in patients with advanced non-small-cell lung cancer (FLEX): an open-label randomised phase III trial</span><span class="research-pub-authors">Pirker R, et al.</span></a>
+              <a href="https://doi.org/10.3390/cancers18193112" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Cancers, 2026</span><span class="research-pub-title">Efficacy and safety of daraxonrasib (RMC-6236) in previously treated metastatic RAS-mutated pancreatic ductal adenocarcinoma: a systematic review</span><span class="research-pub-authors">Gierulska N, et al.</span></a>
+              <a href="https://doi.org/10.5582/ddt.2026.01067" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Drug Discov Ther, 2026</span><span class="research-pub-title">Daraxonrasib: the first-in-class RAS(ON) multi-selective inhibitor approved for treatment of metastatic pancreatic adenocarcinoma</span><span class="research-pub-authors">Sun Y, Pang C, Gao J.</span></a>
+            </div>
+          </section>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
@@ -1462,6 +1832,6 @@
   </footer>
 
   <script src="../script.js?v=39"></script>
-  <script src="../topology.js?v=5"></script>
+  <script src="../topology.js?v=6"></script>
 </body>
 </html>
