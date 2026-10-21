@@ -10,6 +10,8 @@
 //  7. The Broken Instrument: reading a scan, attenuation, waterfalls,
 //     the coin flip at the cutoff
 //  8. There Is No Average Patient: the Reweight the Trial calculator
+//  9. The Patient-Centered Estimand: one hazard ratio across prognoses,
+//     a mixed population, endpoints, the frontier, Translate the Trial
 // ================================================================
 (function () {
   'use strict';
@@ -707,7 +709,7 @@
       try { navigator.clipboard.writeText(location.href).then(done, function () { window.prompt('Copy this link:', location.href); }); }
       catch (e) { window.prompt('Copy this link:', location.href); }
     });
-    q('[data-rw="print"]').addEventListener('click', function () { window.print(); });
+    q('[data-rw="print"]').addEventListener('click', function () { printOnly('print-rw'); });
 
     // Quick estimate: trial rates plus a real-world baseline (appendix A.2)
     var quick = q('.rw-quick');
@@ -738,6 +740,394 @@
     drawAll(true);
     if (new URLSearchParams(location.search).get('rw') && location.hash === '#rw-tool') {
       setTimeout(function () { var el = document.getElementById('rw-tool'); if (el) el.scrollIntoView(); }, 50);
+    }
+  }
+
+  // ---------------------------------------------------------------
+  // 9. The Patient-Centered Estimand. Survival is modeled from the
+  //    median with a constant hazard, S(t) = 0.5^(t/median); under
+  //    proportional hazards the treated arm is S(t)^HR, and the number
+  //    needed to benefit is 1 / (S^HR - S) (Altman & Andersen 1999).
+  // ---------------------------------------------------------------
+  var survAt = function (t, median) { return Math.pow(0.5, t / median); };
+  var fmtN = function (n) { return n < 10 ? n.toFixed(1) : String(Math.round(n)); };
+  var signed = function (x) { var r = Math.round(x); return (r > 0 ? '+' : r < 0 ? '−' : '') + Math.abs(r); };
+
+  // 9a. One hazard ratio, five prognoses (benefit at 12 months)
+  var sameHr = document.getElementById('same-hr');
+  if (sameHr) {
+    var hrIn = sameHr.querySelector('[name="hr"]');
+    var barsHost = sameHr.querySelector('.hr-bars');
+    var MEDIANS = [3, 6, 12, 24, 60];
+    barsHost.innerHTML = MEDIANS.map(function (m) {
+      return '<div class="hr-row"><span class="hr-label">Median ' + m + ' months</span><span class="hr-track"><i></i></span><span class="hr-val"></span></div>';
+    }).join('');
+    var updHr = function () {
+      var hr = +hrIn.value / 100;
+      sameHr.querySelector('[data-out="hr"]').textContent = hr.toFixed(2);
+      hrIn.setAttribute('aria-valuetext', 'hazard ratio ' + hr.toFixed(2));
+      var vals = MEDIANS.map(function (m) { var s = survAt(12, m); return Math.pow(s, hr) - s; });
+      var best = Math.max.apply(null, vals);
+      barsHost.querySelectorAll('.hr-row').forEach(function (row, i) {
+        var d = vals[i];
+        row.querySelector('i').style.width = Math.min(100, d * 100 / 50 * 100) + '%';
+        row.classList.toggle('is-best', d === best);
+        row.querySelector('.hr-val').innerHTML = '<b>+' + Math.round(d * 100) + '</b> per 100 &middot; <b>' + fmtN(1 / d) + '</b> treated';
+      });
+    };
+    hrIn.addEventListener('input', updHr);
+    updHr();
+  }
+
+  // 9b. A mixed population: subgroup hazard ratios from IPASS, one
+  //     illustrative control median for both groups.
+  var mix = document.getElementById('mixture');
+  if (mix) {
+    var pIn = mix.querySelector('[name="p"]');
+    var MW = 560, MH = 260, ML = 44, MR = 14, MT = 14, MB = 34, TMAX = 24, YMIN = -40, YMAX = 30;
+    var msvg = svgEl('svg', { viewBox: '0 0 ' + MW + ' ' + MH, class: 'mix-svg', role: 'img', 'aria-label': 'Extra patients free of progression per 100 treated, over 24 months' }, mix.querySelector('.mix-chart'));
+    var mx = function (t) { return ML + t / TMAX * (MW - ML - MR); };
+    var my = function (v) { return MT + (YMAX - v) / (YMAX - YMIN) * (MH - MT - MB); };
+    [-40, -20, 0, 20].forEach(function (v) {
+      svgEl('line', { x1: ML, x2: MW - MR, y1: my(v), y2: my(v), class: v === 0 ? 'ax-zero' : 'ax-grid' }, msvg);
+      svgEl('text', { x: ML - 8, y: my(v) + 4, class: 'ax-label', 'text-anchor': 'end' }, msvg).textContent = (v > 0 ? '+' : '') + v;
+    });
+    [0, 6, 12, 18, 24].forEach(function (t) {
+      svgEl('text', { x: mx(t), y: MH - 12, class: 'ax-label', 'text-anchor': 'middle' }, msvg).textContent = t + (t === 24 ? ' mo' : '');
+    });
+    var pathFor = function (fn) {
+      var d = '';
+      for (var t = 0; t <= TMAX + 1e-9; t += 0.25) d += (t === 0 ? 'M' : 'L') + mx(t).toFixed(1) + ' ' + my(fn(t) * 100).toFixed(1);
+      return d;
+    };
+    var gainPos = function (t) { var s = survAt(t, 6); return Math.pow(s, 0.48) - s; };
+    var gainNeg = function (t) { var s = survAt(t, 6); return Math.pow(s, 2.85) - s; };
+    svgEl('path', { d: pathFor(gainPos), class: 'mix-line mix-pos' }, msvg);
+    svgEl('path', { d: pathFor(gainNeg), class: 'mix-line mix-neg' }, msvg);
+    var crossLine = svgEl('line', { y1: MT, y2: MH - MB, class: 'mix-cross' }, msvg);
+    var allPath = svgEl('path', { class: 'mix-line mix-all' }, msvg);
+    var mout = function (k, v) { mix.querySelector('[data-out="' + k + '"]').textContent = v; };
+    var updMix = function () {
+      var p = +pIn.value / 100;
+      var all = function (t) { return p * gainPos(t) + (1 - p) * gainNeg(t); };
+      allPath.setAttribute('d', pathFor(all));
+      mout('p', Math.round(p * 100) + '%');
+      pIn.setAttribute('aria-valuetext', Math.round(p * 100) + '% with the mutation');
+      var minV = 0, minT = 0, cross = null, prev = 0;
+      for (var t = 0.25; t <= TMAX + 1e-9; t += 0.25) {
+        var v = all(t);
+        if (v < minV) { minV = v; minT = t; }
+        if (cross === null && prev < 0 && v >= 0) cross = t;
+        prev = v;
+      }
+      mout('early', minV < -0.005 ? signed(minV * 100) : 'None');
+      mout('early-t', minV < -0.005 ? minT.toFixed(1).replace('.0', '') + ' months' : 'no point');
+      mout('cross', minV >= -0.005 || cross === null ? '—' : (Math.round(cross * 2) / 2).toString());
+      mout('cross-note', minV >= -0.005 ? 'No early harm to turn around' : cross === null ? 'Harm does not turn into benefit within 24 months' : 'Months until harm turns into benefit');
+      crossLine.style.display = cross === null || minV >= -0.005 ? 'none' : '';
+      if (cross !== null) { crossLine.setAttribute('x1', mx(cross)); crossLine.setAttribute('x2', mx(cross)); }
+      var d12 = all(12);
+      if (Math.abs(d12) < 0.0005) { mout('nnb12', '—'); mout('nnb12-note', 'no difference'); }
+      else if (d12 > 0) { mout('nnb12', fmtN(1 / d12)); mout('nnb12-note', 'treated for one more to be free of progression'); }
+      else { mout('nnb12', fmtN(-1 / d12)); mout('nnb12-note', 'treated for one more to progress'); }
+    };
+    pIn.addEventListener('input', updMix);
+    updMix();
+  }
+
+  // 9c. Which ruler? NNB point estimates for the thirty trials in Table 1
+  //     of Raju, Khozin, et al. 2020. g: e = approved, molecularly
+  //     selected; n = approved, unselected; w = withdrawn or not approved.
+  var epHost = document.querySelector('#endpoints .ep-chart');
+  if (epHost) {
+    var TRIALS = [
+      ['Gefitinib', 'Study 39 (single arm)', 'ORR', 9.5, 'n', 2003], ['Gefitinib', 'ISEL', 'OS', 25.2, 'w', 2005],
+      ['Gefitinib', 'IPASS', 'PFS', 10.1, 'n', 2015], ['Gefitinib', 'IFUM (single arm)', 'ORR', 1.9, 'e', 2015],
+      ['Erlotinib', 'BR.21', 'OS', 9.7, 'n', 2004], ['Erlotinib', 'EURTAC', 'PFS', 3.4, 'e', 2013],
+      ['Cetuximab + chemotherapy', 'FLEX', 'OS', 21.4, 'w', 2005], ['Bevacizumab + chemotherapy', 'E4599', 'OS', 13.5, 'n', 2006],
+      ['Pemetrexed', 'JMEN', 'PFS', 4.8, 'n', 2009], ['Crizotinib', 'Study 1001 (single arm)', 'ORR', 3.1, 'e', 2011],
+      ['Crizotinib', 'Study 1005 (single arm)', 'ORR', 4.6, 'e', 2011], ['Crizotinib', 'Study 1007', 'PFS', 4.7, 'e', 2013],
+      ['Crizotinib', 'PROFILE 1001, ROS1 (single arm)', 'ORR', 1.8, 'e', 2016], ['Afatinib', 'LUX-Lung 3 (1200.32)', 'PFS', 5.9, 'e', 2013],
+      ['Afatinib', 'LUX-Lung 8', 'PFS', 14.2, 'n', 2016], ['Ceritinib', 'X2101 (single arm)', 'ORR', 4.2, 'e', 2014],
+      ['Ceritinib', 'ASCEND-4', 'PFS', 5.5, 'e', 2017], ['Ramucirumab + docetaxel', 'REVEL', 'OS', 19.6, 'n', 2014],
+      ['Nivolumab', 'CheckMate 017', 'OS', 6.1, 'n', 2015], ['Nivolumab', 'CheckMate 057', 'OS', 9.7, 'n', 2015],
+      ['Necitumumab + chemotherapy', 'SQUIRE', 'OS', 17.3, 'n', 2015], ['Osimertinib', 'AURA 2 (single arm)', 'ORR', 3.3, 'e', 2015],
+      ['Osimertinib', 'AURA 3', 'PFS', 3.2, 'e', 2017], ['Alectinib', 'NP28761 (single arm)', 'ORR', 3.6, 'e', 2015],
+      ['Alectinib', 'NP28763 (single arm)', 'ORR', 3.3, 'e', 2015], ['Alectinib', 'ALEX', 'PFS', 4.5, 'e', 2017],
+      ['Pembrolizumab', 'KEYNOTE-001 (single arm)', 'ORR', 2.5, 'e', 2015], ['Pembrolizumab', 'KEYNOTE-024', 'PFS', 4.8, 'e', 2016],
+      ['Atezolizumab', 'OAK', 'OS', 9.7, 'n', 2016], ['Dabrafenib + trametinib', 'BRF113928 (single arm)', 'ORR', 2.2, 'e', 2017]
+    ];
+    var EP = { ORR: 'Response rate', PFS: 'Progression-free survival', OS: 'Overall survival' };
+    var GROUP = { e: 'approved, molecularly selected population', n: 'approved, unselected population', w: 'withdrawn or not approved' };
+    var xPct = function (v) { return Math.log(v) / Math.log(30) * 100; };
+    var html = '';
+    ['ORR', 'PFS', 'OS'].forEach(function (ep) {
+      var rows = TRIALS.map(function (t, i) { return { t: t, i: i }; }).filter(function (o) { return o.t[2] === ep; })
+        .sort(function (a, b) { return a.t[3] - b.t[3]; });
+      var lanes = [];
+      var mean = rows.reduce(function (s, o) { return s + o.t[3]; }, 0) / rows.length;
+      var dots = rows.map(function (o) {
+        var x = xPct(o.t[3]), lane = 0;
+        while (lanes[lane] !== undefined && x - lanes[lane] < 3.2) lane++;
+        lanes[lane] = x;
+        return '<button type="button" class="ep-dot is-' + o.t[4] + '" style="left:' + x.toFixed(2) + '%;--lane:' + lane + '" data-i="' + o.i + '" aria-label="' +
+          o.t[0] + ', ' + o.t[1] + ': ' + o.t[3] + ' treated per benefit"></button>';
+      }).join('');
+      html += '<div class="ep-row"><span class="ep-name">' + EP[ep] + '<em>avg ' + mean.toFixed(1) + '</em></span><div class="ep-track">' +
+        '<i class="ep-mean" style="left:' + xPct(mean).toFixed(2) + '%"></i>' + dots + '</div></div>';
+    });
+    html += '<div class="ep-row ep-axis" aria-hidden="true"><span></span><div class="ep-track">' + [1, 2, 3, 5, 10, 20, 30].map(function (v) {
+      return '<span style="left:' + xPct(v).toFixed(2) + '%">' + v + '</span>';
+    }).join('') + '</div></div>';
+    epHost.innerHTML = html;
+    var readout = document.querySelector('#endpoints .ep-readout');
+    epHost.querySelectorAll('.ep-dot').forEach(function (b) {
+      var show = function () {
+        var t = TRIALS[+b.dataset.i];
+        epHost.querySelectorAll('.ep-dot').forEach(function (o) { o.classList.toggle('is-on', o === b); });
+        readout.innerHTML = '<b>' + t[0] + '</b> &middot; ' + t[1] + ' &middot; ' + EP[t[2]] + ' &middot; <b>' + t[3] + '</b> treated per benefit &middot; ' + GROUP[t[4]] + ', FDA decision ' + t[5];
+      };
+      b.addEventListener('click', show);
+      b.addEventListener('focus', show);
+      b.addEventListener('mouseenter', show);
+    });
+  }
+
+  // 9d. The frontier: NNB at the untreated median (6 months) from the
+  //     best available median, with the implied HR = 6 / median.
+  var fr = document.getElementById('frontier');
+  if (fr) {
+    var fIn = fr.querySelector('[name="m"]');
+    var FW = 560, FH = 240, FL = 40, FR = 16, FT = 14, FB = 34, X0 = 8, X1 = 48, Y1 = 11;
+    var fsvg = svgEl('svg', { viewBox: '0 0 ' + FW + ' ' + FH, class: 'fr-svg', role: 'img', 'aria-label': 'Patients treated per benefit falls toward a floor of 2 as median survival rises' }, fr.querySelector('.fr-chart'));
+    var fx = function (m) { return FL + (m - X0) / (X1 - X0) * (FW - FL - FR); };
+    var fy = function (n) { return FT + (Y1 - n) / Y1 * (FH - FT - FB); };
+    var nnbAt = function (m) { return 1 / (Math.pow(0.5, 6 / m) - 0.5); };
+    [0, 2, 4, 6, 8, 10].forEach(function (n) {
+      svgEl('line', { x1: FL, x2: FW - FR, y1: fy(n), y2: fy(n), class: n === 2 ? 'ax-floor' : 'ax-grid' }, fsvg);
+      svgEl('text', { x: FL - 8, y: fy(n) + 4, class: 'ax-label', 'text-anchor': 'end' }, fsvg).textContent = n;
+    });
+    svgEl('text', { x: FL + 8, y: fy(2) + 16, class: 'ax-label ax-floor-label' }, fsvg).textContent = 'Floor: 2';
+    [8, 18, 28, 38, 48].forEach(function (m) {
+      svgEl('text', { x: fx(m), y: FH - 12, class: 'ax-label', 'text-anchor': 'middle' }, fsvg).textContent = m + (m === 48 ? ' mo' : '');
+    });
+    var fd = '';
+    for (var m = X0; m <= X1 + 1e-9; m += 0.25) fd += (m === X0 ? 'M' : 'L') + fx(m).toFixed(1) + ' ' + fy(Math.min(Y1, nnbAt(m))).toFixed(1);
+    svgEl('path', { d: fd, class: 'fr-line' }, fsvg);
+    [[9, '2003'], [39.7, '2017']].forEach(function (pt) {
+      svgEl('circle', { cx: fx(pt[0]), cy: fy(nnbAt(pt[0])), r: 5, class: 'fr-mark' }, fsvg);
+      svgEl('text', { x: fx(pt[0]) + 10, y: fy(nnbAt(pt[0])) - 10, class: 'ax-label fr-mark-label' }, fsvg).textContent = pt[1] + ': ' + nnbAt(pt[0]).toFixed(1);
+    });
+    var fDot = svgEl('circle', { r: 8, class: 'fr-dot' }, fsvg);
+    var fo = function (k, v) { fr.querySelector('[data-out="' + k + '"]').textContent = v; };
+    var updFr = function () {
+      var mv = +fIn.value, hr = 6 / mv, n = nnbAt(mv);
+      fDot.setAttribute('cx', fx(mv)); fDot.setAttribute('cy', fy(Math.min(Y1, n)));
+      fo('m', mv.toFixed(1) + ' months'); fo('hr', hr.toFixed(2)); fo('arr', '+' + Math.round((Math.pow(0.5, hr) - 0.5) * 100)); fo('nnb', n.toFixed(1));
+      fIn.setAttribute('aria-valuetext', mv.toFixed(1) + ' months');
+    };
+    fIn.addEventListener('input', updFr);
+    fr.querySelectorAll('[data-m]').forEach(function (b) { b.addEventListener('click', function () { fIn.value = b.dataset.m; updFr(); }); });
+    updFr();
+  }
+
+  // Printing one tool at a time: the body class scopes the print styles
+  function printOnly(cls) {
+    document.body.classList.add(cls);
+    var done = function () { document.body.classList.remove(cls); window.removeEventListener('afterprint', done); };
+    window.addEventListener('afterprint', done);
+    window.print();
+    setTimeout(done, 1000);
+  }
+
+  // 9e. Translate the trial
+  var tt = document.getElementById('translate');
+  if (tt) {
+    var TT_PRESETS = {
+      ras302: { ep: 'os', hr: 0.40, m: 6.6, t: 12, hl: 'Grade 3+ treatment-related adverse events', hc: 57.5, ht: 43.6,
+        src: 'RASolute 302: daraxonrasib vs chemotherapy, previously treated metastatic pancreatic cancer, RAS G12 population. Adverse events are for the whole randomized population.',
+        land: { t: 12, c: 18.7, x: 53.3 } },
+      cm017: { ep: 'os', hr: 0.59, m: 6.0, t: 12, hl: 'Grade 3–4 treatment-related adverse events', hc: 55, ht: 7,
+        src: 'CheckMate 017: nivolumab vs docetaxel, previously treated squamous non-small cell lung cancer.',
+        land: { t: 12, c: 24, x: 42 } },
+      cm057: { ep: 'os', hr: 0.73, m: 9.4, t: 12, hl: 'Grade 3–4 treatment-related adverse events', hc: 54, ht: 10,
+        src: 'CheckMate 057: nivolumab vs docetaxel, previously treated nonsquamous non-small cell lung cancer. The survival curves crossed early, so constant hazards fit poorly before 6 months.',
+        land: { t: 12, c: 39, x: 51 } },
+      kn024: { ep: 'pfs', hr: 0.50, m: 6.0, t: 12, hl: 'Grade 3–5 treatment-related adverse events', hc: 53.3, ht: 26.6,
+        src: 'KEYNOTE-024: pembrolizumab vs platinum chemotherapy, first-line non-small cell lung cancer with PD-L1 at 50% or more.' },
+      alex: { ep: 'pfs', hr: 0.47, m: 11.6, t: 12, hl: 'Grade 3–5 adverse events', hc: 50, ht: 41,
+        src: 'ALEX: alectinib vs crizotinib, untreated ALK-positive non-small cell lung cancer. Control median estimated from the reported 48.7% progression-free at 12 months.',
+        land: { t: 12, c: 48.7, x: 68.4 } },
+      flex: { ep: 'os', hr: 0.871, m: 10.1, t: 12, hl: 'Grade 3 acne-like rash', hc: 0, ht: 10,
+        src: 'FLEX: cetuximab plus chemotherapy vs chemotherapy, first-line non-small cell lung cancer. Rash rate on the control arm set to 0% for illustration.' }
+    };
+    var tst = JSON.parse(JSON.stringify(TT_PRESETS.ras302));
+    tst.preset = 'ras302';
+    try {
+      var tq = new URLSearchParams(location.search).get('tt');
+      if (tq) { var tp = JSON.parse(tq); if (tp && tp.hr && tp.m) tst = tp; }
+    } catch (e) { /* ignore a malformed link */ }
+
+    var tget = function (s) { return tt.querySelector(s); };
+    var tput = function (k, v) { var el = tget('[data-out="' + k + '"]'); if (el) el.textContent = v; };
+    var tclamp = function (v, lo, hi, dflt) { v = parseFloat(v); return isNaN(v) ? dflt : Math.min(hi, Math.max(lo, v)); };
+    var tesc = function (s) { return String(s).replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; }); };
+    var months = function (t) { return t + (t === 1 ? ' month' : ' months'); };
+
+    var CW = 560, CH = 230, CL = 40, CR = 16, CT = 12, CB = 32;
+    var csvg = svgEl('svg', { viewBox: '0 0 ' + CW + ' ' + CH, class: 'tt-svg' }, tget('.tt-chart'));
+    var cg = svgEl('g', {}, csvg);
+
+    var syncInputs = function () {
+      tget('[name="ep"]').value = tst.ep;
+      ['hr', 'm', 'hl', 'hc', 'ht', 't'].forEach(function (k) { tget('[name="' + k + '"]').value = tst[k]; });
+      tt.querySelectorAll('[data-preset]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.preset === tst.preset)); });
+      var p = TT_PRESETS[tst.preset];
+      tput('source', p ? p.src : 'Custom numbers.');
+    };
+
+    var ttTimer;
+    var computeTT = function (fromLoad) {
+      var hr = tst.hr, m = tst.m, t = tst.t;
+      var os = tst.ep === 'os';
+      var word = os ? 'alive' : 'alive without progression';
+      var sc = survAt(t, m), sx = Math.pow(sc, hr), d = sx - sc;
+      tput('t', months(t)); tput('t2', months(t));
+      tput('lbl-c', (os ? 'Alive' : 'Progression-free') + ' on control');
+      tput('lbl-t', (os ? 'Alive' : 'Progression-free') + ' on treatment');
+      tput('sc', (sc * 100).toFixed(1) + '%'); tput('st', (sx * 100).toFixed(1) + '%');
+      tput('d100', signed(d * 100));
+      tput('mt', months(Math.round(m / hr * 10) / 10));
+      tput('floor', 'Even a drug that prevented every event could do no better than ' + fmtN(1 / Math.max(1e-6, 1 - sc)) + ' treated per benefit at this time point.');
+
+      if (Math.abs(d) < 0.0005) { tput('nnb', '—'); tput('nnb-note', 'No difference in patients ' + word); }
+      else if (d > 0) { tput('nnb', fmtN(1 / d)); tput('nnb-note', 'treated for one more patient to be ' + word + ' at ' + months(t)); }
+      else { tput('nnb', fmtN(-1 / d)); tput('nnb-note', 'treated for one fewer patient to be ' + word + ' at ' + months(t)); }
+
+      var hd = (tst.ht - tst.hc) / 100, hl = (tst.hl || 'the adverse event').toLowerCase();
+      if (Math.abs(hd) < 0.0005) { tput('nnh', '—'); tput('nnh-note', 'No difference in ' + hl); }
+      else if (hd > 0) { tput('nnh', fmtN(1 / hd)); tput('nnh-note', 'treated for one more patient to have ' + hl); }
+      else { tput('nnh', fmtN(-1 / hd)); tput('nnh-note', 'treated for one fewer patient to have ' + hl); }
+
+      var gain = Math.round(d * 100), hpp = Math.round(hd * 100);
+      tput('ledger', 'Per 100 patients treated: ' + (gain >= 0 ? gain + ' more' : -gain + ' fewer') + ' ' + word + ' at ' + months(t) + '; ' +
+        (hpp === 0 ? 'no difference in ' + hl : (hpp > 0 ? hpp + ' more' : -hpp + ' fewer') + ' with ' + hl) + '.');
+
+      // the curves
+      cg.innerHTML = '';
+      var xmax = Math.min(60, Math.max(24, Math.ceil(Math.max(t * 1.2, m * 2.5) / 6) * 6));
+      var cx = function (v) { return CL + v / xmax * (CW - CL - CR); };
+      var cy = function (v) { return CT + (1 - v) * (CH - CT - CB); };
+      [0, 0.25, 0.5, 0.75, 1].forEach(function (v) {
+        svgEl('line', { x1: CL, x2: CW - CR, y1: cy(v), y2: cy(v), class: 'ax-grid' }, cg);
+        svgEl('text', { x: CL - 8, y: cy(v) + 4, class: 'ax-label', 'text-anchor': 'end' }, cg).textContent = Math.round(v * 100) + '%';
+      });
+      for (var k = 0; k <= xmax; k += xmax <= 36 ? 6 : 12) {
+        svgEl('text', { x: cx(k), y: CH - 10, class: 'ax-label', 'text-anchor': 'middle' }, cg).textContent = k + (k + (xmax <= 36 ? 6 : 12) > xmax ? ' mo' : '');
+      }
+      var ctl = '', trt = '', area = '';
+      for (var u = 0; u <= xmax + 1e-9; u += xmax / 120) {
+        var a = survAt(u, m), b = Math.pow(a, hr);
+        ctl += (u === 0 ? 'M' : 'L') + cx(u).toFixed(1) + ' ' + cy(a).toFixed(1);
+        trt += (u === 0 ? 'M' : 'L') + cx(u).toFixed(1) + ' ' + cy(b).toFixed(1);
+      }
+      area = trt + ctl.replace(/M/, 'L').split('L').slice(1).reverse().map(function (p) { return 'L' + p; }).join('') + 'Z';
+      svgEl('path', { d: area, class: 'tt-gap' }, cg);
+      svgEl('path', { d: ctl, class: 'tt-line tt-ctl' }, cg);
+      svgEl('path', { d: trt, class: 'tt-line tt-trt' }, cg);
+      svgEl('line', { x1: cx(t), x2: cx(t), y1: CT, y2: CH - CB, class: 'tt-at' }, cg);
+      svgEl('circle', { cx: cx(t), cy: cy(sc), r: 5, class: 'tt-pt tt-pt-c' }, cg);
+      svgEl('circle', { cx: cx(t), cy: cy(sx), r: 5, class: 'tt-pt tt-pt-t' }, cg);
+      // treatment label above and to the right, control label below and to the left, clear of both curves
+      var right = cx(t) > CW - 150, left = cx(t) < CL + 130;
+      svgEl('text', { x: cx(t) + (right ? -10 : 10), y: cy(sx) - 10, class: 'ax-label tt-lab-t', 'text-anchor': right ? 'end' : 'start' }, cg).textContent = 'Treatment ' + Math.round(sx * 100) + '%';
+      svgEl('text', { x: cx(t) + (left ? 10 : -10), y: cy(sc) + 20, class: 'ax-label tt-lab-c', 'text-anchor': left ? 'start' : 'end' }, cg).textContent = 'Control ' + Math.round(sc * 100) + '%';
+
+      // one hundred patients
+      var base = Math.round(Math.min(sc, sx) * 100), top = Math.round(Math.max(sc, sx) * 100);
+      var diffCells = top - base, better = sx >= sc;
+      var cells = '';
+      for (var i = 0; i < 100; i++) cells += '<i class="' + (i < base ? 'is-base' : i < top ? (better ? 'is-gain' : 'is-loss') : 'is-none') + '"></i>';
+      var grid = tget('.tt-grid');
+      grid.innerHTML = cells;
+      tput('k-base', base + ' ' + word + ' at ' + months(t) + ' either way');
+      tput('k-gain', better ? diffCells + ' ' + word + ' because of the treatment' : diffCells + ' ' + word + ' only without the treatment');
+      tput('k-none', (100 - top) + ' not ' + word + ' either way');
+      tt.querySelector('.key-sq.is-gain').classList.toggle('is-loss', !better);
+      grid.setAttribute('aria-label', 'Of 100 patients treated: ' + base + ' ' + word + ' either way, ' + diffCells + (better ? ' because of the treatment, ' : ' only without it, ') + (100 - top) + ' not either way.');
+
+      // other time points
+      tget('.tt-times tbody').innerHTML = [6, 12, 18, 24, 36].map(function (tp) {
+        var a = survAt(tp, m), b = Math.pow(a, hr), dd = b - a;
+        var n = Math.abs(dd) < 0.0005 ? '—' : dd > 0 ? fmtN(1 / dd) : fmtN(-1 / dd) + ' (harm)';
+        return '<tr' + (tp === t ? ' class="is-now"' : '') + '><th scope="row">' + months(tp) + '</th><td>' + (a * 100).toFixed(1) + '%</td><td>' + (b * 100).toFixed(1) + '%</td><td>' + signed(dd * 100) + '</td><td>' + n + '</td></tr>';
+      }).join('');
+
+      // check against what the trial reported
+      var pr = TT_PRESETS[tst.preset];
+      var matches = pr && pr.land && Math.abs(pr.hr - hr) < 1e-9 && Math.abs(pr.m - m) < 1e-9;
+      if (matches) {
+        var L = pr.land, rep = 100 / (L.x - L.c), mod = survAt(L.t, m), modD = Math.pow(mod, hr) - mod;
+        tput('check', 'Check against the trial: it reported ' + L.x + '% vs ' + L.c + '% ' + word + ' at ' + months(L.t) + ', or ' + fmtN(rep) + ' treated per benefit. The model gives ' + fmtN(1 / modD) + ' at the same time point.');
+      } else tput('check', '');
+
+      var warn = [];
+      if (hr > 1) warn.push('A hazard ratio above 1 means events come faster on treatment. The tool reports the loss.');
+      if (t > 3 * m) warn.push('This time point is more than three control medians out. Few control patients remain, and constant hazards are least reliable in the tail of a curve.');
+      tget('.rw-warnings').innerHTML = warn.map(function (w) { return '<li>' + tesc(w) + '</li>'; }).join('');
+
+      if (!fromLoad) {
+        clearTimeout(ttTimer);
+        ttTimer = setTimeout(function () {
+          try {
+            var url = new URL(location.href);
+            url.searchParams.set('tt', JSON.stringify(tst));
+            history.replaceState(null, '', url.pathname + url.search + '#tt-tool');
+          } catch (e) { /* history unavailable */ }
+        }, 300);
+      }
+    };
+
+    var LIMITS = { hr: [0.05, 5, 0.7], m: [0.5, 240, 12], hc: [0, 100, 0], ht: [0, 100, 0], t: [1, 60, 12] };
+    tt.querySelectorAll('input, select').forEach(function (inp) {
+      inp.addEventListener('input', function () {
+        var k = inp.name;
+        if (k === 'ep' || k === 'hl') tst[k] = inp.value;
+        else tst[k] = tclamp(inp.value, LIMITS[k][0], LIMITS[k][1], LIMITS[k][2]);
+        if (k === 't') tst.t = Math.round(tst.t);
+        if (k !== 't' && k !== 'hl') {
+          // edited numbers no longer describe the named trial
+          var p = TT_PRESETS[tst.preset];
+          if (p && (p.hr !== tst.hr || p.m !== tst.m || p.ep !== tst.ep || p.hc !== tst.hc || p.ht !== tst.ht)) {
+            tst.preset = '';
+            tt.querySelectorAll('[data-preset]').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+            tput('source', 'Custom numbers.');
+          }
+        }
+        computeTT(false);
+      });
+    });
+    tt.querySelectorAll('[data-preset]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        tst = JSON.parse(JSON.stringify(TT_PRESETS[b.dataset.preset]));
+        tst.preset = b.dataset.preset;
+        delete tst.src; delete tst.land;
+        syncInputs(); computeTT(false);
+      });
+    });
+    tget('[data-tt="copy"]').addEventListener('click', function (ev) {
+      var btn = ev.currentTarget;
+      var done = function () { btn.textContent = 'Link copied'; setTimeout(function () { btn.textContent = 'Copy link to these numbers'; }, 1800); };
+      try { navigator.clipboard.writeText(location.href).then(done, function () { window.prompt('Copy this link:', location.href); }); }
+      catch (e) { window.prompt('Copy this link:', location.href); }
+    });
+    tget('[data-tt="print"]').addEventListener('click', function () { printOnly('print-tt'); });
+
+    delete tst.src; delete tst.land;
+    syncInputs();
+    computeTT(true);
+    if (new URLSearchParams(location.search).get('tt') && location.hash === '#tt-tool') {
+      setTimeout(function () { var el = document.getElementById('tt-tool'); if (el) el.scrollIntoView(); }, 50);
     }
   }
 
