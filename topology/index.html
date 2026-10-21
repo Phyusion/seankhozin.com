@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Topology — Sean Khozin, MD, MPH</title>
-  <meta name="description" content="In-depth examinations of the themes that run through Sean Khozin’s work and research, beginning with The Simulator’s Dilemma: why better molecules are not better medicines.">
+  <meta name="description" content="In-depth examinations of the themes that run through Sean Khozin’s work and research, including The Simulator’s Dilemma and From Organs to Algorithms.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.seankhozin.com/topology/">
 
@@ -29,13 +29,26 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "The Simulator’s Dilemma",
-    "description": "Why AI that designs better molecules has not yet produced better medicines, and why its biggest opportunity is discovering the human biology that decides whether a drug works.",
-    "url": "https://www.seankhozin.com/topology/#simulators-dilemma",
-    "author": { "@id": "https://www.seankhozin.com/#person", "@type": "Person", "name": "Sean Khozin" },
-    "isPartOf": { "@id": "https://www.seankhozin.com/#website" },
-    "inLanguage": "en-US"
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "The Simulator’s Dilemma",
+        "description": "Why AI that designs better molecules has not yet produced better medicines, and why its biggest opportunity is discovering the human biology that decides whether a drug works.",
+        "url": "https://www.seankhozin.com/topology/#simulators-dilemma",
+        "author": { "@id": "https://www.seankhozin.com/#person", "@type": "Person", "name": "Sean Khozin" },
+        "isPartOf": { "@id": "https://www.seankhozin.com/#website" },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "Article",
+        "headline": "From Organs to Algorithms",
+        "description": "Why cancer is still classified by organ and microscope, what that costs patients, and how AI could build a classification from mechanism up.",
+        "url": "https://www.seankhozin.com/topology/#organs-to-algorithms",
+        "author": { "@id": "https://www.seankhozin.com/#person", "@type": "Person", "name": "Sean Khozin" },
+        "isPartOf": { "@id": "https://www.seankhozin.com/#website" },
+        "inLanguage": "en-US"
+      }
+    ]
   }
   </script>
 
@@ -44,7 +57,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=61">
-  <link rel="stylesheet" href="../topology.css?v=3">
+  <link rel="stylesheet" href="../topology.css?v=4">
 </head>
 <body class="page-topology">
   <!-- Navigation -->
@@ -75,7 +88,7 @@
   <!-- Opener -->
   <header class="topo-hero">
     <div class="container">
-      <div class="hero-eyebrow"><span>Topology &middot; Themes in depth</span><b>01 theme</b></div>
+      <div class="hero-eyebrow"><span>Topology &middot; Themes in depth</span><b>02 themes</b></div>
       <h1 class="topo-hero-title">Topology</h1>
       <p class="topo-hero-sub">In-depth examinations of the themes that run through Dr. Khozin&rsquo;s work and research. Each follows one argument from the evidence to what should change, and links to the others where the ideas meet.</p>
       <ol class="theme-list topo-hero-list">
@@ -86,6 +99,17 @@
               <span class="theme-kicker">AI &middot; Drug discovery &middot; Human biology</span>
               <span class="theme-name">The Simulator&rsquo;s Dilemma</span>
               <span class="theme-desc">Why better molecules are not better medicines.</span>
+            </span>
+            <span class="theme-arrow" aria-hidden="true">&darr;</span>
+          </a>
+        </li>
+        <li>
+          <a href="#organs-to-algorithms" class="theme-row">
+            <span class="theme-num">02</span>
+            <span class="theme-text">
+              <span class="theme-kicker">Classification &middot; Pathology &middot; AI</span>
+              <span class="theme-name">From Organs to Algorithms</span>
+              <span class="theme-desc">Why cancer is still named for where it grows, and what AI can see when it isn&rsquo;t.</span>
             </span>
             <span class="theme-arrow" aria-hidden="true">&darr;</span>
           </a>
@@ -388,6 +412,7 @@
               </div>
               <p>Train AI on these labels and, at best, it learns to reproduce them faster: faster horses, not biological insight.</p>
               <p class="cite-line">Khozin et al., FDA meta-analysis, 2017 &middot; Khozin, Clin Transl Sci 2024</p>
+              <p class="crosslink"><span>Theme 02</span><a href="#organs-to-algorithms">How cancer got these names, and what replaces them: From Organs to Algorithms &rarr;</a></p>
             </div>
 
             <div class="reason" id="sd-not-saas">
@@ -446,6 +471,7 @@
               </tbody>
             </table>
             <p class="cite-line">Adapted from Table 1, Khozin, Clin Transl Sci 2024</p>
+            <p class="crosslink"><span>Theme 02</span><a href="#oa-compare">All ten rows, and the case behind them &rarr;</a></p>
 
             <h4 class="part-sub">From big data to smart data: study the whole patient</h4>
             <p>Moving from a reductionist center, a single structured table, to a holistic edge that spans the volume, variety, velocity and veracity of data: records, trials, sensors, imaging and omics, joined around one patient.</p>
@@ -471,8 +497,9 @@
           <!-- Connections & references -->
           <section class="part part-refs" id="sd-connections" aria-labelledby="sd-connections-h">
             <h3 class="part-title" id="sd-connections-h">Connections</h3>
-            <p>Where this theme meets the rest of the work. Future themes will link here as they are added.</p>
+            <p>Where this theme meets the rest of the work.</p>
             <ul class="connections">
+              <li><a href="#organs-to-algorithms"><span class="conn-where">Theme 02</span><span class="conn-what">From Organs to Algorithms: how disease labels arose, and a classification built from mechanism up</span></a></li>
               <li><a href="../#reader-agreement"><span class="conn-where">Research</span><span class="conn-what">Inter-reader response classification: the 13,677-patient matrix behind &ldquo;arbitrary gold standards&rdquo;</span></a></li>
               <li><a href="../#informed-figures"><span class="conn-where">INFORMED</span><span class="conn-what">From big data to smart data: the four V&rsquo;s and the systems view of drug development</span></a></li>
               <li><a href="../#convergence"><span class="conn-where">Convergence</span><span class="conn-what">Disease classified by mechanism instead of anatomy, inside a learning system</span></a></li>
@@ -511,6 +538,317 @@
     </div>
   </section>
 
+  <!-- Theme 02 -->
+  <section class="section section-theme" id="organs-to-algorithms">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><span class="section-label">Theme 02 &middot; From Organs to Algorithms</span><b>Classification &middot; Pathology &middot; AI</b></div>
+        <h2 class="section-title">From Organs to <em>Algorithms</em></h2>
+      </div>
+
+      <div class="theme-open">
+        <p class="lead">Cancer is still named for where it grows. The treatments that work best follow what drives it.</p>
+        <p class="theme-standfirst">For more than a century, cancer has been classified by the organ it starts in and how it looks under a microscope. Molecular profiling has since shown that tumors in different organs can share the same driver, while tumors in the same organ can be strikingly different. This theme traces how the names arose, what they cost patients, and how AI could build a classification from mechanism up, provided it is not trained to copy the old labels.</p>
+      </div>
+
+      <ol class="brief">
+        <li><span class="brief-num">01</span><h3>The names are historical accidents</h3><p>Anatomy and histology were the best instruments of their time. They were never designed to predict which drug will work.</p></li>
+        <li><span class="brief-num">02</span><h3>Mechanism already wins</h3><p>In FDA lung cancer trials, about 4 patients needed treatment for one to benefit when patients were selected by molecular profile, against 11 without selection.</p></li>
+        <li><span class="brief-num">03</span><h3>Algorithms must learn biology, not labels</h3><p>Models trained on inherited categories learn to reproduce them faster. The opportunity is in features no human defined.</p></li>
+      </ol>
+
+      <div class="theme-body">
+        <nav class="theme-toc" aria-label="In this theme">
+          <p class="theme-toc-head">In this theme</p>
+          <ol>
+            <li><a href="#oa-names"><span>I</span>How cancer got its names</a></li>
+            <li><a href="#oa-promise"><span>II</span>The promise of 100%</a></li>
+            <li><a href="#oa-negation"><span>III</span>Defined by what it is not</a></li>
+            <li><a href="#oa-numbers"><span>IV</span>The numbers say it already</a></li>
+            <li><a href="#oa-split"><span>V</span>Lung cancer, split by split</a></li>
+            <li><a href="#oa-resort"><span>VI</span>Re-sort the tumors</a></li>
+            <li><a href="#oa-see"><span>VII</span>What algorithms can see</a></li>
+            <li><a href="#oa-compare"><span>VIII</span>The full comparison</a></li>
+            <li><a href="#oa-take"><span>IX</span>What it will take</a></li>
+            <li><a href="#oa-connections"><span>&rarr;</span>Connections &amp; references</a></li>
+          </ol>
+        </nav>
+
+        <article class="theme-article">
+
+          <!-- I -->
+          <section class="part" id="oa-names" aria-labelledby="oa-names-h">
+            <p class="part-num">Part I</p>
+            <h3 class="part-title" id="oa-names-h">How cancer got its names</h3>
+            <p>Every classification is a record of the instruments available when it was written. Cancer&rsquo;s was written in layers: first by what could be seen, then by where it was found, then by what its cells looked like through a lens.</p>
+            <figure class="figure figure-timeline" id="names-timeline">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 1</span>Layers of a name. Select a period.</figcaption>
+              <div class="tl-track" role="tablist" aria-label="Periods in the history of cancer classification"></div>
+              <div class="tl-panel" aria-live="polite"></div>
+              <noscript><p class="figure-note">Egyptian papyri &middot; Hippocrates names &ldquo;carcinos&rdquo; &middot; surgeons sort tumors by location &middot; the microscope sorts them by cell shape &middot; immunohistochemistry &middot; sequencing and single cells &middot; algorithms.</p></noscript>
+            </figure>
+            <p>Each layer added real knowledge. But despite sequencing, transcriptomics and single-cell proteomics, the system in daily use is still anchored in anatomical location and histology: a framework rooted in historical practice rather than in what is now known about the biology. It constrains how far the newest diagnostic tools can be exploited, and how precisely therapies can be aimed.</p>
+            <p class="cite-line">Khozin, Clin Transl Sci 2024</p>
+          </section>
+
+          <!-- II -->
+          <section class="part" id="oa-promise" aria-labelledby="oa-promise-h">
+            <p class="part-num">Part II</p>
+            <h3 class="part-title" id="oa-promise-h">The promise of 100%</h3>
+            <p>The founding premise of precision medicine is simple: the right therapy for the right patient, at the right time and dose. Taken literally, it implies that every correctly matched patient should respond.</p>
+            <p>In practice, responses in trials and in the clinic spread across a wide range, and a substantial share of patients with metastatic disease gain little or nothing. The argument of this theme is that the principle is not wrong. The matching is. Classification based on organ and microscope too often fails to find the right patient.</p>
+            <blockquote class="pull">
+              <p>&ldquo;What if the &lsquo;noise&rsquo; is the signal? What if what we have been calling variation is actually heterogeneity: meaningful biological differences that determine whether a patient thrives or dies on a given therapy?&rdquo;</p>
+              <cite>Sean Khozin &middot; The Ghost in the Statistical Machine, 2026</cite>
+            </blockquote>
+            <p>The average patient, the figure every trial reports, exists nowhere except in the aggregate. A classification that lumps different diseases together widens that average and hides the patients a drug could have helped.</p>
+          </section>
+
+          <!-- III -->
+          <section class="part" id="oa-negation" aria-labelledby="oa-negation-h">
+            <p class="part-num">Part III</p>
+            <h3 class="part-title" id="oa-negation-h">Defined by what it is not</h3>
+            <p>&ldquo;Lung cancer&rdquo; records an early surgical observation of where a tumor sits. &ldquo;Non-small cell&rdquo; records what a pathologist did not see through the microscope. Together they define a disease by negation, and group malignancies with distinct molecular drivers, immune environments and resistance mechanisms under a label that encodes none of that.</p>
+            <div class="label-stack">
+              <div class="label-layer"><span class="label-eye">Where it sits</span><p><b>&ldquo;Lung&rdquo;</b>: the organ, from the surgeon&rsquo;s map.</p></div>
+              <div class="label-layer"><span class="label-eye">What it is not</span><p><b>&ldquo;Non-small cell&rdquo;</b>: a negative, from the microscope.</p></div>
+              <div class="label-layer label-truth"><span class="label-eye">What drives it</span><p><b>EGFR, ALK, ROS1, BRAF, KRAS, RET, MET, HER2, NTRK&hellip;</b> each a different disease, each with different drugs.</p></div>
+            </div>
+            <p>Labels drawn from human perception are also unstable. In an FDA analysis of 13,677 patients in registration trials, two expert readers looking at the same scans disagreed on tumor response about 30% of the time.</p>
+            <p class="crosslink"><span>Theme 01</span><a href="#sd-gold-standards">Arbitrary gold standards, in The Simulator&rsquo;s Dilemma &rarr;</a></p>
+            <p>When these inherited categories become training labels, AI does not escape them. Most AI imaging work still correlates what a model learns with existing &ldquo;gold standard&rdquo; criteria, which reinforces the same assumptions the old categories suffer from.</p>
+            <blockquote class="pull pull-small">
+              <p>&ldquo;When these inherited categories become training labels for foundation models, the models do not simply inherit their limitations; they amplify them.&rdquo;</p>
+              <cite>Sean Khozin &middot; The Simulator&rsquo;s Dilemma, Revisited, 2026</cite>
+            </blockquote>
+          </section>
+
+          <!-- IV -->
+          <section class="part" id="oa-numbers" aria-labelledby="oa-numbers-h">
+            <p class="part-num">Part IV</p>
+            <h3 class="part-title" id="oa-numbers-h">The numbers say it already</h3>
+            <p>Across 30 lung cancer trials that supported FDA decisions from 2003 to 2017, researchers counted how many patients had to be treated for one to benefit. The answer depended less on the drug than on whether the patients had been selected by the biology of their tumor.</p>
+            <figure class="figure figure-nnb">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 2</span>Patients treated for one to benefit, advanced non-small cell lung cancer</figcaption>
+              <div class="nnb">
+                <div class="nnb-row"><span class="nnb-num">4</span><span class="nnb-label">Approved targeted therapies in molecularly selected patients</span><span class="nnb-dots" data-n="4" aria-hidden="true"></span></div>
+                <div class="nnb-row"><span class="nnb-num">11</span><span class="nnb-label">Approved therapies without molecular selection</span><span class="nnb-dots" data-n="11" aria-hidden="true"></span></div>
+                <div class="nnb-row"><span class="nnb-num">23</span><span class="nnb-label">Therapies withdrawn or never approved</span><span class="nnb-dots" data-n="23" aria-hidden="true"></span></div>
+              </div>
+              <p class="figure-note">Averages across subpopulations, number needed to benefit. Each row shows one patient who benefits among those treated. <span class="cite-line">Raju, Khozin et al., JCO Clin Cancer Inform 2020</span></p>
+            </figure>
+            <p>The same pattern shows up in response rates. With doublet chemotherapy in morphologically defined non-small cell lung cancer, responses hover around 30%. In molecularly defined settings they routinely reach 50&ndash;90%.</p>
+            <p class="cite-line">Khozin, The Simulator&rsquo;s Dilemma, Revisited, 2026</p>
+            <p>And when machine-learning models were trained on patient-level data from 17 FDA-submitted lung cancer trials, biomarker status was the strongest predictor of response, progression-free survival and overall survival. But single biomarkers had limited predictive value, especially PD-L1 for immunotherapy. The authors concluded that going further requires composite, multiomic signatures: a classification built from many measurements at once.</p>
+            <p class="cite-line">Siah, Khozin, Wong &amp; Lo, JCO Clin Cancer Inform 2019</p>
+          </section>
+
+          <!-- V -->
+          <section class="part" id="oa-split" aria-labelledby="oa-split-h">
+            <p class="part-num">Part V</p>
+            <h3 class="part-title" id="oa-split-h">Lung cancer, split by split</h3>
+            <blockquote class="pull pull-small">
+              <p>&ldquo;&lsquo;Lung cancer&rsquo; has decomposed into a taxonomy of molecular species.&rdquo;</p>
+              <cite>Sean Khozin &middot; The Ghost in the Statistical Machine, 2026</cite>
+            </blockquote>
+            <p>One name has been coming apart, approval by approval. Drag through the years to watch &ldquo;non-small cell lung cancer&rdquo; divide into diseases defined by their drivers.</p>
+            <figure class="figure figure-split" id="nsclc-split">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 3</span>Biomarker-defined FDA approvals in non-small cell lung cancer</figcaption>
+              <div class="split-readout" aria-live="polite"><span class="split-year">2010</span><span class="split-count"></span></div>
+              <ol class="split-chips"></ol>
+              <label class="eroom-slider"><span class="visually-hidden">Year</span><input type="range" min="2010" max="2024" step="1" value="2010"></label>
+              <p class="figure-note">Selected approvals by year of first FDA approval for each biomarker-defined population. <span class="split-key">Outlined</span> entries: FDA approval summaries with Dr. Khozin as first author (erlotinib 2014, ceritinib 2015, osimertinib 2016, in Oncologist and Clin Cancer Res). <span class="cite-line">U.S. FDA approval records</span></p>
+            </figure>
+            <p>Once a disease is defined by its driver, a small study can be decisive. In March 2016, FDA approved crizotinib for ROS1-positive lung cancer on the strength of about fifty patients from a single-arm study, in which independent review found a 66% response rate. The evidence fit in a modest summary table. The biology did the rest.</p>
+            <p class="cite-line">Khozin, Fifty Patients, 2026</p>
+          </section>
+
+          <!-- VI -->
+          <section class="part" id="oa-resort" aria-labelledby="oa-resort-h">
+            <p class="part-num">Part VI</p>
+            <h3 class="part-title" id="oa-resort-h">Re-sort the tumors</h3>
+            <p>Group tumors by organ and each group mixes different diseases, while the same driver turns up in many groups. Group them by driver and tumors from different organs line up behind a shared target.</p>
+            <figure class="figure figure-resort" id="resort">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 4</span>The same tumors, sorted two ways</figcaption>
+              <div class="seg" role="group" aria-label="Group tumors by">
+                <button class="seg-btn" type="button" data-by="organ" aria-pressed="true">By organ</button>
+                <button class="seg-btn" type="button" data-by="driver" aria-pressed="false">By driver</button>
+              </div>
+              <div class="resort-board" aria-live="polite"></div>
+              <p class="figure-note"><span class="resort-note"></span> <span class="cite-line">Illustrative: each tile is a tumor type in which the driver occurs, not its frequency. Approvals: U.S. FDA.</span></p>
+            </figure>
+            <p>Regulators have already started to classify this way. In May 2017, FDA approved pembrolizumab for any solid tumor with high microsatellite instability or mismatch-repair deficiency: the first approval defined by a biomarker rather than an organ. It came during Dr. Khozin&rsquo;s tenure at FDA, at a time when moving away from anatomy was, in his words, &ldquo;at best an ambiguous concept for many stakeholders.&rdquo; Approvals for NTRK fusions, BRAF V600E, RET fusions and HER2 followed.</p>
+            <p>The idea was visible even earlier. Imatinib, built for the BCR-ABL kinase in chronic myeloid leukemia, extended to gastrointestinal stromal tumors once KIT came into view: the first hint that a targeted drug could cross disease boundaries when the biology is shared.</p>
+            <p class="cite-line">Khozin, Unearthing Mechanistic Foundations of Oncological Diseases with AI, 2023 &middot; Khozin, The Discipline of Precision, 2026</p>
+          </section>
+
+          <!-- VII -->
+          <section class="part" id="oa-see" aria-labelledby="oa-see-h">
+            <p class="part-num">Part VII</p>
+            <h3 class="part-title" id="oa-see-h">What algorithms can see</h3>
+            <p>In 2016, in the second game against Lee Sedol, AlphaGo played Move 37: a stone placed where centuries of human strategy said it did not belong. It looked like a mistake. It was a solution humans had not conceived.</p>
+            <p>Dr. Khozin calls these <b>non-obvious, or &ldquo;alien,&rdquo; constructions</b>: solutions that are better than the human ones and that lie outside the set of answers humans would think of. In pathology and imaging, the alien constructions are features: patterns in tissue and scans that predict biology and outcome, which no human ever named.</p>
+            <figure class="figure figure-alien" id="alien">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 5</span>A solution outside the human set</figcaption>
+              <div class="alien-grid">
+                <svg class="alien-svg" viewBox="0 0 420 260" role="img" aria-label="Diagram: the space of all solutions contains a smaller region of human-conceivable solutions; the alien solution lies outside it">
+                  <rect x="6" y="6" width="408" height="248" class="alien-space"/>
+                  <text x="20" y="30" class="alien-label">S &middot; all possible solutions</text>
+                  <ellipse cx="160" cy="150" rx="118" ry="78" class="alien-human"/>
+                  <text x="160" y="206" text-anchor="middle" class="alien-label">H &middot; what humans would conceive</text>
+                  <circle cx="170" cy="160" r="7" class="alien-dot-human"/>
+                  <text x="150" y="182" text-anchor="middle" class="alien-small">best human answer</text>
+                  <g class="alien-star">
+                    <line x1="177" y1="160" x2="336" y2="92" class="alien-gap"/>
+                    <circle cx="344" cy="88" r="10" class="alien-dot"/>
+                    <text x="344" y="122" text-anchor="middle" class="alien-label">s*</text>
+                    <text x="262" y="108" text-anchor="middle" class="alien-small">distance &gt; &epsilon;</text>
+                  </g>
+                </svg>
+                <div class="alien-conds">
+                  <p class="alien-conds-head">A solution s* is alien if it is</p>
+                  <ol>
+                    <li><b>Optimal</b> by the measure of quality</li>
+                    <li><b>Not human-conceivable</b>: outside H</li>
+                    <li><b>Far from human solutions</b>, by more than some &epsilon;</li>
+                    <li><b>Unlikely</b> to be reached from human knowledge</li>
+                  </ol>
+                  <button class="ctl-btn" type="button" data-alien aria-pressed="false">Show the alien solution</button>
+                </div>
+              </div>
+              <p class="figure-note">After Definition 1, Khozin, Non-Obvious Alien AI Constructions (preprint, not peer-reviewed), 2024. <span class="cite-line">Silver et al., Nature 2016</span></p>
+            </figure>
+
+            <h4 class="part-sub">Already in the literature</h4>
+            <div class="tool-groups">
+              <div class="tool-group">
+                <h4 class="tool-group-title">Reading slides as an expert does</h4>
+                <div class="tool-card"><h5>Expert-level grading</h5><p>A deep-learning system for Gleason grading of prostate biopsies agreed with expert uropathologists and outperformed general pathologists.</p><p class="cite-line">Bulten et al., Nat Med 2022</p></div>
+                <div class="tool-card"><h5>Faster, surer diagnosis</h5><p>AI assistance cut diagnosis time by up to 62% for plasma cell identification and 33% for lymph-node metastases, and reduced diagnostic uncertainty and requests for extra tests by over 60%.</p><p class="cite-line">Huang et al., Nat Biomed Eng 2024</p></div>
+              </div>
+              <div class="tool-group">
+                <h4 class="tool-group-title">Finding what no one named</h4>
+                <div class="tool-card"><h5>New prognostic markers</h5><p>Patterns in the stromal environment of colorectal tumors predicted survival; slide analysis found a distinct subset of endometrial cancers with markedly worse outcomes.</p><p class="cite-line">Kather et al., PLoS Med 2019 &middot; Darbandsari et al., Nat Commun 2024</p></div>
+                <div class="tool-card"><h5>Features shared across cancers</h5><p>Four imaging features common to three malignancies, each with its own molecular character and prognostic meaning.</p><p class="cite-line">Wu et al., Nat Mach Intell 2021</p></div>
+              </div>
+              <div class="tool-group">
+                <h4 class="tool-group-title">Molecules from morphology</h4>
+                <div class="tool-card"><h5>Mutations from a stained slide</h5><p>Microsatellite instability and POLE mutations detected from routine H&amp;E slides in colorectal cancer; across cancers, morphology predicted specific mutations.</p><p class="cite-line">Gustav et al., NPJ Precis Oncol 2024 &middot; Fu et al., Nat Cancer 2020</p></div>
+                <div class="tool-card"><h5>Expression, and response</h5><p>Genome-wide tumor mRNA expression inferred from slides, then used to predict response to targeted and immune therapies.</p><p class="cite-line">Hoang et al., Nat Cancer 2024</p></div>
+              </div>
+              <div class="tool-group">
+                <h4 class="tool-group-title">Structure in space</h4>
+                <div class="tool-card"><h5>Tumor microregions</h5><p>Across 131 tumor sections from six cancer types, spatial transcriptomics, multiplexed imaging and single-nucleus sequencing revealed distinct microregions, each with its own genetic clones. Treatment-resistant subclones tended to form larger, metabolically active microregions.</p><p class="cite-line">Mo et al., Nature 2024</p></div>
+                <div class="tool-card"><h5>Imaging beyond the eye</h5><p>A lung-cancer screening model outperformed experienced radiologists in detection; image-based deep learning identified patients likely to respond better to radiotherapy.</p><p class="cite-line">Ardila et al., Nat Med 2019 &middot; Lou et al., Lancet Digit Health 2019</p></div>
+              </div>
+            </div>
+            <p>Trained models also leave behind a rich mathematical representation, the latent space, in which data is compressed and sorted into clusters humans cannot form unaided. That is where new disease categories are most likely to be found: if the representation is explored for itself, rather than forced back onto the old labels.</p>
+            <p class="cite-line">Khozin, Unearthing Mechanistic Foundations of Oncological Diseases with AI, 2023</p>
+          </section>
+
+          <!-- VIII -->
+          <section class="part" id="oa-compare" aria-labelledby="oa-compare-h">
+            <p class="part-num">Part VIII</p>
+            <h3 class="part-title" id="oa-compare-h">The full comparison</h3>
+            <p>AI-driven classification inverts the current diagnostic paradigm: it starts from multiomic profiles and computationally extracted features, and works up to categories, rather than starting from the organ and working down.</p>
+            <table class="compare-table">
+              <caption class="visually-hidden">Current cancer classification compared with AI-driven classification, ten features</caption>
+              <thead>
+                <tr>
+                  <th scope="col"><span class="visually-hidden">Feature</span></th>
+                  <th scope="col">Current classification</th>
+                  <th scope="col" class="is-point">AI-driven classification</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row"><span class="compare-idx">01</span><span class="compare-name">Primary basis</span></th><td>Anatomical location and histological features</td><td class="is-point">Integration of molecular, imaging, histopathological and clinical characteristics</td></tr>
+                <tr><th scope="row"><span class="compare-idx">02</span><span class="compare-name">Origin</span></th><td>Historical medical practices</td><td class="is-point">Reflects the evolving understanding of biological processes</td></tr>
+                <tr><th scope="row"><span class="compare-idx">03</span><span class="compare-name">Precision</span></th><td>Limited by inter- and intra-observer variability</td><td class="is-point">Potentially more objective and reproducible</td></tr>
+                <tr><th scope="row"><span class="compare-idx">04</span><span class="compare-name">Molecular insight</span></th><td>Limited integration of molecular data</td><td class="is-point">Comprehensive integration of multi-omics data</td></tr>
+                <tr><th scope="row"><span class="compare-idx">05</span><span class="compare-name">Novel features</span></th><td>Limited ability to identify new subtypes</td><td class="is-point">Can identify de novo features and patterns</td></tr>
+                <tr><th scope="row"><span class="compare-idx">06</span><span class="compare-name">Data integration</span></th><td>Primarily a single modality</td><td class="is-point">Integrates imaging, pathology, genomics and more</td></tr>
+                <tr><th scope="row"><span class="compare-idx">07</span><span class="compare-name">Treatment matching</span></th><td>Often leads to suboptimal therapy matching</td><td class="is-point">Potential for more precise treatment selection</td></tr>
+                <tr><th scope="row"><span class="compare-idx">08</span><span class="compare-name">Biological relevance</span></th><td>May group heterogeneous cancers together</td><td class="is-point">Aims to reflect underlying disease mechanisms more accurately</td></tr>
+                <tr><th scope="row"><span class="compare-idx">09</span><span class="compare-name">Standardization</span></th><td>Varies across institutions</td><td class="is-point">Potential for standardized diagnostic criteria</td></tr>
+                <tr><th scope="row"><span class="compare-idx">10</span><span class="compare-name">Prognostic value</span></th><td>Limited by broad groupings of heterogeneous patients</td><td class="is-point">Can reveal new prognostic indicators</td></tr>
+              </tbody>
+            </table>
+            <p class="cite-line">Table 1, Khozin, Clin Transl Sci 2024</p>
+          </section>
+
+          <!-- IX -->
+          <section class="part" id="oa-take" aria-labelledby="oa-take-h">
+            <p class="part-num">Part IX</p>
+            <h3 class="part-title" id="oa-take-h">What it will take</h3>
+            <p>A computationally powered classification has to clear the same bar as any other medical claim. The obstacles are known.</p>
+            <ol class="moves moves-5">
+              <li><span class="move-num">01</span><h5>Standardized, integrated data</h5><p>Robust multi-center datasets that link molecular, imaging, pathology and clinical records.</p></li>
+              <li><span class="move-num">02</span><h5>Interpretability</h5><p>Models whose reasoning can be examined in biological terms.</p></li>
+              <li><span class="move-num">03</span><h5>Clinical validation</h5><p>Evaluation guidelines and prospective trials, not only retrospective benchmarks.</p></li>
+              <li><span class="move-num">04</span><h5>Ethics</h5><p>Attention to bias in who is represented in the data that defines a disease.</p></li>
+              <li><span class="move-num">05</span><h5>Teams and infrastructure</h5><p>Clinicians, researchers and AI specialists working together, with the computing to match.</p></li>
+            </ol>
+            <p class="cite-line">Khozin, Clin Transl Sci 2024 &middot; Elemento, Khozin &amp; Sternberg, NEJM AI 2025</p>
+            <blockquote class="pull pull-small">
+              <p>&ldquo;A mutation list is not a disease model. A pathway diagram is not an intervention strategy. A biomarker is not a mechanism unless the biology makes it one.&rdquo;</p>
+              <cite>Sean Khozin &middot; The Discipline of Precision, 2026</cite>
+            </blockquote>
+            <div class="closing">
+              <p class="closing-line">Classify the biology, not the organ.</p>
+              <p>When the training data captures proxies, the model learns proxies. Built on mechanism instead, a classification can find the right patient, and deliver what precision medicine has always promised.</p>
+            </div>
+          </section>
+
+          <!-- Connections & references -->
+          <section class="part part-refs" id="oa-connections" aria-labelledby="oa-connections-h">
+            <h3 class="part-title" id="oa-connections-h">Connections</h3>
+            <ul class="connections">
+              <li><a href="#simulators-dilemma"><span class="conn-where">Theme 01</span><span class="conn-what">The Simulator&rsquo;s Dilemma: why labels drawn from human perception limit what AI can learn about biology</span></a></li>
+              <li><a href="../#reader-agreement"><span class="conn-where">Research</span><span class="conn-what">Inter-reader response classification: the 13,677-patient matrix</span></a></li>
+              <li><a href="../#research"><span class="conn-where">Research</span><span class="conn-what">AutoRECIST and the Total Tumor Burden Index: measurement independent of inherited categories</span></a></li>
+              <li><a href="../#convergence"><span class="conn-where">Convergence</span><span class="conn-what">Disease classified by mechanism instead of anatomy, inside a learning system</span></a></li>
+            </ul>
+
+            <h3 class="part-title part-title-refs">Further reading</h3>
+            <div class="research-pub-list references">
+              <a href="https://www.insights.phyusionbio.com/p/the-evolution-of-cancer-classification" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2024</span><span class="research-pub-title">The Evolution of Cancer Classification</span><span class="research-pub-authors">From organs to algorithms and molecular landscapes</span></a>
+              <a href="https://www.insights.phyusionbio.com/p/unearthing-mechanistic-foundations" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2023</span><span class="research-pub-title">Unearthing Mechanistic Foundations of Oncological Diseases with AI</span><span class="research-pub-authors">From artifacts of history to precision medicine</span></a>
+              <a href="https://www.insights.phyusionbio.com/p/the-ghost-in-the-statistical-machine" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2026</span><span class="research-pub-title">The Ghost in the Statistical Machine and the Illusion of the Average Patient</span><span class="research-pub-authors">A brief history of precision in medicine and FDA&rsquo;s evolution</span></a>
+              <a href="https://www.insights.phyusionbio.com/p/the-aliens-are-here" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2024</span><span class="research-pub-title">The Aliens Are Here</span><span class="research-pub-authors">Non-obvious AI solutions as a paradigm shift in problem-solving</span></a>
+              <a href="https://www.insights.phyusionbio.com/p/the-simulators-dilemma-revisited" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2026</span><span class="research-pub-title">The Simulator&rsquo;s Dilemma, Revisited</span><span class="research-pub-authors">On the language we use, and why it is part of the problem</span></a>
+              <a href="https://www.insights.phyusionbio.com/p/fifty-patients" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2026</span><span class="research-pub-title">Fifty Patients</span><span class="research-pub-authors">Evidence strong enough that no one, including FDA, can object</span></a>
+              <a href="https://www.insights.phyusionbio.com/p/the-discipline-of-precision" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2026</span><span class="research-pub-title">The Discipline of Precision</span><span class="research-pub-authors">On imatinib, and following a biological idea far enough</span></a>
+            </div>
+
+            <h3 class="part-title part-title-refs">References</h3>
+            <div class="research-pub-list references">
+              <a href="https://doi.org/10.1111/cts.70001" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Clin Transl Sci, 2024</span><span class="research-pub-title">From organs to algorithms: redefining cancer classification in the age of artificial intelligence</span><span class="research-pub-authors">Khozin S.</span></a>
+              <a href="https://doi.org/10.1200/CCI.19.00103" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">JCO Clin Cancer Inform, 2020</span><span class="research-pub-title">Patient-centered approach to benefit-risk characterization using number needed to benefit and number needed to harm: advanced non-small-cell lung cancer</span><span class="research-pub-authors">Raju GK, Khozin S, et al.</span></a>
+              <a href="https://doi.org/10.1200/CCI.19.00046" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">JCO Clin Cancer Inform, 2019</span><span class="research-pub-title">Machine-learning and stochastic tumor growth models for predicting outcomes in patients with advanced non-small-cell lung cancer</span><span class="research-pub-authors">Siah KW, Khozin S, Wong CH, Lo AW.</span></a>
+              <a href="https://doi.org/10.1056/aira2401164" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">NEJM AI, 2025</span><span class="research-pub-title">The use of artificial intelligence for cancer therapeutic decision-making</span><span class="research-pub-authors">Elemento O, Khozin S, Sternberg CN.</span></a>
+              <a href="https://doi.org/10.20944/preprints202408.1929.v1" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Preprints, 2024 &middot; not peer-reviewed</span><span class="research-pub-title">Non-obvious alien AI constructions: opportunities and implications</span><span class="research-pub-authors">Khozin S.</span></a>
+              <a href="https://doi.org/10.1634/theoncologist.2014-0089" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Oncologist, 2014</span><span class="research-pub-title">FDA approval summary: erlotinib for the first-line treatment of metastatic NSCLC with EGFR exon 19 deletions or exon 21 (L858R) substitution mutations</span><span class="research-pub-authors">Khozin S, et al.</span></a>
+              <a href="https://doi.org/10.1158/1078-0432.CCR-14-3157" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Clin Cancer Res, 2015</span><span class="research-pub-title">FDA approval: ceritinib for the treatment of metastatic anaplastic lymphoma kinase-positive non-small cell lung cancer</span><span class="research-pub-authors">Khozin S, et al.</span></a>
+              <a href="https://doi.org/10.1158/1078-0432.CCR-16-1773" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Clin Cancer Res, 2016</span><span class="research-pub-title">Osimertinib for the treatment of metastatic EGFR T790M mutation-positive non-small cell lung cancer</span><span class="research-pub-authors">Khozin S, et al.</span></a>
+              <a href="https://doi.org/10.1038/s41586-024-08087-4" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nature, 2024</span><span class="research-pub-title">Tumour evolution and microenvironment interactions in 2D and 3D space</span><span class="research-pub-authors">Mo CK, et al.</span></a>
+              <a href="https://doi.org/10.1038/s41591-021-01620-2" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nat Med, 2022</span><span class="research-pub-title">Artificial intelligence for diagnosis and Gleason grading of prostate cancer: the PANDA challenge</span><span class="research-pub-authors">Bulten W, et al.</span></a>
+              <a href="https://doi.org/10.1038/s41551-024-01223-5" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nat Biomed Eng, 2024</span><span class="research-pub-title">A pathologist&ndash;AI collaboration framework for enhancing diagnostic accuracies and efficiencies</span><span class="research-pub-authors">Huang Z, et al.</span></a>
+              <a href="https://doi.org/10.1371/journal.pmed.1002730" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PLoS Med, 2019</span><span class="research-pub-title">Predicting survival from colorectal cancer histology slides using deep learning</span><span class="research-pub-authors">Kather JN, et al.</span></a>
+              <a href="https://doi.org/10.1038/s43018-020-0085-8" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nat Cancer, 2020</span><span class="research-pub-title">Pan-cancer computational histopathology reveals mutations, tumor composition and prognosis</span><span class="research-pub-authors">Fu Y, et al.</span></a>
+              <a href="https://doi.org/10.1038/s41467-024-49017-2" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nat Commun, 2024</span><span class="research-pub-title">AI-based histopathology image analysis reveals a distinct subset of endometrial cancers</span><span class="research-pub-authors">Darbandsari A, et al.</span></a>
+              <a href="https://doi.org/10.1038/s41698-024-00592-z" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">NPJ Precis Oncol, 2024</span><span class="research-pub-title">Deep learning for dual detection of microsatellite instability and POLE mutations in colorectal cancer histopathology</span><span class="research-pub-authors">Gustav M, et al.</span></a>
+              <a href="https://doi.org/10.1038/s43018-024-00793-2" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nat Cancer, 2024</span><span class="research-pub-title">A deep-learning framework to predict cancer treatment response from histopathology images through imputed transcriptomics</span><span class="research-pub-authors">Hoang DT, et al.</span></a>
+              <a href="https://doi.org/10.1038/s41591-019-0447-x" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nat Med, 2019</span><span class="research-pub-title">End-to-end lung cancer screening with three-dimensional deep learning on low-dose chest computed tomography</span><span class="research-pub-authors">Ardila D, et al.</span></a>
+              <a href="https://doi.org/10.1016/S2589-7500(19)30058-5" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Lancet Digit Health, 2019</span><span class="research-pub-title">An image-based deep learning framework for individualising radiotherapy dose</span><span class="research-pub-authors">Lou B, et al.</span></a>
+              <a href="https://doi.org/10.1038/s42256-021-00377-0" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nat Mach Intell, 2021</span><span class="research-pub-title">Radiological tumour classification across imaging modality and histology</span><span class="research-pub-authors">Wu J, et al.</span></a>
+              <a href="https://doi.org/10.1038/nature16961" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Nature, 2016</span><span class="research-pub-title">Mastering the game of Go with deep neural networks and tree search</span><span class="research-pub-authors">Silver D, et al.</span></a>
+            </div>
+          </section>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
@@ -521,6 +859,6 @@
   </footer>
 
   <script src="../script.js?v=39"></script>
-  <script src="../topology.js?v=2"></script>
+  <script src="../topology.js?v=3"></script>
 </body>
 </html>
