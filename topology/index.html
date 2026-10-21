@@ -93,7 +93,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=61">
-  <link rel="stylesheet" href="../topology.css?v=8">
+  <link rel="stylesheet" href="../topology.css?v=9">
 </head>
 <body class="page-topology">
   <!-- Navigation -->
@@ -247,7 +247,7 @@
           <section class="part" id="sd-rg7112" aria-labelledby="sd-rg7112-h">
             <p class="part-num">Part II</p>
             <h3 class="part-title" id="sd-rg7112-h">The molecule that could not</h3>
-            <p>RG7112 was designed to free the tumor suppressor p53 by blocking MDM2, the protein that holds p53 in check. Many tumors keep p53 silent this way, so releasing it is an elegant idea: switch the cell&rsquo;s own brake back on.</p>
+            <p>RG7112 was designed to free the tumor suppressor p53 by blocking MDM2, the protein that holds p53 in check. Many tumors keep p53 silent this way, so releasing it is a direct strategy: restore the cell&rsquo;s own brake.</p>
             <p>The molecule was built with the best tools of its day, and it passed every test those tools could set. Step through its development to see where it was stopped.</p>
 
             <figure class="figure figure-pipeline" id="rg-pipeline">
@@ -280,7 +280,7 @@
                 <li class="pipe-stage pipe-clinic" data-stage="7">
                   <button class="pipe-btn" type="button"><span class="pipe-n">7</span><span class="pipe-name">The clinic</span><span class="pipe-mark">Fail</span></button>
                   <div class="pipe-detail">
-                    <p>In patients with MDM2-amplified liposarcoma, the drug did exactly what it was designed to do. And still it failed.</p>
+                    <p>In patients with MDM2-amplified liposarcoma, the drug did what it was designed to do. It still failed.</p>
                     <div class="pipe-outcome">
                       <div><span class="pipe-outcome-tag">Benefit</span><p>p53-pathway activation confirmed in tumor biopsies. Only one confirmed partial response.</p></div>
                       <div class="is-harm"><span class="pipe-outcome-tag">Harm</span><p>Serious adverse events, including neutropenia and thrombocytopenia.</p></div>
@@ -480,7 +480,7 @@
                 <div class="label-layer"><span class="label-eye">Pathologist&rsquo;s eye</span><p><b>&ldquo;Small cell&rdquo; vs &ldquo;non-small cell&rdquo;</b>: what a pathologist sees through a microscope. &ldquo;Non-small cell&rdquo; defines a cancer by what it is not.</p></div>
                 <div class="label-layer label-truth"><span class="label-eye">Underneath</span><p><b>Distinct molecular drivers</b>, grouped together as one disease.</p></div>
               </div>
-              <p>Train AI on these labels and, at best, it learns to reproduce them faster: faster horses, not biological insight.</p>
+              <p>Train AI on these labels and, at best, it learns to reproduce them faster: with no gain in biological insight.</p>
               <p class="cite-line">Khozin et al., FDA meta-analysis, 2017 &middot; Khozin, Clin Transl Sci 2024</p>
               <p class="crosslink"><span>Theme 02</span><a href="#organs-to-algorithms">How cancer got these names, and what replaces them: From Organs to Algorithms &rarr;</a></p>
             </div>
@@ -556,7 +556,7 @@
 
             <div class="closing">
               <p class="closing-line">Better molecules are not better medicines.</p>
-              <p>AI&rsquo;s biggest opportunity is not designing the molecule. It is discovering the human biology that decides whether it works. RG7112 hit its target. It missed the patient.</p>
+              <p>AI&rsquo;s biggest opportunity is not designing the molecule. It is discovering the human biology that decides whether it works. RG7112 engaged its target as designed. It failed on human biology the models did not capture.</p>
               <blockquote class="pull pull-small">
                 <p>&ldquo;We can only see a short distance ahead, but we can see plenty there that needs to be done.&rdquo;</p>
                 <cite>Alan Turing, 1950</cite>
@@ -733,9 +733,9 @@
               <div class="split-readout" aria-live="polite"><span class="split-year">2010</span><span class="split-count"></span></div>
               <ol class="split-chips"></ol>
               <label class="eroom-slider"><span class="visually-hidden">Year</span><input type="range" min="2010" max="2024" step="1" value="2010"></label>
-              <p class="figure-note">Selected approvals by year of first FDA approval for each biomarker-defined population. <span class="split-key">Outlined</span> entries: FDA approval summaries with Dr. Khozin as first author (erlotinib 2014, ceritinib 2015, osimertinib 2016, in Oncologist and Clin Cancer Res). <span class="cite-line">U.S. FDA approval records</span></p>
+              <p class="figure-note">Selected approvals by year of first FDA approval for each biomarker-defined population. <span class="cite-line">U.S. FDA approval records</span></p>
             </figure>
-            <p>Once a disease is defined by its driver, a small study can be decisive. In March 2016, FDA approved crizotinib for ROS1-positive lung cancer on the strength of about fifty patients from a single-arm study, in which independent review found a 66% response rate. The evidence fit in a modest summary table. The biology did the rest.</p>
+            <p>Once a disease is defined by its driver, a small study can be decisive. In March 2016, FDA approved crizotinib for ROS1-positive lung cancer on the strength of about fifty patients from a single-arm study, in which independent review found a 66% response rate.</p>
             <p class="cite-line">Khozin, Fifty Patients, 2026</p>
           </section>
 
@@ -937,7 +937,7 @@
 
       <div class="theme-open">
         <p class="lead">What we measure determines what we can find.</p>
-        <p class="theme-standfirst">For twenty-five years, nearly every solid-tumor drug approved on tumor-based endpoints has rested on one instrument: a convention for pressing a ruler against a shadow on a CT scan. Two expert readers applying it to the same images disagree about a third of the time. This theme follows what that disagreement does once it enters a trial: how it shrinks real effects, discards information, turns borderline patients into coin flips, and quietly shapes which drugs get developed. And why, for the first time, the instrument can be replaced.</p>
+        <p class="theme-standfirst">For twenty-five years, nearly every solid-tumor drug approved on tumor-based endpoints has rested on one instrument: a convention for pressing a ruler against a shadow on a CT scan. Two expert readers applying it to the same images disagree about a third of the time. This theme follows what that disagreement does once it enters a trial: how it shrinks real effects, discards information, turns borderline patients into coin flips, and shapes which drugs get developed. And why, for the first time, the instrument can be replaced.</p>
       </div>
 
       <ol class="brief">
@@ -1046,7 +1046,7 @@
               </div>
             </figure>
             <p>The direction is the point. Random measurement error biases observed effects toward the null. At the level of the instrument, that produces a systematic excess of false negatives over false positives. A trial that misses statistical significance is not necessarily a trial of an inactive drug. Some fraction of negative trials in solid-tumor oncology are trials of active drugs measured with an instrument that could not see them.</p>
-            <p class="aside-line">No one knows the size of that fraction. The instrument erases the evidence of what it failed to detect.</p>
+            <p class="aside-line">No one knows the size of that fraction. A negative trial does not record whether the drug or the measurement failed.</p>
           </section>
 
           <!-- V -->
@@ -1069,7 +1069,7 @@
               </div>
               <p class="figure-note"><span class="wf-note"></span> <span class="cite-line">Simulated patients, for illustration</span></p>
             </figure>
-            <p>A drug that shrinks every patient&rsquo;s tumors by a quarter, a remarkable result implying a real mechanism, can post a response rate of zero, the same as no treatment. Trial designs that keep tumor change continuous, with a control group, were proposed precisely to stop discarding that information.</p>
+            <p>A drug that shrinks every patient&rsquo;s tumors by a quarter, an effect that implies real activity, can post a response rate of zero, the same as no treatment. Trial designs that keep tumor change continuous, with a control group, were proposed precisely to stop discarding that information.</p>
             <p class="cite-line">Karrison, Maitland, Stadler &amp; Ratain, J Natl Cancer Inst 2007 &middot; Shannon, Bell Syst Tech J 1948</p>
           </section>
 
@@ -1109,7 +1109,7 @@
             <p class="crosslink"><span>Theme 04</span><a href="#no-average-patient">Who trials leave out, and a tool to adjust for it: There Is No Average Patient &rarr;</a></p>
 
             <h4 class="part-sub">&ldquo;Who has validated ORR as a surrogate?&rdquo;</h4>
-            <p>A true surrogate, in Ross Prentice&rsquo;s 1989 definition, must capture the treatment&rsquo;s effect on the outcome that matters, so that once the surrogate is known, no residual effect remains. Response rate has never been validated this way. When Dr. Khozin, early in his FDA tenure, described response rate as a surrogate, Robert Temple, then deputy center director for clinical science, asked the question above. It had no answer.</p>
+            <p>A true surrogate, in Ross Prentice&rsquo;s 1989 definition, must capture the treatment&rsquo;s effect on the outcome that matters, so that once the surrogate is known, no residual effect remains. Response rate has never been validated this way. When Dr. Khozin, early in his FDA tenure, described response rate as a surrogate, Robert Temple, then deputy center director for clinical science, asked the question above. It has not been answered.</p>
             <div class="stat-row stat-row-3">
               <div class="stat"><span class="stat-num">0.89</span><span class="stat-label">R&sup2;, response rate vs progression-free survival, across FDA lung cancer trials</span></div>
               <div class="stat stat-point"><span class="stat-num">0.09</span><span class="stat-label">R&sup2;, response rate vs overall survival</span></div>
@@ -1436,7 +1436,7 @@
             <p class="cite-line">Khozin et al., Oncologist 2019</p>
             <div class="closing">
               <p class="closing-line">There is no average patient.</p>
-              <p>The Belmont Report&rsquo;s principle of justice asks that the benefits of research not flow only to those who can reach it. A trial that leaves patients out cannot tell us how they will fare. Until trials include them, the least we can do is adjust for their absence, out loud, with the numbers on the table.</p>
+              <p>The Belmont Report&rsquo;s principle of justice asks that the benefits of research not flow only to those who can reach it. A trial that leaves patients out cannot tell us how they will fare. Until trials include them, their absence should at least be estimated and reported.</p>
             </div>
           </section>
 
@@ -1776,7 +1776,7 @@
             </ol>
             <div class="closing">
               <p class="closing-line">One in how many?</p>
-              <p>It is the first question most patients ask and the last one most trial reports answer. A hazard ratio of 0.40 deserved 42 seconds of applause. It also deserved a sentence a patient could hold: treat three people, and one more of them will be alive next year.</p>
+              <p>It is the first question most patients ask and the last one most trial reports answer. A hazard ratio of 0.40 can also be stated in terms a patient can use: treat three people, and one more of them is alive at one year.</p>
             </div>
           </section>
 
@@ -1832,6 +1832,6 @@
   </footer>
 
   <script src="../script.js?v=39"></script>
-  <script src="../topology.js?v=6"></script>
+  <script src="../topology.js?v=7"></script>
 </body>
 </html>

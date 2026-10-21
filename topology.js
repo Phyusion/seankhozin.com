@@ -247,12 +247,12 @@
   });
 
   // 6b. Lung cancer, split by split. Biomarker-defined FDA approvals in
-  //     non-small cell lung cancer; `khozin` marks his FDA approval summaries.
+  //     non-small cell lung cancer.
   var SPLITS = [
     { year: 2011, marker: 'ALK', drug: 'crizotinib' },
-    { year: 2013, marker: 'EGFR exon 19 / L858R', drug: 'erlotinib, first line', khozin: true },
-    { year: 2014, marker: 'ALK, after crizotinib', drug: 'ceritinib', khozin: true },
-    { year: 2015, marker: 'EGFR T790M', drug: 'osimertinib', khozin: true },
+    { year: 2013, marker: 'EGFR exon 19 / L858R', drug: 'erlotinib, first line' },
+    { year: 2014, marker: 'ALK, after crizotinib', drug: 'ceritinib' },
+    { year: 2015, marker: 'EGFR T790M', drug: 'osimertinib' },
     { year: 2016, marker: 'ROS1', drug: 'crizotinib' },
     { year: 2016, marker: 'PD-L1 high', drug: 'pembrolizumab, first line' },
     { year: 2017, marker: 'BRAF V600E', drug: 'dabrafenib + trametinib' },
@@ -271,7 +271,7 @@
     var range = split.querySelector('input');
     SPLITS.forEach(function (sp) {
       var li = document.createElement('li');
-      li.className = 'split-chip' + (sp.khozin ? ' is-khozin' : '');
+      li.className = 'split-chip';
       li.innerHTML = '<span class="split-chip-year">' + sp.year + '</span><b>' + sp.marker + '</b><span>' + sp.drug + '</span>';
       chips.appendChild(li);
       sp.el = li;
