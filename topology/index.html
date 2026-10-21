@@ -91,9 +91,9 @@
   <script>document.documentElement.classList.add('js');</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=61">
-  <link rel="stylesheet" href="../topology.css?v=9">
+  <link rel="stylesheet" href="../topology.css?v=10">
 </head>
 <body class="page-topology">
   <!-- Navigation -->
@@ -763,36 +763,55 @@
             <p class="part-num">Part VII</p>
             <h3 class="part-title" id="oa-see-h">What algorithms can see</h3>
             <p>In 2016, in the second game against Lee Sedol, AlphaGo played Move 37: a stone placed where centuries of human strategy said it did not belong. It looked like a mistake. It was a solution humans had not conceived.</p>
-            <p>Dr. Khozin calls these <b>non-obvious, or &ldquo;alien,&rdquo; constructions</b>: solutions that are better than the human ones and that lie outside the set of answers humans would think of. In pathology and imaging, the alien constructions are features: patterns in tissue and scans that predict biology and outcome, which no human ever named.</p>
+            <p>Dr. Khozin calls these <b>non-obvious, or &ldquo;alien,&rdquo; constructions</b>: solutions that are better than the human ones and that lie outside the set of answers humans would think of. In pathology and imaging, the alien constructions are features: patterns in tissue and scans that predict biology and outcome, which no human ever named. The definition is formal.</p>
+            <div class="formula formula-def" role="group" aria-label="Definition 1, non-obvious alien construction">
+              <p class="formula-key formula-lead">Let <i>S</i> be the set of all possible solutions, <i>H</i> &sub; <i>S</i> the set of human-conceivable solutions, <i>h</i> : <i>S</i> &rarr; &#8477; a measure of solution quality and <i>d</i> a distance on <i>S</i>. A solution <i>s</i>* &isin; <i>S</i> is an alien construction if all four hold:</p>
+              <ol class="def-list">
+                <li><span class="def-num">1</span><span class="def-eq"><i>s</i>* &isin; arg&thinsp;max<sub><i>s</i>&isin;<i>S</i></sub> <i>h</i>(<i>s</i>)</span><span class="def-say">Optimal</span></li>
+                <li><span class="def-num">2</span><span class="def-eq"><i>s</i>* &notin; <i>H</i></span><span class="def-say">Not human-conceivable</span></li>
+                <li><span class="def-num">3</span><span class="def-eq">min<sub><i>s</i>&isin;<i>H</i></sub> <i>d</i>(<i>s</i>, <i>s</i>*) &gt; &epsilon;, &ensp;&epsilon; &gt; 0</span><span class="def-say">Far from every human solution</span></li>
+                <li><span class="def-num">4</span><span class="def-eq"><i>P</i>(<i>s</i>* &#8739; human knowledge) &lt; &delta;, &ensp;&delta; small</span><span class="def-say">Improbable under human priors</span></li>
+              </ol>
+            </div>
+            <p class="cite-line">Definition 1, Khozin, Non-Obvious Alien AI Constructions (preprint, not peer-reviewed), 2024</p>
             <figure class="figure figure-alien" id="alien">
-              <figcaption class="figure-head"><span class="figure-tag">Figure 5</span>A solution outside the human set</figcaption>
-              <div class="alien-grid">
-                <svg class="alien-svg" viewBox="0 0 420 260" role="img" aria-label="Diagram: the space of all solutions contains a smaller region of human-conceivable solutions; the alien solution lies outside it">
-                  <rect x="6" y="6" width="408" height="248" class="alien-space"/>
-                  <text x="20" y="30" class="alien-label">S &middot; all possible solutions</text>
-                  <ellipse cx="160" cy="150" rx="118" ry="78" class="alien-human"/>
-                  <text x="160" y="206" text-anchor="middle" class="alien-label">H &middot; what humans would conceive</text>
-                  <circle cx="170" cy="160" r="7" class="alien-dot-human"/>
-                  <text x="150" y="182" text-anchor="middle" class="alien-small">best human answer</text>
-                  <g class="alien-star">
-                    <line x1="177" y1="160" x2="336" y2="92" class="alien-gap"/>
-                    <circle cx="344" cy="88" r="10" class="alien-dot"/>
-                    <text x="344" y="122" text-anchor="middle" class="alien-label">s*</text>
-                    <text x="262" y="108" text-anchor="middle" class="alien-small">distance &gt; &epsilon;</text>
-                  </g>
-                </svg>
-                <div class="alien-conds">
-                  <p class="alien-conds-head">A solution s* is alien if it is</p>
-                  <ol>
-                    <li><b>Optimal</b> by the measure of quality</li>
-                    <li><b>Not human-conceivable</b>: outside H</li>
-                    <li><b>Far from human solutions</b>, by more than some &epsilon;</li>
-                    <li><b>Unlikely</b> to be reached from human knowledge</li>
+              <figcaption class="figure-head"><span class="figure-tag">Figure 5</span>Testing Definition 1 on a solution landscape</figcaption>
+              <div class="seg" role="group" aria-label="Choose a landscape">
+                <button class="seg-btn" type="button" data-land="far" aria-pressed="true">Distant optimum</button>
+                <button class="seg-btn" type="button" data-land="edge" aria-pressed="false">Just past the edge</button>
+                <button class="seg-btn" type="button" data-land="inside" aria-pressed="false">Optimum within reach</button>
+              </div>
+              <div class="al-body">
+                <div class="al-left">
+                <div class="al-plot">
+                  <canvas class="al-canvas" aria-hidden="true"></canvas>
+                  <svg class="al-svg" viewBox="0 0 600 380" role="img" aria-label="Quality landscape over a two-dimensional solution space, with the human-conceivable region and the global optimum"></svg>
+                </div>
+                <p class="al-hint">Drag <i>H</i> to move current practice; drag the white handle to widen human exploration (&sigma;). The red band is the &epsilon;-neighborhood of <i>H</i>.</p>
+                </div>
+                <div class="al-side">
+                  <div class="att-controls al-controls">
+                    <label><span>Separation threshold &epsilon; <b data-out="eps"></b></span><input type="range" name="eps" min="0" max="0.3" step="0.005" value="0.08"></label>
+                    <label><span>Improbability threshold &delta; <b data-out="delta"></b></span><input type="range" name="delta" min="-6" max="-1" step="0.1" value="-3"></label>
+                  </div>
+                  <ol class="al-checks" aria-live="polite">
+                    <li data-c="1"><b>1</b><span>Optimal</span><em data-out="c1"></em></li>
+                    <li data-c="2"><b>2</b><span>Outside <i>H</i></span><em data-out="c2"></em></li>
+                    <li data-c="3"><b>3</b><span>Distance to <i>H</i> &gt; &epsilon;</span><em data-out="c3"></em></li>
+                    <li data-c="4"><b>4</b><span><i>P</i> &lt; &delta;</span><em data-out="c4"></em></li>
                   </ol>
-                  <button class="ctl-btn" type="button" data-alien aria-pressed="false">Show the alien solution</button>
+                  <p class="al-verdict" data-out="verdict"></p>
+                  <dl class="al-stats">
+                    <div><dt>Best human solution, <i>h</i></dt><dd data-out="hh"></dd></div>
+                    <div><dt>Global optimum, <i>h</i>(<i>s</i>*)</dt><dd data-out="hs"></dd></div>
+                    <div><dt>Gain left outside <i>H</i></dt><dd data-out="gain"></dd></div>
+                  </dl>
                 </div>
               </div>
-              <p class="figure-note">After Definition 1, Khozin, Non-Obvious Alien AI Constructions (preprint, not peer-reviewed), 2024. <span class="cite-line">Silver et al., Nature 2016</span></p>
+              <div class="figure-note">
+                <p><b>How the figure computes each condition.</b> Shading is solution quality <i>h</i>, a mixture of Gaussian peaks; <i>s</i>* is its maximum on a 160&thinsp;&times;&thinsp;100 grid. Human knowledge is a Gaussian prior centered on current practice with spread &sigma;; <i>H</i> is its 95% highest-density region, a disc of radius 2.45&sigma; (dashed rings mark 1&sigma; and 2&sigma;). Distance is Euclidean. <i>P</i>(<i>s</i>* &#8739; human knowledge) is the prior probability of proposing a solution at least as atypical as <i>s</i>*, exp(&minus;<i>r</i>&sup2;&thinsp;/&thinsp;2&sigma;&sup2;) for a point <i>r</i> from the center. Widening &sigma; models broader human exploration: at some point the optimum becomes conceivable and stops being alien.</p>
+                <p class="cite-line">Construction for illustration; the definition is from the preprint. Silver et al., Nature 2016</p>
+              </div>
             </figure>
 
             <h4 class="part-sub">Already in the literature</h4>
@@ -1832,6 +1851,6 @@
   </footer>
 
   <script src="../script.js?v=39"></script>
-  <script src="../topology.js?v=7"></script>
+  <script src="../topology.js?v=8"></script>
 </body>
 </html>

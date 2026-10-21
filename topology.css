@@ -389,22 +389,49 @@ html:not(.js) .pipe-controls { display: none; }
 .resort-board[data-by="organ"] li[data-driver="BRAF V600E"] { background: var(--cobalt); border-color: var(--cobalt); color: var(--paper); }
 .resort-board[data-by="driver"] .resort-group:has(.resort-agnostic) { box-shadow: 6px 6px 0 var(--ink); }
 
-/* Figure: the alien solution */
-.alien-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 20px 28px; padding: 18px; align-items: center; }
-.alien-svg { width: 100%; height: auto; display: block; font-family: var(--font-mono); }
-.alien-space { fill: var(--paper-2); stroke: var(--ink); stroke-width: 2; }
-.alien-human { fill: var(--cobalt-tint); stroke: var(--cobalt); stroke-width: 2; }
-.alien-label { font-size: 12px; font-weight: 600; fill: var(--ink); letter-spacing: .04em; }
-.alien-small { font-size: 10.5px; fill: var(--graphite); }
-.alien-dot-human { fill: var(--cobalt); }
-.alien-dot { fill: var(--signal); stroke: var(--ink); stroke-width: 2.5; }
-.alien-gap { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 4 4; }
-.alien-star { opacity: 0; transition: opacity var(--dur-slow) var(--ease); }
-.figure-alien.is-revealed .alien-star { opacity: 1; }
-.alien-conds-head { font: 500 12px/1.3 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--cobalt); margin-bottom: 8px; }
-.alien-conds ol { margin: 0 0 16px 20px; display: grid; gap: 6px; font-size: 15px; }
-html:not(.js) .alien-star { opacity: 1; }
-html:not(.js) .alien-conds .ctl-btn { display: none; }
+/* Definition 1 and Figure 5: testing it on a solution landscape */
+.formula-def { margin-top: 20px; }
+.theme-article .formula-lead { margin-top: 0; font-size: 16px; }
+.def-list { list-style: none; margin-top: 12px; border-top: 2px solid var(--ink); }
+.def-list li { display: grid; grid-template-columns: 28px minmax(0, 1fr) minmax(0, 220px); gap: 6px 14px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--stone-2); }
+.def-num { font: 700 13px/1 var(--font-mono); color: var(--cobalt); }
+.def-eq, .formula-eq { font: 400 clamp(20px, 2vw, 26px)/1.35 'STIX Two Text', 'Cambria Math', 'Times New Roman', serif; color: var(--ink); }
+.def-eq i, .formula-eq i, .formula-key i { font-family: 'STIX Two Text', 'Cambria Math', 'Times New Roman', serif; font-style: italic; }
+.def-say { font: 700 13px/1.2 var(--font-display); font-stretch: 92%; text-transform: uppercase; letter-spacing: .03em; color: var(--graphite); }
+.figure-alien .seg { padding-bottom: 0; }
+.al-body { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: 18px 22px; padding: 14px 18px 18px; align-items: start; }
+.al-plot { position: relative; aspect-ratio: 600 / 380; border: 2px solid var(--ink); overflow: hidden; }
+.al-canvas, .al-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.al-svg { touch-action: none; }
+.theme-article .al-hint { max-width: none; margin-top: 10px; font-size: 13px; color: var(--graphite); }
+.al-iso { fill: none; stroke: rgba(10, 10, 10, .22); stroke-width: 1; }
+.al-iso.is-high { stroke: rgba(248, 245, 237, .55); }
+.al-axis { font: 500 11px var(--font-mono); fill: var(--graphite); }
+.al-eps { fill: none; stroke: rgba(211, 38, 28, .22); }
+.al-ring { fill: none; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 4; opacity: .6; }
+.al-h { fill: rgba(248, 245, 237, .18); stroke: var(--ink); stroke-width: 2.5; cursor: move; }
+.al-centre { fill: var(--ink); pointer-events: none; }
+.al-best { fill: var(--ink); stroke: var(--paper); stroke-width: 1.5; pointer-events: none; }
+.al-dist { stroke: var(--vermilion); stroke-width: 2; stroke-dasharray: 5 4; pointer-events: none; }
+.al-star { fill: var(--signal); stroke: var(--ink); stroke-width: 2.5; pointer-events: none; }
+.al-handle { fill: var(--paper); stroke: var(--ink); stroke-width: 2.5; cursor: ew-resize; }
+.al-label { font: 700 12px var(--font-mono); fill: var(--ink); paint-order: stroke; stroke: rgba(248, 245, 237, .85); stroke-width: 3px; pointer-events: none; }
+.al-label-sm { font-size: 11px; font-weight: 600; }
+.al-controls { padding: 0; }
+.al-checks { list-style: none; margin-top: 16px; border-top: 2px solid var(--ink); }
+.al-checks li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 2px 10px; padding: 8px 0; border-bottom: 1px solid var(--stone-2); }
+.al-checks b { grid-row: span 2; font: 700 13px/1.3 var(--font-mono); color: var(--cobalt); }
+.al-checks span { font: 700 14px/1.2 var(--font-display); font-stretch: 92%; color: var(--ink); }
+.al-checks em { font: 500 12px/1.3 var(--font-mono); font-style: normal; color: var(--graphite); }
+.al-checks li.is-pass em { color: var(--cobalt); }
+.al-checks li.is-fail em { color: var(--vermilion); }
+.theme-article .al-verdict { margin-top: 12px; padding: 10px 12px; border: 2px solid var(--ink); font: 700 15px/1.3 var(--font-display); font-stretch: 92%; color: var(--ink); }
+.al-verdict.is-alien { background: var(--ink); color: var(--paper); }
+.al-stats { display: grid; gap: 2px; margin-top: 12px; }
+.al-stats div { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; border-bottom: 1px solid var(--stone-2); }
+.al-stats dt { font-size: 14px; }
+.al-stats dd { font: 700 14px/1.2 var(--font-mono); color: var(--ink); }
+.figure-alien .figure-note p + p { margin-top: 8px; }
 
 /* Five requirements: one ruled row each */
 .moves-5 { grid-template-columns: minmax(0, 1fr); border-top: 3px solid var(--ink); }
@@ -416,7 +443,9 @@ html:not(.js) .alien-conds .ctl-btn { display: none; }
 .theme-article .cite-line + .pull, .theme-article .moves + .cite-line + .pull { margin-top: 28px; }
 
 @media (max-width: 1100px) {
-  .alien-grid { grid-template-columns: minmax(0, 1fr); }
+  .al-body { grid-template-columns: minmax(0, 1fr); }
+  .def-list li { grid-template-columns: 24px minmax(0, 1fr); }
+  .def-say { grid-column: 2; }
 }
 @media (max-width: 560px) {
   .moves-5 li { grid-template-columns: 52px minmax(0, 1fr); margin-top: 0; }
@@ -425,7 +454,7 @@ html:not(.js) .alien-conds .ctl-btn { display: none; }
   .resort-board { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 12px; }
   .split-chips { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 10px 12px; }
 }
-@media (prefers-reduced-motion: reduce) { .split-chip, .alien-star { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .split-chip { transition: none; } }
 
 /* --- Theme 03: The Broken Instrument --- */
 .stat-row-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -612,8 +641,7 @@ html:not(.js) .alien-conds .ctl-btn { display: none; }
 
 /* --- Theme 05: The Patient-Centered Estimand --- */
 .formula { margin: 24px 0 0; padding: 18px 20px; border: 2px solid var(--ink); border-left-width: 12px; background: var(--paper-2); }
-.formula-eq { font: 700 clamp(20px, 2.2vw, 30px)/1.3 var(--font-mono); color: var(--ink); overflow-wrap: anywhere; }
-.formula-eq i, .formula-key i { font-family: var(--font-display); }
+.formula-eq { overflow-wrap: anywhere; }
 .theme-article .formula-key { margin-top: 10px; max-width: 72ch; font-size: 15px; }
 
 /* shared chart bits */
@@ -739,6 +767,8 @@ html:not(.js) .alien-conds .ctl-btn { display: none; }
 }
 @media (max-width: 560px) {
   .mix-svg .ax-label, .fr-svg .ax-label, .tt-svg .ax-label { font-size: 19px; }
+  .al-label { font-size: 17px; }
+  .al-label-sm, .al-axis { font-size: 15px; }
   .tt-grid { grid-template-columns: repeat(10, minmax(0, 1fr)); max-width: 300px; }
   .tt-times th:nth-child(2), .tt-times td:nth-child(2), .tt-times th:nth-child(3), .tt-times td:nth-child(3) { display: none; }
 }
