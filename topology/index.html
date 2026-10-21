@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Topology — Sean Khozin, MD, MPH</title>
-  <meta name="description" content="In-depth examinations of the themes that run through Sean Khozin’s work and research, including The Simulator’s Dilemma and From Organs to Algorithms.">
+  <meta name="description" content="In-depth examinations of the themes that run through Sean Khozin’s work and research, including The Simulator’s Dilemma, From Organs to Algorithms and The Broken Instrument.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.seankhozin.com/topology/">
 
@@ -47,6 +47,15 @@
         "author": { "@id": "https://www.seankhozin.com/#person", "@type": "Person", "name": "Sean Khozin" },
         "isPartOf": { "@id": "https://www.seankhozin.com/#website" },
         "inLanguage": "en-US"
+      },
+      {
+        "@type": "Article",
+        "headline": "The Broken Instrument",
+        "description": "How tumor-measurement error in oncology trials shrinks real effects, discards information and biases drug development toward false negatives, and how the instrument can be replaced.",
+        "url": "https://www.seankhozin.com/topology/#broken-instrument",
+        "author": { "@id": "https://www.seankhozin.com/#person", "@type": "Person", "name": "Sean Khozin" },
+        "isPartOf": { "@id": "https://www.seankhozin.com/#website" },
+        "inLanguage": "en-US"
       }
     ]
   }
@@ -57,7 +66,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=61">
-  <link rel="stylesheet" href="../topology.css?v=4">
+  <link rel="stylesheet" href="../topology.css?v=5">
 </head>
 <body class="page-topology">
   <!-- Navigation -->
@@ -88,7 +97,7 @@
   <!-- Opener -->
   <header class="topo-hero">
     <div class="container">
-      <div class="hero-eyebrow"><span>Topology &middot; Themes in depth</span><b>02 themes</b></div>
+      <div class="hero-eyebrow"><span>Topology &middot; Themes in depth</span><b>03 themes</b></div>
       <h1 class="topo-hero-title">Topology</h1>
       <p class="topo-hero-sub">In-depth examinations of the themes that run through Dr. Khozin&rsquo;s work and research. Each follows one argument from the evidence to what should change, and links to the others where the ideas meet.</p>
       <ol class="theme-list topo-hero-list">
@@ -110,6 +119,17 @@
               <span class="theme-kicker">Classification &middot; Pathology &middot; AI</span>
               <span class="theme-name">From Organs to Algorithms</span>
               <span class="theme-desc">Why cancer is still named for where it grows, and what AI can see when it isn&rsquo;t.</span>
+            </span>
+            <span class="theme-arrow" aria-hidden="true">&darr;</span>
+          </a>
+        </li>
+        <li>
+          <a href="#broken-instrument" class="theme-row">
+            <span class="theme-num">03</span>
+            <span class="theme-text">
+              <span class="theme-kicker">Measurement &middot; Endpoints &middot; Imaging</span>
+              <span class="theme-name">The Broken Instrument</span>
+              <span class="theme-desc">How the ruler beneath cancer drug approvals shapes what gets found.</span>
             </span>
             <span class="theme-arrow" aria-hidden="true">&darr;</span>
           </a>
@@ -403,6 +423,7 @@
               <h4 class="reason-title"><span>2</span>Arbitrary gold standards</h4>
               <p><b>Human sensory input is an unreliable instrument.</b> Much of the ground truth AI is trained on comes from people looking at images. In an FDA meta-analysis of 13,677 patients in registration trials, the investigator and an independent radiologist reading the same scans disagreed on tumor response about 30% of the time, and up to 45% in ovarian and pancreatic cancer. Assessments by eye vary within and between observers, in radiology and histopathology alike.</p>
               <p class="crosslink"><span>Explore the data</span><a href="../#reader-agreement">The full reader-agreement matrix, cell by cell &rarr;</a></p>
+              <p class="crosslink"><span>Theme 03</span><a href="#bi-attenuation">What this disagreement does to a trial: The Broken Instrument &rarr;</a></p>
 
               <p><b>The labels themselves are historical accidents.</b> Consider what &ldquo;lung cancer&rdquo; means.</p>
               <div class="label-stack">
@@ -500,6 +521,7 @@
             <p>Where this theme meets the rest of the work.</p>
             <ul class="connections">
               <li><a href="#organs-to-algorithms"><span class="conn-where">Theme 02</span><span class="conn-what">From Organs to Algorithms: how disease labels arose, and a classification built from mechanism up</span></a></li>
+              <li><a href="#broken-instrument"><span class="conn-where">Theme 03</span><span class="conn-what">The Broken Instrument: what reader disagreement does to trials and the drug pipeline</span></a></li>
               <li><a href="../#reader-agreement"><span class="conn-where">Research</span><span class="conn-what">Inter-reader response classification: the 13,677-patient matrix behind &ldquo;arbitrary gold standards&rdquo;</span></a></li>
               <li><a href="../#informed-figures"><span class="conn-where">INFORMED</span><span class="conn-what">From big data to smart data: the four V&rsquo;s and the systems view of drug development</span></a></li>
               <li><a href="../#convergence"><span class="conn-where">Convergence</span><span class="conn-what">Disease classified by mechanism instead of anatomy, inside a learning system</span></a></li>
@@ -616,6 +638,7 @@
             </div>
             <p>Labels drawn from human perception are also unstable. In an FDA analysis of 13,677 patients in registration trials, two expert readers looking at the same scans disagreed on tumor response about 30% of the time.</p>
             <p class="crosslink"><span>Theme 01</span><a href="#sd-gold-standards">Arbitrary gold standards, in The Simulator&rsquo;s Dilemma &rarr;</a></p>
+            <p class="crosslink"><span>Theme 03</span><a href="#broken-instrument">How measurement error shapes which drugs survive: The Broken Instrument &rarr;</a></p>
             <p>When these inherited categories become training labels, AI does not escape them. Most AI imaging work still correlates what a model learns with existing &ldquo;gold standard&rdquo; criteria, which reinforces the same assumptions the old categories suffer from.</p>
             <blockquote class="pull pull-small">
               <p>&ldquo;When these inherited categories become training labels for foundation models, the models do not simply inherit their limitations; they amplify them.&rdquo;</p>
@@ -803,6 +826,7 @@
           <section class="part part-refs" id="oa-connections" aria-labelledby="oa-connections-h">
             <h3 class="part-title" id="oa-connections-h">Connections</h3>
             <ul class="connections">
+              <li><a href="#broken-instrument"><span class="conn-where">Theme 03</span><span class="conn-what">The Broken Instrument: the measurement beneath response rates, and its replacement</span></a></li>
               <li><a href="#simulators-dilemma"><span class="conn-where">Theme 01</span><span class="conn-what">The Simulator&rsquo;s Dilemma: why labels drawn from human perception limit what AI can learn about biology</span></a></li>
               <li><a href="../#reader-agreement"><span class="conn-where">Research</span><span class="conn-what">Inter-reader response classification: the 13,677-patient matrix</span></a></li>
               <li><a href="../#research"><span class="conn-where">Research</span><span class="conn-what">AutoRECIST and the Total Tumor Burden Index: measurement independent of inherited categories</span></a></li>
@@ -849,6 +873,283 @@
     </div>
   </section>
 
+  <!-- Theme 03 -->
+  <section class="section section-theme" id="broken-instrument">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><span class="section-label">Theme 03 &middot; The Broken Instrument</span><b>Measurement &middot; Endpoints &middot; Imaging</b></div>
+        <h2 class="section-title">The Broken <em>Instrument</em></h2>
+      </div>
+
+      <div class="theme-open">
+        <p class="lead">What we measure determines what we can find.</p>
+        <p class="theme-standfirst">For twenty-five years, nearly every solid-tumor drug approved on tumor-based endpoints has rested on one instrument: a convention for pressing a ruler against a shadow on a CT scan. Two expert readers applying it to the same images disagree about a third of the time. This theme follows what that disagreement does once it enters a trial: how it shrinks real effects, discards information, turns borderline patients into coin flips, and quietly shapes which drugs get developed. And why, for the first time, the instrument can be replaced.</p>
+      </div>
+
+      <ol class="brief">
+        <li><span class="brief-num">01</span><h3>The ruler is a convention</h3><p>RECIST certifies drugs, but almost no one uses it to treat patients. Its authority comes from agreement, not validation.</p></li>
+        <li><span class="brief-num">02</span><h3>Noise has a direction</h3><p>Random disagreement does not cancel out. It shrinks observed effects, inflates trial sizes and tilts results toward false negatives.</p></li>
+        <li><span class="brief-num">03</span><h3>The substrate is replaceable</h3><p>Volumetric, continuous, machine-read measurement can now be the same in the trial and in the clinic.</p></li>
+      </ol>
+
+      <div class="theme-body">
+        <nav class="theme-toc" aria-label="In this theme">
+          <p class="theme-toc-head">In this theme</p>
+          <ol>
+            <li><a href="#bi-ruler"><span>I</span>A ruler against a shadow</a></li>
+            <li><a href="#bi-old"><span>II</span>An old warning</a></li>
+            <li><a href="#bi-readers"><span>III</span>Two readers, one scan</a></li>
+            <li><a href="#bi-attenuation"><span>IV</span>The attenuation</a></li>
+            <li><a href="#bi-boxes"><span>V</span>Four boxes for a continuous world</a></li>
+            <li><a href="#bi-coin"><span>VI</span>A coin flip at the cutoff</a></li>
+            <li><a href="#bi-outside"><span>VII</span>An instrument only trials use</a></li>
+            <li><a href="#bi-machines"><span>VIII</span>Machines, readers, references</a></li>
+            <li><a href="#bi-replace"><span>IX</span>Replacing the substrate</a></li>
+            <li><a href="#bi-connections"><span>&rarr;</span>Connections &amp; references</a></li>
+          </ol>
+        </nav>
+
+        <article class="theme-article">
+
+          <!-- I -->
+          <section class="part" id="bi-ruler" aria-labelledby="bi-ruler-h">
+            <p class="part-num">Part I</p>
+            <h3 class="part-title" id="bi-ruler-h">A ruler against a shadow</h3>
+            <p>RECIST (Response Evaluation Criteria in Solid Tumors) works like this. A radiologist picks up to five target lesions, no more than two per organ, and measures each along its longest diameter. The diameters are summed and compared with the baseline sum. Shrink by 30% or more and the patient has a <b>partial response</b>. Grow by 20% or more, and at least 5 mm, and it is <b>progressive disease</b>. Anything in between is <b>stable disease</b>. Disappearance is a <b>complete response</b>.</p>
+            <figure class="figure figure-read" id="recist-read">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 1</span>Read a scan. Drag the change in the sum of diameters.</figcaption>
+              <div class="read-readout" aria-live="polite"><span class="read-pct">0%</span><span class="read-cat" data-cat="SD">Stable disease</span></div>
+              <div class="read-scale" aria-hidden="true">
+                <span class="read-zone is-pr">Partial response</span><span class="read-zone is-sd">Stable disease</span><span class="read-zone is-pd">Progressive</span>
+                <span class="read-mark"></span>
+              </div>
+              <div class="read-ticks" aria-hidden="true"><span style="left:0%">&minus;100%</span><span style="left:43.75%">&minus;30%</span><span style="left:62.5%">0</span><span style="left:75%">+20%</span><span style="left:100%">+60%</span></div>
+              <label class="eroom-slider"><span class="visually-hidden">Change in sum of diameters</span><input type="range" min="-100" max="60" step="1" value="0"></label>
+              <p class="figure-note">Objective response rate, the endpoint behind many accelerated approvals, is the share of patients read as complete or partial response. <span class="cite-line">Eisenhauer et al., Eur J Cancer 2009 (RECIST 1.1)</span></p>
+            </figure>
+            <p>The convention has the unusual property of being both ubiquitous and invisible. It is how drugs are certified, not how they are administered. Its history explains why it looks the way it does.</p>
+            <figure class="figure figure-timeline" id="ruler-timeline">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 2</span>Fifty years of the ruler. Select a period.</figcaption>
+              <div class="tl-track" role="tablist" aria-label="Periods in the history of tumor response criteria"></div>
+              <div class="tl-panel" aria-live="polite"></div>
+              <noscript><p class="figure-note">1976 measurement-error study &middot; 1981 WHO criteria &middot; 2000 RECIST &middot; 2009 RECIST 1.1 &middot; 2017 iRECIST &middot; 2017 FDA pooled analysis &middot; now volumetric.</p></noscript>
+            </figure>
+          </section>
+
+          <!-- II -->
+          <section class="part" id="bi-old" aria-labelledby="bi-old-h">
+            <p class="part-num">Part II</p>
+            <h3 class="part-title" id="bi-old-h">An old warning</h3>
+            <p>The problem was measured before the modern criteria existed. In 1976, sixteen experienced oncologists each measured twelve simulated tumor masses with their usual clinical methods. Unknown to them, some masses were identical in size. Comparing their measurements of identical masses showed how many &ldquo;responses&rdquo; measurement error alone would produce.</p>
+            <div class="stat-row">
+              <div class="stat"><span class="stat-num">7&ndash;8%</span><span class="stat-label">&ldquo;Responses&rdquo; from error alone at a 50% shrinkage criterion</span></div>
+              <div class="stat stat-point"><span class="stat-num">19&ndash;25%</span><span class="stat-label">&ldquo;Responses&rdquo; from error alone at a 25% criterion</span></div>
+            </div>
+            <p class="cite-line">Moertel &amp; Hanley, Cancer 1976</p>
+            <p>The authors advised investigators to expect a 5&ndash;10% response rate from human error in measurement alone. Half a century later, the instrument has changed its geometry, from two diameters to one, but not the fact that a human hand holds the ruler.</p>
+          </section>
+
+          <!-- III -->
+          <section class="part" id="bi-readers" aria-labelledby="bi-readers-h">
+            <p class="part-num">Part III</p>
+            <h3 class="part-title" id="bi-readers-h">Two readers, one scan</h3>
+            <p>Registration trials have a useful quirk. Every scan is read twice: by the investigator and by a blinded radiologist at a central facility, each unaware of the other. In 2017, Dr. Khozin and colleagues at FDA pooled a decade of these paired reads.</p>
+            <div class="stat-row stat-row-3">
+              <div class="stat"><span class="stat-num">13,677</span><span class="stat-label">Paired assessments</span></div>
+              <div class="stat"><span class="stat-num">69.5%</span><span class="stat-label">Agreed on the response category</span></div>
+              <div class="stat stat-point"><span class="stat-num">&gt;40%</span><span class="stat-label">Disagreement in hard-to-measure cancers such as pancreatic and ovarian</span></div>
+            </div>
+            <p class="crosslink"><span>Explore the data</span><a href="../#reader-agreement">The full reader-agreement matrix, cell by cell &rarr;</a></p>
+            <p>In the language of measurement theory, this corresponds to a weighted kappa (agreement beyond chance) of roughly 0.30 to 0.55: between &ldquo;fair&rdquo; and &ldquo;moderate&rdquo; on the scale most often used to grade it. That is what one expects from a diagnostic tool in early development, not from the instrument on which oncology drug development rests.</p>
+            <p class="cite-line">Landis &amp; Koch, Biometrics 1977 &middot; Khozin, The Broken Instrument Beneath the Evidence, 2026</p>
+            <p>The standard defense is procedural. Disagreement is random, spread evenly across both arms of a randomized trial, so the comparison stays fair and the p-value stays honest. That is partly true. It is also incomplete, and many cancer drugs are advanced on single-arm studies with no comparison arm at all.</p>
+          </section>
+
+          <!-- IV -->
+          <section class="part" id="bi-attenuation" aria-labelledby="bi-attenuation-h">
+            <p class="part-num">Part IV</p>
+            <h3 class="part-title" id="bi-attenuation-h">The attenuation</h3>
+            <p>When random misclassification enters a comparison of two proportions, the difference between them does not stay the same. It shrinks. If each patient is misclassified with probability <i>m</i>, the observed difference between arms is the true difference multiplied by (1 &minus; 2<i>m</i>). The result goes back at least to Irwin Bross in 1954, and it is rarely invoked in trial design.</p>
+            <figure class="figure figure-att" id="attenuation">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 3</span>How much of a real effect survives the measurement</figcaption>
+              <div class="att-controls">
+                <label><span>Misclassification rate <i>m</i> <b data-out="m"></b></span><input type="range" name="m" min="0" max="40" step="1" value="30"></label>
+                <label><span>True difference in response rate <b data-out="delta"></b></span><input type="range" name="delta" min="5" max="40" step="1" value="20"></label>
+                <div class="att-presets"><span>Presets</span><button class="ctl-btn" type="button" data-preset="30">m = 30%</button><button class="ctl-btn" type="button" data-preset="18">m &asymp; 18%</button><button class="ctl-btn" type="button" data-preset="0">No error</button></div>
+              </div>
+              <div class="att-bars" aria-hidden="true">
+                <div><span>True</span><i class="att-true"></i></div>
+                <div><span>Observed</span><i class="att-obs"></i></div>
+              </div>
+              <div class="stat-row stat-row-3 att-stats" aria-live="polite">
+                <div class="stat"><span class="stat-num" data-out="obs"></span><span class="stat-label">Observed difference</span></div>
+                <div class="stat"><span class="stat-num" data-out="lost"></span><span class="stat-label">Of the real effect lost</span></div>
+                <div class="stat stat-point"><span class="stat-num" data-out="n"></span><span class="stat-label">Patients needed, if 200 would suffice with no error (<span data-out="mult"></span>)</span></div>
+              </div>
+              <div class="figure-note att-note">
+                <p><b>Two readings of &ldquo;30%.&rdquo;</b> Treating the 30% disagreement between readers as each patient&rsquo;s misclassification rate gives the essay&rsquo;s illustration: a 20-point advantage appears as 8 points, and a 200-patient trial needs about 1,250. If instead 30% is the disagreement between two readers who each err independently, each reader&rsquo;s own error rate is about 18%, and the loss is closer to 37%, with about 2.5 times the patients. Either way the direction is the same.</p>
+                <p class="cite-line">Bross, Biometrics 1954 &middot; simplified two-category model; sample size scales with the inverse square of the effect</p>
+              </div>
+            </figure>
+            <p>The direction is the point. Random measurement error biases observed effects toward the null. At the level of the instrument, that produces a systematic excess of false negatives over false positives. A trial that misses statistical significance is not necessarily a trial of an inactive drug. Some fraction of negative trials in solid-tumor oncology are trials of active drugs measured with an instrument that could not see them.</p>
+            <p class="aside-line">No one knows the size of that fraction. The instrument erases the evidence of what it failed to detect.</p>
+          </section>
+
+          <!-- V -->
+          <section class="part" id="bi-boxes" aria-labelledby="bi-boxes-h">
+            <p class="part-num">Part V</p>
+            <h3 class="part-title" id="bi-boxes-h">Four boxes for a continuous world</h3>
+            <p>Underneath the categories, the biology is continuous: the percent change in tumor burden can take any value. RECIST turns it into four ordered boxes, and response rate collapses those into two. A four-level category carries at most two bits of information; a yes-or-no outcome carries at most one. A continuous measurement carries several times more.</p>
+            <figure class="figure figure-wf" id="waterfall">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 4</span>Three drugs, thirty patients each. Best change in tumor size.</figcaption>
+              <div class="seg" role="group" aria-label="Choose a drug">
+                <button class="seg-btn" type="button" data-drug="uniform" aria-pressed="true">Drug A</button>
+                <button class="seg-btn" type="button" data-drug="deep" aria-pressed="false">Drug B</button>
+                <button class="seg-btn" type="button" data-drug="none" aria-pressed="false">Drug C</button>
+              </div>
+              <div class="wf-chart"></div>
+              <div class="stat-row stat-row-3 wf-stats" aria-live="polite">
+                <div class="stat stat-point"><span class="stat-num" data-out="orr"></span><span class="stat-label">Objective response rate</span></div>
+                <div class="stat"><span class="stat-num" data-out="shrank"></span><span class="stat-label">Patients whose tumors shrank</span></div>
+                <div class="stat"><span class="stat-num" data-out="mean"></span><span class="stat-label">Mean change in tumor size</span></div>
+              </div>
+              <p class="figure-note"><span class="wf-note"></span> <span class="cite-line">Simulated patients, for illustration</span></p>
+            </figure>
+            <p>A drug that shrinks every patient&rsquo;s tumors by a quarter, a remarkable result implying a real mechanism, can post a response rate of zero, the same as no treatment. Trial designs that keep tumor change continuous, with a control group, were proposed precisely to stop discarding that information.</p>
+            <p class="cite-line">Karrison, Maitland, Stadler &amp; Ratain, J Natl Cancer Inst 2007 &middot; Shannon, Bell Syst Tech J 1948</p>
+          </section>
+
+          <!-- VI -->
+          <section class="part" id="bi-coin" aria-labelledby="bi-coin-h">
+            <p class="part-num">Part VI</p>
+            <h3 class="part-title" id="bi-coin-h">A coin flip at the cutoff</h3>
+            <p>Take a patient whose tumor burden truly fell by 28%: two points short of a partial response. If readers&rsquo; measurements vary by about ten percentage points, as the disagreement data suggest, how often will this patient be called a responder?</p>
+            <figure class="figure figure-coin" id="coinflip">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 5</span>The same tumor, read many times</figcaption>
+              <div class="att-controls">
+                <label><span>True change in tumor burden <b data-out="true"></b> &middot; <em data-out="truth"></em></span><input type="range" name="true" min="-60" max="40" step="1" value="-28"></label>
+                <label><span>Reader variation (standard deviation) <b data-out="sd"></b></span><input type="range" name="sd" min="2" max="20" step="1" value="10"></label>
+              </div>
+              <div class="coin-rows" aria-live="polite">
+                <div class="coin-row" data-cat="PR"><span class="coin-name">Partial response</span><span class="coin-track"><i class="coin-fill"></i></span><span class="coin-val"></span></div>
+                <div class="coin-row" data-cat="SD"><span class="coin-name">Stable disease</span><span class="coin-track"><i class="coin-fill"></i></span><span class="coin-val"></span></div>
+                <div class="coin-row" data-cat="PD"><span class="coin-name">Progressive disease</span><span class="coin-track"><i class="coin-fill"></i></span><span class="coin-val"></span></div>
+              </div>
+              <p class="figure-note">Share of reads falling in each category, assuming normally distributed reader error around the true change. <span class="cite-line">Khozin, The Broken Instrument Beneath the Evidence, 2026</span></p>
+            </figure>
+            <p>Forty-two reads in a hundred call it a partial response; fifty-eight call it stable disease. At the boundary, the category is close to a coin flip, and the reported effect depends on how many of those flips land on the side that counts.</p>
+            <p>The instability does more than add noise. Because response rate cuts sharply at minus 30%, sponsors are rewarded for drugs that produce deep responses in a few patients, and drugs that produce shallow but consistent shrinkage across many are structurally disfavored. The shape of the oncology pipeline, enriched for responses the human eye can see, follows from the endpoint. It selects for what the instrument can detect, not necessarily for what prolongs life.</p>
+          </section>
+
+          <!-- VII -->
+          <section class="part" id="bi-outside" aria-labelledby="bi-outside-h">
+            <p class="part-num">Part VII</p>
+            <h3 class="part-title" id="bi-outside-h">An instrument only trials use</h3>
+            <p>Community oncologists, who treat most patients with cancer, do not sum diameters. They read narrative radiology reports (&ldquo;stable appearance of the right upper lobe mass&rdquo;) and combine them with clinical judgment. When Dr. Khozin showed the reader-disagreement data to Richard Pazdur, FDA&rsquo;s longtime head of oncology, Pazdur was not surprised. &ldquo;You know, Sean, I never liked RECIST,&rdquo; he said. What he trusted most was the &ldquo;lipstick sign&rdquo;: a frail patient returning to clinic after a few cycles of treatment, color back in her face, wearing bright red lipstick.</p>
+            <div class="stat-row">
+              <div class="stat stat-point"><span class="stat-num">23%</span><span class="stat-label">Patients for whom RECIST progression could be determined from health-record data (6 of 26)</span></div>
+              <div class="stat"><span class="stat-num">87%</span><span class="stat-label">With a real-world progression event using radiology- and clinician-anchored approaches</span></div>
+            </div>
+            <p class="cite-line">Griffith, &hellip; Khozin, &hellip; Miksad, Adv Ther 2019</p>
+            <p>So the variable on which approval rests is absent from the data routine care generates, and trial results cannot be checked against practice on the same scale.</p>
+
+            <h4 class="part-sub">&ldquo;Who has validated ORR as a surrogate?&rdquo;</h4>
+            <p>A true surrogate, in Ross Prentice&rsquo;s 1989 definition, must capture the treatment&rsquo;s effect on the outcome that matters, so that once the surrogate is known, no residual effect remains. Response rate has never been validated this way. When Dr. Khozin, early in his FDA tenure, described response rate as a surrogate, Robert Temple, then deputy center director for clinical science, asked the question above. It had no answer.</p>
+            <div class="stat-row stat-row-3">
+              <div class="stat"><span class="stat-num">0.89</span><span class="stat-label">R&sup2;, response rate vs progression-free survival, across FDA lung cancer trials</span></div>
+              <div class="stat stat-point"><span class="stat-num">0.09</span><span class="stat-label">R&sup2;, response rate vs overall survival</span></div>
+              <div class="stat"><span class="stat-num">0.08</span><span class="stat-label">R&sup2;, progression-free vs overall survival</span></div>
+            </div>
+            <p class="cite-line">Blumenthal et al. (incl. Khozin), J Clin Oncol 2015 &middot; 14 trials, 12,567 patients</p>
+            <p>Across FDA approvals from 2009 to 2014 that rested on surrogate endpoints, more than half of accelerated approvals had no formal analysis of how well the surrogate tracked survival; where analyses existed, correlations were mostly low. Even the strongest precedent shows the difficulty: pathological complete response in early breast cancer predicts survival powerfully for individual patients, especially in aggressive subtypes, yet the pooled analysis could not validate it as a trial-level surrogate.</p>
+            <p class="cite-line">Prentice, Stat Med 1989 &middot; Kim &amp; Prasad, Mayo Clin Proc 2016 &middot; Cortazar et al., Lancet 2014 &middot; Khozin, The Misnomer of Surrogate Endpoints in Oncology, 2025</p>
+          </section>
+
+          <!-- VIII -->
+          <section class="part" id="bi-machines" aria-labelledby="bi-machines-h">
+            <p class="part-num">Part VIII</p>
+            <h3 class="part-title" id="bi-machines-h">Machines, readers, references</h3>
+            <p>Run one chest CT through a measurement algorithm a thousand times and it returns the same number a thousand times. Run it through a generative AI system and it returns a distribution of reports, mostly in agreement. Give it to a thousand radiologists and they disagree on the response category roughly 30% of the time.</p>
+            <div class="trio">
+              <div><h5>Algorithm</h5><p>Identical output on every run. Perfectly reproducible, which is not the same as correct.</p></div>
+              <div><h5>Generative AI</h5><p>A distribution of reports. Reliability can be measured run by run.</p></div>
+              <div><h5>Radiologists</h5><p>About 30% disagreement on the category that decides whether a drug stays in development.</p></div>
+            </div>
+            <p>Two principles follow. Reliability is necessary for validity, but not sufficient: a system can return the same wrong answer every time, and consistency reads as confidence. And when machines are judged against a panel of clinicians, the panel itself has to be measured. A device that agrees with a three-person panel 85% of the time sounds deficient until one learns the panelists agree with each other only 78% of the time. Machines and readers should report reliability on the same scales: kappa for categories, intraclass correlation for continuous measures.</p>
+            <p class="cite-line">Khozin, A Thousand Runs, 2026 &middot; the 85% and 78% figures are an illustration</p>
+          </section>
+
+          <!-- IX -->
+          <section class="part" id="bi-replace" aria-labelledby="bi-replace-h">
+            <p class="part-num">Part IX</p>
+            <h3 class="part-title" id="bi-replace-h">Replacing the substrate</h3>
+            <p>In 2009, the RECIST working group considered moving to volumetric or functional measurement and concluded that there was not yet enough standardization or evidence to abandon the diameter. That condition has changed. Volumetric segmentation is now routine, imaging foundation models are trained on more scans than any radiologist reads in a career, and automated assessment can run at scale in trials and in community care.</p>
+            <table class="compare-table">
+              <caption class="visually-hidden">RECIST compared with a volumetric, continuous, machine-read measure</caption>
+              <thead>
+                <tr>
+                  <th scope="col"><span class="visually-hidden">Property</span></th>
+                  <th scope="col">RECIST</th>
+                  <th scope="col" class="is-point">Total Tumor Burden Index</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row"><span class="compare-idx">01</span><span class="compare-name">Geometry</span></th><td>Longest diameter of up to five lesions</td><td class="is-point">Volume of all disease</td></tr>
+                <tr><th scope="row"><span class="compare-idx">02</span><span class="compare-name">Scale</span></th><td>Four categories, then a binary</td><td class="is-point">Continuous, with no thresholds to straddle</td></tr>
+                <tr><th scope="row"><span class="compare-idx">03</span><span class="compare-name">Reader</span></th><td>Human, about 30% disagreement</td><td class="is-point">Machine-generated, reproducible across sites and re-reads</td></tr>
+                <tr><th scope="row"><span class="compare-idx">04</span><span class="compare-name">Setting</span></th><td>Trials only</td><td class="is-point">The same variable in trials and routine care</td></tr>
+              </tbody>
+            </table>
+            <p class="crosslink"><span>On the homepage</span><a href="../#tumor-ai">AutoRECIST and the Total Tumor Burden Index at Project Data Sphere &rarr;</a></p>
+            <p>The regulatory path will take time: prospective comparison with RECIST, integration across imaging systems, agreement on validation. None of these barriers is technical.</p>
+            <div class="closing">
+              <p class="closing-line">Replace the measurement, not the statistics.</p>
+              <p>What we measure determines what we can find. What we can find determines what we develop. What we develop determines who is treated. The ruler pressed against the tumor for a generation is not the only ruler available. It is simply the one we inherited.</p>
+            </div>
+          </section>
+
+          <!-- Connections & references -->
+          <section class="part part-refs" id="bi-connections" aria-labelledby="bi-connections-h">
+            <h3 class="part-title" id="bi-connections-h">Connections</h3>
+            <ul class="connections">
+              <li><a href="#sd-gold-standards"><span class="conn-where">Theme 01</span><span class="conn-what">The Simulator&rsquo;s Dilemma: human sensory input as an unreliable gold standard</span></a></li>
+              <li><a href="#oa-negation"><span class="conn-where">Theme 02</span><span class="conn-what">From Organs to Algorithms: labels drawn from the human eye, and what models learn from them</span></a></li>
+              <li><a href="../#reader-agreement"><span class="conn-where">Research</span><span class="conn-what">Inter-reader response classification: the 13,677-patient matrix</span></a></li>
+              <li><a href="../#tumor-ai"><span class="conn-where">Research</span><span class="conn-what">AutoRECIST and the Total Tumor Burden Index</span></a></li>
+            </ul>
+
+            <h3 class="part-title part-title-refs">Further reading</h3>
+            <div class="research-pub-list references">
+              <a href="https://www.insights.phyusionbio.com/p/the-broken-instrument-beneath-the" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2026</span><span class="research-pub-title">The Broken Instrument Beneath the Evidence</span><span class="research-pub-authors">How the measurement substrate of oncology drug development favors false negatives</span></a>
+              <a href="https://www.insights.phyusionbio.com/p/a-thousand-runs" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2026</span><span class="research-pub-title">A Thousand Runs</span><span class="research-pub-authors">Machines, clinicians and the standard both are measured against</span></a>
+              <a href="https://www.insights.phyusionbio.com/p/the-misnomer-of-surrogate-endpoints" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2025</span><span class="research-pub-title">The Misnomer of Surrogate Endpoints in Oncology</span><span class="research-pub-authors">A fundamental flaw in regulatory language and scientific precision</span></a>
+              <a href="https://www.insights.phyusionbio.com/p/imprecise-medicine-overcoming-the" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2024</span><span class="research-pub-title">Imprecise Medicine</span><span class="research-pub-authors">The limitations of standard tumor assessments, and AI-based alternatives</span></a>
+              <a href="https://www.insights.phyusionbio.com/p/fifty-patients" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">PhyusionBio, 2026</span><span class="research-pub-title">Fifty Patients</span><span class="research-pub-authors">How regulators ratify a consensus, and why RECIST persists</span></a>
+            </div>
+
+            <h3 class="part-title part-title-refs">References</h3>
+            <div class="research-pub-list references">
+              <a href="https://doi.org/10.1002/1097-0142(197607)38:1%3C388::aid-cncr2820380156%3E3.0.co;2-a" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Cancer, 1976</span><span class="research-pub-title">The effect of measuring error on the results of therapeutic trials in advanced cancer</span><span class="research-pub-authors">Moertel CG, Hanley JA.</span></a>
+              <a href="https://doi.org/10.1002/1097-0142(19810101)47:1%3C207::aid-cncr2820470134%3E3.0.co;2-6" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Cancer, 1981</span><span class="research-pub-title">Reporting results of cancer treatment</span><span class="research-pub-authors">Miller AB, Hoogstraten B, Staquet M, Winkler A.</span></a>
+              <a href="https://doi.org/10.1093/jnci/92.3.205" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">J Natl Cancer Inst, 2000</span><span class="research-pub-title">New guidelines to evaluate the response to treatment in solid tumors</span><span class="research-pub-authors">Therasse P, et al.</span></a>
+              <a href="https://doi.org/10.1016/j.ejca.2008.10.026" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Eur J Cancer, 2009</span><span class="research-pub-title">New response evaluation criteria in solid tumours: revised RECIST guideline (version 1.1)</span><span class="research-pub-authors">Eisenhauer EA, et al.</span></a>
+              <a href="https://doi.org/10.1016/S1470-2045(17)30074-8" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Lancet Oncol, 2017</span><span class="research-pub-title">iRECIST: guidelines for response criteria for use in trials testing immunotherapeutics</span><span class="research-pub-authors">Seymour L, et al.</span></a>
+              <span class="research-pub"><span class="research-journal">Biometrics, 1977</span><span class="research-pub-title">The measurement of observer agreement for categorical data</span><span class="research-pub-authors">Landis JR, Koch GG. PMID 843571.</span></span>
+              <a href="https://doi.org/10.2307/3001619" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Biometrics, 1954</span><span class="research-pub-title">Misclassification in 2 &times; 2 tables</span><span class="research-pub-authors">Bross I.</span></a>
+              <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Bell Syst Tech J, 1948</span><span class="research-pub-title">A mathematical theory of communication</span><span class="research-pub-authors">Shannon CE.</span></a>
+              <a href="https://doi.org/10.1093/jnci/djm158" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">J Natl Cancer Inst, 2007</span><span class="research-pub-title">Design of phase II cancer trials using a continuous endpoint of change in tumor size</span><span class="research-pub-authors">Karrison TG, Maitland ML, Stadler WM, Ratain MJ.</span></a>
+              <a href="https://doi.org/10.1002/sim.4780080407" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Stat Med, 1989</span><span class="research-pub-title">Surrogate endpoints in clinical trials: definition and operational criteria</span><span class="research-pub-authors">Prentice RL.</span></a>
+              <a href="https://doi.org/10.1200/JCO.2014.59.0489" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">J Clin Oncol, 2015</span><span class="research-pub-title">Overall response rate, progression-free survival, and overall survival with targeted and standard therapies in advanced non-small-cell lung cancer: FDA trial-level and patient-level analyses</span><span class="research-pub-authors">Blumenthal GM, et al., including Khozin S.</span></a>
+              <a href="https://doi.org/10.1016/j.mayocp.2016.02.012" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Mayo Clin Proc, 2016</span><span class="research-pub-title">Strength of validation for surrogate end points used in the US Food and Drug Administration&rsquo;s approval of oncology drugs</span><span class="research-pub-authors">Kim C, Prasad V.</span></a>
+              <a href="https://doi.org/10.1016/S0140-6736(13)62422-8" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Lancet, 2014</span><span class="research-pub-title">Pathological complete response and long-term clinical benefit in breast cancer: the CTNeoBC pooled analysis</span><span class="research-pub-authors">Cortazar P, et al.</span></a>
+              <a href="https://doi.org/10.1007/s12325-019-00970-1" class="research-pub" target="_blank" rel="noopener"><span class="research-journal">Adv Ther, 2019</span><span class="research-pub-title">Generating real-world tumor burden endpoints from electronic health record data: comparison of RECIST, radiology-anchored, and clinician-anchored approaches</span><span class="research-pub-authors">Griffith SD, &hellip; Khozin S, &hellip; Miksad RA.</span></a>
+            </div>
+          </section>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
@@ -859,6 +1160,6 @@
   </footer>
 
   <script src="../script.js?v=39"></script>
-  <script src="../topology.js?v=3"></script>
+  <script src="../topology.js?v=4"></script>
 </body>
 </html>

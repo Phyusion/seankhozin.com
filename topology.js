@@ -1,12 +1,14 @@
 // ================================================================
 //  Topology — interactive figures for the themes
-//  1. Timelines (eighty years of AI; how cancer got its names)
+//  1. Timelines (eighty years of AI; how cancer got its names; the ruler)
 //  2. RG7112 pipeline stepper
 //  3. Today's toolkit: see / miss
 //  4. Eroom's law slider
 //  5. Reveal, sliver grid, and the contents scrollspy
 //  6. From Organs to Algorithms: number needed to benefit, lung cancer
 //     splits, re-sorting tumors, the alien solution
+//  7. The Broken Instrument: reading a scan, attenuation, waterfalls,
+//     the coin flip at the cutoff
 // ================================================================
 (function () {
   'use strict';
@@ -41,6 +43,15 @@
       { year: '1900s', kind: 'Staining', title: 'Immunohistochemistry', text: 'Stains that bind specific proteins refine what the microscope can distinguish, but the categories stay anchored to organ and appearance.' },
       { year: '2000s', kind: 'Molecular', title: 'Sequencing and single cells', text: 'Next-generation sequencing, transcriptomics and single-cell proteomics reveal that tumors in different organs can share drivers, while tumors in one organ can be strikingly different.' },
       { year: 'Now', kind: 'Algorithms', title: 'Classification from the bottom up', text: 'AI can integrate molecular, histopathological, imaging and clinical data at once, and find features no human defined. The daily system is still the surgeon’s and the microscope’s.' }
+    ] },
+    'ruler-timeline': { start: 2, periods: [
+      { year: '1976', kind: 'Warning', title: 'Sixteen oncologists, twelve spheres', text: 'Asked to measure simulated tumors, experienced oncologists produced “responses” from measurement error alone: 7–8% at a 50% shrinkage criterion, 19–25% at 25%.' },
+      { year: '1981', kind: 'WHO', title: 'Two diameters', text: 'WHO criteria standardize response reporting using the product of two perpendicular diameters.' },
+      { year: '2000', kind: 'RECIST', title: 'One diameter', text: 'An international collaboration (EORTC, the US National Cancer Institute and the National Cancer Institute of Canada) moves to a single longest diameter: up to ten target lesions, summed and compared with baseline.' },
+      { year: '2009', kind: 'RECIST 1.1', title: 'Five lesions, and a decision to wait', text: 'At most five target lesions, two per organ; progression now also needs a 5 mm absolute increase. The working group considered volumetric and functional imaging and concluded there was not yet enough standardization to abandon the diameter.' },
+      { year: '2017', kind: 'iRECIST', title: 'Immunotherapy breaks the rules', text: 'Pseudoprogression and delayed responses lead to a modified guideline for immunotherapy trials.' },
+      { year: '2017', kind: 'FDA', title: '13,677 paired reads', text: 'Pooling a decade of registration trials, FDA analysts find two expert readers agree on the response category in 69.5% of cases.' },
+      { year: 'Now', kind: 'Volumetric', title: 'A replaceable substrate', text: 'Volumetric segmentation and imaging foundation models make continuous, machine-read tumor burden feasible in trials and in routine care.' }
     ] }
   };
 
@@ -338,6 +349,165 @@
       abtn.setAttribute('aria-pressed', String(on));
       abtn.textContent = on ? 'Hide the alien solution' : 'Show the alien solution';
     });
+  }
+
+  // ---------------------------------------------------------------
+  // 7. The Broken Instrument
+  // ---------------------------------------------------------------
+  function normCdf(z) {
+    // Abramowitz and Stegun 7.1.26
+    var t = 1 / (1 + 0.3275911 * Math.abs(z) / Math.SQRT2);
+    var y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-z * z / 2);
+    return z >= 0 ? (1 + y) / 2 : (1 - y) / 2;
+  }
+  function recistCategory(pct) {
+    if (pct <= -100) return 'CR';
+    if (pct <= -30) return 'PR';
+    if (pct >= 20) return 'PD';
+    return 'SD';
+  }
+  var CATEGORY_NAMES = { CR: 'Complete response', PR: 'Partial response', SD: 'Stable disease', PD: 'Progressive disease' };
+
+  // 7a. Read a scan: percent change in the sum of diameters -> category
+  var readFig = document.getElementById('recist-read');
+  if (readFig) {
+    var rIn = readFig.querySelector('input');
+    var rPct = readFig.querySelector('.read-pct');
+    var rCat = readFig.querySelector('.read-cat');
+    var rMark = readFig.querySelector('.read-mark');
+    var updateRead = function () {
+      var v = +rIn.value;
+      var c = recistCategory(v);
+      rPct.textContent = (v > 0 ? '+' : '') + v + '%';
+      rCat.textContent = CATEGORY_NAMES[c];
+      rCat.dataset.cat = c;
+      rMark.style.left = ((v + 100) / 160 * 100) + '%';
+      rIn.setAttribute('aria-valuetext', v + '%, ' + CATEGORY_NAMES[c]);
+    };
+    rIn.addEventListener('input', updateRead);
+    updateRead();
+  }
+
+  // 7b. Attenuation: observed difference = true difference x (1 - 2m)
+  var att = document.getElementById('attenuation');
+  if (att) {
+    var mIn = att.querySelector('[name="m"]');
+    var dIn = att.querySelector('[name="delta"]');
+    var out = function (k) { return att.querySelector('[data-out="' + k + '"]'); };
+    var updateAtt = function () {
+      var m = +mIn.value / 100;
+      var d = +dIn.value;
+      var f = 1 - 2 * m;
+      var obs = d * f;
+      var mult = 1 / (f * f);
+      out('m').textContent = Math.round(m * 100) + '%';
+      out('delta').textContent = d + ' pts';
+      out('obs').textContent = obs.toFixed(1) + ' pts';
+      out('lost').textContent = Math.round((1 - f) * 100) + '%';
+      out('mult').textContent = mult < 10 ? mult.toFixed(1) + '×' : Math.round(mult) + '×';
+      out('n').textContent = Math.round(200 * mult).toLocaleString('en-US');
+      att.querySelector('.att-true').style.width = (d / 40 * 100) + '%';
+      att.querySelector('.att-obs').style.width = (obs / 40 * 100) + '%';
+      mIn.setAttribute('aria-valuetext', Math.round(m * 100) + '% misclassified');
+      dIn.setAttribute('aria-valuetext', d + ' percentage points');
+    };
+    mIn.addEventListener('input', updateAtt);
+    dIn.addEventListener('input', updateAtt);
+    att.querySelectorAll('[data-preset]').forEach(function (b) {
+      b.addEventListener('click', function () { mIn.value = b.dataset.preset; updateAtt(); });
+    });
+    updateAtt();
+  }
+
+  // 7c. Four boxes for a continuous world: simulated waterfall plots
+  function seeded(seed) { return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
+  var wf = document.getElementById('waterfall');
+  if (wf) {
+    var N = 30;
+    var gen = {
+      uniform: function (r) { return -21 - r() * 8; },
+      deep: function (r, i) { return i < 6 ? -40 - r() * 35 : 4 + r() * 32; },
+      none: function (r) { return -8 + r() * 46; }
+    };
+    var DRUGS = {
+      uniform: { label: 'Drug A', note: 'Every patient’s tumors shrink by 21–29%. A real, reliable effect, and an objective response rate of zero.' },
+      deep: { label: 'Drug B', note: 'One patient in five responds deeply; the rest progress. The response rate looks like a signal, and it is the one the instrument rewards.' },
+      none: { label: 'Drug C', note: 'No consistent effect. Most tumors grow.' }
+    };
+    var data = {};
+    Object.keys(gen).forEach(function (k, j) {
+      var r = seeded(97 + j * 31);
+      var arr = [];
+      for (var i = 0; i < N; i++) arr.push(Math.round(gen[k](r, i)));
+      data[k] = arr.sort(function (a, b) { return b - a; });
+    });
+    // Bars are drawn in a stretchable SVG; labels are HTML so they never distort.
+    var W = 600, H = 240, top = 12, bottom = 12;
+    var yOf = function (v) { return top + (45 - v) / 125 * (H - top - bottom); };
+    var chart = wf.querySelector('.wf-chart');
+    var svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, preserveAspectRatio: 'none', class: 'wf-svg', role: 'img', 'aria-label': 'Waterfall plot of simulated percent change in tumor size' });
+    [[0, '0', 'wf-zero'], [-30, 'PR −30%', 'wf-thresh'], [20, 'PD +20%', 'wf-thresh']].forEach(function (t) {
+      svgEl('line', { x1: 0, x2: W, y1: yOf(t[0]), y2: yOf(t[0]), class: t[2], 'vector-effect': 'non-scaling-stroke' }, svg);
+      var lab = document.createElement('span');
+      lab.className = 'wf-label';
+      lab.style.top = (yOf(t[0]) / H * 100) + '%';
+      lab.textContent = t[1];
+      chart.appendChild(lab);
+    });
+    var bars = [];
+    var bw = W / N;
+    for (var i = 0; i < N; i++) bars.push(svgEl('rect', { x: i * bw + 2, width: bw - 4, class: 'wf-bar', 'vector-effect': 'non-scaling-stroke' }, svg));
+    var plot = document.createElement('div');
+    plot.className = 'wf-plot';
+    plot.appendChild(svg);
+    chart.appendChild(plot);
+    var wfBtns = wf.querySelectorAll('.seg-btn');
+    var drawWf = function (k) {
+      var arr = data[k];
+      var resp = 0, sum = 0, shrank = 0;
+      arr.forEach(function (v, i) {
+        var y0 = yOf(0), y1 = yOf(v);
+        bars[i].setAttribute('y', Math.min(y0, y1));
+        bars[i].setAttribute('height', Math.max(1, Math.abs(y1 - y0)));
+        bars[i].setAttribute('class', 'wf-bar' + (v <= -30 ? ' is-resp' : v < 0 ? ' is-shrink' : ''));
+        if (v <= -30) resp++;
+        if (v < 0) shrank++;
+        sum += v;
+      });
+      wf.querySelector('[data-out="orr"]').textContent = Math.round(resp / N * 100) + '%';
+      wf.querySelector('[data-out="shrank"]').textContent = Math.round(shrank / N * 100) + '%';
+      wf.querySelector('[data-out="mean"]').textContent = (sum / N > 0 ? '+' : '') + Math.round(sum / N) + '%';
+      wf.querySelector('.wf-note').textContent = DRUGS[k].note;
+      wfBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.drug === k)); });
+    };
+    wfBtns.forEach(function (b) { b.addEventListener('click', function () { drawWf(b.dataset.drug); }); });
+    drawWf('uniform');
+  }
+
+  // 7d. A coin flip at the cutoff: probability each category is read
+  var coin = document.getElementById('coinflip');
+  if (coin) {
+    var tIn = coin.querySelector('[name="true"]');
+    var sIn = coin.querySelector('[name="sd"]');
+    var updateCoin = function () {
+      var t = +tIn.value, sd = +sIn.value;
+      var pPR = normCdf((-30 - t) / sd);
+      var pPD = 1 - normCdf((20 - t) / sd);
+      var pSD = Math.max(0, 1 - pPR - pPD);
+      [['PR', pPR], ['SD', pSD], ['PD', pPD]].forEach(function (x) {
+        var row = coin.querySelector('[data-cat="' + x[0] + '"]');
+        row.querySelector('.coin-fill').style.width = (x[1] * 100) + '%';
+        row.querySelector('.coin-val').textContent = Math.round(x[1] * 100) + '%';
+      });
+      coin.querySelector('[data-out="true"]').textContent = (t > 0 ? '+' : '') + t + '%';
+      coin.querySelector('[data-out="sd"]').textContent = '±' + sd + ' pts';
+      coin.querySelector('[data-out="truth"]').textContent = CATEGORY_NAMES[recistCategory(t)];
+      tIn.setAttribute('aria-valuetext', 'True change ' + t + '%');
+      sIn.setAttribute('aria-valuetext', 'Reader variation ' + sd + ' points');
+    };
+    tIn.addEventListener('input', updateCoin);
+    sIn.addEventListener('input', updateCoin);
+    updateCoin();
   }
 
   // 5c. Contents: mark the part in view
