@@ -6,7 +6,7 @@
 //  4. Eroom's law slider
 //  5. Reveal, sliver grid, and the contents scrollspy
 //  6. From Organs to Algorithms: number needed to benefit, lung cancer
-//     splits, re-sorting tumors, the alien solution
+//     splits, re-sorting tumors, Definition 1 on a solution landscape
 //  7. The Broken Instrument: reading a scan, attenuation, waterfalls,
 //     the coin flip at the cutoff
 //  8. There Is No Average Patient: the Reweight the Trial calculator
@@ -247,12 +247,12 @@
   });
 
   // 6b. Lung cancer, split by split. Biomarker-defined FDA approvals in
-  //     non-small cell lung cancer; `khozin` marks his FDA approval summaries.
+  //     non-small cell lung cancer.
   var SPLITS = [
     { year: 2011, marker: 'ALK', drug: 'crizotinib' },
-    { year: 2013, marker: 'EGFR exon 19 / L858R', drug: 'erlotinib, first line', khozin: true },
-    { year: 2014, marker: 'ALK, after crizotinib', drug: 'ceritinib', khozin: true },
-    { year: 2015, marker: 'EGFR T790M', drug: 'osimertinib', khozin: true },
+    { year: 2013, marker: 'EGFR exon 19 / L858R', drug: 'erlotinib, first line' },
+    { year: 2014, marker: 'ALK, after crizotinib', drug: 'ceritinib' },
+    { year: 2015, marker: 'EGFR T790M', drug: 'osimertinib' },
     { year: 2016, marker: 'ROS1', drug: 'crizotinib' },
     { year: 2016, marker: 'PD-L1 high', drug: 'pembrolizumab, first line' },
     { year: 2017, marker: 'BRAF V600E', drug: 'dabrafenib + trametinib' },
@@ -271,7 +271,7 @@
     var range = split.querySelector('input');
     SPLITS.forEach(function (sp) {
       var li = document.createElement('li');
-      li.className = 'split-chip' + (sp.khozin ? ' is-khozin' : '');
+      li.className = 'split-chip';
       li.innerHTML = '<span class="split-chip-year">' + sp.year + '</span><b>' + sp.marker + '</b><span>' + sp.drug + '</span>';
       chips.appendChild(li);
       sp.el = li;
@@ -343,16 +343,191 @@
     drawResort('organ');
   }
 
-  // 6d. The alien solution: reveal the point outside the human set
+  // 6d. Testing Definition 1 on a solution landscape. Quality h is a
+  //     mixture of Gaussian peaks over a 2-D space; human knowledge is an
+  //     isotropic Gaussian prior (center c, spread sigma) and H is its 95%
+  //     highest-density region, a disc of radius 2.448 sigma. P(s* | human
+  //     knowledge) is the prior tail probability exp(-r^2 / 2 sigma^2).
+  (function () {
   var alien = document.getElementById('alien');
   if (alien) {
-    var abtn = alien.querySelector('[data-alien]');
-    abtn.addEventListener('click', function () {
-      var on = alien.classList.toggle('is-revealed');
-      abtn.setAttribute('aria-pressed', String(on));
-      abtn.textContent = on ? 'Hide the alien solution' : 'Show the alien solution';
+    var AW = 1.6, AH = 1, GX = 160, GY = 100, VW = 600, VH = 380, R95 = Math.sqrt(-2 * Math.log(0.05));
+    var LANDS = {
+      far: { c: [0.45, 0.55], sigma: 0.1, peaks: [[0.47, 0.52, 0.72, 0.16], [1.22, 0.3, 1, 0.085], [0.92, 0.8, 0.45, 0.12], [0.18, 0.2, 0.3, 0.12], [1.42, 0.82, 0.35, 0.1]] },
+      edge: { c: [0.6, 0.5], sigma: 0.1, peaks: [[0.6, 0.5, 0.8, 0.14], [0.87, 0.48, 1, 0.07], [1.3, 0.25, 0.4, 0.12], [0.25, 0.8, 0.35, 0.12]] },
+      inside: { c: [0.6, 0.5], sigma: 0.1, peaks: [[0.68, 0.44, 1, 0.1], [1.3, 0.3, 0.8, 0.1], [0.25, 0.78, 0.35, 0.12]] }
+    };
+    var land, field, hMin, hMax, sStar;
+    var canvas = alien.querySelector('.al-canvas');
+    var asvg = alien.querySelector('.al-svg');
+    var epsIn = alien.querySelector('[name="eps"]'), delIn = alien.querySelector('[name="delta"]');
+    var ax = function (x) { return x / AW * VW; };
+    var ay = function (y) { return (1 - y / AH) * VH; };
+    var hAt = function (x, y) {
+      var v = 0;
+      land.peaks.forEach(function (p) { var dx = x - p[0], dy = y - p[1]; v += p[2] * Math.exp(-(dx * dx + dy * dy) / (2 * p[3] * p[3])); });
+      return v;
+    };
+    var gx = function (i) { return (i + 0.5) / GX * AW; };
+    var gy = function (j) { return (j + 0.5) / GY * AH; };
+
+    var buildField = function () {
+      field = new Float64Array(GX * GY); hMin = Infinity; hMax = -Infinity;
+      var best = -1;
+      for (var j = 0; j < GY; j++) for (var i = 0; i < GX; i++) {
+        var v = hAt(gx(i), gy(j)); field[j * GX + i] = v;
+        if (v < hMin) hMin = v;
+        if (v > hMax) { hMax = v; best = j * GX + i; }
+      }
+      sStar = [gx(best % GX), gy(Math.floor(best / GX))];
+    };
+
+    // shading: paper to cobalt by normalized quality
+    var paintField = function () {
+      var off = document.createElement('canvas'); off.width = GX; off.height = GY;
+      var octx = off.getContext('2d'), img = octx.createImageData(GX, GY);
+      var lo = [248, 245, 237], mid = [168, 186, 226], hi = [11, 55, 158];
+      for (var j = 0; j < GY; j++) for (var i = 0; i < GX; i++) {
+        var q = (field[j * GX + i] - hMin) / (hMax - hMin), a, b, t;
+        if (q < 0.5) { a = lo; b = mid; t = q / 0.5; } else { a = mid; b = hi; t = (q - 0.5) / 0.5; }
+        var k = ((GY - 1 - j) * GX + i) * 4;
+        img.data[k] = a[0] + (b[0] - a[0]) * t; img.data[k + 1] = a[1] + (b[1] - a[1]) * t; img.data[k + 2] = a[2] + (b[2] - a[2]) * t; img.data[k + 3] = 255;
+      }
+      octx.putImageData(img, 0, 0);
+      var r = canvas.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.round(r.width * dpr)); canvas.height = Math.max(1, Math.round(r.height * dpr));
+      var ctx = canvas.getContext('2d');
+      ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(off, 0, 0, canvas.width, canvas.height);
+    };
+
+    // iso-quality contours by marching squares on the grid
+    var contourPath = function (level) {
+      var d = '';
+      var P = function (i, j) { return [ax(gx(i)), ay(gy(j))]; };
+      var lerp = function (a, b, va, vb) { var t = (level - va) / (vb - va); return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]; };
+      for (var j = 0; j < GY - 1; j++) for (var i = 0; i < GX - 1; i++) {
+        var v0 = field[j * GX + i], v1 = field[j * GX + i + 1], v2 = field[(j + 1) * GX + i + 1], v3 = field[(j + 1) * GX + i];
+        var c = (v0 > level ? 1 : 0) | (v1 > level ? 2 : 0) | (v2 > level ? 4 : 0) | (v3 > level ? 8 : 0);
+        if (c === 0 || c === 15) continue;
+        var p0 = P(i, j), p1 = P(i + 1, j), p2 = P(i + 1, j + 1), p3 = P(i, j + 1);
+        var e = [lerp(p0, p1, v0, v1), lerp(p1, p2, v1, v2), lerp(p2, p3, v2, v3), lerp(p3, p0, v3, v0)];
+        var segs = { 1: [[3, 0]], 2: [[0, 1]], 3: [[3, 1]], 4: [[1, 2]], 5: [[3, 2], [0, 1]], 6: [[0, 2]], 7: [[3, 2]], 8: [[2, 3]], 9: [[0, 2]], 10: [[0, 3], [1, 2]], 11: [[1, 2]], 12: [[1, 3]], 13: [[0, 1]], 14: [[0, 3]] }[c];
+        segs.forEach(function (sg) { var a = e[sg[0]], b = e[sg[1]]; d += 'M' + a[0].toFixed(1) + ' ' + a[1].toFixed(1) + 'L' + b[0].toFixed(1) + ' ' + b[1].toFixed(1); });
+      }
+      return d;
+    };
+
+    var gStatic, gDyn;
+    var drawStatic = function () {
+      asvg.innerHTML = '';
+      gStatic = svgEl('g', {}, asvg);
+      [0.2, 0.35, 0.5, 0.65, 0.8, 0.9].forEach(function (f) {
+        svgEl('path', { d: contourPath(hMin + f * (hMax - hMin)), class: 'al-iso' + (f >= 0.8 ? ' is-high' : '') }, gStatic);
+      });
+      svgEl('text', { x: VW - 8, y: VH - 8, class: 'al-axis', 'text-anchor': 'end' }, gStatic).textContent = 'latent dimension 1 →';
+      svgEl('text', { x: 10, y: 18, class: 'al-axis' }, gStatic).textContent = '↑ latent dimension 2';
+      gDyn = svgEl('g', {}, asvg);
+    };
+
+    var aout = function (k, v) { var el = alien.querySelector('[data-out="' + k + '"]'); if (el) el.innerHTML = v; };
+    var fmtP = function (p) { return p >= 0.01 ? p.toFixed(3) : p.toExponential(1).replace('e-', ' × 10<sup>−') + '</sup>'; };
+    var mark = function (n, pass, text) {
+      var li = alien.querySelector('[data-c="' + n + '"]');
+      li.classList.toggle('is-pass', pass); li.classList.toggle('is-fail', !pass);
+      aout('c' + n, (pass ? '✓ ' : '✗ ') + text);
+    };
+
+    var update = function () {
+      var eps = +epsIn.value, delta = Math.pow(10, +delIn.value);
+      aout('eps', eps.toFixed(3)); aout('delta', fmtP(delta));
+      var c = land.c, sg = land.sigma, R = R95 * sg;
+      var r = Math.hypot(sStar[0] - c[0], sStar[1] - c[1]);
+      var inH = r <= R, dmin = Math.max(0, r - R), P = Math.exp(-r * r / (2 * sg * sg));
+      // best solution inside H
+      var bestH = -Infinity, bh = null;
+      for (var j = 0; j < GY; j++) for (var i = 0; i < GX; i++) {
+        var x = gx(i), y = gy(j);
+        if (Math.hypot(x - c[0], y - c[1]) <= R && field[j * GX + i] > bestH) { bestH = field[j * GX + i]; bh = [x, y]; }
+      }
+      // overlay
+      gDyn.innerHTML = '';
+      var cx = ax(c[0]), cy = ay(c[1]), sx = VW / AW;
+      // the epsilon band: solutions within epsilon of H fail condition 3
+      if (eps > 0) svgEl('circle', { cx: cx, cy: cy, r: (R + eps / 2) * sx, 'stroke-width': eps * sx, class: 'al-eps' }, gDyn);
+      [1, 2].forEach(function (k) { svgEl('circle', { cx: cx, cy: cy, r: k * sg * sx, class: 'al-ring' }, gDyn); });
+      var disc = svgEl('circle', { cx: cx, cy: cy, r: R * sx, class: 'al-h' }, gDyn);
+      disc.dataset.drag = 'move';
+      svgEl('text', { x: cx, y: cy - R * sx - 8, class: 'al-label', 'text-anchor': 'middle' }, gDyn).textContent = 'H · 95% of human prior';
+      svgEl('circle', { cx: cx, cy: cy, r: 3, class: 'al-centre' }, gDyn);
+      if (bh) {
+        svgEl('rect', { x: ax(bh[0]) - 5, y: ay(bh[1]) - 5, width: 10, height: 10, class: 'al-best' }, gDyn);
+        svgEl('text', { x: ax(bh[0]) + 9, y: ay(bh[1]) + 18, class: 'al-label al-label-sm' }, gDyn).textContent = 'best in H';
+      }
+      var ssx = ax(sStar[0]), ssy = ay(sStar[1]);
+      if (!inH) {
+        var ux = (sStar[0] - c[0]) / r, uy = (sStar[1] - c[1]) / r;
+        var ex = ax(c[0] + ux * R), ey = ay(c[1] + uy * R);
+        svgEl('line', { x1: ex, y1: ey, x2: ssx, y2: ssy, class: 'al-dist' }, gDyn);
+        svgEl('text', { x: (ex + ssx) / 2, y: (ey + ssy) / 2 - 8, class: 'al-label al-label-sm', 'text-anchor': 'middle' }, gDyn).textContent = 'd = ' + dmin.toFixed(3);
+      }
+      svgEl('circle', { cx: ssx, cy: ssy, r: 9, class: 'al-star' }, gDyn);
+      svgEl('text', { x: ssx, y: ssy - 15, class: 'al-label', 'text-anchor': 'middle' }, gDyn).textContent = 's*';
+      var handle = svgEl('circle', { cx: cx + R * sx, cy: cy, r: 8, class: 'al-handle' }, gDyn);
+      handle.dataset.drag = 'size';
+
+      mark(1, true, 'h = ' + (hMax).toFixed(2) + ', grid maximum');
+      mark(2, !inH, inH ? 'inside H' : 'r = ' + (r / sg).toFixed(2) + 'σ > 2.45σ');
+      mark(3, dmin > eps, 'd = ' + dmin.toFixed(3) + (dmin > eps ? ' > ' : ' ≤ ') + 'ε');
+      mark(4, P < delta, 'P = ' + fmtP(P) + (P < delta ? ' < ' : ' ≥ ') + 'δ');
+      var fails = [!inH, dmin > eps, P < delta].map(function (ok, k) { return ok ? null : k + 2; }).filter(Boolean);
+      aout('verdict', fails.length ? 'Not alien: fails condition' + (fails.length > 1 ? 's ' : ' ') + (fails.length > 1 ? fails.slice(0, -1).join(', ') + ' and ' + fails[fails.length - 1] : fails[0]) + '.' : '<b>s* is an alien construction.</b>');
+      alien.querySelector('.al-verdict').classList.toggle('is-alien', !fails.length);
+      aout('hh', bestH.toFixed(2)); aout('hs', hMax.toFixed(2));
+      aout('gain', bestH >= hMax - 1e-9 ? 'none' : '+' + Math.round((hMax / bestH - 1) * 100) + '%');
+    };
+
+    var setLand = function (key) {
+      land = JSON.parse(JSON.stringify(LANDS[key]));
+      alien.querySelectorAll('[data-land]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.land === key)); });
+      buildField(); paintField(); drawStatic(); update();
+    };
+
+    // drag the human region (move) or its edge handle (widen)
+    var drag = null;
+    var toData = function (ev) {
+      var pt = asvg.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY;
+      var q = pt.matrixTransform(asvg.getScreenCTM().inverse());
+      return [q.x / VW * AW, (1 - q.y / VH) * AH];
+    };
+    asvg.addEventListener('pointerdown', function (ev) {
+      var mode = ev.target.dataset && ev.target.dataset.drag;
+      if (!mode) return;
+      drag = { mode: mode, start: toData(ev), c0: land.c.slice() };
+      asvg.setPointerCapture(ev.pointerId); ev.preventDefault();
     });
+    asvg.addEventListener('pointermove', function (ev) {
+      if (!drag) return;
+      var p = toData(ev);
+      if (drag.mode === 'move') {
+        land.c = [Math.min(AW - 0.05, Math.max(0.05, drag.c0[0] + p[0] - drag.start[0])), Math.min(AH - 0.05, Math.max(0.05, drag.c0[1] + p[1] - drag.start[1]))];
+      } else {
+        land.sigma = Math.min(0.4, Math.max(0.03, Math.hypot(p[0] - land.c[0], p[1] - land.c[1]) / R95));
+      }
+      update();
+    });
+    var endDrag = function () { drag = null; };
+    asvg.addEventListener('pointerup', endDrag);
+    asvg.addEventListener('pointercancel', endDrag);
+
+    epsIn.addEventListener('input', update);
+    delIn.addEventListener('input', update);
+    alien.querySelectorAll('[data-land]').forEach(function (b) { b.addEventListener('click', function () { setLand(b.dataset.land); }); });
+    var rt;
+    window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(paintField, 150); });
+    setLand('far');
   }
+  })();
 
   // ---------------------------------------------------------------
   // 7. The Broken Instrument
@@ -565,7 +740,7 @@
           '<label class="rw-cell rw-name"><span>Group</span><input type="text" data-k="n" value="' + esc(g.n) + '" maxlength="40"></label>' +
           '<label class="rw-cell"><span>Share of trial, %</span><input type="number" data-k="t" min="0" max="100" step="0.1" value="' + g.t + '"></label>' +
           '<label class="rw-cell"><span>Share of real world, %</span><input type="number" data-k="r" min="0" max="100" step="0.1" value="' + g.r + '"></label>' +
-          '<label class="rw-cell"><span>Event rate untreated, %</span><input type="number" data-k="c" min="0" max="100" step="0.1" value="' + g.c + '"></label>' +
+          '<label class="rw-cell"><span>Event rate on control, %</span><input type="number" data-k="c" min="0" max="100" step="0.1" value="' + g.c + '"></label>' +
           '<label class="rw-cell rw-effect"><span>' + (state.scale === 'or' ? 'Odds ratio' : 'Relative reduction, %') + '</span><input type="number" data-k="e" step="' + (state.scale === 'or' ? '0.01' : '1') + '" value="' + g.e + '"></label>' +
           '<button class="rw-remove" type="button" aria-label="Remove ' + esc(g.n) + '"' + (state.groups.length <= 2 ? ' disabled' : '') + '>&times;</button>';
         row.querySelectorAll('input').forEach(function (inp) {
@@ -760,7 +935,7 @@
     var barsHost = sameHr.querySelector('.hr-bars');
     var MEDIANS = [3, 6, 12, 24, 60];
     barsHost.innerHTML = MEDIANS.map(function (m) {
-      return '<div class="hr-row"><span class="hr-label">Median ' + m + ' months</span><span class="hr-track"><i></i></span><span class="hr-val"></span></div>';
+      return '<div class="hr-row"><span class="hr-label">Control median ' + m + ' mo</span><span class="hr-track"><i></i></span><span class="hr-val"></span></div>';
     }).join('');
     var updHr = function () {
       var hr = +hrIn.value / 100;
@@ -893,7 +1068,7 @@
     });
   }
 
-  // 9d. The frontier: NNB at the untreated median (6 months) from the
+  // 9d. The frontier: NNB at the no-treatment median (6 months) from the
   //     best available median, with the implied HR = 6 / median.
   var fr = document.getElementById('frontier');
   if (fr) {
@@ -1051,10 +1226,10 @@
       var grid = tget('.tt-grid');
       grid.innerHTML = cells;
       tput('k-base', base + ' ' + word + ' at ' + months(t) + ' either way');
-      tput('k-gain', better ? diffCells + ' ' + word + ' because of the treatment' : diffCells + ' ' + word + ' only without the treatment');
+      tput('k-gain', better ? diffCells + ' ' + word + ' on treatment but not on control' : diffCells + ' ' + word + ' on control but not on treatment');
       tput('k-none', (100 - top) + ' not ' + word + ' either way');
       tt.querySelector('.key-sq.is-gain').classList.toggle('is-loss', !better);
-      grid.setAttribute('aria-label', 'Of 100 patients treated: ' + base + ' ' + word + ' either way, ' + diffCells + (better ? ' because of the treatment, ' : ' only without it, ') + (100 - top) + ' not either way.');
+      grid.setAttribute('aria-label', 'Of 100 patients treated: ' + base + ' ' + word + ' either way, ' + diffCells + (better ? ' on treatment but not on control, ' : ' on control but not on treatment, ') + (100 - top) + ' not either way.');
 
       // other time points
       tget('.tt-times tbody').innerHTML = [6, 12, 18, 24, 36].map(function (tp) {
