@@ -740,7 +740,7 @@
           '<label class="rw-cell rw-name"><span>Group</span><input type="text" data-k="n" value="' + esc(g.n) + '" maxlength="40"></label>' +
           '<label class="rw-cell"><span>Share of trial, %</span><input type="number" data-k="t" min="0" max="100" step="0.1" value="' + g.t + '"></label>' +
           '<label class="rw-cell"><span>Share of real world, %</span><input type="number" data-k="r" min="0" max="100" step="0.1" value="' + g.r + '"></label>' +
-          '<label class="rw-cell"><span>Event rate untreated, %</span><input type="number" data-k="c" min="0" max="100" step="0.1" value="' + g.c + '"></label>' +
+          '<label class="rw-cell"><span>Event rate on control, %</span><input type="number" data-k="c" min="0" max="100" step="0.1" value="' + g.c + '"></label>' +
           '<label class="rw-cell rw-effect"><span>' + (state.scale === 'or' ? 'Odds ratio' : 'Relative reduction, %') + '</span><input type="number" data-k="e" step="' + (state.scale === 'or' ? '0.01' : '1') + '" value="' + g.e + '"></label>' +
           '<button class="rw-remove" type="button" aria-label="Remove ' + esc(g.n) + '"' + (state.groups.length <= 2 ? ' disabled' : '') + '>&times;</button>';
         row.querySelectorAll('input').forEach(function (inp) {
@@ -935,7 +935,7 @@
     var barsHost = sameHr.querySelector('.hr-bars');
     var MEDIANS = [3, 6, 12, 24, 60];
     barsHost.innerHTML = MEDIANS.map(function (m) {
-      return '<div class="hr-row"><span class="hr-label">Median ' + m + ' months</span><span class="hr-track"><i></i></span><span class="hr-val"></span></div>';
+      return '<div class="hr-row"><span class="hr-label">Control median ' + m + ' mo</span><span class="hr-track"><i></i></span><span class="hr-val"></span></div>';
     }).join('');
     var updHr = function () {
       var hr = +hrIn.value / 100;
@@ -1068,7 +1068,7 @@
     });
   }
 
-  // 9d. The frontier: NNB at the untreated median (6 months) from the
+  // 9d. The frontier: NNB at the no-treatment median (6 months) from the
   //     best available median, with the implied HR = 6 / median.
   var fr = document.getElementById('frontier');
   if (fr) {
@@ -1226,10 +1226,10 @@
       var grid = tget('.tt-grid');
       grid.innerHTML = cells;
       tput('k-base', base + ' ' + word + ' at ' + months(t) + ' either way');
-      tput('k-gain', better ? diffCells + ' ' + word + ' because of the treatment' : diffCells + ' ' + word + ' only without the treatment');
+      tput('k-gain', better ? diffCells + ' ' + word + ' on treatment but not on control' : diffCells + ' ' + word + ' on control but not on treatment');
       tput('k-none', (100 - top) + ' not ' + word + ' either way');
       tt.querySelector('.key-sq.is-gain').classList.toggle('is-loss', !better);
-      grid.setAttribute('aria-label', 'Of 100 patients treated: ' + base + ' ' + word + ' either way, ' + diffCells + (better ? ' because of the treatment, ' : ' only without it, ') + (100 - top) + ' not either way.');
+      grid.setAttribute('aria-label', 'Of 100 patients treated: ' + base + ' ' + word + ' either way, ' + diffCells + (better ? ' on treatment but not on control, ' : ' on control but not on treatment, ') + (100 - top) + ' not either way.');
 
       // other time points
       tget('.tt-times tbody').innerHTML = [6, 12, 18, 24, 36].map(function (tp) {

@@ -1088,7 +1088,7 @@
               </div>
               <p class="figure-note"><span class="wf-note"></span> <span class="cite-line">Simulated patients, for illustration</span></p>
             </figure>
-            <p>A drug that shrinks every patient&rsquo;s tumors by a quarter, an effect that implies real activity, can post a response rate of zero, the same as no treatment. Trial designs that keep tumor change continuous, with a control group, were proposed precisely to stop discarding that information.</p>
+            <p>A drug that shrinks every patient&rsquo;s tumors by a quarter, an effect that implies real activity, can post a response rate of zero, the same as an inactive drug. Trial designs that keep tumor change continuous, with a control group, were proposed precisely to stop discarding that information.</p>
             <p class="cite-line">Karrison, Maitland, Stadler &amp; Ratain, J Natl Cancer Inst 2007 &middot; Shannon, Bell Syst Tech J 1948</p>
           </section>
 
@@ -1306,7 +1306,7 @@
           <section class="part" id="ap-surprise" aria-labelledby="ap-surprise-h">
             <p class="part-num">Part IV</p>
             <h3 class="part-title" id="ap-surprise-h">Same drug, different answer</h3>
-            <p>Consider a hypothetical cancer and three groups of patients with different untreated death rates: 80% in group A, 16.7% in group B and 75% in group C. The real-world patient population is 1.1% A, 33.5% B and 65.3% C. A trial with restrictive criteria enrolls 30% A, no B and 70% C. The new drug cuts the risk of death by 10% in relative terms.</p>
+            <p>Consider a hypothetical cancer and three groups of patients with different death rates on the control therapy: 80% in group A, 16.7% in group B and 75% in group C. The real-world patient population is 1.1% A, 33.5% B and 65.3% C. A trial with restrictive criteria enrolls 30% A, no B and 70% C. The new drug cuts the risk of death by 10% in relative terms.</p>
             <table class="compare-table compare-3">
               <caption class="visually-hidden">Absolute risk reduction and number needed to treat in the trial and in the real world</caption>
               <thead>
@@ -1330,7 +1330,7 @@
           <section class="part part-tool" id="rw-tool" aria-labelledby="rw-tool-h">
             <p class="part-num">Part V &middot; Tool</p>
             <h3 class="part-title" id="rw-tool-h">Reweight the trial</h3>
-            <p>Enter the groups that matter for your question: age bands, comorbidity, performance status, ancestry, or anything else a trial reports by subgroup. For each, give its share of the trial, its share of the population you treat, its event rate without treatment, and the treatment&rsquo;s effect. The tool recomputes what the trial would have reported for your population, and for one patient.</p>
+            <p>Enter the groups that matter for your question: age bands, comorbidity, performance status, ancestry, or anything else a trial reports by subgroup. For each, give its share of the trial, its share of the population you treat, its event rate on the control therapy, and the treatment&rsquo;s effect relative to that control. The tool recomputes what the trial would have reported for your population, and for one patient.</p>
 
             <div class="rw" id="reweight">
               <div class="rw-tabs" role="tablist" aria-label="Calculator mode">
@@ -1370,8 +1370,8 @@
                   <div class="rw-col">
                     <h4>Trial, as reported</h4>
                     <dl>
-                      <div><dt>Event rate, untreated</dt><dd data-out="tr-c"></dd></div>
-                      <div><dt>Event rate, treated</dt><dd data-out="tr-t"></dd></div>
+                      <div><dt>Event rate, control</dt><dd data-out="tr-c"></dd></div>
+                      <div><dt>Event rate, new treatment</dt><dd data-out="tr-t"></dd></div>
                       <div><dt>Absolute risk reduction</dt><dd data-out="tr-arr"></dd></div>
                     </dl>
                     <p class="rw-nnt"><b data-out="tr-nnt"></b><span data-out="tr-nnt-note"></span></p>
@@ -1379,8 +1379,8 @@
                   <div class="rw-col is-point">
                     <h4>Your population</h4>
                     <dl>
-                      <div><dt>Event rate, untreated</dt><dd data-out="rl-c"></dd></div>
-                      <div><dt>Event rate, treated</dt><dd data-out="rl-t"></dd></div>
+                      <div><dt>Event rate, control</dt><dd data-out="rl-c"></dd></div>
+                      <div><dt>Event rate, new treatment</dt><dd data-out="rl-t"></dd></div>
                       <div><dt>Absolute risk reduction</dt><dd data-out="rl-arr"></dd></div>
                     </dl>
                     <p class="rw-nnt"><b data-out="rl-nnt"></b><span data-out="rl-nnt-note"></span></p>
@@ -1393,7 +1393,7 @@
                   <h4>One patient</h4>
                   <label><span>Your patient belongs to</span><select></select></label>
                   <div class="stat-row stat-row-3">
-                    <div class="stat"><span class="stat-num" data-out="pt-c"></span><span class="stat-label">Event rate untreated</span></div>
+                    <div class="stat"><span class="stat-num" data-out="pt-c"></span><span class="stat-label">Event rate on control</span></div>
                     <div class="stat"><span class="stat-num" data-out="pt-t"></span><span class="stat-label">Event rate treated</span></div>
                     <div class="stat stat-point"><span class="stat-num" data-out="pt-nnt"></span><span class="stat-label"><span data-out="pt-nnt-note"></span> (absolute reduction <span data-out="pt-arr"></span>)</span></div>
                   </div>
@@ -1407,11 +1407,11 @@
               </div>
 
               <div class="rw-panel rw-quick" id="rw-quick" role="tabpanel" aria-labelledby="rw-tab-quick" hidden>
-                <p>When a trial reports only overall results, enter its event rates and the untreated event rate in your population. The tool carries the trial&rsquo;s effect across on two common assumptions; the gap between them shows how much the assumption matters.</p>
+                <p>When a trial reports only overall results, enter its event rates and the control-therapy event rate in your population. The tool carries the trial&rsquo;s effect across on two common assumptions; the gap between them shows how much the assumption matters.</p>
                 <div class="rw-quick-inputs">
                   <label><span>Trial control arm event rate, %</span><input type="number" name="qp" min="0.1" max="99.9" step="0.1" value="76.5"></label>
                   <label><span>Trial treatment arm event rate, %</span><input type="number" name="qa" min="0.1" max="99.9" step="0.1" value="68.9"></label>
-                  <label><span>Untreated event rate in your population, %</span><input type="number" name="qr" min="0.1" max="99.9" step="0.1" value="55.5"></label>
+                  <label><span>Control-therapy event rate in your population, %</span><input type="number" name="qr" min="0.1" max="99.9" step="0.1" value="55.5"></label>
                 </div>
                 <table class="rw-quick-table">
                   <thead><tr><th scope="col"></th><th scope="col">Treated event rate</th><th scope="col">Absolute reduction</th><th scope="col">Treated per benefit</th></tr></thead>
@@ -1554,9 +1554,9 @@
           <section class="part" id="pe-hazard" aria-labelledby="pe-hazard-h">
             <p class="part-num">Part II</p>
             <h3 class="part-title" id="pe-hazard-h">What a hazard ratio is, and is not</h3>
-            <p>A hazard is the rate at which events happen among patients who have not yet had one. The hazard ratio compares those rates between arms, and the Cox model averages the comparison over the whole follow-up. It is an efficient statistic for detecting a difference. It is a poor one for describing it.</p>
+            <p>A hazard is the rate at which events happen among patients who have not yet had one. The hazard ratio compares those rates between the experimental arm and the control arm, and the Cox model averages the comparison over the whole follow-up. The control is whatever the trial chose as the comparator: in oncology usually the standard of care, sometimes placebo added to it, rarely no treatment. Every number on this page is relative to that comparator. It is an efficient statistic for detecting a difference. It is a poor one for describing it.</p>
             <ol class="moves">
-              <li><span class="move-num">01</span><h5>It is relative</h5><p>A 40% reduction means very different things when 80% of untreated patients will die within a year and when 8% will. Risk communication research is consistent: patients and physicians overestimate benefit when it is framed in relative terms.</p></li>
+              <li><span class="move-num">01</span><h5>It is relative</h5><p>A 40% reduction means very different things when 80% of patients on the control arm will die within a year and when 8% will. Risk communication research is consistent: patients and physicians overestimate benefit when it is framed in relative terms.</p></li>
               <li><span class="move-num">02</span><h5>It averages over time</h5><p>When hazards are not proportional, as when curves cross or separate late, a single ratio describes no moment of the trial. Its clinical meaning becomes difficult, if not impossible, to interpret.</p></li>
               <li><span class="move-num">03</span><h5>It conditions on survival</h5><p>Later in follow-up, the ratio compares the patients still at risk in each arm, who are no longer comparable groups. Even in a perfect randomized trial, the period-specific ratio has a built-in selection bias.</p></li>
             </ol>
@@ -1587,7 +1587,7 @@
               </div>
               <div class="hr-bars" aria-live="polite"></div>
               <div class="figure-note">
-                <p>Each row is a patient group whose median survival without the drug differs. Bars show additional patients alive at 12 months per 100 treated; the number is how many must be treated for one of them. With a hazard ratio of 0.70, it ranges from about 8 to 27.</p>
+                <p>Each row is a patient group whose median survival on the control therapy differs. Bars show additional patients alive at 12 months per 100 treated; the number is how many must be treated for one of them. With a hazard ratio of 0.70, it ranges from about 8 to 27.</p>
                 <p class="cite-line">Illustrative: constant hazards in each group, so survival at 12 months is 0.5<sup>12/median</sup></p>
               </div>
             </figure>
@@ -1665,9 +1665,9 @@
           <section class="part" id="pe-frontier" aria-labelledby="pe-frontier-h">
             <p class="part-num">Part VII</p>
             <h3 class="part-title" id="pe-frontier-h">The frontier</h3>
-            <p>The paper also asked how far lung cancer treatment had come. For each year, it took the best estimated median survival available to any type of patient and compared it with an untreated patient&rsquo;s median of about 6 months. The best median rose from 9 months in 2003 to 39.7 months in 2017, for patients with EGFR mutations. Translated at the untreated median, the number of patients treated for one to benefit fell from 7.7 to 2.5.</p>
+            <p>The paper also asked how far lung cancer treatment had come. For each year, it took the best estimated median survival available to any type of patient and compared it with an estimated median of about 6 months for a patient receiving no treatment. This is a modeled reference, not a trial control: it measures cumulative progress against no therapy, where a trial measures one drug against its comparator. The best median rose from 9 months in 2003 to 39.7 months in 2017, for patients with EGFR mutations. Translated at that 6-month median, the number of patients treated for one to benefit fell from 7.7 to 2.5.</p>
             <figure class="figure figure-frontier" id="frontier">
-              <figcaption class="figure-head"><span class="figure-tag">Figure 4</span>From median survival to patients treated per benefit, against an untreated median of 6 months</figcaption>
+              <figcaption class="figure-head"><span class="figure-tag">Figure 4</span>From median survival to patients treated per benefit, against no treatment (modeled median 6 months)</figcaption>
               <div class="att-controls">
                 <label><span>Median survival with the best available treatment <b data-out="m"></b></span><input type="range" name="m" min="8" max="48" step="0.1" value="39.7"></label>
                 <div class="att-presets"><span>Years</span><button class="ctl-btn" type="button" data-m="9">2003</button><button class="ctl-btn" type="button" data-m="39.7">2017</button></div>
@@ -1679,7 +1679,7 @@
                 <div class="stat stat-point"><span class="stat-num" data-out="nnb"></span><span class="stat-label">Treated for one to benefit</span></div>
               </div>
               <div class="figure-note">
-                <p><b>The floor is 2.</b> At the untreated median, half of untreated patients are still alive, so no treatment can save more than the other half: at most one extra survivor for every two treated. By 2017 the frontier was near that floor. Measured later in the disease, the same treatments show more room, and the paper notes the frontier shifts lower when calculated at a lower survival percentile.</p>
+                <p><b>The floor is 2.</b> At the reference median, half of the reference patients are still alive, so no therapy can add more than the other half: at most one extra survivor for every two treated. By 2017 the frontier was near that floor. Measured later in the disease, the same treatments show more room, and the paper notes the frontier shifts lower when calculated at a lower survival percentile.</p>
                 <p class="cite-line">Raju, Khozin, et al., 2020, Figure 5 &middot; hazard ratio estimated as 6 &divide; median, which assumes constant hazards</p>
               </div>
             </figure>
@@ -1851,6 +1851,6 @@
   </footer>
 
   <script src="../script.js?v=39"></script>
-  <script src="../topology.js?v=8"></script>
+  <script src="../topology.js?v=9"></script>
 </body>
 </html>
