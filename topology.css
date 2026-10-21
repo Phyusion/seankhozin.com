@@ -497,3 +497,123 @@ html:not(.js) .alien-conds .ctl-btn { display: none; }
   .read-zone { font-size: 9px; padding: 0 4px; }
 }
 @media (prefers-reduced-motion: reduce) { .att-bars i, .wf-bar, .coin-fill { transition: none; } }
+
+/* --- Theme 04: There Is No Average Patient --- */
+.compare-3 thead th:first-child { width: 28%; }
+.compare-3 .compare-name { max-width: none; font-size: clamp(16px, 1.6vw, 22px); }
+
+/* Reweight the trial */
+.part-tool { padding-bottom: clamp(40px, 5vw, 64px); }
+.rw { margin-top: 24px; border: 3px solid var(--ink); background: var(--paper); }
+.rw-tabs { display: flex; border-bottom: 3px solid var(--ink); }
+.rw-tab {
+  flex: 1; min-height: 52px; padding: 0 16px; background: var(--paper-2); color: var(--ink); border: 0; cursor: pointer;
+  font: 800 14px/1 var(--font-display); font-stretch: 90%; letter-spacing: .04em; text-transform: uppercase;
+}
+.rw-tab + .rw-tab { border-left: 3px solid var(--ink); }
+.rw-tab[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+.rw-panel { padding: 18px; display: grid; gap: 18px; }
+.rw-panel[hidden] { display: none; }
+.rw-presets { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.rw-presets > span, .rw-options legend, .rw-cell > span, .rw-common > span, .rw-patient label > span, .rw-quick-inputs label > span {
+  font: 500 11px/1.25 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--graphite);
+}
+.rw-presets > span { margin-right: 6px; }
+.rw-options { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: end; padding: 14px 0; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+.rw-options fieldset { border: 0; display: grid; gap: 6px; }
+.rw-options legend { margin-bottom: 6px; }
+.rw-options label { display: flex; align-items: center; gap: 8px; font: 600 15px/1.2 var(--font-display); font-stretch: 92%; color: var(--ink); cursor: pointer; }
+.rw-options input[type="radio"] { width: 18px; height: 18px; accent-color: var(--ink); }
+.rw-common { display: grid; gap: 6px; }
+.rw input[type="number"], .rw input[type="text"], .rw select {
+  width: 100%; min-height: 44px; padding: 0 10px; border: 2px solid var(--ink); border-radius: 0; background: #fff; color: var(--ink);
+  font: 600 16px/1 var(--font-mono); font-variant-numeric: tabular-nums;
+}
+.rw input:focus-visible, .rw select:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 1px; }
+.rw-common input { max-width: 160px; }
+.rw.is-same .rw-common { display: grid; }
+.rw:not(.is-same) .rw-common { display: none; }
+.rw.is-same .rw-effect { display: none; }
+.rw-rows { display: grid; gap: 8px; }
+.rw-row { display: grid; grid-template-columns: 10px minmax(0, 1.4fr) repeat(4, minmax(0, 1fr)) 44px; gap: 10px; align-items: end; padding: 10px 0; border-bottom: 1px solid var(--stone-2); }
+.rw.is-same .rw-row { grid-template-columns: 10px minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)) 44px; }
+.rw-cell { display: grid; gap: 6px; min-width: 0; }
+.rw-swatch { display: inline-block; width: 10px; height: 44px; border: 1px solid var(--ink); }
+.rw-remove { width: 44px; height: 44px; background: transparent; border: 2px solid var(--ink); cursor: pointer; font: 700 22px/1 var(--font-display); color: var(--ink); }
+.rw-remove:hover:not(:disabled) { background: var(--ink); color: var(--paper); }
+.rw-remove:disabled { opacity: .3; cursor: default; }
+.rw-add { justify-self: start; }
+
+.rw-composition { display: grid; gap: 8px; }
+.rw-bar { display: grid; grid-template-columns: 96px minmax(0, 1fr); align-items: center; gap: 10px; }
+.rw-bar > span:first-child { font: 800 13px/1 var(--font-display); font-stretch: 88%; text-transform: uppercase; }
+.rw-bar-fill { display: flex; height: 28px; border: 2px solid var(--ink); overflow: hidden; }
+.rw-bar-fill i { display: block; height: 100%; border-right: 1px solid var(--paper); }
+.rw-rep { list-style: none; display: grid; gap: 4px; margin-top: 6px; }
+.rw-rep li { display: grid; grid-template-columns: 10px minmax(0, 160px) minmax(0, 1fr) auto; gap: 10px; align-items: center; font-size: 14px; }
+.rw-rep .rw-swatch { height: 14px; }
+.rw-rep b { font: 700 14px/1.2 var(--font-display); font-stretch: 92%; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rw-rep em { font: 600 11px/1 var(--font-mono); font-style: normal; letter-spacing: .04em; text-transform: uppercase; color: var(--graphite); }
+.rw-rep li.is-under em { color: var(--cobalt); }
+.rw-rep li.is-absent em { color: var(--vermilion); }
+
+.rw-results { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border: 2px solid var(--ink); }
+.rw-results.is-empty { opacity: .35; }
+.rw-col { padding: 14px 16px; min-width: 0; }
+.rw-col + .rw-col { border-left: 3px solid var(--ink); }
+.rw-col.is-point { background: var(--signal); }
+.rw-col h4 { margin-bottom: 10px; font: 900 18px/1 var(--font-display); font-stretch: 104%; text-transform: uppercase; }
+.rw-col dl { display: grid; gap: 4px; }
+.rw-col dl div { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; border-bottom: 1px solid rgba(10,10,10,.15); }
+.rw-col dt { font-size: 14px; }
+.rw-col dd { font: 700 15px/1.2 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink); }
+.rw-nnt { display: flex; align-items: baseline; gap: 10px; margin-top: 12px; }
+.rw-nnt b { font: 900 clamp(48px, 5.4vw, 80px)/.82 var(--font-display); font-stretch: 72%; letter-spacing: -.03em; color: var(--ink); }
+.rw-nnt span { font: 700 14px/1.2 var(--font-display); font-stretch: 90%; color: var(--ink); }
+.rw-diff { grid-column: 1 / -1; padding: 12px 16px; border-top: 3px solid var(--ink); font: 800 clamp(17px, 1.6vw, 22px)/1.2 var(--font-display); font-stretch: 92%; color: var(--ink); }
+.rw-diff:empty { display: none; }
+.rw-warnings { list-style: none; display: grid; gap: 6px; }
+.rw-warnings:empty { display: none; }
+.rw-warnings li { padding: 10px 12px; border-left: 6px solid var(--vermilion); background: #FBECEA; font-size: 15px; }
+.rw-patient { display: grid; gap: 12px; padding-top: 16px; border-top: 3px solid var(--ink); }
+.rw-patient h4 { font: 900 18px/1 var(--font-display); font-stretch: 104%; text-transform: uppercase; }
+.rw-patient label { display: grid; gap: 6px; max-width: 360px; }
+.rw-patient .stat-row { margin-top: 0; }
+.rw-flag { font: 700 14px/1.3 var(--font-display); color: var(--vermilion); }
+.rw-flag:empty { display: none; }
+.rw-actions { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 14px; border-top: 2px solid var(--ink); }
+.rw-quick-inputs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.rw-quick-inputs label { display: grid; gap: 6px; align-content: end; }
+.rw-quick-table { width: 100%; border-collapse: collapse; }
+.rw-quick-table th, .rw-quick-table td { padding: 10px 8px; border-bottom: 1px solid var(--stone-2); text-align: right; font: 700 15px/1.2 var(--font-mono); font-variant-numeric: tabular-nums; }
+.rw-quick-table thead th { font: 500 11px/1.2 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--graphite); border-bottom: 2px solid var(--ink); }
+.rw-quick-table tbody th { text-align: left; font: 700 15px/1.2 var(--font-display); font-stretch: 92%; color: var(--ink); }
+.rw-quick-table tbody tr:first-child { background: var(--paper-2); }
+.rw-privacy { border-top: 0; padding-left: 0; padding-right: 0; }
+
+@media (max-width: 820px) {
+  .rw-row, .rw.is-same .rw-row { grid-template-columns: 10px minmax(0, 1fr) minmax(0, 1fr); }
+  .rw-row .rw-swatch { grid-column: 1; grid-row: 1 / span 3; height: 100%; }
+  .rw-row .rw-name { grid-column: 2; grid-row: 1; }
+  .rw-row .rw-remove { grid-column: 3; grid-row: 1; justify-self: end; }
+  .rw-results { grid-template-columns: minmax(0, 1fr); }
+  .rw-col + .rw-col { border-left: 0; border-top: 3px solid var(--ink); }
+  .rw-quick-inputs { grid-template-columns: minmax(0, 1fr); }
+  .compare-3 thead tr, .compare-3 tbody tr { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+  .rw-rep li { grid-template-columns: 10px minmax(0, 1fr) auto; }
+  .rw-rep li > span:not(.rw-swatch) { grid-column: 2 / -1; font-size: 13px; }
+  .rw-rep li em { grid-column: 2 / -1; }
+}
+@media (max-width: 560px) {
+  .rw-tab { font-size: 12px; padding: 0 8px; }
+  .rw-quick-table { font-size: 13px; }
+  .rw-quick-table th, .rw-quick-table td { padding: 8px 4px; font-size: 13px; }
+}
+
+/* Printing the calculator: just the tool and its results */
+@media print {
+  .nav, .topo-hero, .theme-toc, .footer, .section-runner, .rw-presets, .rw-add, .rw-remove, .rw-actions, .rw-tabs { display: none !important; }
+  .section-theme:not(#no-average-patient), #no-average-patient .part:not(#rw-tool), #no-average-patient .section-header, #no-average-patient .theme-open, #no-average-patient .brief { display: none !important; }
+  .theme-body { display: block; margin: 0; }
+  .rw { border-width: 2px; }
+}
