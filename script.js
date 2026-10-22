@@ -123,24 +123,43 @@
     });
   }
 
-  // Fetch latest Precision Signals episode from YouTube RSS feed
+  // Fetch latest Precision Signals episode from YouTube RSS feed.
+  // Skips Shorts, times out rather than leaving the player blank, and
+  // falls back to the channel's uploads playlist on any failure.
   function loadLatestEpisode() {
-    var fallbackSrc = 'https://www.youtube.com/embed/videoseries?list=UUaFDT_bRrAwsNo4WFUteVjw';
-    fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://www.youtube.com/feeds/videos.xml?channel_id=UCaFDT_bRrAwsNo4WFUteVjw'))
-      .then(function (res) { return res.json(); })
+    var channelId = 'UCaFDT_bRrAwsNo4WFUteVjw';
+    var fallbackSrc = 'https://www.youtube.com/embed/videoseries?list=UU' + channelId.slice(2);
+    var feed = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + channelId;
+    var done = false;
+    function show(src) {
+      if (done) return;
+      done = true;
+      podcastIframe.src = src;
+    }
+    var timer = setTimeout(function () { show(fallbackSrc); }, 6000);
+    fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feed))
+      .then(function (res) {
+        if (!res.ok) throw new Error('feed ' + res.status);
+        return res.json();
+      })
       .then(function (data) {
-        if (data.items && data.items.length > 0) {
-          var link = data.items[0].link;
-          var match = link.match(/[?&]v=([^&]+)/);
+        var items = (data && data.status === 'ok' && data.items) || [];
+        for (var i = 0; i < items.length; i++) {
+          var link = items[i].link || '';
+          if (link.indexOf('/shorts/') !== -1) continue;
+          var guid = String(items[i].guid || '').match(/^yt:video:([\w-]{11})$/);
+          var match = guid || link.match(/[?&]v=([\w-]{11})/);
           if (match) {
-            podcastIframe.src = 'https://www.youtube.com/embed/' + match[1];
+            clearTimeout(timer);
+            show('https://www.youtube.com/embed/' + match[1] + '?rel=0');
             return;
           }
         }
-        podcastIframe.src = fallbackSrc;
+        throw new Error('no episode in feed');
       })
       .catch(function () {
-        podcastIframe.src = fallbackSrc;
+        clearTimeout(timer);
+        show(fallbackSrc);
       });
   }
 
