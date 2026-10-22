@@ -8,7 +8,7 @@
 //  6. From Organs to Algorithms: number needed to benefit, lung cancer
 //     splits, re-sorting tumors, Definition 1 on a solution landscape
 //  7. The Broken Instrument: reading a scan, attenuation, waterfalls,
-//     the coin flip at the cutoff
+//     instability at the cutoff
 //  8. There Is No Average Patient: the Reweight the Trial calculator
 //  9. The Patient-Centered Estimand: one hazard ratio across prognoses,
 //     a mixed population, endpoints, the frontier, Translate the Trial
@@ -343,6 +343,19 @@
     drawResort('organ');
   }
 
+  // 6e. Inputs to a mechanism-based classification: highlight the layer
+  //     behind today's biomarker approvals, or the full profile.
+  var layers = document.getElementById('layers');
+  if (layers) {
+    var setLayer = function (k) {
+      layers.classList.toggle('show-today', k === 'today');
+      layers.classList.toggle('show-all', k === 'all');
+      layers.querySelectorAll('[data-layer]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.layer === k)); });
+    };
+    layers.querySelectorAll('[data-layer]').forEach(function (b) { b.addEventListener('click', function () { setLayer(b.dataset.layer); }); });
+    setLayer('today');
+  }
+
   // 6d. Testing Definition 1 on a solution landscape. Quality h is a
   //     mixture of Gaussian peaks over a 2-D space; human knowledge is an
   //     isotropic Gaussian prior (center c, spread sigma) and H is its 95%
@@ -662,7 +675,7 @@
     drawWf('uniform');
   }
 
-  // 7d. A coin flip at the cutoff: probability each category is read
+  // 7d. Instability at the cutoff: probability each category is read
   var coin = document.getElementById('coinflip');
   if (coin) {
     var tIn = coin.querySelector('[name="true"]');

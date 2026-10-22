@@ -13,7 +13,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Topology — Sean Khozin, MD, MPH</title>
-  <meta name="description" content="In-depth examinations of the themes that run through Sean Khozin’s work and research, including The Simulator’s Dilemma, From Organs to Algorithms, The Broken Instrument and There Is No Average Patient.">
+  <meta name="description" content="In-depth examinations of the themes that run through Sean Khozin’s work and research, including The Simulator’s Dilemma, From Organs to Algorithms, The Broken Instrument, There Is No Average Patient and The Patient-Centered Estimand.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.seankhozin.com/topology/">
 
@@ -51,7 +51,7 @@
       {
         "@type": "Article",
         "headline": "From Organs to Algorithms",
-        "description": "Why cancer is still classified by organ and microscope, what that costs patients, and how AI could build a classification from mechanism up.",
+        "description": "Why cancer is still classified by organ and histology, and how AI could classify it by mechanism, integrating molecular profiling of the tumor with its microenvironment and the host.",
         "url": "https://www.seankhozin.com/topology/#organs-to-algorithms",
         "author": { "@id": "https://www.seankhozin.com/#person", "@type": "Person", "name": "Sean Khozin" },
         "isPartOf": { "@id": "https://www.seankhozin.com/#website" },
@@ -78,7 +78,7 @@
       {
         "@type": "Article",
         "headline": "The Patient-Centered Estimand",
-        "description": "Why hazard ratios fail patients, how to translate a trial result into the number of patients treated for one to benefit and one to be harmed, and a calculator that does it for any trial.",
+        "description": "Why hazard ratios are hard for patients to use, how to translate a trial result into the number of patients treated for one to benefit and one to be harmed, and a calculator that does it for any trial.",
         "url": "https://www.seankhozin.com/topology/#patient-centered-estimand",
         "author": { "@id": "https://www.seankhozin.com/#person", "@type": "Person", "name": "Sean Khozin" },
         "isPartOf": { "@id": "https://www.seankhozin.com/#website" },
@@ -93,7 +93,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=61">
-  <link rel="stylesheet" href="../topology.css?v=11">
+  <link rel="stylesheet" href="../topology.css?v=12">
 </head>
 <body class="page-topology">
   <!-- Navigation -->
@@ -145,7 +145,7 @@
             <span class="theme-text">
               <span class="theme-kicker">Classification &middot; Pathology &middot; AI</span>
               <span class="theme-name">From Organs to Algorithms</span>
-              <span class="theme-desc">Why cancer is still named for where it grows, and what AI can see when it isn&rsquo;t.</span>
+              <span class="theme-desc">Classifying cancer by mechanism, using tumor, microenvironment and host data.</span>
             </span>
             <span class="theme-arrow" aria-hidden="true">&darr;</span>
           </a>
@@ -156,7 +156,7 @@
             <span class="theme-text">
               <span class="theme-kicker">Measurement &middot; Endpoints &middot; Imaging</span>
               <span class="theme-name">The Broken Instrument</span>
-              <span class="theme-desc">How the ruler beneath cancer drug approvals shapes what gets found.</span>
+              <span class="theme-desc">How measurement error in tumor response criteria biases trial results.</span>
             </span>
             <span class="theme-arrow" aria-hidden="true">&darr;</span>
           </a>
@@ -167,7 +167,7 @@
             <span class="theme-text">
               <span class="theme-kicker">Trials &middot; External validity &middot; Equity &middot; Tool</span>
               <span class="theme-name">There Is No Average Patient</span>
-              <span class="theme-desc">Why trial results drift from real-world outcomes, and a tool to reweight them for the patients you treat.</span>
+              <span class="theme-desc">Why trial results differ from real-world outcomes, and a tool to reweight them for a target population.</span>
             </span>
             <span class="theme-arrow" aria-hidden="true">&darr;</span>
           </a>
@@ -178,7 +178,7 @@
             <span class="theme-text">
               <span class="theme-kicker">Benefit &amp; risk &middot; Statistics &middot; Tool</span>
               <span class="theme-name">The Patient-Centered Estimand</span>
-              <span class="theme-desc">From relative hazard to absolute benefit, and a tool to translate any trial into patients helped and harmed.</span>
+              <span class="theme-desc">From relative hazard to absolute benefit, and a tool to express any trial as patients helped and harmed.</span>
             </span>
             <span class="theme-arrow" aria-hidden="true">&darr;</span>
           </a>
@@ -197,7 +197,7 @@
 
       <div class="theme-open">
         <p class="lead">Better molecules are not better medicines.</p>
-        <p class="theme-standfirst">Artificial intelligence can now predict how molecules fit together, read the genome&rsquo;s regulatory code and write proteins evolution never made. Yet the productivity of drug development has not moved. This theme follows one molecule through the tools of its day and through today&rsquo;s, and argues that AI&rsquo;s biggest opportunity is not designing the molecule. It is discovering the human biology that decides whether the molecule works.</p>
+        <p class="theme-standfirst">Artificial intelligence can now predict how molecules fit together, read the genome&rsquo;s regulatory code and design proteins not found in nature. The productivity of drug development has not improved. This theme follows one molecule through the tools of its day and through today&rsquo;s, and argues that AI&rsquo;s biggest opportunity is not designing the molecule. It is discovering the human biology that decides whether the molecule works.</p>
       </div>
 
       <ol class="brief">
@@ -232,8 +232,8 @@
               <p>&ldquo;Every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it.&rdquo;</p>
               <cite>McCarthy, Minsky, Rochester &amp; Shannon &middot; Dartmouth proposal &middot; August 31, 1955</cite>
             </blockquote>
-            <p>The field began with a wager. If something can be described precisely enough, a machine can simulate it. Seventy years later the same wager has moved into biology: describe the protein, the cell or the patient precisely enough, and drug discovery becomes engineering.</p>
-            <p>The history of that wager is a reminder that progress is never a straight line. Eighty years of AI include two winters, each following a period when expectations ran ahead of what the methods could deliver.</p>
+            <p>The 1955 Dartmouth proposal stated a conjecture: anything described precisely enough can be simulated by a machine. The same conjecture now underlies computational biology: if the protein, the cell or the patient can be described precisely enough, drug discovery becomes an engineering problem.</p>
+            <p>The history of AI includes two &ldquo;winters,&rdquo; periods of reduced funding and interest, each following a phase in which expectations exceeded what the methods could deliver.</p>
 
             <figure class="figure figure-timeline" id="ai-timeline">
               <figcaption class="figure-head"><span class="figure-tag">Figure 1</span>Eighty years, two winters. Select a period.</figcaption>
@@ -248,7 +248,7 @@
             <p class="part-num">Part II</p>
             <h3 class="part-title" id="sd-rg7112-h">The molecule that could not</h3>
             <p>RG7112 was designed to free the tumor suppressor p53 by blocking MDM2, the protein that holds p53 in check. Many tumors keep p53 silent this way, so releasing it is a direct strategy: restore the cell&rsquo;s own brake.</p>
-            <p>The molecule was built with the best tools of its day, and it passed every test those tools could set. Step through its development to see where it was stopped.</p>
+            <p>The molecule was developed with the best tools available at the time and cleared each preclinical test. Step through its development to see where it failed.</p>
 
             <figure class="figure figure-pipeline" id="rg-pipeline">
               <figcaption class="figure-head"><span class="figure-tag">Figure 2</span>RG7112, stage by stage</figcaption>
@@ -280,7 +280,7 @@
                 <li class="pipe-stage pipe-clinic" data-stage="7">
                   <button class="pipe-btn" type="button"><span class="pipe-n">7</span><span class="pipe-name">The clinic</span><span class="pipe-mark">Fail</span></button>
                   <div class="pipe-detail">
-                    <p>In patients with MDM2-amplified liposarcoma, the drug did what it was designed to do. It still failed.</p>
+                    <p>In patients with MDM2-amplified liposarcoma, the drug engaged its target and activated p53 as designed. Efficacy was minimal and hematologic toxicity was dose-limiting.</p>
                     <div class="pipe-outcome">
                       <div><span class="pipe-outcome-tag">Benefit</span><p>p53-pathway activation confirmed in tumor biopsies. Only one confirmed partial response.</p></div>
                       <div class="is-harm"><span class="pipe-outcome-tag">Harm</span><p>Serious adverse events, including neutropenia and thrombocytopenia.</p></div>
@@ -306,7 +306,7 @@
               <p>&ldquo;For the very first time in human history, biology has the opportunity to be engineering, not science.&rdquo;</p>
               <cite>Jensen Huang, 2023</cite>
             </blockquote>
-            <p>A decade on, the toolkit looks transformed. Four families of models now cover the steps RG7112&rsquo;s chemists did by hand.</p>
+            <p>A decade later, four families of models cover most of the steps RG7112&rsquo;s chemists performed by hand.</p>
 
             <div class="tool-groups">
               <div class="tool-group">
@@ -320,7 +320,7 @@
                 <div class="tool-card"><h5>Evo 2</h5><p>40 billion parameters, a 1&nbsp;Mb context, trained on more than 9 trillion nucleotides. Predicts and designs across DNA, RNA and proteins.</p><p class="cite-line">Brixi et al., Nature 2026</p></div>
               </div>
               <div class="tool-group">
-                <h4 class="tool-group-title">Writing proteins evolution never made</h4>
+                <h4 class="tool-group-title">Designing proteins not found in nature</h4>
                 <div class="tool-card tool-card-stat"><h5>ESM3</h5><p>A multimodal generative language model that reasons over protein sequence, structure and function. It produced a bright new fluorescent protein only 58% identical to known ones: a distance equivalent to about 500 million years of evolution.</p><p class="cite-line">Hayes et al., Science 2025</p></div>
               </div>
               <div class="tool-group">
@@ -339,7 +339,7 @@
               <p>&ldquo;It takes ten years and billions of dollars to design just one drug. We can maybe reduce that down from years to maybe months or maybe even weeks.&rdquo;</p>
               <cite>Demis Hassabis, 2025</cite>
             </blockquote>
-            <p>The promise is speed. The first clinical results look encouraging, until they reach the stage where efficacy in patients is tested.</p>
+            <p>The main claim is speed. Early clinical results are favorable through Phase I; the advantage is not evident in Phase II, where efficacy is first tested.</p>
 
             <div class="stat-row">
               <div class="stat"><span class="stat-num">80&ndash;90%</span><span class="stat-label">Phase I success for AI-discovered molecules</span></div>
@@ -371,7 +371,7 @@
                   </ul>
                 </div>
               </div>
-              <p class="figure-note">The toxicity was not an error in the chemistry. RG7112 did what it was designed to do, in human tissue the models never see. <span class="cite-line">Ray-Coquard et al., Lancet Oncol 2012</span></p>
+              <p class="figure-note">The toxicity was on-target: RG7112 activated p53 in bone-marrow progenitors, a human tissue context the design models did not represent. <span class="cite-line">Ray-Coquard et al., Lancet Oncol 2012</span></p>
             </figure>
           </section>
 
@@ -379,7 +379,7 @@
           <section class="part" id="sd-eroom" aria-labelledby="sd-eroom-h">
             <p class="part-num">Part V</p>
             <h3 class="part-title" id="sd-eroom-h">Why Eroom&rsquo;s law won&rsquo;t break</h3>
-            <p>Moore&rsquo;s law, spelled backward. Since 1950, the number of new drugs approved per billion US dollars of R&amp;D has halved roughly every nine years: about an 80-fold decline, adjusted for inflation, despite huge advances in science, technology and management. AI-designed molecules have not bent the curve yet.</p>
+            <p>Eroom&rsquo;s law, Moore&rsquo;s law spelled backward: since 1950, the number of new drugs approved per billion US dollars of R&amp;D has halved roughly every nine years: about an 80-fold decline, adjusted for inflation, despite large advances in science, technology and management. AI-designed molecules have not yet changed the trend.</p>
 
             <figure class="figure figure-eroom" id="eroom">
               <figcaption class="figure-head"><span class="figure-tag">Figure 4</span>Drugs approved per billion R&amp;D dollars, relative to 1950. Drag through the years.</figcaption>
@@ -401,7 +401,7 @@
             </figure>
 
             <h4 class="part-sub">Our gold standards can be blunt tools</h4>
-            <p>Animal models are the standard gate between the bench and the clinic. In oncology, they predict human toxicity little better than a coin toss.</p>
+            <p>Animal models are the standard gate between the bench and the clinic. In oncology, their predictive value for human toxicity is close to chance.</p>
             <div class="stat-row stat-row-4">
               <div class="stat"><span class="stat-num">108</span><span class="stat-label">Oncology drugs studied</span></div>
               <div class="stat"><span class="stat-num">0.65</span><span class="stat-label">Median positive predictive value</span></div>
@@ -430,7 +430,7 @@
               <div><h5>Documents</h5><p>Document management and drafting of regulatory submissions.</p></div>
               <div><h5>Workflow</h5><p>Automation across business operations.</p></div>
             </div>
-            <p class="aside-line">These improve efficiency, not biological insight.</p>
+            <p class="aside-line">These tools improve efficiency; they do not add biological insight.</p>
           </section>
 
           <!-- VII -->
@@ -448,7 +448,7 @@
             <div class="reason" id="sd-fragmentation">
               <h4 class="reason-title"><span>1</span>Fragmentation</h4>
               <p><b>Of data.</b> Trials, health records, imaging, omics and outcomes sit in separate silos. A model learns only the slice it can see, and no single slice contains the patient.</p>
-              <p><b>Of work.</b> AI itself was the by-product of one conversation across disciplines. In the 1940s and 1950s, neuroscience (McCulloch and Pitts&rsquo;s neuron as a logic unit, 1943), mathematics (Turing&rsquo;s work on logic and computability, 1936 and 1950) and computer science (stored programs and the Dartmouth workshop, 1956) were in the same room. Today they are super-specialized. Medicine and AI both need multidisciplinary work, and multidisciplinary data.</p>
+              <p><b>Of work.</b> AI itself was the by-product of one conversation across disciplines. In the 1940s and 1950s, neuroscience (McCulloch and Pitts&rsquo;s neuron as a logic unit, 1943), mathematics (Turing&rsquo;s work on logic and computability, 1936 and 1950) and computer science (stored programs and the Dartmouth workshop, 1956) were in the same room. Today these fields are highly specialized. Medicine and AI both require multidisciplinary work and multidisciplinary data.</p>
 
               <div class="thought">
                 <p class="thought-q">Suppose someone invented a biosensor and wanted to use it to make life-and-death diagnoses.</p>
@@ -470,7 +470,7 @@
 
             <div class="reason" id="sd-gold-standards">
               <h4 class="reason-title"><span>2</span>Arbitrary gold standards</h4>
-              <p><b>Human sensory input is an unreliable instrument.</b> Much of the ground truth AI is trained on comes from people looking at images. In an FDA meta-analysis of 13,677 patients in registration trials, the investigator and an independent radiologist reading the same scans disagreed on tumor response about 30% of the time, and up to 45% in ovarian and pancreatic cancer. Assessments by eye vary within and between observers, in radiology and histopathology alike.</p>
+              <p><b>Human visual assessment is a variable instrument.</b> Much of the ground truth used to train AI comes from human reading of images. In an FDA meta-analysis of 13,677 patients in registration trials, the investigator and an independent radiologist reading the same scans disagreed on tumor response about 30% of the time, and up to 45% in ovarian and pancreatic cancer. Assessments by eye vary within and between observers, in radiology and histopathology alike.</p>
               <p class="crosslink"><span>Explore the data</span><a href="../#reader-agreement">The full reader-agreement matrix, cell by cell &rarr;</a></p>
               <p class="crosslink"><span>Theme 03</span><a href="#bi-attenuation">What this disagreement does to a trial: The Broken Instrument &rarr;</a></p>
 
@@ -491,7 +491,7 @@
                 <div><span class="playbook-tag">Software playbook</span><p class="playbook-motto">Ship it</p><p>A regulatory clearance feels like a launch. Technology companies and their investors shy away from clinical trials.</p></div>
                 <div class="is-point"><span class="playbook-tag">Medical product playbook</span><p class="playbook-motto">Prove it</p><p>Medical products need clinical validation. A 510(k) clearance alone does not win clinicians or payers.</p></div>
               </div>
-              <p>The cost of confusing the two is real: Pear Therapeutics, a pioneer of FDA-authorized prescription digital therapeutics, filed for bankruptcy in 2023. Meanwhile the regulatory door to simulation has opened faster than industry has used it.</p>
+              <p>The two models carry different evidentiary requirements. Pear Therapeutics, a pioneer of FDA-authorized prescription digital therapeutics, filed for bankruptcy in 2023. Regulatory acceptance of simulation-based evidence has meanwhile advanced faster than industry adoption.</p>
               <ol class="door">
                 <li><span class="door-date">Oct 2024</span><p>FDA Science Board report on new methods</p></li>
                 <li><span class="door-date">Apr 2025</span><p>Plan to phase out animal testing; AI toxicity data welcomed in IND applications</p></li>
@@ -499,7 +499,7 @@
                 <li><span class="door-date">Mar 2026</span><p>Draft guidance: a validation framework</p></li>
                 <li class="door-next"><span class="door-date">Next</span><p>No validated simulation submission yet</p></li>
               </ol>
-              <p class="aside-line">The door to simulation is open. No one has walked through.</p>
+              <p class="aside-line">Regulators now accept simulation-based evidence in defined settings; industry uptake has lagged.</p>
             </div>
 
             <div class="reason" id="sd-limited-knowledge">
@@ -508,7 +508,7 @@
                 <div class="sliver-grid" aria-hidden="true"></div>
                 <div class="sliver-text">
                   <p class="sliver-num">1&ndash;5%<span>?</span></p>
-                  <p>A plausible share of human biology that has been mapped: a sliver. And that counts only the known unknowns. What is truly known may be far less.</p>
+                  <p>An illustrative estimate of the share of human biology that has been mapped: a small fraction. It counts only gaps that are already recognized; actual coverage may be lower.</p>
                   <p>The human genome encodes about 20,000 proteins, many still uncharacterized, and research keeps returning to the ones already well studied. By one systematic ranking of how much is known about each protein family, nearly a quarter of human families (23%) still sit at the very bottom. A simulator cannot simulate what no one has measured.</p>
                   <p class="cite-line">Rocha et al., PLOS Biol 2023</p>
                 </div>
@@ -620,14 +620,14 @@
       </div>
 
       <div class="theme-open">
-        <p class="lead">Cancer is still named for where it grows. The treatments that work best follow what drives it.</p>
-        <p class="theme-standfirst">For more than a century, cancer has been classified by the organ it starts in and how it looks under a microscope. Molecular profiling has since shown that tumors in different organs can share the same driver, while tumors in the same organ can be strikingly different. This theme traces how the names arose, what they cost patients, and how AI could build a classification from mechanism up, provided it is not trained to copy the old labels.</p>
+        <p class="lead">Cancer is classified by organ and histology. Response to treatment follows disease mechanism.</p>
+        <p class="theme-standfirst">For more than a century, cancer has been classified by organ of origin and microscopic appearance. Molecular profiling has shown that tumors in different organs can share a driver, while tumors in the same organ can differ substantially. The goal set out here is a classification based on disease mechanism. Molecular profiling of tumor cells is one input to it. Mechanism also depends on features extrinsic to the tumor cell, including the immune and stromal microenvironment and the host, and these are measured across sequencing, pathology, imaging and clinical data. This theme covers how the current categories arose, what they cost patients, and how AI could derive categories from multimodal data rather than reproduce the existing ones.</p>
       </div>
 
       <ol class="brief">
         <li><span class="brief-num">01</span><h3>The names are historical accidents</h3><p>Anatomy and histology were the best instruments of their time. They were never designed to predict which drug will work.</p></li>
-        <li><span class="brief-num">02</span><h3>Mechanism already wins</h3><p>In FDA lung cancer trials, about 4 patients needed treatment for one to benefit when patients were selected by molecular profile, against 11 without selection.</p></li>
-        <li><span class="brief-num">03</span><h3>Algorithms must learn biology, not labels</h3><p>Models trained on inherited categories learn to reproduce them faster. The opportunity is in features no human defined.</p></li>
+        <li><span class="brief-num">02</span><h3>Molecular selection already improves outcomes</h3><p>In FDA lung cancer trials, about 4 patients were treated for one to benefit when patients were selected by molecular profile, against 11 without selection.</p></li>
+        <li><span class="brief-num">03</span><h3>Mechanism is multimodal</h3><p>Tumor-cell genomics is one layer. Microenvironment and host factors also determine response. Models trained on inherited labels reproduce those labels; models trained on integrated data can define new categories.</p></li>
       </ol>
 
       <div class="theme-body">
@@ -641,7 +641,7 @@
             <li><a href="#oa-split"><span>V</span>Lung cancer, split by split</a></li>
             <li><a href="#oa-resort"><span>VI</span>Re-sort the tumors</a></li>
             <li><a href="#oa-see"><span>VII</span>What algorithms can see</a></li>
-            <li><a href="#oa-compare"><span>VIII</span>The full comparison</a></li>
+            <li><a href="#oa-compare"><span>VIII</span>Beyond the molecular profile</a></li>
             <li><a href="#oa-take"><span>IX</span>What it will take</a></li>
             <li><a href="#oa-connections"><span>&rarr;</span>Connections &amp; references</a></li>
           </ol>
@@ -660,7 +660,7 @@
               <div class="tl-panel" aria-live="polite"></div>
               <noscript><p class="figure-note">Egyptian papyri &middot; Hippocrates names &ldquo;carcinos&rdquo; &middot; surgeons sort tumors by location &middot; the microscope sorts them by cell shape &middot; immunohistochemistry &middot; sequencing and single cells &middot; algorithms.</p></noscript>
             </figure>
-            <p>Each layer added real knowledge. But despite sequencing, transcriptomics and single-cell proteomics, the system in daily use is still anchored in anatomical location and histology: a framework rooted in historical practice rather than in what is now known about the biology. It constrains how far the newest diagnostic tools can be exploited, and how precisely therapies can be aimed.</p>
+            <p>Each layer added knowledge. Despite sequencing, transcriptomics and single-cell proteomics, the system in routine use remains anchored in anatomical location and histology, a framework based on historical practice rather than current biological understanding. It limits how fully newer diagnostic methods are used, and how precisely therapies are matched to patients.</p>
             <p class="cite-line">Khozin, Clin Transl Sci 2024</p>
           </section>
 
@@ -668,13 +668,13 @@
           <section class="part" id="oa-promise" aria-labelledby="oa-promise-h">
             <p class="part-num">Part II</p>
             <h3 class="part-title" id="oa-promise-h">The promise of 100%</h3>
-            <p>The founding premise of precision medicine is simple: the right therapy for the right patient, at the right time and dose. Taken literally, it implies that every correctly matched patient should respond.</p>
-            <p>In practice, responses in trials and in the clinic spread across a wide range, and a substantial share of patients with metastatic disease gain little or nothing. The argument of this theme is that the principle is not wrong. The matching is. Classification based on organ and microscope too often fails to find the right patient.</p>
+            <p>The premise of precision medicine is the right therapy for the right patient, at the right time and dose. Taken literally, it implies that every correctly matched patient should respond.</p>
+            <p>In practice, responses in trials and in routine care vary widely, and a substantial share of patients with metastatic disease derive little or no benefit. The limitation is less in the principle than in the matching: classification by organ and histology does not resolve the biological differences that determine response.</p>
             <blockquote class="pull">
               <p>&ldquo;What if the &lsquo;noise&rsquo; is the signal? What if what we have been calling variation is actually heterogeneity: meaningful biological differences that determine whether a patient thrives or dies on a given therapy?&rdquo;</p>
               <cite>Sean Khozin &middot; The Ghost in the Statistical Machine, 2026</cite>
             </blockquote>
-            <p>The average patient, the figure every trial reports, exists nowhere except in the aggregate. A classification that lumps different diseases together widens that average and hides the patients a drug could have helped.</p>
+            <p>The average patient, the figure every trial reports, exists only in aggregate. A classification that groups distinct diseases together increases the heterogeneity behind that average and obscures the subgroups a drug could help.</p>
             <p class="crosslink"><span>Theme 04</span><a href="#rw-tool">Reweight a trial for the patients you treat &rarr;</a></p>
           </section>
 
@@ -682,7 +682,7 @@
           <section class="part" id="oa-negation" aria-labelledby="oa-negation-h">
             <p class="part-num">Part III</p>
             <h3 class="part-title" id="oa-negation-h">Defined by what it is not</h3>
-            <p>&ldquo;Lung cancer&rdquo; records an early surgical observation of where a tumor sits. &ldquo;Non-small cell&rdquo; records what a pathologist did not see through the microscope. Together they define a disease by negation, and group malignancies with distinct molecular drivers, immune environments and resistance mechanisms under a label that encodes none of that.</p>
+            <p>&ldquo;Lung cancer&rdquo; denotes the organ of origin, a surgical observation. &ldquo;Non-small cell&rdquo; is defined by exclusion: tumors that do not show small-cell morphology. Together they define a category by negation, and group malignancies with distinct molecular drivers, immune microenvironments and resistance mechanisms under a label that encodes none of them.</p>
             <div class="label-stack">
               <div class="label-layer"><span class="label-eye">Where it sits</span><p><b>&ldquo;Lung&rdquo;</b>: the organ, from the surgeon&rsquo;s map.</p></div>
               <div class="label-layer"><span class="label-eye">What it is not</span><p><b>&ldquo;Non-small cell&rdquo;</b>: a negative, from the microscope.</p></div>
@@ -691,7 +691,7 @@
             <p>Labels drawn from human perception are also unstable. In an FDA analysis of 13,677 patients in registration trials, two expert readers looking at the same scans disagreed on tumor response about 30% of the time.</p>
             <p class="crosslink"><span>Theme 01</span><a href="#sd-gold-standards">Arbitrary gold standards, in The Simulator&rsquo;s Dilemma &rarr;</a></p>
             <p class="crosslink"><span>Theme 03</span><a href="#broken-instrument">How measurement error shapes which drugs survive: The Broken Instrument &rarr;</a></p>
-            <p>When these inherited categories become training labels, AI does not escape them. Most AI imaging work still correlates what a model learns with existing &ldquo;gold standard&rdquo; criteria, which reinforces the same assumptions the old categories suffer from.</p>
+            <p>When these categories are used as training labels, models inherit them. Most AI imaging work still validates model outputs against existing &ldquo;gold standard&rdquo; criteria, which carries their assumptions forward.</p>
             <blockquote class="pull pull-small">
               <p>&ldquo;When these inherited categories become training labels for foundation models, the models do not simply inherit their limitations; they amplify them.&rdquo;</p>
               <cite>Sean Khozin &middot; The Simulator&rsquo;s Dilemma, Revisited, 2026</cite>
@@ -702,7 +702,7 @@
           <section class="part" id="oa-numbers" aria-labelledby="oa-numbers-h">
             <p class="part-num">Part IV</p>
             <h3 class="part-title" id="oa-numbers-h">The numbers say it already</h3>
-            <p>Across 30 lung cancer trials that supported FDA decisions from 2003 to 2017, researchers counted how many patients had to be treated for one to benefit. The answer depended less on the drug than on whether the patients had been selected by the biology of their tumor.</p>
+            <p>Across 30 lung cancer trials that supported FDA decisions from 2003 to 2017, researchers counted how many patients had to be treated for one to benefit. The result tracked molecular selection of patients more closely than drug class.</p>
             <figure class="figure figure-nnb">
               <figcaption class="figure-head"><span class="figure-tag">Figure 2</span>Patients treated for one to benefit, advanced non-small cell lung cancer</figcaption>
               <div class="nnb">
@@ -713,9 +713,9 @@
               <p class="figure-note">Averages across subpopulations, number needed to benefit. Each row shows one patient who benefits among those treated. <span class="cite-line">Raju, Khozin et al., JCO Clin Cancer Inform 2020</span></p>
             </figure>
             <p class="crosslink"><span>Theme 05</span><a href="#patient-centered-estimand">How these numbers are computed, trial by trial, and a tool to compute them: The Patient-Centered Estimand &rarr;</a></p>
-            <p>The same pattern shows up in response rates. With doublet chemotherapy in morphologically defined non-small cell lung cancer, responses hover around 30%. In molecularly defined settings they routinely reach 50&ndash;90%.</p>
+            <p>The same pattern shows up in response rates. With doublet chemotherapy in morphologically defined non-small cell lung cancer, response rates are about 30%. In molecularly defined populations they commonly range from 50% to 90%.</p>
             <p class="cite-line">Khozin, The Simulator&rsquo;s Dilemma, Revisited, 2026</p>
-            <p>And when machine-learning models were trained on patient-level data from 17 FDA-submitted lung cancer trials, biomarker status was the strongest predictor of response, progression-free survival and overall survival. But single biomarkers had limited predictive value, especially PD-L1 for immunotherapy. The authors concluded that going further requires composite, multiomic signatures: a classification built from many measurements at once.</p>
+            <p>When machine-learning models were trained on patient-level data from 17 FDA-submitted lung cancer trials, biomarker status was the strongest predictor of response, progression-free survival and overall survival. But single biomarkers had limited predictive value, especially PD-L1 for immunotherapy. The authors concluded that further gains require composite, multiomic signatures that integrate many measurements.</p>
             <p class="cite-line">Siah, Khozin, Wong &amp; Lo, JCO Clin Cancer Inform 2019</p>
           </section>
 
@@ -727,7 +727,7 @@
               <p>&ldquo;&lsquo;Lung cancer&rsquo; has decomposed into a taxonomy of molecular species.&rdquo;</p>
               <cite>Sean Khozin &middot; The Ghost in the Statistical Machine, 2026</cite>
             </blockquote>
-            <p>One name has been coming apart, approval by approval. Drag through the years to watch &ldquo;non-small cell lung cancer&rdquo; divide into diseases defined by their drivers.</p>
+            <p>Since 2011, FDA approvals have subdivided &ldquo;non-small cell lung cancer&rdquo; into biomarker-defined populations. Drag through the years to see the sequence.</p>
             <figure class="figure figure-split" id="nsclc-split">
               <figcaption class="figure-head"><span class="figure-tag">Figure 3</span>Biomarker-defined FDA approvals in non-small cell lung cancer</figcaption>
               <div class="split-readout" aria-live="polite"><span class="split-year">2010</span><span class="split-count"></span></div>
@@ -735,7 +735,7 @@
               <label class="eroom-slider"><span class="visually-hidden">Year</span><input type="range" min="2010" max="2024" step="1" value="2010"></label>
               <p class="figure-note">Selected approvals by year of first FDA approval for each biomarker-defined population. <span class="cite-line">U.S. FDA approval records</span></p>
             </figure>
-            <p>Once a disease is defined by its driver, a small study can be decisive. In March 2016, FDA approved crizotinib for ROS1-positive lung cancer on the strength of about fifty patients from a single-arm study, in which independent review found a 66% response rate.</p>
+            <p>Once a population is defined by its driver, a small study can support approval. In March 2016, FDA approved crizotinib for ROS1-positive lung cancer on the strength of about fifty patients from a single-arm study, in which independent review found a 66% response rate.</p>
             <p class="cite-line">Khozin, Fifty Patients, 2026</p>
           </section>
 
@@ -743,7 +743,7 @@
           <section class="part" id="oa-resort" aria-labelledby="oa-resort-h">
             <p class="part-num">Part VI</p>
             <h3 class="part-title" id="oa-resort-h">Re-sort the tumors</h3>
-            <p>Group tumors by organ and each group mixes different diseases, while the same driver turns up in many groups. Group them by driver and tumors from different organs line up behind a shared target.</p>
+            <p>Group tumors by organ and each group mixes different diseases, while the same driver turns up in many groups. Grouped by driver, tumors from different organs share a therapeutic target.</p>
             <figure class="figure figure-resort" id="resort">
               <figcaption class="figure-head"><span class="figure-tag">Figure 4</span>The same tumors, sorted two ways</figcaption>
               <div class="seg" role="group" aria-label="Group tumors by">
@@ -753,8 +753,8 @@
               <div class="resort-board" aria-live="polite"></div>
               <p class="figure-note"><span class="resort-note"></span> <span class="cite-line">Illustrative: each tile is a tumor type in which the driver occurs, not its frequency. Approvals: U.S. FDA.</span></p>
             </figure>
-            <p>Regulators have already started to classify this way. In May 2017, FDA approved pembrolizumab for any solid tumor with high microsatellite instability or mismatch-repair deficiency: the first approval defined by a biomarker rather than an organ. It came during Dr. Khozin&rsquo;s tenure at FDA, at a time when moving away from anatomy was, in his words, &ldquo;at best an ambiguous concept for many stakeholders.&rdquo; Approvals for NTRK fusions, BRAF V600E, RET fusions and HER2 followed.</p>
-            <p>The idea was visible even earlier. Imatinib, built for the BCR-ABL kinase in chronic myeloid leukemia, extended to gastrointestinal stromal tumors once KIT came into view: the first hint that a targeted drug could cross disease boundaries when the biology is shared.</p>
+            <p>Regulators have begun to classify this way. In May 2017, FDA approved pembrolizumab for any solid tumor with high microsatellite instability or mismatch-repair deficiency: the first approval defined by a biomarker rather than an organ. It came during Dr. Khozin&rsquo;s tenure at FDA, at a time when moving away from anatomy was, in his words, &ldquo;at best an ambiguous concept for many stakeholders.&rdquo; Approvals for NTRK fusions, BRAF V600E, RET fusions and HER2 followed.</p>
+            <p>An earlier precedent is imatinib. Developed against the BCR-ABL kinase in chronic myeloid leukemia, it was later approved for gastrointestinal stromal tumors, which are driven by KIT, another kinase it inhibits. It showed that a targeted drug can cross disease boundaries when the mechanism is shared.</p>
             <p class="cite-line">Khozin, Unearthing Mechanistic Foundations of Oncological Diseases with AI, 2023 &middot; Khozin, The Discipline of Precision, 2026</p>
           </section>
 
@@ -762,8 +762,8 @@
           <section class="part" id="oa-see" aria-labelledby="oa-see-h">
             <p class="part-num">Part VII</p>
             <h3 class="part-title" id="oa-see-h">What algorithms can see</h3>
-            <p>In 2016, in the second game against Lee Sedol, AlphaGo played Move 37: a stone placed where centuries of human strategy said it did not belong. It looked like a mistake. It was a solution humans had not conceived.</p>
-            <p>Dr. Khozin calls these <b>non-obvious, or &ldquo;alien,&rdquo; constructions</b>: solutions that are better than the human ones and that lie outside the set of answers humans would think of. In pathology and imaging, the alien constructions are features: patterns in tissue and scans that predict biology and outcome, which no human ever named. The definition is formal.</p>
+            <p>In 2016, in the second game against Lee Sedol, AlphaGo played Move 37: a stone outside established human strategy. Commentators first read it as an error; it proved decisive.</p>
+            <p>Dr. Khozin calls these <b>non-obvious, or &ldquo;alien,&rdquo; constructions</b>: solutions that are better than the human ones and that lie outside the set of answers humans would think of. In pathology and imaging, the alien constructions are features: patterns in tissue and scans, in tumor cells and in their surroundings, that predict biology and outcome and have not been described by human observers. The definition is formal.</p>
             <div class="formula formula-def" role="group" aria-label="Definition 1, non-obvious alien construction">
               <p class="formula-key formula-lead">Let <i>S</i> be the set of all possible solutions, <i>H</i> &sub; <i>S</i> the set of human-conceivable solutions, <i>h</i> : <i>S</i> &rarr; &#8477; a measure of solution quality and <i>d</i> a distance on <i>S</i>. A solution <i>s</i>* &isin; <i>S</i> is an alien construction if all four hold:</p>
               <ol class="def-list">
@@ -837,15 +837,52 @@
                 <div class="tool-card"><h5>Imaging beyond the eye</h5><p>A lung-cancer screening model outperformed experienced radiologists in detection; image-based deep learning identified patients likely to respond better to radiotherapy.</p><p class="cite-line">Ardila et al., Nat Med 2019 &middot; Lou et al., Lancet Digit Health 2019</p></div>
               </div>
             </div>
-            <p>Trained models also leave behind a rich mathematical representation, the latent space, in which data is compressed and sorted into clusters humans cannot form unaided. That is where new disease categories are most likely to be found: if the representation is explored for itself, rather than forced back onto the old labels.</p>
+            <p>Trained models also produce a learned representation, the latent space, in which data is compressed and organized into clusters that are not apparent to human observers. New disease categories are most likely to be found there, if the representation is analyzed directly rather than mapped back onto existing labels.</p>
             <p class="cite-line">Khozin, Unearthing Mechanistic Foundations of Oncological Diseases with AI, 2023</p>
           </section>
 
           <!-- VIII -->
           <section class="part" id="oa-compare" aria-labelledby="oa-compare-h">
             <p class="part-num">Part VIII</p>
-            <h3 class="part-title" id="oa-compare-h">The full comparison</h3>
-            <p>AI-driven classification inverts the current diagnostic paradigm: it starts from multiomic profiles and computationally extracted features, and works up to categories, rather than starting from the organ and working down.</p>
+            <h3 class="part-title" id="oa-compare-h">Beyond the molecular profile</h3>
+            <p>Current biomarker-defined categories rest mostly on one layer: genomic alterations in tumor cells. That layer is necessary but incomplete. The same driver mutation can produce different outcomes depending on the immune infiltrate, the stroma, tissue architecture and the host. A mechanism-based classification integrates features intrinsic to the tumor cell with features extrinsic to it.</p>
+            <figure class="figure figure-layers" id="layers">
+              <figcaption class="figure-head"><span class="figure-tag">Figure 6</span>Inputs to a mechanism-based classification</figcaption>
+              <div class="seg" role="group" aria-label="Highlight a layer">
+                <button class="seg-btn" type="button" data-layer="today" aria-pressed="true">Today&rsquo;s biomarker approvals</button>
+                <button class="seg-btn" type="button" data-layer="all" aria-pressed="false">The full multimodal profile</button>
+              </div>
+              <div class="lay-grid">
+                <div class="lay-col">
+                  <h4 class="lay-head">Intrinsic to the tumor cell</h4>
+                  <ul class="lay-list">
+                    <li class="is-today"><b>Genome</b><span>Driver mutations, fusions, copy number, mutational signatures, tumor mutational burden</span></li>
+                    <li><b>Epigenome</b><span>DNA methylation, chromatin state</span></li>
+                    <li><b>Transcriptome</b><span>Expression programs, cell states, single-cell heterogeneity</span></li>
+                    <li><b>Proteome</b><span>Protein and phosphoprotein levels, pathway activity</span></li>
+                    <li><b>Morphology</b><span>Nuclear and cellular features in tissue</span></li>
+                    <li><b>Clonal architecture</b><span>Subclones and their evolution under treatment</span></li>
+                  </ul>
+                </div>
+                <div class="lay-col">
+                  <h4 class="lay-head">Extrinsic: microenvironment</h4>
+                  <ul class="lay-list">
+                    <li><b>Immune contexture</b><span>Density, type and location of T cells, macrophages and other immune cells; PD-L1 expression</span></li>
+                    <li><b>Stroma</b><span>Cancer-associated fibroblasts, extracellular matrix</span></li>
+                    <li><b>Vasculature and metabolism</b><span>Angiogenesis, hypoxia, nutrient gradients</span></li>
+                    <li><b>Spatial organization</b><span>Microregions and cell neighborhoods within the tumor</span></li>
+                  </ul>
+                  <h4 class="lay-head">Extrinsic: host</h4>
+                  <ul class="lay-list">
+                    <li><b>Germline</b><span>Inherited variants, including pharmacogenomic ones</span></li>
+                    <li><b>Systemic state</b><span>Systemic immunity, inflammation, microbiome, comorbidity, prior therapy</span></li>
+                  </ul>
+                </div>
+              </div>
+              <p class="lay-modes"><b>Measured by</b> DNA and RNA sequencing, including single-cell &middot; immunohistochemistry and multiplex imaging &middot; H&amp;E whole-slide images &middot; spatial transcriptomics and proteomics &middot; radiology &middot; circulating tumor DNA &middot; clinical records</p>
+              <p class="figure-note">Highlighted, the layer behind most biomarker-defined approvals to date. Most of the profile sits outside it. <span class="cite-line">After Khozin, Clin Transl Sci 2024; Mo et al., Nature 2024</span></p>
+            </figure>
+            <p>AI-driven classification reverses the current direction of diagnosis. It begins with integrated data from the tumor, its microenvironment and the host, together with computationally extracted features, and derives categories from them, rather than starting from the organ.</p>
             <table class="compare-table">
               <caption class="visually-hidden">Current cancer classification compared with AI-driven classification, ten features</caption>
               <thead>
@@ -875,7 +912,7 @@
           <section class="part" id="oa-take" aria-labelledby="oa-take-h">
             <p class="part-num">Part IX</p>
             <h3 class="part-title" id="oa-take-h">What it will take</h3>
-            <p>A computationally powered classification has to clear the same bar as any other medical claim. The obstacles are known.</p>
+            <p>A computational classification must meet the same evidentiary standard as any other diagnostic claim. The main obstacles are known.</p>
             <ol class="moves moves-5">
               <li><span class="move-num">01</span><h5>Standardized, integrated data</h5><p>Robust multi-center datasets that link molecular, imaging, pathology and clinical records.</p></li>
               <li><span class="move-num">02</span><h5>Interpretability</h5><p>Models whose reasoning can be examined in biological terms.</p></li>
@@ -889,8 +926,8 @@
               <cite>Sean Khozin &middot; The Discipline of Precision, 2026</cite>
             </blockquote>
             <div class="closing">
-              <p class="closing-line">Classify the biology, not the organ.</p>
-              <p>When the training data captures proxies, the model learns proxies. Built on mechanism instead, a classification can find the right patient, and deliver what precision medicine has always promised.</p>
+              <p class="closing-line">Classify by mechanism, measured across modalities.</p>
+              <p>When training data captures proxies, models learn proxies. A classification built on mechanism, drawing on the tumor cell, its microenvironment and the host, is more likely to identify the patients a therapy will help.</p>
             </div>
           </section>
 
@@ -956,7 +993,7 @@
 
       <div class="theme-open">
         <p class="lead">What we measure determines what we can find.</p>
-        <p class="theme-standfirst">For twenty-five years, nearly every solid-tumor drug approved on tumor-based endpoints has rested on one instrument: a convention for pressing a ruler against a shadow on a CT scan. Two expert readers applying it to the same images disagree about a third of the time. This theme follows what that disagreement does once it enters a trial: how it shrinks real effects, discards information, turns borderline patients into coin flips, and shapes which drugs get developed. And why, for the first time, the instrument can be replaced.</p>
+        <p class="theme-standfirst">For twenty-five years, nearly every solid-tumor drug approved on tumor-based endpoints has rested on one instrument: RECIST, a convention for measuring lesion diameters on CT. Two expert readers applying it to the same images disagree about a third of the time. This theme follows what that disagreement does in a trial: it attenuates true effects, discards information, makes the classification of borderline patients unstable, and influences which drugs are developed. It also describes how volumetric, machine-read measurement could replace it.</p>
       </div>
 
       <ol class="brief">
@@ -974,7 +1011,7 @@
             <li><a href="#bi-readers"><span>III</span>Two readers, one scan</a></li>
             <li><a href="#bi-attenuation"><span>IV</span>The attenuation</a></li>
             <li><a href="#bi-boxes"><span>V</span>Four boxes for a continuous world</a></li>
-            <li><a href="#bi-coin"><span>VI</span>A coin flip at the cutoff</a></li>
+            <li><a href="#bi-coin"><span>VI</span>Instability at the cutoff</a></li>
             <li><a href="#bi-outside"><span>VII</span>An instrument only trials use</a></li>
             <li><a href="#bi-machines"><span>VIII</span>Machines, readers, references</a></li>
             <li><a href="#bi-replace"><span>IX</span>Replacing the substrate</a></li>
@@ -1000,7 +1037,7 @@
               <label class="eroom-slider"><span class="visually-hidden">Change in sum of diameters</span><input type="range" min="-100" max="60" step="1" value="0"></label>
               <p class="figure-note">Objective response rate, the endpoint behind many accelerated approvals, is the share of patients read as complete or partial response. <span class="cite-line">Eisenhauer et al., Eur J Cancer 2009 (RECIST 1.1)</span></p>
             </figure>
-            <p>The convention has the unusual property of being both ubiquitous and invisible. It is how drugs are certified, not how they are administered. Its history explains why it looks the way it does.</p>
+            <p>RECIST is used to evaluate drugs in trials, not to manage patients in routine care. Its history explains its design.</p>
             <figure class="figure figure-timeline" id="ruler-timeline">
               <figcaption class="figure-head"><span class="figure-tag">Figure 2</span>Fifty years of the ruler. Select a period.</figcaption>
               <div class="tl-track" role="tablist" aria-label="Periods in the history of tumor response criteria"></div>
@@ -1019,14 +1056,14 @@
               <div class="stat stat-point"><span class="stat-num">19&ndash;25%</span><span class="stat-label">&ldquo;Responses&rdquo; from error alone at a 25% criterion</span></div>
             </div>
             <p class="cite-line">Moertel &amp; Hanley, Cancer 1976</p>
-            <p>The authors advised investigators to expect a 5&ndash;10% response rate from human error in measurement alone. Half a century later, the instrument has changed its geometry, from two diameters to one, but not the fact that a human hand holds the ruler.</p>
+            <p>The authors advised investigators to expect a 5&ndash;10% response rate from human error in measurement alone. Since then the criteria have moved from two diameters to one; measurement is still performed manually by human readers.</p>
           </section>
 
           <!-- III -->
           <section class="part" id="bi-readers" aria-labelledby="bi-readers-h">
             <p class="part-num">Part III</p>
             <h3 class="part-title" id="bi-readers-h">Two readers, one scan</h3>
-            <p>Registration trials have a useful quirk. Every scan is read twice: by the investigator and by a blinded radiologist at a central facility, each unaware of the other. In 2017, Dr. Khozin and colleagues at FDA pooled a decade of these paired reads.</p>
+            <p>Many registration trials read every scan twice: by the investigator and by a blinded radiologist at a central facility, each unaware of the other. In 2017, Dr. Khozin and colleagues at FDA pooled a decade of these paired reads.</p>
             <div class="stat-row stat-row-3">
               <div class="stat"><span class="stat-num">13,677</span><span class="stat-label">Paired assessments</span></div>
               <div class="stat"><span class="stat-num">69.5%</span><span class="stat-label">Agreed on the response category</span></div>
@@ -1064,7 +1101,7 @@
                 <p class="cite-line">Bross, Biometrics 1954 &middot; simplified two-category model; sample size scales with the inverse square of the effect</p>
               </div>
             </figure>
-            <p>The direction is the point. Random measurement error biases observed effects toward the null. At the level of the instrument, that produces a systematic excess of false negatives over false positives. A trial that misses statistical significance is not necessarily a trial of an inactive drug. Some fraction of negative trials in solid-tumor oncology are trials of active drugs measured with an instrument that could not see them.</p>
+            <p>The bias has a direction. Random measurement error biases observed effects toward the null. At the level of the instrument, that produces a systematic excess of false negatives over false positives. A trial that misses statistical significance is not necessarily a trial of an inactive drug. Some fraction of negative trials in solid-tumor oncology are trials of active drugs measured with an instrument that could not see them.</p>
             <p class="aside-line">No one knows the size of that fraction. A negative trial does not record whether the drug or the measurement failed.</p>
           </section>
 
@@ -1095,8 +1132,8 @@
           <!-- VI -->
           <section class="part" id="bi-coin" aria-labelledby="bi-coin-h">
             <p class="part-num">Part VI</p>
-            <h3 class="part-title" id="bi-coin-h">A coin flip at the cutoff</h3>
-            <p>Take a patient whose tumor burden truly fell by 28%: two points short of a partial response. If readers&rsquo; measurements vary by about ten percentage points, as the disagreement data suggest, how often will this patient be called a responder?</p>
+            <h3 class="part-title" id="bi-coin-h">Instability at the cutoff</h3>
+            <p>Consider a patient whose true tumor burden fell by 28%: two points short of a partial response. If readers&rsquo; measurements vary by about ten percentage points, as the disagreement data suggest, how often will this patient be called a responder?</p>
             <figure class="figure figure-coin" id="coinflip">
               <figcaption class="figure-head"><span class="figure-tag">Figure 5</span>The same tumor, read many times</figcaption>
               <div class="att-controls">
@@ -1110,7 +1147,7 @@
               </div>
               <p class="figure-note">Share of reads falling in each category, assuming normally distributed reader error around the true change. <span class="cite-line">Khozin, The Broken Instrument Beneath the Evidence, 2026</span></p>
             </figure>
-            <p>Forty-two reads in a hundred call it a partial response; fifty-eight call it stable disease. At the boundary, the category is close to a coin flip, and the reported effect depends on how many of those flips land on the side that counts.</p>
+            <p>Forty-two reads in a hundred call it a partial response; fifty-eight call it stable disease. Near the threshold, classification is close to random, and the reported effect depends on how many borderline patients fall on the responder side.</p>
             <p>The instability does more than add noise. Because response rate cuts sharply at minus 30%, sponsors are rewarded for drugs that produce deep responses in a few patients, and drugs that produce shallow but consistent shrinkage across many are structurally disfavored. The shape of the oncology pipeline, enriched for responses the human eye can see, follows from the endpoint. It selects for what the instrument can detect, not necessarily for what prolongs life.</p>
           </section>
 
@@ -1178,7 +1215,7 @@
             <p>The regulatory path will take time: prospective comparison with RECIST, integration across imaging systems, agreement on validation. None of these barriers is technical.</p>
             <div class="closing">
               <p class="closing-line">Replace the measurement, not the statistics.</p>
-              <p>What we measure determines what we can find. What we can find determines what we develop. What we develop determines who is treated. The ruler pressed against the tumor for a generation is not the only ruler available. It is simply the one we inherited.</p>
+              <p>The choice of measurement determines which effects can be detected, which drugs are developed and, in turn, which patients are treated. Diameter-based RECIST is a convention; reproducible alternatives are now available.</p>
             </div>
           </section>
 
@@ -1234,7 +1271,7 @@
       </div>
 
       <div class="theme-open">
-        <p class="lead">A trial reports what happened to the people it enrolled. The clinic treats everyone else.</p>
+        <p class="lead">A trial estimates the effect in the patients it enrolled. Clinical practice applies it to a broader population.</p>
         <p class="theme-standfirst">Real-world outcomes for patients with cancer are often worse than those reported in the trials that led to a drug&rsquo;s approval. Part of the gap comes from who gets into trials: narrow eligibility, a handful of specialized sites, and unequal access leave older patients, patients with other illnesses, and many minority groups underrepresented. This theme shows how much that gap can change a drug&rsquo;s expected benefit, even when the drug works equally well for everyone, and gives clinicians and researchers a tool to make the adjustment themselves.</p>
       </div>
 
@@ -1265,7 +1302,7 @@
           <section class="part" id="ap-ghost" aria-labelledby="ap-ghost-h">
             <p class="part-num">Part I</p>
             <h3 class="part-title" id="ap-ghost-h">The ghost of the average</h3>
-            <p>In 1747, aboard HMS Salisbury, James Lind divided twelve sailors with scurvy into pairs and gave each pair a different remedy. The pair given citrus recovered. Lind had invented the controlled trial, and with it a figure that would shape medicine for three centuries: the average patient, who exists nowhere except in the aggregate.</p>
+            <p>In 1747, aboard HMS Salisbury, James Lind divided twelve sailors with scurvy into pairs and gave each pair a different remedy. The pair given citrus recovered. The experiment is often cited as one of the first controlled clinical trials. It also introduced a construct that has shaped medicine since: the average patient, who exists only in aggregate.</p>
             <blockquote class="pull">
               <p>&ldquo;The Average Patient does not exist, yet its statistical ghost has served us well. It has saved millions. But it has also exacted a heavy price: the systematic erasure of the particular in service of the universal.&rdquo;</p>
               <cite>Sean Khozin &middot; The Ghost in the Statistical Machine, 2026</cite>
@@ -1444,7 +1481,7 @@
           <section class="part" id="ap-fix" aria-labelledby="ap-fix-h">
             <p class="part-num">Part VII</p>
             <h3 class="part-title" id="ap-fix-h">Fixing the trial itself</h3>
-            <p>Adjustment is a bridge. The lasting fix is trials that look like the patients who will be treated.</p>
+            <p>Statistical adjustment is an interim measure. The durable solution is trial populations that resemble the patients who will be treated.</p>
             <ol class="moves">
               <li><span class="move-num">01</span><h5>Broaden eligibility</h5><p>In 10,500 real-world patients with advanced lung cancer, three traditional criteria excluded 48%. Broadened versions admitted 98%, adding more women, more patients aged 75 and older, and more with stage IV disease.</p></li>
               <li><span class="move-num">02</span><h5>Bring trials to patients</h5><p>Decentralized and pragmatic designs reach patients beyond a few specialized centers.</p></li>
@@ -1540,7 +1577,7 @@
             <p class="part-num">Part I</p>
             <h3 class="part-title" id="pe-applause-h">Forty-two seconds</h3>
             <p>When the results of RASolute 302 were first shown in May 2026, the audience applauded for 42 seconds. In patients with previously treated metastatic pancreatic cancer, the RAS inhibitor daraxonrasib had doubled median overall survival over chemotherapy, from 6.6 to 13.2 months, with a hazard ratio of 0.40.</p>
-            <p>A hazard ratio of 0.40 is usually read as &ldquo;a 60% reduction in the risk of death.&rdquo; That sentence is accurate and almost impossible to act on. Sixty percent of what, by when? The trial also reported the answer a patient can use: at 12 months, 53.3% of patients on daraxonrasib were alive against 18.7% on chemotherapy. Treat three patients, and one more of them is alive a year later.</p>
+            <p>A hazard ratio of 0.40 is usually read as &ldquo;a 60% reduction in the risk of death.&rdquo; The statement is accurate, but it specifies neither an absolute effect nor a time frame. The trial also reported the answer a patient can use: at 12 months, 53.3% of patients on daraxonrasib were alive against 18.7% on chemotherapy. Treat three patients, and one more of them is alive a year later.</p>
             <div class="stat-row stat-row-3">
               <div class="stat"><span class="stat-num">0.40</span><span class="stat-label">Hazard ratio for death</span></div>
               <div class="stat"><span class="stat-num">+35</span><span class="stat-label">More patients alive at 12 months, per 100 treated</span></div>
@@ -1565,7 +1602,7 @@
               <p>&ldquo;We recommend using frequency statements instead of single-event probabilities, absolute risks instead of relative risks, mortality rates instead of survival rates, and natural frequencies instead of conditional probabilities.&rdquo;</p>
               <cite>Gigerenzer, Gaissmaier, Kurz-Milcke, Schwartz &amp; Woloshin &middot; Helping Doctors and Patients Make Sense of Health Statistics, 2007</cite>
             </blockquote>
-            <p>Regulators now have a word for the underlying question. The 2019 ICH E9(R1) addendum asks every trial to define its <em>estimand</em>: the treatment, the population, the outcome, how events such as switching therapy are handled, and the population-level summary that will describe the effect. The hazard ratio is one possible summary. It is not the only one, and it is rarely the one a patient would choose.</p>
+            <p>The 2019 ICH E9(R1) addendum formalizes this question. It asks every trial to define its <em>estimand</em>: the treatment, the population, the outcome, how events such as switching therapy are handled, and the population-level summary that will describe the effect. The hazard ratio is one possible summary. It is not the only one, and it is rarely the one a patient would choose.</p>
             <p class="cite-line">ICH E9(R1), Estimands and Sensitivity Analysis in Clinical Trials, 2019</p>
           </section>
 
@@ -1620,7 +1657,7 @@
                 <p class="cite-line">Illustrative model using the published subgroup hazard ratios and a 6-month control median for both groups; the observed IPASS curves crossed near 6 months</p>
               </div>
             </figure>
-            <p>The same pattern runs the other way in immunotherapy. In CheckMate 057, patients whose tumors expressed PD-L1 at 10% or more began benefiting from nivolumab early; the rest did not, and the overall survival curves crossed before they separated. A single hazard ratio averages all of this into one number that describes no actual patient at any actual time. The same arithmetic also connects to who is in the trial: change the mix of patients and the answer changes, the problem examined in <a href="#no-average-patient">Theme 04</a>.</p>
+            <p>The same pattern runs the other way in immunotherapy. In CheckMate 057, patients whose tumors expressed PD-L1 at 10% or more began benefiting from nivolumab early; the rest did not, and the overall survival curves crossed before they separated. A single hazard ratio averages these patterns into one number that corresponds to no specific subgroup or time point. The same arithmetic also connects to who is in the trial: change the mix of patients and the answer changes, the problem examined in <a href="#no-average-patient">Theme 04</a>.</p>
             <p class="cite-line">Borghaei et al., N Engl J Med 2015 &middot; Raju, Khozin, et al., 2020, Figure 3B</p>
           </section>
 
@@ -1787,7 +1824,7 @@
           <section class="part" id="pe-estimand" aria-labelledby="pe-estimand-h">
             <p class="part-num">Part X</p>
             <h3 class="part-title" id="pe-estimand-h">The patient&rsquo;s estimand</h3>
-            <p>The paper&rsquo;s conclusion is modest: numbers needed to benefit and to harm complement the hazard ratio, and reporting them could support shared decisions. The implication is larger. If the estimand is a choice, it can be chosen for the patient.</p>
+            <p>The paper&rsquo;s conclusion is modest: numbers needed to benefit and to harm complement the hazard ratio, and reporting them could support shared decisions. Because the estimand is chosen at the design stage, it can be chosen to answer the question patients ask.</p>
             <ol class="moves">
               <li><span class="move-num">01</span><h5>Report absolute effects at set times</h5><p>Survival in each arm at prespecified landmarks, with confidence intervals, alongside every hazard ratio.</p></li>
               <li><span class="move-num">02</span><h5>Put both sides on one scale</h5><p>Patients treated per benefit and per harm, by subgroup, in labels and in the clinic.</p></li>
@@ -1851,6 +1888,6 @@
   </footer>
 
   <script src="../script.js?v=39"></script>
-  <script src="../topology.js?v=9"></script>
+  <script src="../topology.js?v=11"></script>
 </body>
 </html>

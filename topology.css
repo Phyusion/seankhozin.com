@@ -390,6 +390,26 @@ html:not(.js) .pipe-controls { display: none; }
 .resort-board[data-by="organ"] li[data-driver="BRAF V600E"] { background: var(--cobalt); border-color: var(--cobalt); color: var(--paper); }
 .resort-board[data-by="driver"] .resort-group:has(.resort-agnostic) { box-shadow: 6px 6px 0 var(--ink); }
 
+/* Figure 6: inputs to a mechanism-based classification */
+.figure-layers .seg { padding-bottom: 0; }
+.lay-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 28px; padding: 14px 18px 4px; }
+.lay-head { margin: 10px 0 6px; padding-bottom: 6px; border-bottom: 3px solid var(--ink); font: 900 15px/1.1 var(--font-display); font-stretch: 104%; text-transform: uppercase; color: var(--ink); }
+.lay-list { list-style: none; display: grid; gap: 4px; }
+.lay-list li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 2px 12px; padding: 7px 8px; border-left: 4px solid transparent; transition: opacity var(--dur) var(--ease), background var(--dur) var(--ease); }
+.lay-list b { font: 700 14px/1.25 var(--font-display); font-stretch: 92%; color: var(--ink); }
+.lay-list span { font-size: 14px; line-height: 1.35; }
+.lay-list li.is-today { background: var(--cobalt-tint); border-left-color: var(--cobalt); }
+.figure-layers.show-today .lay-list li:not(.is-today) { opacity: .38; }
+.figure-layers.show-all .lay-list li { background: var(--paper-2); border-left-color: var(--ink); }
+.figure-layers.show-all .lay-list li.is-today { background: var(--cobalt-tint); border-left-color: var(--cobalt); }
+.theme-article .lay-modes { max-width: none; margin: 12px 18px 16px; padding-top: 10px; border-top: 1px solid var(--stone-2); font-size: 14px; color: var(--graphite); }
+.lay-modes b { margin-right: 6px; font: 500 11px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink); }
+@media (max-width: 820px) {
+  .lay-grid { grid-template-columns: minmax(0, 1fr); }
+  .lay-list li { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) { .lay-list li { transition: none; } }
+
 /* Definition 1 and Figure 5: testing it on a solution landscape */
 .formula-def { margin-top: 20px; }
 .theme-article .formula-lead { margin-top: 0; font-size: 16px; }
