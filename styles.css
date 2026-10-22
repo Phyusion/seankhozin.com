@@ -292,9 +292,8 @@ button { font: inherit; }
   background: #fff; border: 2px solid var(--ink);
 }
 .role-logo img { max-height: 56px; width: auto; max-width: 100%; height: auto; object-fit: contain; }
-.role-logo img, .podcast-banner-logo { filter: grayscale(1); transition: filter var(--dur-slow) var(--ease-snap); }
-.role-logo:hover img, .role-card:focus-within .role-logo img, .role-card:active .role-logo img,
-.podcast-banner-trigger:hover .podcast-banner-logo, .podcast-banner-trigger:focus-visible .podcast-banner-logo { filter: none; }
+.role-logo img { filter: grayscale(1); transition: filter var(--dur-slow) var(--ease-snap); }
+.role-logo:hover img, .role-card:focus-within .role-logo img, .role-card:active .role-logo img { filter: none; }
 .role-logo img.logo-wordmark { max-height: 44px; }
 .role-logo img.logo-stacked { max-height: 68px; }
 .role-position { order: -1; margin-top: 4px; font: 700 14px/1.1 var(--font-display); font-stretch: 88%; letter-spacing: .04em; text-transform: uppercase; color: var(--cobalt); }
@@ -344,6 +343,11 @@ button { font: inherit; }
 .informed-year { font: 900 clamp(96px, 16vw, 248px)/.78 var(--font-display); font-stretch: 72%; letter-spacing: -.04em; color: var(--ink); }
 .informed-year-label { margin-bottom: 14px; font: 500 13px/1.2 var(--font-display) !important; font-stretch: 80% !important; letter-spacing: .06em; text-transform: uppercase; }
 .informed-facts { border-top: 3px solid var(--ink); }
+.informed-video { margin-top: clamp(28px, 3vw, 40px); max-width: 320px; }
+.informed-video-frame { aspect-ratio: 9 / 16; border: 3px solid var(--ink); background: var(--ink); }
+.informed-video-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+.informed-video figcaption { margin-top: 12px; font-size: 14px; line-height: 1.45; color: var(--ink); }
+.informed-video figcaption span { display: block; margin-bottom: 6px; font: 500 13px/1.2 var(--font-display); font-stretch: 80%; letter-spacing: .06em; text-transform: uppercase; }
 .informed-facts div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 16px; padding-block: 14px; border-bottom: 2px solid var(--ink); align-items: baseline; }
 .informed-facts dt { font: 500 13px/1.2 var(--font-display); font-stretch: 80%; letter-spacing: .06em; text-transform: uppercase; }
 .informed-facts dd { font: 800 clamp(18px, 1.6vw, 22px)/1.15 var(--font-display); font-stretch: 96%; color: var(--ink); }
