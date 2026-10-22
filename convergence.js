@@ -63,6 +63,7 @@
       ],
       papers: [
         { t: 'From Organs to Algorithms: Redefining Cancer Classification in the Age of Artificial Intelligence', a: 'Khozin S.', j: 'Clinical and Translational Science, 2024', d: '10.1111/cts.70001' },
+        { t: 'Non-Obvious Alien AI Constructions: Opportunities and Implications', a: 'Khozin S.', j: 'Preprints, 2024 \u00b7 not peer-reviewed', d: '10.20944/preprints202408.1929.v1', preprint: true },
         { t: 'The Use of Artificial Intelligence for Cancer Therapeutic Decision-Making', a: 'Elemento O, Khozin S, Sternberg CN.', j: 'NEJM AI, 2025', d: '10.1056/aira2401164' }
       ],
       posts: [
@@ -162,7 +163,8 @@
     for (var i = 0; i < r.body.length; i++) h += '<p>' + esc(r.body[i]) + '</p>';
 
     if (r.papers && r.papers.length) {
-      h += '<div class="convergence-refs"><h4>Peer-Reviewed</h4><div class="research-pub-list">';
+      var hasPreprint = r.papers.some(function (q) { return q.preprint; });
+      h += '<div class="convergence-refs"><h4>' + (hasPreprint ? 'Papers' : 'Peer-Reviewed') + '</h4><div class="research-pub-list">';
       for (var p = 0; p < r.papers.length; p++) {
         var q = r.papers[p];
         h += '<a href="https://doi.org/' + esc(q.d) + '" class="research-pub" target="_blank" rel="noopener">' +
