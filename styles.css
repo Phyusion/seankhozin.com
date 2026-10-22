@@ -292,9 +292,8 @@ button { font: inherit; }
   background: #fff; border: 2px solid var(--ink);
 }
 .role-logo img { max-height: 56px; width: auto; max-width: 100%; height: auto; object-fit: contain; }
-.role-logo img, .podcast-banner-logo { filter: grayscale(1); transition: filter var(--dur-slow) var(--ease-snap); }
-.role-logo:hover img, .role-card:focus-within .role-logo img, .role-card:active .role-logo img,
-.podcast-banner-trigger:hover .podcast-banner-logo, .podcast-banner-trigger:focus-visible .podcast-banner-logo { filter: none; }
+.role-logo img { filter: grayscale(1); transition: filter var(--dur-slow) var(--ease-snap); }
+.role-logo:hover img, .role-card:focus-within .role-logo img, .role-card:active .role-logo img { filter: none; }
 .role-logo img.logo-wordmark { max-height: 44px; }
 .role-logo img.logo-stacked { max-height: 68px; }
 .role-position { order: -1; margin-top: 4px; font: 700 14px/1.1 var(--font-display); font-stretch: 88%; letter-spacing: .04em; text-transform: uppercase; color: var(--cobalt); }
