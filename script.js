@@ -123,44 +123,12 @@
     });
   }
 
-  // Fetch latest Precision Signals episode from YouTube RSS feed.
-  // Skips Shorts, times out rather than leaving the player blank, and
-  // falls back to the channel's uploads playlist on any failure.
+  // Latest Precision Signals episode. YouTube's UULF playlist holds a
+  // channel's long-form uploads only (no Shorts or live streams), newest
+  // first, so the player opens on the latest full episode.
   function loadLatestEpisode() {
     var channelId = 'UCaFDT_bRrAwsNo4WFUteVjw';
-    var fallbackSrc = 'https://www.youtube.com/embed/videoseries?list=UU' + channelId.slice(2);
-    var feed = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + channelId;
-    var done = false;
-    function show(src) {
-      if (done) return;
-      done = true;
-      podcastIframe.src = src;
-    }
-    var timer = setTimeout(function () { show(fallbackSrc); }, 6000);
-    fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feed))
-      .then(function (res) {
-        if (!res.ok) throw new Error('feed ' + res.status);
-        return res.json();
-      })
-      .then(function (data) {
-        var items = (data && data.status === 'ok' && data.items) || [];
-        for (var i = 0; i < items.length; i++) {
-          var link = items[i].link || '';
-          if (link.indexOf('/shorts/') !== -1) continue;
-          var guid = String(items[i].guid || '').match(/^yt:video:([\w-]{11})$/);
-          var match = guid || link.match(/[?&]v=([\w-]{11})/);
-          if (match) {
-            clearTimeout(timer);
-            show('https://www.youtube.com/embed/' + match[1] + '?rel=0');
-            return;
-          }
-        }
-        throw new Error('no episode in feed');
-      })
-      .catch(function () {
-        clearTimeout(timer);
-        show(fallbackSrc);
-      });
+    podcastIframe.src = 'https://www.youtube.com/embed/videoseries?list=UULF' + channelId.slice(2) + '&rel=0';
   }
 
   // Expandable research cards (light theme)
