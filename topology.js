@@ -261,7 +261,8 @@
     { year: 2020, marker: 'RET fusion', drug: 'selpercatinib' },
     { year: 2021, marker: 'KRAS G12C', drug: 'sotorasib' },
     { year: 2021, marker: 'EGFR exon 20', drug: 'amivantamab' },
-    { year: 2022, marker: 'HER2 mutation', drug: 'trastuzumab deruxtecan' }
+    { year: 2022, marker: 'HER2 mutation', drug: 'trastuzumab deruxtecan' },
+    { year: 2024, marker: 'NRG1 fusion', drug: 'zenocutuzumab' }
   ];
   var split = document.getElementById('nsclc-split');
   if (split) {
@@ -281,8 +282,8 @@
       var n = 0;
       SPLITS.forEach(function (sp) { var on = sp.year <= y; sp.el.classList.toggle('is-on', on); if (on) n++; });
       yearOut.textContent = y;
-      countOut.textContent = n === 0 ? 'One disease: “non-small cell lung cancer”' : n + ' molecularly defined ' + (n === 1 ? 'subset' : 'subsets') + ' with an approved targeted or biomarker-selected therapy';
-      range.setAttribute('aria-valuetext', y + ': ' + n + ' subsets');
+      countOut.textContent = n === 0 ? 'One disease: “non-small cell lung cancer”' : n + ' biomarker-defined ' + (n === 1 ? 'population' : 'populations') + ' with an approved therapy';
+      range.setAttribute('aria-valuetext', y + ': ' + n + ' biomarker-defined populations');
     };
     range.addEventListener('input', updateSplit);
     updateSplit();
@@ -622,7 +623,7 @@
     };
     var DRUGS = {
       uniform: { label: 'Drug A', note: 'Every patient’s tumors shrink by 21–29%. A real, reliable effect, and an objective response rate of zero.' },
-      deep: { label: 'Drug B', note: 'One patient in five responds deeply; the rest progress. The response rate looks like a signal, and it is the one the instrument rewards.' },
+      deep: { label: 'Drug B', note: 'One patient in five responds deeply; in the rest, tumors grow. The response rate looks like a signal, and it is the one the instrument rewards.' },
       none: { label: 'Drug C', note: 'No consistent effect. Most tumors grow.' }
     };
     var data = {};
