@@ -307,7 +307,7 @@
   document.querySelectorAll('.section').forEach(section => {
     const header = section.querySelector('.section-header');
     const cards = section.querySelectorAll(
-      '.role-card, .timeline-item, .research-card, .research-subsection, .media-card, .board-item, .highlight-card, .pillar, .contact-link, .podcast-banner'
+      '.role-card, .timeline-item, .research-card, .research-subsection, .media-card, .board-item, .pillar, .contact-link, .podcast-banner'
     );
 
     if (header) header.classList.add('fade-in');
